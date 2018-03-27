@@ -1,5 +1,5 @@
 # Progetto-D18:
-Realizzazione di un sistema per la **configurazione di *almeno* un menù** per un evento con molti invitati. L'utente può combinare le portate a sua scelta tra quelle disponibili fino a formare un menù completo di suo gradimento.  
+Realizzazione di un sistema per la **configurazione di *almeno* un menù** per un evento con molti invitati. L'utente può combinare le portate a sua scelta, tra quelle disponibili, fino a formare un menù completo di suo gradimento.  
 Verranno settati dei **vincoli** da rispettare e dei possibili **filtri** da applicare (e.g. vincolo sul prezzo o filtri per menù vegani/senza glutine etc).  
 Sarà inoltre disponibile un **resoconto dettagliato**, all'atto della scelta, degli allergeni eventualmente presenti in ciascuna pietanza, al fine di permettere una selezione più fine in relazione alle esigenze dell'utente.
 
