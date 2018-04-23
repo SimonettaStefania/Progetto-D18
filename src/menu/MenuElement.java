@@ -51,8 +51,8 @@ public class MenuElement {
 
         String tmp = name + "\t" ;
 
-        for ( int i=0 ; i< ingredientsList.size() ; i++)
-            tmp += ingredientsList.get(i) + ", " ;
+        for (String anIngredientsList : ingredientsList)
+            tmp += anIngredientsList + ", ";
 
         tmp += "\t" + price + "€" ;
 
@@ -64,8 +64,8 @@ public class MenuElement {
 
         String tmp = name + "\t" ;
 
-        for ( int i=0 ; i< allergenList.size() ; i++)
-            tmp += allergenList.get(i) + ", " ;
+        for (Allergen anAllergenList : allergenList)
+            tmp += anAllergenList + ", ";
 
         return tmp;
     }
