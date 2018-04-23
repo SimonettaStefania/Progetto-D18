@@ -1,7 +1,9 @@
+package menu;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
-    public class Menu {
+public class Menu {
 
         private String name;
         private ArrayList <MenuElement> menuElementsList;
@@ -52,6 +54,5 @@ import java.util.Iterator;
             }
             return sb.toString();
         }
-    }
 
 }
