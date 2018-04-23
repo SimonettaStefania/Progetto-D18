@@ -47,16 +47,22 @@ public class MenuElement {
 
     }
 
-    public String toString(){
+    public String showDetails(){
 
         String tmp = name + "\t" ;
 
         for (String anIngredientsList : ingredientsList)
             tmp += anIngredientsList + ", ";
 
-        tmp += "\t" + price + "€" ;
+        tmp += "\t" + price + " €" ;
 
         return tmp ;
+
+    }
+
+    public String toString() {
+
+        return name + "\t" +  price + " €" ;
 
     }
 
