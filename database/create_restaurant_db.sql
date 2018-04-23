@@ -174,7 +174,7 @@ CREATE VIEW DESSERTS AS(
                   ELSE 'NO' 
              END  as CELIAC
     FROM DISHES
-    WHERE DISH_TYPE='SECONDO'
+    WHERE DISH_TYPE='DESSERT'
 );
 
 

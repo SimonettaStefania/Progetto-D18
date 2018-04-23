@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Tester {
+public class java_db_src{
     public static void main(String[] args) {
         String connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?user=esame&password=123456";
 
