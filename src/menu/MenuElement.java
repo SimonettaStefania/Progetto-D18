@@ -41,6 +41,20 @@ public class MenuElement {
 
     }
 
+    public void addAllergen (Allergen a ){
+
+        if ( ! allergenList.contains(a) )
+            allergenList.add(a) ;
+
+    }
+
+    public void removeAllergen (Allergen a ){
+
+        if ( allergenList.contains(a) )
+            allergenList.remove(a) ;
+
+    }
+
     public boolean containsAllergen(Allergen a){
 
          return allergenList.contains(a);
@@ -71,7 +85,7 @@ public class MenuElement {
         String tmp = name + "\t" ;
 
         for (Allergen anAllergenList : allergenList)
-            tmp += anAllergenList + ", ";
+            tmp += anAllergenList + " ";
 
         return tmp;
     }

@@ -9,15 +9,18 @@ public class Allergen {
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getAllergenCode() {
+
         return allergenCode;
+
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return name + " " + allergenCode;
+    }
 }
