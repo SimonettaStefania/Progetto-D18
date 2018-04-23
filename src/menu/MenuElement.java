@@ -3,7 +3,6 @@ package menu;
 import java.util.ArrayList;
 
 public class MenuElement {
-
     private String name, elementCode;
     private DishType type;
     private double price;

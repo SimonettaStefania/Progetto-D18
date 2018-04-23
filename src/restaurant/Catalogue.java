@@ -19,13 +19,13 @@ public class Catalogue {
     }
 
     public void addDish(MenuElement elem) {
-        if (elem.getType() != DRINK) {
+        if (elem.getType() != DishType.DRINK) {
             dishesList.add(elem);
         }
     }
 
     public void addDrink(MenuElement elem) {
-        if (elem.getType() == DRINK) {
+        if (elem.getType() == DishType.DRINK) {
             drinksList.add(elem);
         }
     }
