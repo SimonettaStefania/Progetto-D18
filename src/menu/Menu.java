@@ -1,8 +1,5 @@
 package menu;
 
-public class Menu {
-    package menu;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
