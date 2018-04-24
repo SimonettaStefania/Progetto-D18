@@ -51,7 +51,7 @@ public class Reservation {
         menuWhereAddDish.addElement(dishToAdd);
     }
 
-    public void revomeDish(Menu menuWhereRemoveDish, MenuElement dishToRemove) {
+    public void removeDish(Menu menuWhereRemoveDish, MenuElement dishToRemove) {
         menuWhereRemoveDish.removeElement(dishToRemove);
     }
 
