@@ -15,7 +15,8 @@ public class TestContain {
         m.addAllergen(a1);
         m.addAllergen(b1);
 
-        System.out.println("TEST PER VERIFICARE IL COMPORTAMENTO DELLA CONTAINS NELL'ARRAYLIST DI ALLERGENIIN MENUELEMENT");
+        System.out.println("TEST PER VERIFICARE IL COMPORTAMENTO DELLA CONTAINS NELL'ARRAYLIST" +
+                           " DI ALLERGENI IN MENUELEMENT");
 
         System.out.println("Elenco iniziale allergeni : " + m.showAllergenes());
 

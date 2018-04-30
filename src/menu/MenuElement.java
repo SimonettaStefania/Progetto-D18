@@ -63,10 +63,10 @@ public class MenuElement {
 
     public String showDetails(){
 
-        String tmp = name + "\t" ;
+        String tmp = name + "\n" ;
 
-        for (String anIngredientsList : ingredientsList)
-            tmp += anIngredientsList + ", ";
+        for (String element : ingredientsList)
+            tmp += element + " ;\n ";
 
         tmp += "\t" + price + " €" ;
 
@@ -82,10 +82,11 @@ public class MenuElement {
 
     public String showAllergenes(){
 
-        String tmp = name + "\t" ;
+        String tmp = name + "\n" ;
 
-        for (Allergen anAllergenList : allergenList)
-            tmp += anAllergenList + " ";
+        for (Allergen element : allergenList)
+            tmp += element + " ;\n";
+
 
         return tmp;
     }

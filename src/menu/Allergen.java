@@ -21,6 +21,7 @@ public class Allergen {
 
     @Override
     public String toString() {
-        return name + " " + allergenCode;
+
+        return name + " ( " + allergenCode + " )";
     }
 }
