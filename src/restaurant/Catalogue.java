@@ -12,21 +12,65 @@ public class Catalogue {
     }
 
     public ArrayList<MenuElement> getDishes() {
+
         return dishesList;
+
     }
     public ArrayList<MenuElement> getDrinks() {
+
         return drinksList;
+
     }
 
-    public void addDish(MenuElement elem) {
-        if (elem.getType() != DishType.DRINK) {
+    private void addDish(MenuElement elem) {
+
+        if ( !dishesList.contains(elem) )
             dishesList.add(elem);
-        }
+
     }
 
-    public void addDrink(MenuElement elem) {
-        if (elem.getType() == DishType.DRINK) {
+    private void addDrink(MenuElement elem) {
+
+        if ( !drinksList.contains(elem) )
             drinksList.add(elem);
-        }
+
+    }
+
+    public void addElement (MenuElement elem){
+
+        if (elem.getType() != DishType.DRINK)
+            addDish(elem);
+
+        else if (elem.getType() == DishType.DRINK)
+            addDrink(elem);
+
+    }
+
+    public void removeElement (MenuElement elem){
+
+        if ( dishesList.contains(elem))
+            dishesList.remove(elem);
+        else if ( drinksList.contains(elem))
+            drinksList.remove(elem);
+
+
+    }
+
+    @Override
+    public String toString() {
+        String tmp = "CATALOGO DI PORTATE : \nPIATTI : \n";
+
+            for ( MenuElement element : dishesList)
+                tmp += element.toString() + "\n";
+
+            tmp += "\nBEVANDE :\n";
+
+        for ( MenuElement element : drinksList)
+            tmp += element.toString() + "\n";
+
+        return tmp ;
+
+
+
     }
 }
