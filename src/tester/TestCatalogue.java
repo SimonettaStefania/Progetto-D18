@@ -17,18 +17,18 @@ public class TestCatalogue {
 
         Restaurant r = new Restaurant("Ristorante Italiano", 100);
 
-        MenuElement starter_1 = new MenuElement("Bruschetta","S001",
-                                                    DishType.STARTER,4.00);
+        MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER,
+                                                4.00, false, false, false);
         MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001",
-                                                    DishType.FIRST_COURSE,10.0);
+                                                    DishType.FIRST_COURSE,10.0, false, false, false);
         MenuElement main_1 = new MenuElement("Pepata di cozze", "M001",
-                                                    DishType.MAIN_COURSE,10.00);
+                                                    DishType.MAIN_COURSE,10.00, false, false, false);
         MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001",
-                                                    DishType.DESSERT, 4.00);
+                                                    DishType.DESSERT, 4.00, false, false, false);
         MenuElement drink_1 = new MenuElement("Acqua", "DR001",
-                                                    DishType.DRINK, 1.0);
+                                                    DishType.DRINK, 1.0, false, false, false);
         MenuElement drink_2 = new MenuElement("Caffè", "DR002",
-                                                    DishType.DRINK, 1.0);
+                                                    DishType.DRINK, 1.0, false, false, false);
 
         r.addToCatalogue(starter_1);
         r.addToCatalogue(first_1);
