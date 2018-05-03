@@ -7,7 +7,8 @@ import menu.MenuElement;
 public class TestContain {
 
     public static void main(String[] args) {
-        MenuElement m = new MenuElement("pasta","P1", DishType.FIRST_COURSE,10.0);
+        MenuElement m = new MenuElement("pasta","P1", DishType.FIRST_COURSE,
+                                        10.0,false, false, false);
         Allergen a1 = new Allergen("A","A1");
         Allergen b1 = new Allergen("B","A2");
 
