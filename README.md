@@ -17,3 +17,4 @@ Sarà inoltre disponibile un **resoconto dettagliato**, all'atto della scelta, d
 - [Diagramma di sequenza](https://github.com/IngSW-unipv/Progetto-D18/wiki/Diagrammi-di-sequenza)
 - [Modello dei domini](https://github.com/IngSW-unipv/Progetto-D18/wiki/Modello-dei-domini)
 - [Obiettivi e Specifiche](https://github.com/IngSW-unipv/Progetto-D18/wiki/Obiettivi-e-specifiche)
+- [Diagramma ERA database](https://github.com/IngSW-unipv/Progetto-D18/wiki/Diagramma-ERA-database)
