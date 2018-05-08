@@ -6,7 +6,7 @@ import menu.*;
 public class TestMenu {
     public static void main(String[] args) {
 
-    Menu m = new Menu("menuProva");
+    Menu m = new Menu("menuProva", 10);
 
     MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER, 4.00, false, false, false);
     MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE,10.0, false, false, false);
@@ -73,15 +73,6 @@ public class TestMenu {
     m.addElement(starter_1);
     m.sortMenuElements();
     System.out.println(m.toString());
-
-
-
-
-
-
-
-
-
 
     }
 }
