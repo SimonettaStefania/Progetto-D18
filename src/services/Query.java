@@ -13,7 +13,7 @@ public class Query {
     public Query(){
 
     }
-
+    /*
     public static String addFilterToQuery(String query, boolean flags[]){    //flags[0]=vegan flags[1]=vegetarian flags[2]=celiac
         String tmp = query + " WHERE ";
         for (int i = 0 ; i<flags.length ; i++)
@@ -22,4 +22,5 @@ public class Query {
         tmp += "TRUE";
         return tmp;
     }
+    */
 }

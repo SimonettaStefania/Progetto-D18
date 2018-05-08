@@ -1,11 +1,16 @@
 package services;
 
+import menu.DishType;
+import menu.MenuElement;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DbReader implements Runnable {
 
     private static String connectionString;
     private String query;
+    private ArrayList<MenuElement> dishesList = new ArrayList<>();
+
 
     public DbReader(String username, String password){
         this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?user="+username +"&password="+password;
@@ -24,58 +29,14 @@ public class DbReader implements Runnable {
             connection = DriverManager.getConnection(connectionString);
             Statement stm = connection.createStatement();
 
-            //PROVA QUERY
-
             ResultSet rs = stm.executeQuery(this.query);
 
             if(this.query.contains(" DISHES")){
+                MenuElement tmpElem;
                 while (rs.next()) {
-
-                    System.out.println(rs.getString("DISH_CODE") + " " + rs.getString("DISH_NAME") + " "+ rs.getString("DISH_PRICE") +" " +rs.getString("DISH_TYPE") );
-                }
-            }
-
-            if(this.query.contains(" STARTERS")){
-                while (rs.next()) {
-                    System.out.println(rs.getString("DISH_CODE") + " " + rs.getString("DISH_NAME") + " "+ rs.getString("DISH_PRICE") +" " +rs.getString("DISH_TYPE") );
-                }
-            }
-
-            if(this.query.contains(" FIRST_COURSES")){
-                while (rs.next()) {
-
-                    System.out.println(rs.getString("DISH_CODE") + " " + rs.getString("DISH_NAME") + " "+ rs.getString("DISH_PRICE") +" " +rs.getString("DISH_TYPE") );
-                }
-            }
-
-            if(this.query.contains(" MAIN_COURSES")){
-                while (rs.next()) {
-                    System.out.println(this.query);
-                    System.out.println(rs.getString("DISH_CODE") + " " + rs.getString("DISH_NAME") + " "+ rs.getString("DISH_PRICE") +" " +rs.getString("DISH_TYPE") );
-                }
-            }
-
-            if(this.query.contains(" DESSERTS")){
-                while (rs.next()) {
-                    System.out.println(rs.getString("DISH_CODE") + " " + rs.getString("DISH_NAME") + " "+ rs.getString("DISH_PRICE") +" " +rs.getString("DISH_TYPE") );
-                }
-            }
-
-            if(this.query.contains(" DRINKS")){
-                while (rs.next()) {
-                    System.out.println(rs.getString("DISH_CODE") + " " + rs.getString("DISH_NAME") + " "+ rs.getString("DISH_PRICE") +" " +rs.getString("DISH_TYPE") );
-                }
-            }
-
-            if(this.query.contains(" ALLERGENS_IN_DISHES")){
-                while (rs.next()) {
-                    System.out.println(rs.getString("ALLERGEN_CODE") + " " + rs.getString("DISH_CODE"));
-                }
-            }
-
-            if(this.query.contains(" INGREDIENTS_IN_DISHES")){
-                while (rs.next()) {
-                    System.out.println(rs.getString("INGREDIENT_CODE") + " " + rs.getString("DISH_CODE"));
+                    tmpElem=new MenuElement(rs.getString("DISH_NAME"),rs.getString("DISH_CODE"), DishType.valueOf(rs.getString("DISH_TYPE")),
+                            rs.getDouble("DISH_PRICE"),rs.getBoolean("VEGAN"),rs.getBoolean("VEGETARIAN"),rs.getBoolean("CELIAC"));
+                    dishesList.add(tmpElem);
                 }
             }
 
@@ -94,5 +55,9 @@ public class DbReader implements Runnable {
     }
     public void setQuery(String query) {
         this.query = query;
+    }
+
+    public ArrayList<MenuElement> getDishesList() {
+        return dishesList;
     }
 }

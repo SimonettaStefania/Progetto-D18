@@ -63,7 +63,7 @@ public class Catalogue {
             for ( MenuElement element : dishesList)
                 tmp += element.toString() + "\n";
 
-            tmp += "\n BEVANDE :\n";
+            tmp += "\nBEVANDE :\n";
 
         for ( MenuElement element : drinksList)
             tmp += element.toString() + "\n";
