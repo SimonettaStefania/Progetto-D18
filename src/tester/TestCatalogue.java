@@ -1,6 +1,5 @@
 package tester;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import menu.DishType;
 import menu.MenuElement;
 import restaurant.Restaurant;
