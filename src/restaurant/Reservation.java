@@ -15,11 +15,11 @@ public class Reservation {
     private Date eventDate;
 
 
-    public Reservation(int nGuests, double budget, ArrayList<Menu> createdMenu, double reservationCost, Date eventDate) {
+    public Reservation(int nGuests, double budget, Date eventDate) {
         this.nGuests = nGuests;
         this.budget = budget;
         this.createdMenu = new ArrayList<>();
-        this.reservationCost = reservationCost;
+        this.reservationCost = 0;
         this.eventDate = eventDate;
     }
 
@@ -55,6 +55,25 @@ public class Reservation {
         menuWhereRemoveDish.removeElement(dishToRemove);
     }
 
+
+    public void calculateReservationCost(){   // method to calculate all menus's cost  TODO add this method in the UML
+
+        for (Menu m : createdMenu) {
+            m.calculateMenuCost();
+            reservationCost += m.getMenuCost();
+        }
+    }
+
+    public String toString() {                    // TODO add this method in the UML
+        StringBuilder sb = new StringBuilder();
+        sb.append("Reservation info:\n").append("Budget: ").append(this.budget).append("\t nGuest: ").append(this.nGuests)
+                .append("\t ReservationCost: ").append(this.reservationCost).append(("\t eventDate: ")).append(this.eventDate).append("\n");
+        for (Menu m : createdMenu) {
+            sb.append(m.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
     public void setnGuests(int nGuests) {
         this.nGuests = nGuests;
     }
@@ -66,4 +85,7 @@ public class Reservation {
     public double getReservationCost() {
         return reservationCost;
     }
+
+
+
 }
