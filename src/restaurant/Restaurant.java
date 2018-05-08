@@ -68,7 +68,6 @@ public class Restaurant {
 
         String tmp = "Catalogo del ristorante \" " + name + " \" :\n" ;
             tmp += dishesCatalogue.toString();
-
         return tmp ;
 
     }
