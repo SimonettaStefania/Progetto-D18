@@ -11,7 +11,7 @@ public class TestReservation {
 
     public static void main(String[] args) {
 
-        Reservation r1 = new Reservation(30,300,new Date(2018-05-13));
+        Reservation r1 = new Reservation(30,300,new Date(2018- 5 -13)); //TODO fix problem date
 
         Menu m1 = new Menu("first menu", 10);
         Menu m2 = new Menu("second menu", 12);

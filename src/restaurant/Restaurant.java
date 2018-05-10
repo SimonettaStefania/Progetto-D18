@@ -13,12 +13,6 @@ public class Restaurant {
     private Catalogue dishesCatalogue;
     private ArrayList<Reservation> reservationList;
 
-    public Restaurant(String name, int nCover, Catalogue dishesCatalogue) {
-        this.name = name;
-        this.nCover = nCover;
-        this.dishesCatalogue = dishesCatalogue;
-        this.reservationList = new ArrayList<>();
-    }
 
     public Restaurant(String name, int nCover) {
         this.name = name;
@@ -36,6 +30,7 @@ public class Restaurant {
 
         return nCover;
     }
+
 
     public Catalogue getDishesCatalogue() {
 

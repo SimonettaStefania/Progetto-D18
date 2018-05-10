@@ -57,7 +57,7 @@ public class Reservation {
 
 
     public void calculateReservationCost(){   // method to calculate all menus's cost  TODO add this method in the UML
-
+        reservationCost = 0;
         for (Menu m : createdMenu) {
             m.calculateMenuCost();
             reservationCost += m.getMenuCost();

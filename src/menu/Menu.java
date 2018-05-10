@@ -50,7 +50,7 @@ public class Menu {
 
     // method that calculates all menus's cost  TODO add this method in the UML
     public void calculateMenuCost(){
-
+        menuCost = 0;
         for (MenuElement el : menuElementsList) {
             menuCost += el.getPrice();
         }
