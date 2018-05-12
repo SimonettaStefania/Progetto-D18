@@ -5,10 +5,12 @@ import menu.*;
 public class Catalogue {
     private ArrayList<MenuElement> dishesList;
     private ArrayList<MenuElement> drinksList;
+    private ArrayList<MenuElement> filterSelection ;
 
     public Catalogue() {
         dishesList = new ArrayList<>();
         drinksList = new ArrayList<>();
+        filterSelection = new ArrayList<>();
     }
 
     public ArrayList<MenuElement> getDishes() {
@@ -70,6 +72,17 @@ public class Catalogue {
 
         return tmp ;
 
+    }
+
+    public void generateFilter(boolean vegan, boolean vegetarian, boolean celiac) {
+
+        filterSelection.clear();
+
+        for (MenuElement element : dishesList){
+            if (element.checkFlags(vegan, vegetarian, celiac))
+                filterSelection.add(element);
+                        
+        }
 
 
     }

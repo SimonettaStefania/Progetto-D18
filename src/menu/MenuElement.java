@@ -86,5 +86,11 @@ public class MenuElement implements Comparable<MenuElement>{
         return tmp;
     }
 
+    public boolean checkFlags(boolean vegan, boolean vegetarian, boolean celiac){
+
+        return flags.check(vegan, vegetarian, celiac);
+
+    }
+
 
 }
