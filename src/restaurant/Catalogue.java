@@ -79,7 +79,7 @@ public class Catalogue {
         filterSelection.clear();
 
         for (MenuElement element : dishesList){
-            if (element.checkFlags(vegan, vegetarian, celiac))
+            if (element.respectsFilters(vegan, vegetarian, celiac))
                 filterSelection.add(element);
                         
         }

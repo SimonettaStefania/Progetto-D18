@@ -38,7 +38,7 @@ public class MenuElement implements Comparable<MenuElement>{
         return type;
     }
 
-    public boolean respectsFilters(boolean veg, boolean vgt, boolean cel) {
+    public boolean respectsFilters(boolean veg, boolean vgt, boolean cel){
         return flags.check(veg, vgt, cel);
     }
 
@@ -86,11 +86,7 @@ public class MenuElement implements Comparable<MenuElement>{
         return tmp;
     }
 
-    public boolean checkFlags(boolean vegan, boolean vegetarian, boolean celiac){
 
-        return flags.check(vegan, vegetarian, celiac);
-
-    }
 
 
 }
