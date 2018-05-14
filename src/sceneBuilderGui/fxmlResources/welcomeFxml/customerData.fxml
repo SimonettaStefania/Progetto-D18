@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+
+
+<BorderPane fx:id="customerData"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- Restaurant logo -->
+
+    <top>
+        <ImageView fx:id="logo"
+                   fitHeight="103.0" fitWidth="388.0" pickOnBounds="true" BorderPane.alignment="CENTER">
+            <image>
+                <Image url="@../../../../img/logo_try.jpg" />
+            </image>
+
+        </ImageView>
+    </top>
+
+    <!-- Customer's data -->
+
+    <center>
+      <FlowPane fx:id="dataInsert" alignment="CENTER">
+         <children>
+            <HBox prefHeight="123.0" prefWidth="600.0">
+
+               <children>
+
+       <!-- VBOX contains Field for customer to insert his name, surname and e-mail -->
+
+                  <VBox fx:id="customer"
+                        prefHeight="276.0" prefWidth="298.0" spacing="10.0">
+                     <children>
+
+                  <!-- Customer's name field -->
+
+                            <HBox fx:id="name"
+                              layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="34.0">
+                           <children>
+                              <Label text="Name :">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id = "nameField" promptText="Name" />
+                           </children>
+                        </HBox>
+
+                  <!-- Customer's surname field -->
+
+                            <HBox fx:id="surname"
+                              layoutX="18.0" layoutY="18.0" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                           <children>
+                              <Label text="Surname :">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="surnameField" promptText="Surname" />
+                           </children>
+                        </HBox>
+
+                  <!-- Customer's e-mail field -->
+
+                            <HBox fx:id="email"
+                              layoutX="10.0" layoutY="80.0" prefHeight="100.0" prefWidth="200.0" spacing="31.0">
+                           <children>
+                              <Label text="E-mail :">
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id = "emailField" promptText="E-mail" />
+                           </children>
+                        </HBox>
+
+                     </children>
+
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+
+                  </VBox>
+
+       <!-- VBOX for the reservation date and the book button -->
+
+                  <VBox layoutX="10.0" layoutY="10.0" prefHeight="179.0" prefWidth="302.0">
+                     <children>
+
+                  <!-- Reservation date-->
+
+                        <HBox fx:id="date"
+                              prefHeight="207.0" prefWidth="298.0" spacing="20.0">
+
+                           <children>
+                              <Label text="Date :" />
+                              <DatePicker fx:id = "reservDate"/>
+                           </children>
+
+                           <padding>
+                              <Insets left="5.0" top="20.0" />
+                           </padding>
+
+                        </HBox>
+
+                  <!-- Book button -->
+
+                        <AnchorPane>
+                           <children>
+                              <Button fx:id="bookButton"
+                                      layoutX="219.0" layoutY="95.0" mnemonicParsing="false" text="Book reservation!"
+                                      AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+
+               </children>
+
+               <padding>
+                  <Insets bottom="10.0" right="10.0" top="10.0" />
+               </padding>
+
+            </HBox>
+         </children>
+      </FlowPane>
+   </center>
+
+</BorderPane>
