@@ -9,6 +9,8 @@ public class Query {
     public static final String SELECT_DRINKS = "SELECT * FROM DRINKS";
     public static final String SELECT_ALLERGENS_IN_DISHES = "SELECT * FROM ALLERGENS_IN_DISHES";
     public static final String SELECT_INGREDIENTS_IN_DISHES = "SELECT * FROM INGREDIENTS_IN_DISHES";
+    public static final String INSERT_RESERVATION= "INSERT INTO RESERVATIONS VALUES ";
+    public static final String SELECT_RESERVATION= "SELECT * FROM  RESERVATIONS ";
     private static final String[] FLAG_TYPE = {"VEGAN", "VEGETARIAN", "CELIAC"};
     public Query(){
 
@@ -23,4 +25,9 @@ public class Query {
         return tmp;
     }
     */
+
+    public static String editQuery(String query, String stringToAdd){
+        String newQuery=query + stringToAdd;
+        return newQuery;
+    }
 }

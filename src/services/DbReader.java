@@ -29,16 +29,44 @@ public class DbReader implements Runnable {
             connection = DriverManager.getConnection(connectionString);
             Statement stm = connection.createStatement();
 
-            ResultSet rs = stm.executeQuery(this.query);
+            if(this.query.contains("SELECT ")){
+                ResultSet rs = stm.executeQuery(this.query);
+                if(this.query.contains(" DISHES")){
 
-            if(this.query.contains(" DISHES")){
-                MenuElement tmpElem;
-                while (rs.next()) {
-                    tmpElem=new MenuElement(rs.getString("DISH_NAME"),rs.getString("DISH_CODE"), DishType.valueOf(rs.getString("DISH_TYPE")),
-                            rs.getDouble("DISH_PRICE"),rs.getBoolean("VEGAN"),rs.getBoolean("VEGETARIAN"),rs.getBoolean("CELIAC"));
-                    dishesList.add(tmpElem);
+                    MenuElement tmpElem;
+                    while (rs.next()) {
+                        tmpElem=new MenuElement(rs.getString("DISH_NAME"),rs.getString("DISH_CODE"), DishType.valueOf(rs.getString("DISH_TYPE")),
+                                rs.getDouble("DISH_PRICE"),rs.getBoolean("VEGAN"),rs.getBoolean("VEGETARIAN"),rs.getBoolean("CELIAC"));
+                        dishesList.add(tmpElem);
+                    }
+                }
+
+                if(this.query.contains(" RESERVATIONS")){
+                    while (rs.next()) {
+                        System.out.println(rs.getString("RES_CODE") + " " + rs.getString("CUSTOMER_NAME"));
+                    }
+
+                }
+
+            }else {
+                if(this.query.contains("INSERT ")){
+                    if(this.query.contains(" RESERVATIONS ")){
+                        stm.executeUpdate(this.query);
+                        System.out.println("Insert reservation OK");
+                    }
                 }
             }
+
+
+
+
+
+
+
+
+
+
+
 
         } catch (SQLException e) {
             e.printStackTrace();

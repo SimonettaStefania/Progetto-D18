@@ -46,7 +46,7 @@ public class TestRestaurant {
 
         System.out.println(ilTitolareDelCorso.showCatalogue());
 
-        Reservation r1 = new Reservation(30,300,new Date(2018- 5 -13));
+        Reservation r1 = new Reservation("R1",50,50,new Date(2018- 5 -13),"C01","Piero Angela","3334567654");
 
         Menu m1 = new Menu("first menu", 10);
         Menu m2 = new Menu("second menu", 12);

@@ -9,7 +9,7 @@ import services.Query;
 public class TestCatalogueDB {
 
     public static void main(String[] args) throws InterruptedException {
-        DbReader dbr = new DbReader("esame","123456");
+        DbReader dbr = new DbReader("root","root");
         Thread readerThread=new Thread(dbr);
 
         dbr.setQuery((Query.SELECT_ALL_DISHES));
