@@ -8,19 +8,29 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class Reservation {
+    private String reservationCode;
     private int nGuests;
     private double budget;
     private ArrayList<Menu> createdMenu;
     private double reservationCost;
     private Date eventDate;
+    private String customerId;
+    private String customerNameSurname;
+    private String customerPhone;
 
 
-    public Reservation(int nGuests, double budget, Date eventDate) {
+
+    public Reservation(String reservationCode, int nGuests, double budget, Date eventDate, String customerId, String customerNameSurname, String customerPhone) {
+        this.reservationCode=reservationCode;
         this.nGuests = nGuests;
         this.budget = budget;
         this.createdMenu = new ArrayList<>();
         this.reservationCost = 0;
         this.eventDate = eventDate;
+        this.customerId=customerId;
+        this.customerNameSurname=customerNameSurname;
+        this.customerPhone=customerPhone;
+
     }
 
     public boolean checkPeople(int nPeople) {
@@ -86,6 +96,31 @@ public class Reservation {
         return reservationCost;
     }
 
+    public String getReservationCode() {
+        return reservationCode;
+    }
 
+    public int getnGuests() {
+        return nGuests;
+    }
 
+    public double getBudget() {
+        return budget;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public String getCustomerNameSurname() {
+        return customerNameSurname;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
 }
