@@ -1,31 +1,39 @@
 package tester;
 
 import menu.MenuElement;
-import restaurant.Catalogue;
 import restaurant.Restaurant;
 import services.DbReader;
 import services.Query;
 
 public class TestCatalogueDB {
-
     public static void main(String[] args) throws InterruptedException {
-        DbReader dbr = new DbReader("root","root");
-        Thread readerThread=new Thread(dbr);
+        DbReader dbr = new DbReader("esame","123456");
+        Thread dishesReaderThread=new Thread(dbr);
+
 
         dbr.setQuery((Query.SELECT_ALL_DISHES));
 
-        readerThread.start();
-        readerThread.join();
+        dishesReaderThread.start();
+        dishesReaderThread.join();
 
         Restaurant rest=new Restaurant("Da Nino",150);
 
-        for(MenuElement elem:dbr.getDishesList()){          //TODO to be checked
+        //POPULATING CATALOGUE
+        for(MenuElement elem:dbr.getDishesList()){
             rest.addToCatalogue(elem);
         }
+        //System.out.println(rest.showCatalogue());
 
+        System.out.println("\nALLERGENS LIST (FOR EVERY DISH)");
+        //SHOWS ALLERGENES FOR EVERY ELEMENT OF THE CATALOGUE
+        for (MenuElement elem: rest.getDishesCatalogue().getDishes()){
+            System.out.print(elem.showAllergenes());
+        }
 
-        System.out.println(rest.showCatalogue());
-
-
+        //SHOWS INGREDIENTS FOR EVERY ELEMENT OF THE CATALOGUE
+        System.out.println("\n \nDISHES DETAILS");
+        for (MenuElement elem: rest.getDishesCatalogue().getDishes()){
+            System.out.print(elem.showDetails());
+        }
     }
 }

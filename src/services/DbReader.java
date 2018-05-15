@@ -1,5 +1,6 @@
 package services;
 
+import menu.Allergen;
 import menu.DishType;
 import menu.MenuElement;
 import java.sql.*;
@@ -10,6 +11,7 @@ public class DbReader implements Runnable {
     private static String connectionString;
     private String query;
     private ArrayList<MenuElement> dishesList = new ArrayList<>();
+    private ArrayList<Allergen> allergensDishesList = new ArrayList<>();
 
 
     public DbReader(String username, String password){
@@ -30,32 +32,62 @@ public class DbReader implements Runnable {
             Statement stm = connection.createStatement();
 
             if(this.query.contains("SELECT ")){
-                ResultSet rs = stm.executeQuery(this.query);
+                ResultSet rsDishes = stm.executeQuery(this.query);
                 if(this.query.contains(" DISHES")){
 
                     MenuElement tmpElem;
-                    while (rs.next()) {
-                        tmpElem=new MenuElement(rs.getString("DISH_NAME"),rs.getString("DISH_CODE"), DishType.valueOf(rs.getString("DISH_TYPE")),
-                                rs.getDouble("DISH_PRICE"),rs.getBoolean("VEGAN"),rs.getBoolean("VEGETARIAN"),rs.getBoolean("CELIAC"));
+                    while (rsDishes.next()) {
+                        tmpElem=new MenuElement(rsDishes.getString("DISH_NAME"),rsDishes.getString("DISH_CODE"), DishType.valueOf(rsDishes.getString("DISH_TYPE")),
+                                rsDishes.getDouble("DISH_PRICE"),rsDishes.getBoolean("VEGAN"),rsDishes.getBoolean("VEGETARIAN"),rsDishes.getBoolean("CELIAC"));
                         dishesList.add(tmpElem);
                     }
+                    this.query=Query.SELECT_ALLERGENS_IN_DISHES;
+                    ResultSet rsAllergens = stm.executeQuery(this.query);
+                    while(rsAllergens.next()){
+                        for(MenuElement elem : dishesList){
+                            if(elem.getElementCode().equals(rsAllergens.getString("DISH_CODE"))){
+                                elem.addAllergen(new Allergen(rsAllergens.getString("ALLERGEN_CODE"),rsAllergens.getString("ALLERGEN_DESCR")));
+                            }
+                        }
+                    }
+                    this.query=Query.SELECT_INGREDIENTS_IN_DISHES;
+                    ResultSet rsIngredients = stm.executeQuery(this.query);
+                    while(rsIngredients.next()){
+                        for(MenuElement elem : dishesList){
+                            if(elem.getElementCode().equals(rsIngredients.getString("DISH_CODE"))){
+                                elem.addIngredient(rsIngredients.getString("INGREDIENT_NAME"));
+                            }
+                        }
+                    }
+
                 }
 
                 if(this.query.contains(" RESERVATIONS")){
-                    while (rs.next()) {
-                        System.out.println(rs.getString("RES_CODE") + " " + rs.getString("CUSTOMER_NAME"));
+                    System.out.println("ELENCO PRENOTAZIONI:");
+                    while (rsDishes.next()) {
+                        System.out.println(rsDishes.getString("RES_CODE") + " " + rsDishes.getString("CUSTOMER_NAME_SURNAME"));
                     }
 
                 }
+
+
 
             }else {
                 if(this.query.contains("INSERT ")){
                     if(this.query.contains(" RESERVATIONS ")){
                         stm.executeUpdate(this.query);
-                        System.out.println("Insert reservation OK");
+                        System.out.println("Insert OK");
                     }
                 }
+                if(this.query.contains("DELETE ")){
+                    if(this.query.contains(" RESERVATIONS ")){
+                        stm.executeUpdate(this.query);
+                        System.out.println("Delete OK");
+                    }
+
+                }
             }
+
 
 
 

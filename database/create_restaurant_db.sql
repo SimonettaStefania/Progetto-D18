@@ -24,7 +24,7 @@ INSERT INTO DISHES VALUES('A06', 'TORTA SALATA', 'STARTER', 3, FALSE, TRUE, FALS
 INSERT INTO DISHES VALUES('A07', 'TAGLIERE FORMAGGI MISTI', 'STARTER', 5, FALSE, TRUE, TRUE);
 INSERT INTO DISHES VALUES('A08', 'MOZZARELLA IN CARROZZA', 'STARTER', 3, FALSE, TRUE, FALSE);
 INSERT INTO DISHES VALUES('A09', 'COZZE GRATINATE', 'STARTER', 7.5, FALSE, FALSE, FALSE);
-INSERT INTO DISHES VALUES('A10', 'TOFU CON SALSA DI SOIA', 'STARTER', 3,5, TRUE, TRUE, FALSE);
+INSERT INTO DISHES VALUES('A10', 'TOFU CON SALSA DI SOIA', 'STARTER', 3.5, TRUE, TRUE, FALSE);
 
 -- INSERIMENTO PRIMI
 INSERT INTO DISHES VALUES('P01', 'PAELLA','FIRST_COURSE', 12.5, FALSE, FALSE, FALSE);
@@ -99,11 +99,12 @@ INSERT INTO ALLERGENS VALUES ('P', 'MOLLUSCHI E DERIVATI');
 
 CREATE TABLE INGREDIENTS
 	(
-		INGREDIENT_CODE VARCHAR(3) PRIMARY KEY,
+		INGREDIENT_CODE VARCHAR(4) PRIMARY KEY,
         INGREDIENT_NAME VARCHAR(50) NOT NULL
 		
     );
-
+INSERT INTO INGREDIENTS VALUES ('I01','CURCUMA');
+INSERT INTO INGREDIENTS VALUES ('I02','CURRY');
     
 
     
@@ -118,10 +119,12 @@ CREATE TABLE ALLERGENS_IN_DISHES
     );
     
 INSERT INTO ALLERGENS_IN_DISHES VALUES ('A','A01');
+INSERT INTO ALLERGENS_IN_DISHES VALUES ('B','A01');
+INSERT INTO ALLERGENS_IN_DISHES VALUES ('C','A01');
 
 CREATE TABLE INGREDIENTS_IN_DISHES
 	(
-		INGREDIENT_CODE VARCHAR(3),
+		INGREDIENT_CODE VARCHAR(4),
         DISH_CODE VARCHAR(3),
         PRIMARY KEY (INGREDIENT_CODE, DISH_CODE),
         FOREIGN KEY (DISH_CODE) REFERENCES DISHES(DISH_CODE),
@@ -129,126 +132,19 @@ CREATE TABLE INGREDIENTS_IN_DISHES
         
     );
     
+INSERT INTO INGREDIENTS_IN_DISHES VALUES('I01','A01');
+INSERT INTO INGREDIENTS_IN_DISHES VALUES('I02','A01');
+    
+    
 CREATE TABLE RESERVATIONS
 	(
 		RES_CODE VARCHAR(4) PRIMARY KEY,
 		N_GUESTS INT NOT NULL,
 		RES_COST DOUBLE NOT NULL,
 		EVENT_DATE VARCHAR(50) NOT NULL,
-		CUSTOMER_CODE VARCHAR(3) NOT NULL,
-		CUSTOMER_NAME VARCHAR(30) NOT NULL,
-		CUSTOMER_PHONE VARCHAR(10)
-	
+		CUSTOMER_NAME_SURNAME VARCHAR(50) NOT NULL,
+		CUSTOMER_EMAIL VARCHAR(50) NOT NULL
 	);
 
+
     
-
-CREATE VIEW STARTERS AS(
-
-	SELECT DISH_CODE, DISH_NAME, DISH_TYPE, DISH_PRICE,  CASE 
-                  WHEN VEGAN = TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGAN, 
-             CASE 
-                  WHEN VEGETARIAN=TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGETARIAN, 
-             CASE 
-                  WHEN CELIAC=TRUE
-                     THEN 'YES'
-                  ELSE 'NO' 
-             END  as CELIAC
-    FROM DISHES
-    WHERE DISH_TYPE='STARTER'
-
-);
-CREATE VIEW FIRST_COURSES AS(
-
-	SELECT DISH_CODE, DISH_NAME, DISH_TYPE, DISH_PRICE,  CASE 
-                  WHEN VEGAN = TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGAN, 
-             CASE 
-                  WHEN VEGETARIAN=TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGETARIAN, 
-             CASE 
-                  WHEN CELIAC=TRUE
-                     THEN 'YES'
-                  ELSE 'NO' 
-             END  as CELIAC
-    FROM DISHES
-    WHERE DISH_TYPE='FIRST_COURSE'
-);
-
-
-
-CREATE VIEW MAIN_COURSES AS(
-
-	SELECT DISH_CODE, DISH_NAME, DISH_TYPE, DISH_PRICE,  CASE 
-                  WHEN VEGAN = TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGAN, 
-             CASE 
-                  WHEN VEGETARIAN=TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGETARIAN, 
-             CASE 
-                  WHEN CELIAC=TRUE
-                     THEN 'YES'
-                  ELSE 'NO' 
-             END  as CELIAC
-    FROM DISHES
-    WHERE DISH_TYPE='MAIN_COURSE'
-);
-CREATE VIEW DESSERTS AS(
-
-	SELECT DISH_CODE, DISH_NAME, DISH_TYPE, DISH_PRICE,  CASE 
-                  WHEN VEGAN = TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGAN, 
-             CASE 
-                  WHEN VEGETARIAN=TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGETARIAN, 
-             CASE 
-                  WHEN CELIAC=TRUE
-                     THEN 'YES'
-                  ELSE 'NO' 
-             END  as CELIAC
-    FROM DISHES
-    WHERE DISH_TYPE='DESSERT'
-);
-
-CREATE VIEW DRINKS AS(
-
-	SELECT DISH_CODE, DISH_NAME, DISH_TYPE, DISH_PRICE,  CASE 
-                  WHEN VEGAN = TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGAN, 
-             CASE 
-                  WHEN VEGETARIAN=TRUE 
-                     THEN 'YES' 
-                  ELSE 'NO'
-             END  as VEGETARIAN, 
-             CASE 
-                  WHEN CELIAC=TRUE
-                     THEN 'YES'
-                  ELSE 'NO' 
-             END  as CELIAC
-    FROM DISHES
-    WHERE DISH_TYPE='DRINK'
-);
-
-
-
-
