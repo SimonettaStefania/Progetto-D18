@@ -61,12 +61,11 @@ public class MenuElement implements Comparable<MenuElement>{
         return allergenList.contains(a);
 
     }
-
     public String showDetails() {
-        String tmp = name + "\n";
+        String tmp = name + ": ";
         for (String element : ingredientsList)
-            tmp += element + " ;\n ";
-        tmp += "\t" + price + " €";
+            tmp += element + "; ";
+        tmp += "\t" + price + " €\n";
         return tmp;
 
     }

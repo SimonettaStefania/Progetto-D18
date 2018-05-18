@@ -14,22 +14,20 @@ public class Reservation {
     private ArrayList<Menu> createdMenu;
     private double reservationCost;
     private Date eventDate;
-    private String customerId;
     private String customerNameSurname;
-    private String customerPhone;
+    private String customerMail;
 
 
 
-    public Reservation(String reservationCode, int nGuests, double budget, Date eventDate, String customerId, String customerNameSurname, String customerPhone) {
+    public Reservation(String reservationCode, int nGuests, double budget, Date eventDate, String customerNameSurname, String customerMail) {
         this.reservationCode=reservationCode;
         this.nGuests = nGuests;
         this.budget = budget;
         this.createdMenu = new ArrayList<>();
         this.reservationCost = 0;
         this.eventDate = eventDate;
-        this.customerId=customerId;
         this.customerNameSurname=customerNameSurname;
-        this.customerPhone=customerPhone;
+        this.customerMail =customerMail;
 
     }
 
@@ -112,15 +110,11 @@ public class Reservation {
         return eventDate;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
     public String getCustomerNameSurname() {
         return customerNameSurname;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getCustomerMail() {
+        return customerMail;
     }
 }
