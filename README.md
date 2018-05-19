@@ -12,7 +12,7 @@ Sarà inoltre disponibile un **resoconto dettagliato**, all'atto della scelta, d
 - Documentazione requisiti: [SimonettaStefania](https://github.com/SimonettaStefania)
 
 # Link utili:
-- [Casi D'uso](https://github.com/IngSW-unipv/Progetto-D18/wiki/CASI-D'USO)
+- [Casi D'uso](https://github.com/IngSW-unipv/Progetto-D18/wiki/Casi-d'uso-aggiornati)
 - [Diagramma delle classi](https://github.com/IngSW-unipv/Progetto-D18/wiki/Diagramma-delle-classi)
 - [Diagramma di sequenza](https://github.com/IngSW-unipv/Progetto-D18/wiki/Diagrammi-di-sequenza)
 - [Modello dei domini](https://github.com/IngSW-unipv/Progetto-D18/wiki/Modello-dei-domini)
