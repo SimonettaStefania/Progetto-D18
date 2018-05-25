@@ -1,8 +1,9 @@
 package menu;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class MenuElement implements Comparable<MenuElement>{
+public class MenuElement implements Comparable<MenuElement> {
     private String name, elementCode;
     private DishType type;
     private double price;
@@ -75,7 +76,7 @@ public class MenuElement implements Comparable<MenuElement>{
     }
 
     public String toString() {
-        return name + "\t" + price + " €";
+        return name + "\t" + price + " €" + "\t" + type;
     }
 
     public String showAllergenes() {
@@ -85,7 +86,22 @@ public class MenuElement implements Comparable<MenuElement>{
         return tmp;
     }
 
+    public static Comparator <MenuElement> typeComparator = new Comparator<MenuElement>() {
+        @Override
+        public int compare(MenuElement o1, MenuElement o2) {
+            return o1.getType().compareTo(o2.getType());
+        }
+    };
 
+    public static Comparator <MenuElement> priceComparator = new Comparator<MenuElement>() {
+        @Override
+        public int compare(MenuElement o1, MenuElement o2) {
+            Double p1 = o1.getPrice();
+            Double p2 = o2.getPrice();
 
+            return p1.compareTo(p2);
+
+        }
+    };
 
 }

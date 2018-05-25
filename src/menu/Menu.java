@@ -58,10 +58,14 @@ public class Menu {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.name).append("\t menuCost: ").append(this.menuCost).append("\t nGuest: ").append(this.nMenuGuests).append("\t");
+        sb.append(this.name).append("\t menuCost: ").append(this.menuCost).append("\t nGuest: ").append(this.nMenuGuests).append("\n");
         for (MenuElement el : menuElementsList) {
-            sb.append(el.toString()).append("\t");
+            sb.append(el.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    public ArrayList<MenuElement> getMenuElementsList() {
+        return menuElementsList;
     }
 }

@@ -2,6 +2,8 @@ package tester;
 
 import menu.*;
 
+import java.util.Collections;
+
 
 public class TestMenu {
     public static void main(String[] args) {
@@ -27,6 +29,7 @@ public class TestMenu {
     // Print all elements in the menu
 
     m.sortMenuElements();  // method to be called in the UI
+
 
     System.out.println(m.toString());
 
