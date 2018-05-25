@@ -5,6 +5,8 @@ import restaurant.Restaurant;
 import services.DbReader;
 import services.Query;
 
+import java.util.Collections;
+
 public class TestCatalogueDB {
     public static void main(String[] args) throws InterruptedException {
         DbReader dbr = new DbReader("esame","123456");
@@ -22,7 +24,12 @@ public class TestCatalogueDB {
         for(MenuElement elem:dbr.getDishesList()){
             rest.addToCatalogue(elem);
         }
-        //System.out.println(rest.showCatalogue());
+
+        Collections.sort(rest.getDishesCatalogue().getDishes(),MenuElement.priceComparator);
+        Collections.sort(rest.getDishesCatalogue().getDishes(),MenuElement.typeComparator);
+
+        System.out.println(rest.showCatalogue());
+
 
         System.out.println("\nALLERGENS LIST (FOR EVERY DISH)");
         //SHOWS ALLERGENES FOR EVERY ELEMENT OF THE CATALOGUE
@@ -35,5 +42,6 @@ public class TestCatalogueDB {
         for (MenuElement elem: rest.getDishesCatalogue().getDishes()){
             System.out.print(elem.showDetails());
         }
+
     }
 }
