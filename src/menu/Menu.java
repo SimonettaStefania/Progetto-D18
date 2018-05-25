@@ -18,6 +18,10 @@ public class Menu {
         this.nMenuGuests = nMenuGuests;
     }
 
+    public Menu(){
+        this.menuElementsList = new ArrayList<>();
+    }
+
     public void addElement(MenuElement newElement) {
 
         if(!menuElementsList.contains(newElement))  //check if newElement is already in the menuElementList
