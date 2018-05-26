@@ -31,16 +31,33 @@ public class MenuGenerator {
 
 
     private Menu optimizeBudget(double starterQuote, double firstQuote, double mainQuote){
-        double starterBudget = (budget*starterQuote)/2;
-        double firstBudget = (budget*firstQuote)/2;
-        double mainBudget = (budget*mainQuote)/2;
-        double dessertBudget = (budget*0.01)/2;
+        double starterBudget = (budget*starterQuote);
+        double firstBudget = (budget*firstQuote);
+        double mainBudget = (budget*mainQuote);
+        double dessertBudget = (budget*0.1);
 
         Menu optimizedMenu = new Menu();
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.STARTER,starterBudget));
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.FIRST_COURSE,firstBudget));
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.MAIN_COURSE,mainBudget));
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.DESSERT,dessertBudget));
+        optimizedMenu.calculateMenuCost();
+
+        if(starterBudget==firstBudget && firstBudget==mainBudget){
+            optimizedMenu.setName("JUST OPTIMIZED BUDGET");
+        }else{
+            if(Math.max(starterBudget,Math.max(firstBudget,mainBudget))==starterBudget) {
+                optimizedMenu.setName("OPTIMIZED BUDGET ON STARTERS");
+            }else {
+                if(Math.max(firstBudget,mainBudget)==firstBudget){
+                    optimizedMenu.setName("OPTIMIZED BUDGET ON FIRST COURSES");
+                }else{
+                    optimizedMenu.setName("OPTIMIZED BUDGET ON MAIN COURSES");
+                }
+            }
+        }
+
+
 
         return optimizedMenu;
 
@@ -48,22 +65,38 @@ public class MenuGenerator {
 
 
     private ArrayList<MenuElement> findDishes(DishType type, double budget){
+        MenuElement tmpElem=null;
+        boolean first=true;
 
-        int n = 0 ;
         ArrayList<MenuElement> tmp = new ArrayList<>();
         for ( MenuElement element : catalogue.getDishes() ) {
-            if (n == 2)
-                break;
-            if (element.getType() == type && element.getPrice() <= budget) {
-                tmp.add(element);
-                n++;
+            if(first)
+            {
+                tmpElem=element;
+                first=false;
+            }else{
+                if(tmpElem.getType()==type && element.getType()==type && (tmpElem.getPrice()+element.getPrice()<=budget)){
+                    tmp.add(tmpElem);
+                    tmp.add(element);
+                    break;
+                }else{
+                    tmpElem=element;
+                }
+            }
+        }
+        if(tmp.isEmpty()){
+            for ( MenuElement element : catalogue.getDishes() ) {
+                if(element.getType()==type && element.getPrice()<=budget){
+                    tmp.add(element);
+                    break;
+                }
             }
         }
 
         return tmp ;
     }
 
-
-
-
+    public ArrayList<Menu> getGeneratedMenu() {
+        return generatedMenu;
+    }
 }
