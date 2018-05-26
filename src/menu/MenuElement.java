@@ -3,7 +3,7 @@ package menu;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class MenuElement implements Comparable<MenuElement> {
+public class MenuElement  {
     private String name, elementCode;
     private DishType type;
     private double price;
@@ -71,10 +71,6 @@ public class MenuElement implements Comparable<MenuElement> {
 
     }
 
-    public int compareTo(MenuElement element){
-        return Integer.compare(this.type.ordinal(), element.type.ordinal());
-    }
-
     public String toString() {
         return name + "\t" + price + " €" + "\t" + type;
     }
@@ -99,7 +95,7 @@ public class MenuElement implements Comparable<MenuElement> {
             Double p1 = o1.getPrice();
             Double p2 = o2.getPrice();
 
-            return p1.compareTo(p2);
+            return -p1.compareTo(p2);
 
         }
     };

@@ -49,7 +49,7 @@ public class Menu {
     }
 
 
-    public void sortMenuElements(){ Collections.sort(this.menuElementsList); }  // Method that sorts elementListMenu TODO add this method in the UML
+    public void sortMenuElements(){ Collections.sort(this.menuElementsList,MenuElement.typeComparator); }  // Method that sorts elementListMenu TODO add this method in the UML
 
 
     // method that calculates all menus's cost  TODO add this method in the UML
@@ -72,4 +72,6 @@ public class Menu {
     public ArrayList<MenuElement> getMenuElementsList() {
         return menuElementsList;
     }
+
+    public void setName(String name) { this.name = name; }
 }
