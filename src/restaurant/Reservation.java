@@ -19,10 +19,9 @@ public class Reservation {
 
 
 
-    public Reservation(String reservationCode, int nGuests, double budget, Date eventDate, String customerNameSurname, String customerMail) {
+    public Reservation(String reservationCode, int nGuests, Date eventDate, String customerNameSurname, String customerMail) {
         this.reservationCode=reservationCode;
         this.nGuests = nGuests;
-        this.budget = budget;
         this.createdMenu = new ArrayList<>();
         this.reservationCost = 0;
         this.eventDate = eventDate;
@@ -74,7 +73,7 @@ public class Reservation {
 
     public String toString() {                    // TODO add this method in the UML
         StringBuilder sb = new StringBuilder();
-        sb.append("Reservation info:\n").append("Budget: ").append(this.budget).append("\t nGuest: ").append(this.nGuests)
+        sb.append("Reservation: ").append(this.reservationCode).append("\tCliente: ").append(this.customerNameSurname).append("\tBudget: ").append(this.budget).append("\t nGuest: ").append(this.nGuests)
                 .append("\t ReservationCost: ").append(this.reservationCost).append(("\t eventDate: ")).append(this.eventDate).append("\n");
         for (Menu m : createdMenu) {
             sb.append(m.toString()).append("\n");
