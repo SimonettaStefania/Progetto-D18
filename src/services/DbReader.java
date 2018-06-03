@@ -3,8 +3,11 @@ package services;
 import menu.Allergen;
 import menu.DishType;
 import menu.MenuElement;
+import restaurant.Reservation;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DbReader implements Runnable {
 
@@ -12,10 +15,11 @@ public class DbReader implements Runnable {
     private String query;
     private ArrayList<MenuElement> dishesList = new ArrayList<>();
     private ArrayList<Allergen> allergensDishesList = new ArrayList<>();
+    private ArrayList<Reservation> reservationsList = new ArrayList<>();
 
 
     public DbReader(String username, String password){
-        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?user="+username +"&password="+password;
+        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?useSSL=false&user="+username +"&password="+password;
     }
 
     @Override
@@ -32,9 +36,9 @@ public class DbReader implements Runnable {
             Statement stm = connection.createStatement();
 
             if(this.query.contains("SELECT ")){
-                ResultSet rsDishes = stm.executeQuery(this.query);
-                if(this.query.contains(" DISHES")){
 
+                if(this.query.contains(" DISHES")){
+                    ResultSet rsDishes = stm.executeQuery(this.query);
                     MenuElement tmpElem;
                     while (rsDishes.next()) {
                         tmpElem=new MenuElement(rsDishes.getString("DISH_NAME"),rsDishes.getString("DISH_CODE"), DishType.valueOf(rsDishes.getString("DISH_TYPE")),
@@ -63,15 +67,13 @@ public class DbReader implements Runnable {
                 }
 
                 if(this.query.contains(" RESERVATIONS")){
-                    System.out.println("ELENCO PRENOTAZIONI:");
-                    while (rsDishes.next()) {
-                        System.out.println(rsDishes.getString("RES_CODE") + " " + rsDishes.getString("CUSTOMER_NAME_SURNAME"));
+                    ResultSet rsReservations = stm.executeQuery(this.query);
+                    while (rsReservations.next()) {
+                        Date eventDate = rsReservations.getTimestamp("EVENT_DATE");
+                        reservationsList.add(new Reservation(rsReservations.getString("RES_CODE"),rsReservations.getInt("N_GUESTS"),
+                                eventDate,rsReservations.getString("CUSTOMER_NAME_SURNAME"),rsReservations.getString("CUSTOMER_EMAIL")));
                     }
-
                 }
-
-
-
             }else {
                 if(this.query.contains("INSERT ")){
                     if(this.query.contains(" RESERVATIONS ")){
@@ -84,22 +86,8 @@ public class DbReader implements Runnable {
                         stm.executeUpdate(this.query);
                         System.out.println("Delete OK");
                     }
-
                 }
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -113,11 +101,14 @@ public class DbReader implements Runnable {
             }
         }
     }
+
     public void setQuery(String query) {
         this.query = query;
     }
-
     public ArrayList<MenuElement> getDishesList() {
         return dishesList;
+    }
+    public ArrayList<Reservation> getReservationsList() {
+        return reservationsList;
     }
 }
