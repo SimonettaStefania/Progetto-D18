@@ -1,0 +1,81 @@
+body{
+	
+	background-color:#faf1d500;
+	background-size:cover;
+
+	
+}
+
+.row, #welcome{
+	
+	background-color:#eac68fb5;
+	margin-top:40px;
+	margin-bottom:50px;
+	text-align:center;
+	
+	
+}
+
+#description {
+	
+	padding-top:30px;
+	padding-bottom:30px;
+	padding-left:40px;
+	padding-right:40px;
+	text-align:justify;
+	font-style:italic;
+	font-size:30px;
+	font-family:times;
+	
+}
+
+.col{
+	
+	margin:30px;
+	alignement:start;
+	text-align:center;
+	
+}
+
+
+
+.display-3, .display-4, .display-5{
+	
+	
+	margin-top:0px;
+	font-weight:bold;
+	text-align : center;
+}
+
+.display-5{
+	
+	margin:2%;
+	margin-bottom:50px;
+}
+
+.form-control, #inputGroup-names, #inputGroup-mail, #inputGroup-date {
+	
+	font-size:20px;
+	text-align:justify;
+
+	
+}
+
+p {
+	
+	font-size:23px;
+	text-align:justify;
+	
+}
+
+
+.btn{
+
+	font-size:25px;
+	background-color: #6576a5;
+	border:#6576a5;
+
+}
+
+
+
