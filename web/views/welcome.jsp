@@ -36,13 +36,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home </a>
+                            <a class="nav-link" href="welcome.jsp">Home </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">Reservations </a>
+                            <a class="nav-link" href="reservationState.jsp">Reservations </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">Catalogue </a>
+                            <a class="nav-link" href="recap.jsp">Catalogue </a>
                         </li>
                     </ul>
                 </div>
@@ -115,7 +115,7 @@
                     </div>
 
 
-                    <p><a class="btn btn-info btn-lg" href="#" role="button">Book &raquo;</a></p>
+                    <p><a class="btn btn-info btn-lg" href="reservationState.jsp" role="button">Book &raquo;</a></p>
 
 
 
