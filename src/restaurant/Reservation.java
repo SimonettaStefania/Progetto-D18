@@ -30,14 +30,20 @@ public class Reservation {
 
     }
 
-    public boolean checkPeople(int nPeople) {
-        return nPeople == nGuests;
+    public boolean checkPeople() {
+        int realGuests = 0;
+        for(Menu m : createdMenu){
+            realGuests += m.getnMenuGuests();
+        }
+        return realGuests == nGuests;
+
     }
 
     public boolean checkBudget(int realCost) {
         return realCost == reservationCost;
 
     }
+
 
     public void addMenu(Menu newMenu) {     // newMenu is the menu that you want to add in the arraylist createdMenu
         createdMenu.add(newMenu);
@@ -74,7 +80,7 @@ public class Reservation {
     public String toString() {                    // TODO add this method in the UML
         StringBuilder sb = new StringBuilder();
         sb.append("Reservation: ").append(this.reservationCode).append("\tCliente: ").append(this.customerNameSurname).append("\tBudget: ").append(this.budget).append("\t nGuest: ").append(this.nGuests)
-                .append("\t ReservationCost: ").append(this.reservationCost).append(("\t eventDate: ")).append(this.eventDate).append("\n");
+                .append("\t ReservationCost: ").append(this.reservationCost).append(("\t eventDate: ")).append(this.eventDate.getDay()).append("/").append(this.eventDate).append("\n");
         for (Menu m : createdMenu) {
             sb.append(m.toString()).append("\n");
         }
