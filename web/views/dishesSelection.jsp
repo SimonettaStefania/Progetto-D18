@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Chiara
-  Date: 05/06/2018
-  Time: 16:42
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -26,56 +19,96 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item active"><a class="nav-link" href="#">Menu Creation<span class="sr-only">(current)</span></a>
+            <li class="nav-item active"><a class="nav-link" href="#">Menu Creation</a>
             </li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
-    <div class="jumbotron" style="background: #fffffff0">
+    <div class="jumbotron" style="background: #ffffff">
         <h2>Filters</h2>
-        <p class="lead text-muted">
-            <label class="checkbox-inline" style="margin-left: 2%"><input type="checkbox" value=""> Vegetarian</label>
-            <label class="checkbox-inline" style="margin-left: 2%"><input type="checkbox" value=""> Vegan</label>
-            <label class="checkbox-inline" style="margin-left: 2%"><input type="checkbox" value=""> Celiac</label>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="vegetarian" name="vegetarian" class="custom-control-input">
+            <label class="custom-control-label" for="vegetarian">Vegetarian</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="vegan" name="vegan" class="custom-control-input">
+            <label class="custom-control-label" for="vegan">Vegan</label>
+        </div>
+        <div class="custom-control custom-checkbox custom-control-inline">
+            <input type="checkbox" id="celiac" name="celiac" class="custom-control-input">
+            <label class="custom-control-label" for="celiac">Celiac</label>
+        </div>
             <a style="float: right" href="#" class="btn btn-primary">Apply</a>
         </p>
     </div>
 </div>
 
-<div class="jumbotron" style="margin-left: 5%; margin-right: 5%; background: #ffffffd7">
+<div class="jumbotron" style="margin-left: 5%; margin-right: 5%; background: #ffffffc0">
     <div class="row" style="margin-left: 1%; margin-right: 1%">
         <div class="col-sm-2">
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="starters-tab" data-toggle="list"
-                   href="#starters" role="tab" aria-controls="starters">Starters</a>
+                   href="#starters" role="tab" aria-controls="starters"><b>Starters</b></a>
                 <a class="list-group-item list-group-item-action" id="first-tab" data-toggle="list"
-                   href="#first-courses" role="tab" aria-controls="first">First courses</a>
+                   href="#first-courses" role="tab" aria-controls="first"><b>First courses</b></a>
                 <a class="list-group-item list-group-item-action" id="main-tab" data-toggle="list"
-                   href="#main-courses" role="tab" aria-controls="main">Main courses</a>
+                   href="#main-courses" role="tab" aria-controls="main"><b>Main courses</b></a>
                 <a class="list-group-item list-group-item-action" id="desserts-tab" data-toggle="list"
-                   href="#desserts" role="tab" aria-controls="desserts">Desserts</a>
+                   href="#desserts" role="tab" aria-controls="desserts"><b>Desserts</b></a>
                 <a class="list-group-item list-group-item-action" id="drinks-tab" data-toggle="list"
-                   href="#drinks" role="tab" aria-controls="drinks">Drinks</a>
+                   href="#drinks" role="tab" aria-controls="drinks"><b>Drinks</b></a>
             </div>
         </div>
         <div class="col-sm-7">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="starters" role="tabpanel" aria-labelledby="starters-tab">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <label><input type="checkbox"> Un antipasto a caso</label>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="starter_1">
+                                <label class="custom-control-label" for="starter_1">Bruschetta al Jigglypuff</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="starter_2">
+                                <label class="custom-control-label" for="starter_2">Oddish all'ascolana</label>
                             </div>
                         </div>
                     </div>
+				</div>
 
+                <div class="tab-pane fade" id="first-courses" role="tabpanel" aria-labelledby="first-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            Lorem ipsum
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane fade" id="first-courses" role="tabpanel" aria-labelledby="first-tab">B</div>
-                <div class="tab-pane fade" id="main-courses" role="tabpanel" aria-labelledby="main-tab">C</div>
-                <div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">D</div>
-                <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab">E</div>
+
+                <div class="tab-pane fade" id="main-courses" role="tabpanel" aria-labelledby="main-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            Lorem ipsum
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            Lorem ipsum
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            Lorem ipsum
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-3">
@@ -84,8 +117,8 @@
                 <div class="card-body">
                     <p>I'm a dish</p>
                     <p>I'm another dish</p>
-                    <p>I'm Poppy</p>
-                    <p>I'm lovin it</p>
+                    <p>I'm Groot</p>
+                    <p>I'm <span style="color: blue">blue</span> <span style="font-size: xx-small">♫ dabba di dabba dai ♫</span></p>
                 </div>
             </div>
 

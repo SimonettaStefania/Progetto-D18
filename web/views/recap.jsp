@@ -11,6 +11,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Progetto D18</title>
 
     <link   rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
@@ -23,7 +24,7 @@
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 </head>
 
-<body background="../img/background.jpg">
+<body background ="../img/background.jpg" style="background-repeat: no-repeat">
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Project D-18</a>
@@ -48,7 +49,7 @@
 
 
 <div class="jumbotron" style="background-color: #ffffffc2; margin-left: 5%; margin-right: 5%; margin-top: 3%; padding-top: 3%; padding-bottom: 2%">
-    <div class="card-header" style="margin-left: 3.7%; background-color:#6576a5; color: white; max-width: 67%"><h3>RESERVATION ID: 87926248</h3></div>
+    <h3 style="margin-left: 3.8%">RESERVATION ID: 87926248</h3>
     <br/>
 
     <div class="row">
@@ -56,11 +57,13 @@
         <div class="col-12 col-md-9">
 
             <div class="jumbotron" style="background-color: #ffffffe3; margin-left: 5%; margin-right: 5%; padding-top: 3%; padding-bottom: 3%">
-                <h3><center>Dettagli Menu</center></h3>
+
+                <h3><center>Reservation recapp</center></h3>
                 <hr class="my-4">
+
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list"><div class="card bg-light mb-3">
-                        <div class="card-header bg-dark text-white">MenuProva</div>
+                        <div class="card-header text-white" style="background-color: #6576a5">MenuProva</div>
                         <div class="card-body">
                             <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
                             <p class="card-text">
@@ -70,9 +73,10 @@
                                 Caffè	1.0 €	DRINK
                                 Acqua	1.0 €	DRINK</pre></p>
                         </div>
-                    </div></div>
+                    </div>
+                    </div>
                     <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list"><div class="card bg-light mb-3">
-                        <div class="card-header bg-dark text-white">Menu2</div>
+                        <div class="card-header text-white" style="background-color: #6576a5">Menu2</div>
                         <div class="card-body">
                             <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
                             <p class="card-text">
@@ -84,7 +88,7 @@
                         </div>
                     </div></div>
                     <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list"><div class="card bg-light mb-3">
-                        <div class="card-header bg-dark text-white">Menu3</div>
+                        <div class="card-header text-white" style="background-color: #6576a5">Menu3</div>
                         <div class="card-body">
                             <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
                             <p class="card-text">
@@ -96,7 +100,7 @@
                         </div>
                     </div></div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list"><div class="card bg-light mb-3">
-                        <div class="card-header bg-dark text-white">Menu4</div>
+                        <div class="card-header text-white" style="background-color: #6576a5">Menu4</div>
                         <div class="card-body">
                             <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
                             <p class="card-text">
