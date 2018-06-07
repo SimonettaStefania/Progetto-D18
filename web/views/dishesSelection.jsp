@@ -123,7 +123,7 @@
             </div>
 
             <br/>
-            <a style="float: right" href="#" class="btn btn-success">Submit</a>
+            <a style="float: right" href="/status" class="btn btn-success">Submit</a>
         </div>
     </div>
 </div>

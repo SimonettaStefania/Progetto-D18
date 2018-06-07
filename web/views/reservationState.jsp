@@ -80,12 +80,12 @@
             </div>
 
 
-            <button type="button" class="btn" style="background:#6576a5; color: white" id="create">Create your own Menu</button>
+            <a href="/selection" class="btn" style="background:#6576a5; color: white" id="create">Create your own Menu</a>
             </br>
             </br>
             <div class="row" id="row2_pg2">
-                <button type="button" class="btn" style="background: #1d2124; color: white;  width: 30%; margin-left:30% " id="next">Next</button>
-                <button type="button" class="btn" style="background: #1d2124; color: white;width: 30%; margin-left:6%" id="cancel">Cancel</button>
+                <a href="/recap" class="btn" style="background: #1d2124; color: white;  width: 30%; margin-left:30% " id="next">Next</a>
+                <a href="/home" class="btn" style="background: #1d2124; color: white;width: 30%; margin-left:6%" id="cancel">Cancel</a>
 
             </div>
         </div>

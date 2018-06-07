@@ -83,6 +83,9 @@
 
                     <p>Want to make a new reservation? Compile the form below and organize your event!</p>
 
+
+
+                <form action="/views/reservationState.jsp" method="post">
                     <div class="input-group input-group-sm mb-3">
 
                         <div class="input-group-prepend">
@@ -115,11 +118,14 @@
                     </div>
 
 
-                    <p><a class="btn btn-info btn-lg" href="reservationState.jsp" role="button">Book &raquo;</a></p>
+                    <input class="btn btn-info btn-lg" type="submit" value="Book &raquo;">
 
-
+                </form>
 
                 </div>
+
+
+
 
 
                 <div class = "col col-md-2">
