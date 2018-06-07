@@ -85,14 +85,14 @@
 
 
 
-                <form action="/views/reservationState.jsp" method="post">
+                <form action="../status" method="post">
                     <div class="input-group input-group-sm mb-3">
 
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-names"> First Name | Last Name</span>
                         </div>
-                        <input id = "name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                        <input id = "surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" >
+                        <input name="name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input name="surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" >
 
                     </div>
 
@@ -103,7 +103,7 @@
                             <span class="input-group-text" id="inputGroup-mail">E-mail</span>
                         </div>
 
-                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 
                     </div>
 
@@ -113,7 +113,7 @@
                             <span class="input-group-text" id="inputGroup-date">Date</span>
                         </div>
 
-                        <input type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 
                     </div>
 

@@ -8,8 +8,8 @@ import java.io.IOException;
 @WebServlet(name = "WelcomeServlet", urlPatterns = "/home")
 public class WelcomeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        forwardTo(request, response, "/views/reservationState.jsp");
+        // Si può fare qualcosa qui nel caso in cui viene premuto Cancel e la reservation viene annullata
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,4 +22,3 @@ public class WelcomeServlet extends HttpServlet {
         rd.forward(request, response);
     }
 }
-

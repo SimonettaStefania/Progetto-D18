@@ -80,13 +80,18 @@
             </div>
 
 
-            <a href="/selection" class="btn" style="background:#6576a5; color: white" id="create">Create your own Menu</a>
+            <form action="/selection" method="post">
+                <input type="submit" class="btn" style="background:#6576a5; color: white" value="Create your own Menu">
+            </form>
             </br>
             </br>
             <div class="row" id="row2_pg2">
-                <a href="/recap" class="btn" style="background: #1d2124; color: white;  width: 30%; margin-left:30% " id="next">Next</a>
-                <a href="/home" class="btn" style="background: #1d2124; color: white;width: 30%; margin-left:6%" id="cancel">Cancel</a>
-
+                <form action="/recap" method="post">
+                    <input type="submit" class="btn btn-dark" value="Next">
+                </form>
+                <form action="/home" method="post" style="margin-left: 6%">
+                    <input type="submit" class="btn btn-dark" value="Cancel">
+                </form>
             </div>
         </div>
 

@@ -8,11 +8,15 @@ import java.io.IOException;
 @WebServlet(name = "RecapServlet", urlPatterns = "/recap")
 public class RecapServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        forwardTo(request, response, "/views/recap.jsp");
     }
 
+    /**
+     *  Redirects to homepage if trying to access the page from its address.
+     *  Only access through post method is allowed.
+     * */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/views/recap.jsp");
+        forwardTo(request, response, "/index.jsp");
     }
 
     private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {

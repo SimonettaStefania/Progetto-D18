@@ -123,7 +123,9 @@
             </div>
 
             <br/>
-            <a style="float: right" href="/status" class="btn btn-success">Submit</a>
+            <form action="/status" method="post" style="float: right">
+                <input type="submit" class="btn btn-success" value="Submit">
+            </form>
         </div>
     </div>
 </div>
