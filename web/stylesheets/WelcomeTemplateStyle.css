@@ -1,13 +1,14 @@
 body{
 	
-	background-color:#faf1d500;
+
 	background-size:cover;
+	background-repeat:no-repeat;
 
 	
 }
 
 .row, #welcome{
-	
+
 	background-color:#eac68fb5;
 	margin-top:40px;
 	margin-bottom:50px;
@@ -32,7 +33,6 @@ body{
 .col{
 	
 	margin:30px;
-	alignement:start;
 	text-align:center;
 	
 }
