@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Woizbora
+  User: Woizbora & beard33
   Date: 05/06/2018
   Time: 16:45
   To change this template use File | Settings | File Templates.
@@ -53,7 +53,7 @@
 
 <div class="jumbotron" id="mainJumbotronRecap">
 
-    <h3 style="margin-left: 3.8%">RESERVATION ID: 87926248</h3>
+    <h1 style="margin-right: 27%"><center>Reservation recap</center></h1>
     <br/>
 
     <div class="row">
@@ -64,7 +64,7 @@
 
             <div class="jumbotron" id="menuJumbotronRecap">
 
-                <h3><center>Reservation recap</center></h3>
+                <h4>ID: 867483638</h4>
                 <hr class="my-4">
 
                 <div class="tab-content" id="nav-tabContent">
@@ -141,9 +141,9 @@
                     <tr>
                         <th scope="row"></th>
 
-                        <td><button type="button" class="btn" style="margin-left: 40%"> Total person <span class="badge">30</span></button></td>
+                        <td><button type="button" class="btn" id="totalPerson" style="margin-left: 40%"> Total person <span class="badge">30</span></button></td>
 
-                        <td><button type="button" class="btn" style="margin-right: 40%">Total cost <span class="badge">300</span></button></td>
+                        <td><button type="button" class="btn" id="totalCost" style="margin-right: 40%">Total cost <span class="badge">300</span></button></td>
                     </tr>
 
                 </table>
@@ -169,7 +169,7 @@
 
             <!-- -------------------------------------- FINAL BTN --------------------------------------------------- -->
 
-            <div class="row" style="margin-right: 13%;">
+            <div class="row" style="margin-right: 20%">
 
             <table class="table table-borderless">
 
@@ -178,13 +178,13 @@
 
                     <td>
                         <form action="/status" method="post">
-                        <input type="submit" class="btn btn-lg" value="Modify">
+                        <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
                         </form>
                     </td>
 
                     <td>
                         <form action="/home" method="post">
-                        <input type="submit" class="btn btn-lg" value="Confirm">
+                        <input type="submit" class="btn btn-success btn-lg" value="Confirm &checkmark;">
                         </form>
                     </td>
                 </tr>

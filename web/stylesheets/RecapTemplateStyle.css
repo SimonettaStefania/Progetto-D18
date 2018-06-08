@@ -24,10 +24,25 @@ body{
 
 }
 
+#totalCost{
+    background-color: #6576a5;
+    color: white;
+}
+
+#totalPerson{
+    background-color: #6576a5;
+    color: white;
+}
+
+#btnBack{
+    color: white;
+    background-color: #d60000;
+}
+
 
 .list-group{
     margin-right: 5%;
-    padding-right: 10%;
+    padding-right: 7%;
 }
 
 .list-group-item.active{
@@ -39,7 +54,3 @@ body{
     background-color: #6576a5;
 }
 
-.btn{
-    background-color: #6576a5;
-    color: white;
-}
