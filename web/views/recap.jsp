@@ -136,7 +136,7 @@
 
                 <!-- -------------------------------------- TABLE INFO RESERVATION (total cost & guest) --------------------------------------------------- -->
 
-                <table class="table" style="margin-bottom: 0%">
+                <table class="table table-borderless" style="margin-bottom: 0%">
 
                     <tr>
                         <th scope="row"></th>
@@ -154,12 +154,42 @@
 
         <div class="col-6 col-md-3 sidebar" id="sidebar">
 
-            <div class="list-group" id="list-tab" role="tablist">
 
-                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-menu1" role="tab">Menu 1</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu2" role="tab" >Menu 2</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu3" role="tab">Is simonetta legit?</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu4" role="tab">No, she isn't</a>
+
+                <div class="list-group" id="list-tab" role="tablist">
+
+                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-menu1" role="tab">Menu 1</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu2" role="tab" >Menu 2</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu3" role="tab">Is simonetta legit?</a>
+                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu4" role="tab">No, she isn't</a>
+
+                </div>
+
+            <br/><br/>
+
+            <!-- -------------------------------------- FINAL BTN --------------------------------------------------- -->
+
+            <div class="row" style="margin-right: 13%;">
+
+            <table class="table table-borderless">
+
+                <tr>
+                    <th scope="row"></th>
+
+                    <td>
+                        <form action="/status" method="post">
+                        <input type="submit" class="btn btn-lg" value="Modify">
+                        </form>
+                    </td>
+
+                    <td>
+                        <form action="/home" method="post">
+                        <input type="submit" class="btn btn-lg" value="Confirm">
+                        </form>
+                    </td>
+                </tr>
+
+            </table>
 
             </div>
 
