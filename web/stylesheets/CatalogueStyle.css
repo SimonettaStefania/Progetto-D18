@@ -1,0 +1,34 @@
+body {
+
+	background-size:cover;
+	background-repeat: no-repeat;
+
+}
+
+#dishesList {
+	
+	padding-top:0;
+	background-color:#ffffff00;
+	
+}
+
+#typeList {
+	
+	background-color: #ffffffe3; 
+	margin:5%;
+
+}
+
+.card{
+	
+	margin-top:0%;
+	
+}
+.card-header, .btn-info, .list-group-item.active {
+	
+	background-color: #6576a5;
+	border-color: #6576a5;
+}
+
+
+

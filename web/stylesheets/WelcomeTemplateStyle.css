@@ -1,38 +1,36 @@
 body{
-	
 
 	background-size:cover;
 	background-repeat:no-repeat;
-
-	
 }
 
 .row, #welcome{
 
-	background-color:#eac68fb5;
-	margin-top:40px;
-	margin-bottom:50px;
+	background-color: rgba(255, 255, 255, 0.61);
+	margin:2%;
 	text-align:center;
 	
 	
 }
 
+.jumbotron  {
+
+    background-color:#ffffff00;
+
+}
+
 #description {
 	
-	padding-top:30px;
-	padding-bottom:30px;
-	padding-left:40px;
-	padding-right:40px;
+
 	text-align:justify;
-	font-style:italic;
-	font-size:30px;
-	font-family:times;
+	font-size:1.875em;
+
 	
 }
 
 .col{
 	
-	margin:30px;
+	margin:1.875em;
 	text-align:center;
 	
 }
@@ -42,7 +40,7 @@ body{
 .display-3, .display-4, .display-5{
 	
 	
-	margin-top:0px;
+	margin-top:0;
 	font-weight:bold;
 	text-align : center;
 }
@@ -50,28 +48,29 @@ body{
 .display-5{
 	
 	margin:2%;
-	margin-bottom:50px;
+	margin-bottom:3.125em;
 }
 
-.form-control, #inputGroup-names, #inputGroup-mail, #inputGroup-date {
+#inputGroup-names, #inputGroup-mail, #inputGroup-date, input[type="submit"]{
 	
-	font-size:20px;
+	font-size:1.438em;
 	text-align:justify;
-
+    background-color:#6576a5;
+    color:#ffffff;
 	
 }
 
 p {
 	
-	font-size:23px;
+	font-size:1.438em;
 	text-align:justify;
 	
 }
 
 
-.btn{
+.btn, btn-info, .navbar{
 
-	font-size:25px;
+    font-size:1em;
 	background-color: #6576a5;
 	border:#6576a5;
 

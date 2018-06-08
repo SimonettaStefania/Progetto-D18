@@ -31,7 +31,7 @@
         <!-- ============= NAVBAR =======================================================================-->
 
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="#">Project D-18</a>
+                <a class="navbar-brand" href="welcome.jsp">Project D-18</a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
@@ -39,10 +39,10 @@
                             <a class="nav-link" href="welcome.jsp">Home </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="reservationState.jsp">Reservations </a>
+                            <a class="nav-link" href="#">Reservations </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="recap.jsp">Catalogue </a>
+                            <a class="nav-link" href="catalogue.jsp">Catalogue </a>
                         </li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@
         <!-- ============= TITLE AND DESCRIPTION =======================================================================-->
 
 
-            <div class = "container-fluid">
+            <div class = "jumbotron">
 
                 <div id = "welcome" class = "row justify-content-around" >
 
@@ -118,7 +118,7 @@
                     </div>
 
 
-                    <input class="btn btn-info btn-lg" type="submit" value="Book &raquo;">
+                    <input class="btn btn-info" type="submit" value="Book &raquo;">
 
                 </form>
 
