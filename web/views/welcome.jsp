@@ -92,8 +92,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-names"> First Name | Last Name</span>
                         </div>
-                        <input name="name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                        <input name="surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" >
+                        <input name="name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
+                        <input name="surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" >
 
                     </div>
 
@@ -101,10 +101,10 @@
                     <div class="input-group input-group-sm mb-3 ">
 
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-mail">E-mail</span>
+                            <span class="input-group-text" id="inputGroup-mail" required="">E-mail</span>
                         </div>
 
-                        <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
 
                     </div>
 
@@ -115,7 +115,7 @@
                         </div>
 
                         <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                style="font-size: 2em">
+                                style="font-size: 2em" required="">
 
                     </div>
 
