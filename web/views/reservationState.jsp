@@ -34,8 +34,10 @@
 </br>
 </br>
 
-<div class="container">
-    <div class="row" style="background-color:#f1f1f1d1; padding: 5%; " id="row1_pg2">
+<div class="container" style="background-color:#f1f1f1d1; padding: 2%;">
+
+    <div class="row"  id="row1_pg2">
+
         <div class="col-sm-5">
             <ul class="list-group mb-3" style="margin-left: 20%;">
                 <a class="list-view bg-dark" style="height: 30px; color: antiquewhite; text-align: center">Added Menù</a>
@@ -72,31 +74,43 @@
                 <input type="text" class="form-control" placeholder="How many?" aria-label="Username" aria-describedby="basic-addon1" style="width:50%">
             </div>
 
+            <form action="/selection" method="post">
+                <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create your own Menu &raquo;">
+            </form>
+
+            <span style="font-size: small; margin-bottom: 0%">If you want to optimize your menu</span>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <button class="btn" type="button"style="background-color:#6576a5; color: white;" id="optimize">Optimize your Menu!</button>
+                    <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Budget</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1">
+                <input type="text" class="form-control" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1" style="width:50%">
             </div>
 
 
             <form action="/selection" method="post">
-                <input type="submit" class="btn" style="background:#6576a5; color: white" value="Create your own Menu">
+                <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create your optimized Menu &raquo;">
             </form>
-            </br>
-            </br>
-            <div class="row" id="row2_pg2">
-                <form action="/recap" method="post">
-                    <input type="submit" class="btn btn-dark" value="Next">
-                </form>
-                <form action="/home" method="post" style="margin-left: 6%">
-                    <input type="submit" class="btn btn-dark" value="Cancel">
-                </form>
-            </div>
+
+
+        </div>
+    </div>
+
+        <br/>
+
+        <div class="row">
+
+            <div class="col">
+            <form action="/recap" method="post" style="margin-right: 50%; margin-left: 10%">
+                <input type="submit" class="btn btn-lg btn-success" value="Next">
+            </form></div>
+            <div class="col">
+            <form action="/home" method="post" style=" margin-left: 50%; margin-right: 10%">
+                <input type="submit" class="btn btn-lg" value="Cancel">
+            </form></div>
         </div>
 
-    </div>
+
 </div>
-</div>
+
 </body>
 </html>
