@@ -40,7 +40,7 @@
     <div class="row"  id="row1_pg2">
 
         <div class="col-sm-5">
-            <ul class="list-group mb-3" style="margin-left: 20%;">
+            <ul class="list-group mb-3" style="margin-left: 20%; padding: 2%">
                 <a class="list-view bg-dark" style="height: 30px; color: antiquewhite; text-align: center">Added Menù</a>
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
@@ -66,7 +66,7 @@
             </ul>
         </div>
 
-        <div class="col-sm-4" style="margin-left: 150px; width: 400px; ">
+        <div class="col-sm-4" style="margin-left: 15%; width: 40%; ">
 
            <!-- <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -108,12 +108,12 @@
         <div class="row">
 
             <div class="col">
-                <form action="/home" method="post" style=" margin-right: 50%; margin-left: 16.4%">
+                <form action="/home" method="post" style="  margin-left: 18.3%">
                     <input type="submit" class="btn btn-lg" id="btnBack" value=" &laquo; Cancel">
                 </form></div>
 
             <div class="col">
-            <form action="/recap" method="post" style="margin-left: 59.5%; margin-right: 10%">
+            <form action="/recap" method="post" style="margin-left: 62%;">
                 <input type="submit" class="btn btn-lg btn-success" value="Next &raquo;">
             </form></div>
         </div>
