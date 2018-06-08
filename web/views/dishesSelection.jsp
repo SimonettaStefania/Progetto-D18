@@ -1,3 +1,7 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="menu.MenuElement" %>
+<%@ page import="restaurant.Catalogue" %>
+<%@ page import="menu.DishType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -66,14 +70,17 @@
                 <div class="tab-pane fade show active" id="starters" role="tabpanel" aria-labelledby="starters-tab">
                     <div class="card">
                         <div class="card-body">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="starter_1">
-                                <label class="custom-control-label" for="starter_1">Bruschetta al Jigglypuff</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="starter_2">
-                                <label class="custom-control-label" for="starter_2">Oddish all'ascolana</label>
-                            </div>
+
+                        <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");
+                                for (MenuElement item : catalogue.getDishes()) {
+                                    if (item.getType().equals(DishType.STARTER)) {  %>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
+                                        <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                                     </div>
+                                <%  }
+                                }   %>
+
                         </div>
                     </div>
 				</div>
@@ -81,7 +88,16 @@
                 <div class="tab-pane fade" id="first-courses" role="tabpanel" aria-labelledby="first-tab">
                     <div class="card">
                         <div class="card-body">
-                            Lorem ipsum
+
+                            <%  for (MenuElement item : catalogue.getDishes()) {
+                                    if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
+                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                            </div>
+                            <%  }
+                            }   %>
+
                         </div>
                     </div>
                 </div>
@@ -89,7 +105,16 @@
                 <div class="tab-pane fade" id="main-courses" role="tabpanel" aria-labelledby="main-tab">
                     <div class="card">
                         <div class="card-body">
-                            Lorem ipsum
+
+                            <%  for (MenuElement item : catalogue.getDishes()) {
+                                if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
+                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                            </div>
+                            <%  }
+                            }   %>
+
                         </div>
                     </div>
                 </div>
@@ -97,7 +122,16 @@
                 <div class="tab-pane fade" id="desserts" role="tabpanel" aria-labelledby="desserts-tab">
                     <div class="card">
                         <div class="card-body">
-                            Lorem ipsum
+
+                            <%  for (MenuElement item : catalogue.getDishes()) {
+                                if (item.getType().equals(DishType.DESSERT)) {  %>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
+                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                            </div>
+                            <%  }
+                            }   %>
+
                         </div>
                     </div>
                 </div>
@@ -105,7 +139,14 @@
                 <div class="tab-pane fade" id="drinks" role="tabpanel" aria-labelledby="drinks-tab">
                     <div class="card">
                         <div class="card-body">
-                            Lorem ipsum
+
+                            <%  for (MenuElement item : catalogue.getDrinks()) {    %>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
+                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                            </div>
+                            <%  }  %>
+
                         </div>
                     </div>
                 </div>
