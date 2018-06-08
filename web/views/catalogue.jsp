@@ -25,6 +25,7 @@
         <body background ="../img/background.jpg" >
 
 
+
         <!-- ========== NAVBAR ======================================================================================================-->
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -162,14 +163,14 @@
                                         <div class="card-header" id="first2">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-info " type="button" data-toggle="collapse" data-target="#descriptionFirst2" aria-expanded="false">
-                                                    First 1
+                                                    First 2
                                                 </button>
                                             </h5>
                                         </div>
 
                                         <div id="descriptionFirst2" class="collapse" aria-labelledby="first2" >
                                             <div class="card-body">
-                                                Description 1
+                                                Description 2
                                             </div>
                                         </div>
 

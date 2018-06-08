@@ -1,9 +1,17 @@
+html {
+
+    height:100%;
+
+}
+
+
 body {
 
 	background-size:cover;
 	background-repeat: no-repeat;
 
 }
+
 
 #dishesList {
 	
@@ -16,6 +24,11 @@ body {
 	
 	background-color: #ffffffe3; 
 	margin:5%;
+}
+
+#sidebar {
+
+    margin-bottom:5%;
 
 }
 

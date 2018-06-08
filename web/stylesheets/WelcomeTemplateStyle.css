@@ -1,8 +1,11 @@
-body{
 
-	background-size:cover;
-	background-repeat:no-repeat;
+body {
+
+    background-size:cover;
+    background-repeat: no-repeat;
+
 }
+
 
 .row, #welcome{
 
@@ -16,8 +19,10 @@ body{
 .jumbotron  {
 
     background-color:#ffffff00;
-
+    margin:2%;
 }
+
+
 
 #description {
 	

@@ -15,6 +15,7 @@
 
             <!-- Bootstrap core CSS -->
             <link  rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
             <link  rel="stylesheet" type="text/css" href="../stylesheets/WelcomeTemplateStyle.css"/>
 
 
@@ -72,7 +73,7 @@
         <!-- ============= FORM CATALOGUE AND RESERVATIONS =======================================================================-->
 
 
-            <div class = " container-fluid">
+            <div class = " jumbotron">
 
 
             <div class = "row justify-content-around align-items-center">
@@ -113,7 +114,8 @@
                             <span class="input-group-text" id="inputGroup-date">Date</span>
                         </div>
 
-                        <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                        <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                style="font-size: 2em">
 
                     </div>
 
@@ -156,6 +158,7 @@
 
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
 
 
