@@ -11,6 +11,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../stylesheets/RecapTemplateStyle.css">
 
     <title> Reservation State </title>
 
@@ -65,20 +66,27 @@
             </ul>
         </div>
 
-        <div class="col-sm-4" style="margin-left: 90px; width: 400px; ">
+        <div class="col-sm-4" style="margin-left: 150px; width: 400px; ">
 
-            <div class="input-group mb-3">
+           <!-- <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Number of Guests</span>
                 </div>
                 <input type="text" class="form-control" placeholder="How many?" aria-label="Username" aria-describedby="basic-addon1" style="width:50%">
-            </div>
+            </div>-->
+            <span style="font-size: larger; font-style: inherit">You can create your own menu or we can do it for you: you've just to insert the budget!</span>
+
+
 
             <form action="/selection" method="post">
+                <br>
                 <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create your own Menu &raquo;">
+                <br>
             </form>
 
-            <span style="font-size: small; margin-bottom: 0%">If you want to optimize your menu</span>
+            <center><span style="font-size: medium; margin-bottom: 0%">OR</span></center>
+            <br>
+
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Budget</span>
@@ -88,7 +96,7 @@
 
 
             <form action="/selection" method="post">
-                <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create your optimized Menu &raquo;">
+                <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create a budget optimized Menu &raquo;">
             </form>
 
 
@@ -100,12 +108,13 @@
         <div class="row">
 
             <div class="col">
-            <form action="/recap" method="post" style="margin-right: 50%; margin-left: 10%">
-                <input type="submit" class="btn btn-lg btn-success" value="Next">
-            </form></div>
+                <form action="/home" method="post" style=" margin-right: 50%; margin-left: 16.4%">
+                    <input type="submit" class="btn btn-lg" id="btnBack" value=" &laquo; Cancel">
+                </form></div>
+
             <div class="col">
-            <form action="/home" method="post" style=" margin-left: 50%; margin-right: 10%">
-                <input type="submit" class="btn btn-lg" value="Cancel">
+            <form action="/recap" method="post" style="margin-left: 59.5%; margin-right: 10%">
+                <input type="submit" class="btn btn-lg btn-success" value="Next &raquo;">
             </form></div>
         </div>
 
