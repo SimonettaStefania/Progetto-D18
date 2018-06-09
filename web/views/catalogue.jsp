@@ -69,10 +69,6 @@
 
                 <div class="col-md-3 sidebar-offcanvas" id="sidebar">
 
-
-
-
-
                     <div class="list-group" id="list-tab" role="tablist">
 
                         <a class="list-group-item list-group-item-action active" id="label-starters" data-toggle="list" href="#list-starters" role="tab" >Starters</a>

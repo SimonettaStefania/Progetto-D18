@@ -10,12 +10,20 @@ body {
 	background-size:cover;
 	background-repeat: no-repeat;
 	border-radius:0.5em ;
-	font-size:1.3em;
+	font-size:21px;
+}
+
+p {
+
+	font-size:1em;
+
 }
 
 .navbar {
 
 	border-radius:0em;
+	font-size:0.9em;
+
 
 }
 
@@ -36,7 +44,7 @@ body {
 
 #typeList {
 	
-	background-color: #ffffffe3; 
+	background-color: #ffffffe3;
 	margin:5%;
 }
 
@@ -52,9 +60,11 @@ body {
 	
 }
 .card-header, .btn-info, .list-group-item.active {
-	
+
 	background-color: #6576a5;
 	border-color: #6576a5;
+	font-size:1em;
+
 
 }
 

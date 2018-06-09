@@ -118,7 +118,7 @@
 
                         </div>
 
-                        <input class="btn btn-info" id="bookButton"  type="submit" value="Book &raquo;">
+                        <input class="btn btn-dark" id="bookButton"  type="submit" value="Book &raquo;">
 
                     </form>
 
@@ -128,14 +128,14 @@
 
                         <h1 class = "display-4" style = "padding-bottom:0.5em">Catalogue</h1>
                         <p>Want to see what we offer in our catalogue? Click on the button below and discover our dishes,from startes to desserts ! </p>
-                        <input class="btn btn-info" id="CatalogueBtn"  type="submit" value="Go to Catalogue&raquo;">
+                        <input class="btn btn-dark" id="CatalogueBtn"  type="submit" value="Go to Catalogue&raquo;">
                     </div>
 
 
                     <div class="col col-md-2">
                         <h1 class = "display-4" style = "padding-bottom:0.5em">Reservations</h1>
                         <p >You made a reservation and now you want to see it? Nothing easier! Click on the button below to view your hires.</p>
-                        <input class="btn btn-info" id="ReservationsBtn"   type="submit" value="Go to Reservations&raquo;">
+                        <input class="btn btn-dark" id="ReservationsBtn"   type="submit" value="Go to Reservations&raquo;">
 
                     </div>
 

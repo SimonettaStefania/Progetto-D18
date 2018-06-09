@@ -1,56 +1,42 @@
-#r1{
-    background-color: #f1f1f1d1;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 8%;
-    padding-top: 5%;
-    padding-bottom: 5%
-}
-#list{
-    width: 70%;
-    margin-left:10%;
+body {
+
+    background-size:cover;
+    background-repeat:no-repeat;
+    font-size:21px;
 
 }
 
-#addon1{
-    background-color:#6576a5;
-    color: white;
-    width: 100%;
+.navbar {
+
+    border-radius: 0;
+    font-size:0.9em;
 }
 
-.card-header{
+.jumbotron {
+
+    background-color: #ffffffe3;
+    margin:5%;
+
+}
+
+.card-header, .btn-info, .list-group-item.active, #emailLabel {
+
     background-color: #6576a5;
+    color:#ffffff;
+    border-color: #6576a5;
 }
 
-.btt{
-    color:white;
+input[value="Delete"] , .btn-dark , .btn-info{
+
+    margin:1%;
+    font-size:1em;
+
+
 }
 
-#placeholder{
-    width:80%;
-}
+.input-group-text, .form-control {
 
-#confirm {
-   margin-left: 10%;
-    border-color: transparent;
-    width:30%;
-}
+    font-size:1em;
 
-#container{
-    width: 100%;
-}
-
-.btt_m {
-   width: 50%;
-    margin-left: 35%;
-    margin-bottom: 2%;
-    border-color: transparent;
-}
-
-.btt_d{
-        width: 50%;
-        margin-left: 15%;
-        margin-bottom: 2%;
-        border-color: transparent;
 }
 
