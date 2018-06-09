@@ -9,6 +9,20 @@ body {
 
 	background-size:cover;
 	background-repeat: no-repeat;
+	border-radius:0.5em ;
+	font-size:1.3em;
+}
+
+.navbar {
+
+	border-radius:0em;
+
+}
+
+.row {
+
+	margin: 1%;
+	padding : 1%;
 
 }
 
@@ -41,6 +55,7 @@ body {
 	
 	background-color: #6576a5;
 	border-color: #6576a5;
+
 }
 
 

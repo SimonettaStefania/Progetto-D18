@@ -15,7 +15,6 @@
 
             <!-- Bootstrap core CSS -->
             <link  rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
             <link  rel="stylesheet" type="text/css" href="../stylesheets/WelcomeTemplateStyle.css"/>
 
 
@@ -61,7 +60,7 @@
 
                         <h1 class="display-4" >Welcome to Project D-18 book page!</h1>
                         <p id="description">This website will guide you through the creation of a reservation. You can book your event and
-                            add one or more menu for your guests. What are you waiting for ? See the options below to discover what our website
+                            add one or more menu for your guests. <br/>What are you waiting for ? See the options below to discover what our website
                             can offer!</p>
 
                     </div>
@@ -73,84 +72,78 @@
         <!-- ============= FORM CATALOGUE AND RESERVATIONS =======================================================================-->
 
 
-            <div class = " jumbotron">
+            <div class = " jumbotron ">
 
 
-            <div class = "row justify-content-around align-items-center">
+                <div class = "row justify-content-around align-items-center">
 
-                <div class = "col col-md-5">
+                    <div class = "col col-md-5">
 
-                    <h1 class = "display-6">New Reservation</h1>
+                        <h1 class = "display-4">New Reservation</h1>
 
-                    <p>Want to make a new reservation? Compile the form below and organize your event!</p>
+                        <p>Want to make a new reservation? Compile the form below and organize your event!</p>
 
 
 
-                <form action="../status" method="post">
-                    <div class="input-group input-group-sm mb-3">
+                        <form action="../status" method="post">
+                        <div class="input-group input-group-sm mb-3">
 
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-names"> First Name | Last Name</span>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-names"> First Name | Last Name</span>
+                            </div>
+                            <input name="name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
+                            <input name="surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" >
+
                         </div>
-                        <input name="name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
-                        <input name="surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" >
+
+
+                        <div class="input-group input-group-sm mb-3 ">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-mail" >E-mail</span>
+                            </div>
+
+                            <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
+
+                        </div>
+
+                        <div class="input-group input-group-sm mb-3 ">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-date">Date</span>
+                            </div>
+
+                            <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                    style="font-size: 1em" required="">
+
+                        </div>
+
+                        <input class="btn btn-info" id="bookButton"  type="submit" value="Book &raquo;">
+
+                    </form>
+
+                    </div>
+
+                    <div class = "col col-md-2">
+
+                        <h1 class = "display-4" style = "padding-bottom:0.5em">Catalogue</h1>
+                        <p>Want to see what we offer in our catalogue? Click on the button below and discover our dishes,from startes to desserts ! </p>
+                        <input class="btn btn-info" id="CatalogueBtn"  type="submit" value="Go to Catalogue&raquo;">
+                    </div>
+
+
+                    <div class="col col-md-2">
+                        <h1 class = "display-4" style = "padding-bottom:0.5em">Reservations</h1>
+                        <p >You made a reservation and now you want to see it? Nothing easier! Click on the button below to view your hires.</p>
+                        <input class="btn btn-info" id="ReservationsBtn"   type="submit" value="Go to Reservations&raquo;">
 
                     </div>
 
 
-                    <div class="input-group input-group-sm mb-3 ">
-
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-mail" required="">E-mail</span>
-                        </div>
-
-                        <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
-
-                    </div>
-
-                    <div class="input-group input-group-sm mb-3 ">
-
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-date">Date</span>
-                        </div>
-
-                        <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                style="font-size: 2em" required="">
-
-                    </div>
-
-
-                    <input class="btn btn-info" type="submit" value="Book &raquo;">
-
-                </form>
-
-                </div>
-
-
-
-
-
-                <div class = "col col-md-2">
-
-                    <h1 class = "display-6" style = "padding-bottom:60px">Catalogue</h1>
-                    <p>Want to see what we offer in our catalogue? Click on the button below and discover our dishes,from startes to desserts ! </p>
-                    <p><a class="btn btn-info" href="#" role="button">Go to Catalogue&raquo;</a></p>
-
-                </div>
-
-
-                <div class="col col-md-2">
-                    <h1 class = "display-6" style = "padding-bottom:60px">Reservations</h1>
-                    <p >You made a reservation and now you want to see it? Nothing easier! Click on the button below to view your hires.</p>
-                    <p><a class="btn btn-info" href="#" role="button">Go to Reservations &raquo;</a></p>
                 </div>
 
 
             </div>
-
-
-
-    </div>
 
 
         <!-- ============= BOOTSTRAP SCRIPTS =======================================================================-->

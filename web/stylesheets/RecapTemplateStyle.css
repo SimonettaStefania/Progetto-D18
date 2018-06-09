@@ -36,7 +36,7 @@ body{
 
 #btnBack{
     color: white;
-    background-color: #d60000;
+    background-color: #e34d4d;
 }
 
 
@@ -49,6 +49,7 @@ body{
     background-color:#6576a5;
     border-color: #6576a5;
 }
+
 
 .card-header{
     background-color: #6576a5;

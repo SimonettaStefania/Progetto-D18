@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Progetto D18</title>
+    <title>Recap</title>
 
 <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
 
@@ -39,7 +39,7 @@
                 <a class="nav-link" href="#">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Reservation<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Reservations<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Catalogue</a>

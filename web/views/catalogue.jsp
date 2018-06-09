@@ -56,9 +56,22 @@
 
         <div class="jumbotron" id= "typeList" >
 
+            <div class = "row-sm">
+
+                <div class="col-12">
+                    <h1 class = "display-4" >Catalogue</h1>
+                    <p>Click on the dish name to view its details :</p>
+                </div>
+
+            </div>
+
             <div class="row">
 
                 <div class="col-md-3 sidebar-offcanvas" id="sidebar">
+
+
+
+
 
                     <div class="list-group" id="list-tab" role="tablist">
 

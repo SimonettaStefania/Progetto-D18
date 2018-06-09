@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="../stylesheets/RecapTemplateStyle.css">
 
-    <title> Reservation State </title>
+    <title>Reservation State </title>
 
 </head>
 <body background="../img/background.jpg">
@@ -84,7 +84,7 @@
                 <br>
             </form>
 
-            <center><span style="font-size: medium; margin-bottom: 0%">OR</span></center>
+            <center><span style="font-size: larger; margin-bottom: 0%">OR</span></center>
             <br>
 
             <div class="input-group mb-3">
@@ -109,7 +109,7 @@
 
             <div class="col">
                 <form action="/home" method="post" style="  margin-left: 18.3%">
-                    <input type="submit" class="btn btn-lg" id="btnBack" value=" &laquo; Cancel">
+                    <input type="submit" class="btn btn-danger btn-lg" id="btnBack" value=" &laquo; Cancel">
                 </form></div>
 
             <div class="col">
