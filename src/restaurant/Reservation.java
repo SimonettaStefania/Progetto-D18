@@ -12,6 +12,7 @@ public class Reservation {
     private int nGuests;
     private double budget;
     private ArrayList<Menu> createdMenu;
+    private ArrayList<Menu> optimizedMenu;
     private double reservationCost;
     private Date eventDate;
     private String customerNameSurname;
@@ -23,6 +24,18 @@ public class Reservation {
         this.reservationCode=reservationCode;
         this.nGuests = nGuests;
         this.createdMenu = new ArrayList<>();
+        this.optimizedMenu = new ArrayList<>();
+        this.reservationCost = 0;
+        this.eventDate = eventDate;
+        this.customerNameSurname=customerNameSurname;
+        this.customerMail =customerMail;
+
+    }
+
+    public Reservation(String reservationCode, Date eventDate, String customerNameSurname, String customerMail) {
+        this.reservationCode=reservationCode;
+        this.createdMenu = new ArrayList<>();
+        this.optimizedMenu = new ArrayList<>();
         this.reservationCost = 0;
         this.eventDate = eventDate;
         this.customerNameSurname=customerNameSurname;
@@ -80,7 +93,7 @@ public class Reservation {
     public String toString() {                    // TODO add this method in the UML
         StringBuilder sb = new StringBuilder();
         sb.append("Reservation: ").append(this.reservationCode).append("\tCliente: ").append(this.customerNameSurname).append("\tBudget: ").append(this.budget).append("\t nGuest: ").append(this.nGuests)
-                .append("\t ReservationCost: ").append(this.reservationCost).append(("\t eventDate: ")).append(this.eventDate.getDay()).append("/").append(this.eventDate).append("\n");
+                .append("\t ReservationCost: ").append(this.reservationCost).append(("\t eventDate: ")).append(this.eventDate).append("\n");
         for (Menu m : createdMenu) {
             sb.append(m.toString()).append("\n");
         }
@@ -121,5 +134,9 @@ public class Reservation {
 
     public String getCustomerMail() {
         return customerMail;
+    }
+
+    public ArrayList<Menu> getOptimizedMenu() {
+        return optimizedMenu;
     }
 }

@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class TestRestaurant {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // create dishes and drink
         MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER, 4.00, false, false, false);
@@ -23,7 +23,7 @@ public class TestRestaurant {
         MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
 
         //create a resturant
-        Restaurant ilTitolareDelCorso = new Restaurant("il titolare del corso",50);
+        Restaurant ilTitolareDelCorso = new Restaurant("il titolare del corso",50,false);
 
         System.out.println("BENVENUTI AL RISTORANTE " + ilTitolareDelCorso.getName());
 

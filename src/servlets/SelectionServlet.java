@@ -19,7 +19,11 @@ public class SelectionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Reservation r = (Reservation) request.getAttribute("reservation");
 
-        request.setAttribute("catalogue", getCatalogue());
+        try {
+            request.setAttribute("catalogue", getCatalogue());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         forwardTo(request, response, "/views/dishesSelection.jsp");
     }
 
@@ -39,8 +43,8 @@ public class SelectionServlet extends HttpServlet {
 
 
     // Solo un test
-    private Catalogue getCatalogue() {
-        Restaurant r = new Restaurant("Ristorante Italiano", 100);
+    private Catalogue getCatalogue() throws InterruptedException {
+        Restaurant r = new Restaurant("Ristorante Italiano", 100,false);
 
         MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER,
                 4.00, false, false, false);

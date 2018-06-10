@@ -8,15 +8,15 @@ import java.util.Collections;
 
 public class TestCatalogue {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         checkCatalogue();
 
     }
 
-    public static void checkCatalogue(){
+    public static void checkCatalogue() throws InterruptedException {
 
-        Restaurant r = new Restaurant("Ristorante Italiano", 100);
+        Restaurant r = new Restaurant("Ristorante Italiano", 100,false);
 
         MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER,
                                                 4.00, false, false, false);

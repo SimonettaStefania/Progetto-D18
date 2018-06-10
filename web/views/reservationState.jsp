@@ -86,16 +86,13 @@
 
             <center><span style="font-size: larger; margin-bottom: 0%">OR</span></center>
             <br>
-
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Budget</span>
+            <form action="/optimize" method="post">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Budget</span>
+                    </div>
+                    <input name ="budget" type="text" class="form-control" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1" style="width:50%">
                 </div>
-                <input type="text" class="form-control" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1" style="width:50%">
-            </div>
-
-
-            <form action="/selection" method="post">
                 <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create a budget optimized Menu &raquo;">
             </form>
 
