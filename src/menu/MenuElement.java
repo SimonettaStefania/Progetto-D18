@@ -72,7 +72,7 @@ public class MenuElement  {
     }
 
     public String toString() {
-        return name + "\t" + price + " €" + "\t" + type;
+        return name + "\t" + price + " €" + "\t" + type+"\n";
     }
 
     public String showAllergenes() {

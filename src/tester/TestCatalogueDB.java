@@ -18,7 +18,7 @@ public class TestCatalogueDB {
         dishesReaderThread.start();
         dishesReaderThread.join();
 
-        Restaurant rest=new Restaurant("Da Nino",150);
+        Restaurant rest=new Restaurant("Da Nino",150,false);
 
         //POPULATING CATALOGUE
         for(MenuElement elem:dbr.getDishesList()){
