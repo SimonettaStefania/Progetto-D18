@@ -16,7 +16,8 @@
 
     <title>Progetto D18</title>
 
-    <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
+
+<!-- ---------------------------------------------------- CSS LINK ------------------------------------------------------------------------- -->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../stylesheets/ReservationsTemplate.css">
@@ -26,7 +27,7 @@
 
 <body background ="../img/background.jpg" style="background-repeat: no-repeat">
 
-<!-- -------------------------------------- NAVBAR --------------------------------------------------- -->
+<!-- ------------------------------------------------------ NAVBAR ------------------------------------------------------------------- -->
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
@@ -50,91 +51,141 @@
 </nav>
 
 
+<!-- ----------------------------------------------- TITLE, EMAIL AND BUTTON ------------------------------------------->
 
-<!---------------------------------------- Collapse list --------------------------------------------------- -->
 
 <div class="row"  id="r1" >
+
     <div class="col">
+
+        <h1 style="margin-left: 8%">Your Reservations</h1>
+        <br>
+        <h6 style="margin-left: 8%; margin-right: 5%">Insert here your e-mail and click the button below to view your reservations</h6>
+
         <div class="row">
+
             <div class="input-group mb-3" id="list" >
                 <div class="input-group-prepend" >
                     <span class="input-group-text" id="addon1" >E-mail</span>
                 </div>
                 <input type="text" class="form-control" id= "placeholder" placeholder="Insert your email" aria-label="Username" aria-describedby="basic-addon1" >
             </div>
+
         </div>
+
         <div class="row">
-            <input class="btn  btn-dark" id="confirm"  value="Confirm">
+
+            <input type="submit" class="btn btn-dark" id="confirm"  value="Confirm">
+
         </div>
+
     </div>
+
     <div class="col">
+
+<!------------------------------------------------------------ COLLAPSING LIST ------------------------------------------------------------------- -->
+
         <div class="container" id="container" >
             <div id="accordion" >
+
+                <!-- -------------------------------------------- First element---------------------------------------------------- -->
+
                 <div class="card" >
-                    <div class="card-header" id="headingOne" >
+
+                    <div class="card-header">
                         <h5 class="mb-0">
-                            <button class="btn btn-link btt" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" >
+                            <button class="btn collapsed btt" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
                                 Reservation 1
                             </button>
                         </h5>
                     </div>
+
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                        <div class="row">
-                            <div class="card-body">
-                                skateboard  you probably haven't heard of them accusamus labore sustainable VHS.
+
+                        <div class="card-body">
+                            Description of reservation 1 -------------
+                            <pre>
+                                Menu 1 ----------
+                                Menu 2 ----------
+                                Menu 3 ----------
+                            </pre>
+
+                            <div class="row">
+                                <div class="col">
+                                    <input type="submit" class="btn btn-sm btn-dark btt_m"  value="Modify">
+                                </div>
+                                <div class="col">
+                                    <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
+                                </div>
                             </div>
-                            <div class="col">
-                                <input class="btn btn-sm btn-dark btt_m"  value="Modify">
-                            </div>
-                            <div class="col">
-                                <input class="btn btn-sm btn-dark btt_d"  value="Delete">
-                            </div>
+
                         </div>
                     </div>
                 </div>
+
+                <!--  ----------------------------------------------- Second element------------------------------------------ -->
+
                 <div class="card">
-                    <div class="card-header" id="headingTwo">
+
+                    <div class="card-header">
                         <h5 class="mb-0">
-                            <button class="btn btn-link collapsed btt" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <button class="btn collapsed btt" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 Reservation 2
                             </button>
                         </h5>
                     </div>
+
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 
-                        <div class="row">
-                            <div class="card-body">
-                                skateboard  you probably haven't heard of them accusamus labore sustainable VHS.
+                        <div class="card-body">
+                            Description of reservation 2 -------------
+                            <pre>
+                                Menu veg ----------
+                                Menu celiac ----------
+                                Menu 3 ----------
+                            </pre>
+
+                            <div class="row">
+                                <div class="col">
+                                    <input type="submit" class="btn btn-sm btn-dark btt_m"  value="Modify">
+                                </div>
+                                <div class="col">
+                                    <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
+                                </div>
                             </div>
-                            <div class="col">
-                                <input class="btn btn-sm btn-dark btt_m"  value="Modify">
-                            </div>
-                            <div class="col">
-                                <input class="btn btn-sm btn-dark btt_d"  value="Delete">
-                            </div>
+
                         </div>
                     </div>
                 </div>
+
+                <!-- ------------------------------------------------ Third element ----------------------------------------------- -->
+
                 <div class="card">
+
                     <div class="card-header" id="headingThree">
                         <h5 class="mb-0">
-                            <button class="btn btn-link collapsed btt" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <button class="btn collapsed btt" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                 Reservation 3
                             </button>
                         </h5>
                     </div>
+
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                        <div class="row">
-                            <div class="card-body">
-                                skateboard  you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                            <div class="col">
-                                <input class="btn btn-sm btn-dark btt_m"  value="Modify">
-                            </div>
-                            <div class="col">
-                                <input class="btn btn-sm btn-dark btt_d" value="Delete">
+
+                        <div class="card-body">
+                            Description of reservation 3 -------------
+                            <pre></pre>
+
+                            <div class="row">
+                                <div class="col">
+                                    <input type="submit" class="btn btn-sm btn-dark btt_m"  value="Modify">
+                                </div>
+                                <div class="col">
+                                    <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -142,6 +193,8 @@
         </div>
     </div>
 </div>
+
+
 </body>
 </html>
 
