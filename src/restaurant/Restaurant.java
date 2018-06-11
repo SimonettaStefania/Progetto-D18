@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Restaurant {
-    static Restaurant restaurantInstance;
+    private static Restaurant restaurantInstance;
     private String name;
     private int nCover;
     private Catalogue dishesCatalogue;
@@ -24,7 +24,7 @@ public class Restaurant {
         this.reservationList = new ArrayList<>();
 
         if(database){
-            DbReader dbr = new DbReader("root", "root");
+            DbReader dbr = new DbReader("esame", "123456");
             Thread reservationReaderThread = new Thread(dbr);
             Thread dishesReaderThread = new Thread(dbr);
 

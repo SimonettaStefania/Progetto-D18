@@ -21,6 +21,7 @@ public class ReservationServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     //Non chiedete perchè questo try/catch faccia così schifo pls
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

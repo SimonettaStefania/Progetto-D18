@@ -81,7 +81,7 @@
 
                                 <hr class="my-4">
 
-                                <form action="/home" method="post">
+                                <form action="/selectOptimized" method="post">
 
                                     <input name="code" type="hidden" value="1">
                                     <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
@@ -106,7 +106,7 @@
 
                                 <hr class="my-4">
 
-                                <form action="/home" method="post">
+                                <form action="/selectOptimized" method="post">
 
                                     <input name="code" type="hidden" value="2">
                                     <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
@@ -131,7 +131,7 @@
 
                                 <hr class="my-4">
 
-                                <form action="/home" method="post">
+                                <form action="/selectOptimized" method="post">
 
                                     <input name="code" type="hidden" value="3">
                                     <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
@@ -160,7 +160,7 @@
 
                                 <hr class="my-4">
 
-                                <form action="/home" method="post">
+                                <form action="/selecOptimized" method="post">
 
                                     <input name="code" type="hidden" value="4">
                                     <input type="submit" class="btn btn-success btn-lg" style="margin-left: 39%; "value="Select menu &checkmark;">

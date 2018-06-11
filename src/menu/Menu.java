@@ -48,6 +48,9 @@ public class Menu {
         return nMenuGuests;
     }
 
+    public String getName() {
+        return name;
+    }
 
     public void sortMenuElements(){ Collections.sort(this.menuElementsList,MenuElement.typeComparator); }  // Method that sorts elementListMenu TODO add this method in the UML
 

@@ -139,4 +139,8 @@ public class Reservation {
     public ArrayList<Menu> getOptimizedMenu() {
         return optimizedMenu;
     }
+
+    public ArrayList<Menu> getCreatedMenu() {
+        return createdMenu;
+    }
 }
