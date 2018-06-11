@@ -1,5 +1,6 @@
 package servlets;
 
+import menu.Menu;
 import restaurant.Reservation;
 import restaurant.Restaurant;
 
@@ -25,41 +26,60 @@ public class ReservationServlet extends HttpServlet {
     //Non chiedete perchè questo try/catch faccia così schifo pls
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String formName = request.getParameter("name");
-        String formSurname = request.getParameter("surname");
-        String formEmail = request.getParameter("email");
-        String formStringDate = request.getParameter("date");
-        Date eventDate=null;
-        int reservationListSize = restaurant.getReservationList().size(),reservationsCount;
-        String lastReservationCode="R000",newReservationCode;
+        String backToStatus=request.getParameter("backToStatus");
+        if(backToStatus==null){
 
-        // GENERATING THE CODE FOR THE NEW RESERVATION
-        if(!(restaurant.getReservationList().isEmpty())){
-            lastReservationCode=restaurant.getReservationList().get(reservationListSize-1).getReservationCode();
-        }
-        reservationsCount= Integer.parseInt(lastReservationCode.substring(1));
+            String formName = request.getParameter("name");
+            String formSurname = request.getParameter("surname");
+            String formEmail = request.getParameter("email");
+            String formStringDate = request.getParameter("date");
+            Date eventDate=null;
+            int reservationListSize = restaurant.getReservationList().size(),reservationsCount;
+            String lastReservationCode="R000",newReservationCode;
 
-        if(reservationsCount<10)
-            newReservationCode="R00"+(reservationsCount+1);
-        else
-        {
-            if(reservationsCount<100){
-                newReservationCode="R0"+(lastReservationCode+1);
+            // GENERATING THE CODE FOR THE NEW RESERVATION
+            if(!(restaurant.getReservationList().isEmpty())){
+                lastReservationCode=restaurant.getReservationList().get(reservationListSize-1).getReservationCode();
             }
+            reservationsCount= Integer.parseInt(lastReservationCode.substring(1));
+
+            if(reservationsCount<10)
+                newReservationCode="R00"+(reservationsCount+1);
             else
-                newReservationCode="R"+(lastReservationCode+1);
+            {
+                if(reservationsCount<100){
+                    newReservationCode="R0"+(lastReservationCode+1);
+                }
+                else
+                    newReservationCode="R"+(lastReservationCode+1);
+            }
+
+            // MANAGING EVENT DATE
+            try {
+                eventDate=new SimpleDateFormat("yyyy-MM-dd").parse(formStringDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            restaurant.getReservationList().add(new Reservation(newReservationCode,eventDate,formName+" "+formSurname,formEmail));
+
+            forwardTo(request, response, "/views/reservationState.jsp");
+        }else{
+
+            backToStatus=null;
+            //CLEAR ALL THE OPTIMIZED MENU CREATED
+            int reservationListSize = restaurant.getReservationList().size();
+            Reservation lastReservation=null;
+
+            if(!(restaurant.getReservationList().isEmpty())){
+                lastReservation=restaurant.getReservationList().get(reservationListSize-1);
+            }
+
+            lastReservation.getOptimizedMenu().clear();
+            forwardTo(request, response, "/views/reservationState.jsp");
         }
 
-        // MANAGING EVENT DATE
-        try {
-            eventDate=new SimpleDateFormat("yyyy-MM-dd").parse(formStringDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
-        restaurant.getReservationList().add(new Reservation(newReservationCode,eventDate,formName+" "+formSurname,formEmail));
-
-        forwardTo(request, response, "/views/reservationState.jsp");
     }
 
     /**

@@ -106,6 +106,7 @@
 
             <div class="col">
                 <form action="/home" method="post" style="  margin-left: 18.3%">
+                    <input type="hidden" name="backToHome" value="true">
                     <input type="submit" class="btn btn-danger btn-lg" id="btnBack" value=" &laquo; Cancel">
                 </form></div>
 

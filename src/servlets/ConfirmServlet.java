@@ -3,6 +3,8 @@ package servlets;
 import menu.Menu;
 import restaurant.Reservation;
 import restaurant.Restaurant;
+import services.DbReader;
+import services.Query;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,9 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 
-@WebServlet(name = "SelectOptimizedServlet", urlPatterns = "/selectOptimized")
-public class SelectOptimizedServlet extends HttpServlet {
+@WebServlet(name = "ConfirmServlet", urlPatterns = "/confirm")
+public class ConfirmServlet extends HttpServlet {
     Restaurant restaurant;
     {
         try {
@@ -23,42 +26,36 @@ public class SelectOptimizedServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int optimizedMenuCode=Integer.parseInt(request.getParameter("code"));
-        String menuName;
-        int reservationListSize = restaurant.getReservationList().size() ;
-        Reservation lastReservation=null;
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        double resCost=0;
+        String addToQuery;
+        DbReader dbr = new DbReader("root","root");
+        Thread insertThread=new Thread(dbr);
+        int reservationListSize = restaurant.getReservationList().size();
+        Reservation lastReservation=null;
         if(!(restaurant.getReservationList().isEmpty())){
             lastReservation=restaurant.getReservationList().get(reservationListSize-1);
         }
+        //CALCULATE RESERVATION COST
+        for (Menu elem:lastReservation.getCreatedMenu()){
+            resCost+=elem.getMenuCost();
+        }
+        lastReservation.setReservationCost(resCost);
 
-        switch (optimizedMenuCode){
-            case 1:
-                menuName="OPTIMIZED BUDGET ON STARTERS";
-                break;
-            case 2:
-                menuName="OPTIMIZED BUDGET ON FIRST COURSES";
-                break;
-            case 3:
-                menuName="OPTIMIZED BUDGET ON MAIN COURSES";
-                break;
-            case 4:
-                menuName="JUST OPTIMIZED BUDGET";
-                break;
-            default:
-                menuName="NOT OPTIMIZED";
-                break;
+        //ADD RESERVATION TO DATABASE
+        addToQuery="('"+lastReservation.getReservationCode()+"',"+lastReservation.getnGuests()+","+lastReservation.getReservationCost() +",'"+new Date(lastReservation.getEventDate().getTime())+"','"+lastReservation.getCustomerNameSurname()+"','"+lastReservation.getCustomerMail()+"',NULL)";
+
+        dbr.setQuery(Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
+        insertThread.start();
+        try {
+            insertThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
-        for (Menu elem: lastReservation.getOptimizedMenu()){
+        forwardTo(request, response, "/views/welcome.jsp");
 
-            if (elem.getName().equals(menuName)){
-                lastReservation.getCreatedMenu().add(elem);
-            }
-        }
-
-        forwardTo(request, response, "/views/optimizedMenus.jsp");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

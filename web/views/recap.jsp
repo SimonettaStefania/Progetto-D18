@@ -178,12 +178,13 @@
 
                     <td>
                         <form action="/status" method="post">
-                        <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
+                            <input type="hidden" name="backToStatus" value="true">
+                            <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
                         </form>
                     </td>
 
                     <td>
-                        <form action="/home" method="post">
+                        <form action="/confirm" method="post">
                         <input type="submit" class="btn btn-success btn-lg" value="Confirm &checkmark;">
                         </form>
                     </td>
