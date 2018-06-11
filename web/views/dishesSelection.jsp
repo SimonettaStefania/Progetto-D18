@@ -1,12 +1,11 @@
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="menu.DishType" %>
 <%@ page import="menu.MenuElement" %>
 <%@ page import="restaurant.Catalogue" %>
-<%@ page import="menu.DishType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Create your Menu</title>
+    <title>Menu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"
@@ -15,6 +14,16 @@
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
+
+    <script type="text/javascript">
+    <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");   %>
+
+
+        function updateList() {
+            document.getElementById("checkout").innerHTML += "Checkbox premuta <br/>";
+        }
+    </script>
+
 </head>
 <body background="../img/background.jpg">
 
@@ -45,7 +54,6 @@
             <label class="custom-control-label" for="celiac">Celiac</label>
         </div>
             <a style="float: right" href="#" class="btn btn-primary">Apply</a>
-        </p>
     </div>
 </div>
 
@@ -65,22 +73,20 @@
                    href="#drinks" role="tab" aria-controls="drinks"><b>Drinks</b></a>
             </div>
         </div>
-        <div class="col-sm-7">
+        <form class="col-sm-7" action="/status" method="post" id="selected-dishes">
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="starters" role="tabpanel" aria-labelledby="starters-tab">
                     <div class="card">
                         <div class="card-body">
 
-                        <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");
-                                for (MenuElement item : catalogue.getDishes()) {
+                        <%  for (MenuElement item : catalogue.getDishes()) {
                                     if (item.getType().equals(DishType.STARTER)) {  %>
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
-                                        <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                                        <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                        <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                                      </div>
                                 <%  }
                                 }   %>
-
                         </div>
                     </div>
 				</div>
@@ -92,8 +98,8 @@
                             <%  for (MenuElement item : catalogue.getDishes()) {
                                     if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
-                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
                             }   %>
@@ -109,8 +115,8 @@
                             <%  for (MenuElement item : catalogue.getDishes()) {
                                 if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
-                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
                             }   %>
@@ -126,8 +132,8 @@
                             <%  for (MenuElement item : catalogue.getDishes()) {
                                 if (item.getType().equals(DishType.DESSERT)) {  %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
-                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
                             }   %>
@@ -142,8 +148,8 @@
 
                             <%  for (MenuElement item : catalogue.getDrinks()) {    %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id=<%out.print(item.getElementCode());%> >
-                                <label class="custom-control-label" for=<%out.print(item.getElementCode());%> > <%out.print(item.getName());%> </label>
+                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }  %>
 
@@ -151,22 +157,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-header bg-dark text-white"><b>Menu checkout</b></div>
                 <div class="card-body">
-                    <p>I'm a dish</p>
-                    <p>I'm another dish</p>
-                    <p>I'm Groot</p>
-                    <p>I'm <span style="color: blue">blue</span> <span style="font-size: xx-small">♫ dabba di dabba dai ♫</span></p>
+                    <p id="checkout"></p>
                 </div>
             </div>
 
             <br/>
-            <form action="/status" method="post" style="float: right">
-                <input type="submit" class="btn btn-success" value="Submit">
-            </form>
+            <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
         </div>
     </div>
 </div>
