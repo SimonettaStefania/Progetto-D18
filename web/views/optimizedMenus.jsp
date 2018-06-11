@@ -78,6 +78,15 @@
                                 Spaghetti alla carbonara	10.0 €	FIRST_COURSE
                                 Caffè	1.0 €	DRINK
                                 Acqua	1.0 €	DRINK</pre>
+
+                                <hr class="my-4">
+
+                                <form action="/home" method="post">
+
+                                    <input name="code" type="hidden" value="1">
+                                    <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -94,6 +103,15 @@
                                 Spaghetti alla Simonetta	1000.0 €	FIRST_COURSE
                                 ciaone biricone	1.0 €	DRINK
                                 Acqua	1.0 €	DRINK</pre>
+
+                                <hr class="my-4">
+
+                                <form action="/home" method="post">
+
+                                    <input name="code" type="hidden" value="2">
+                                    <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -110,6 +128,15 @@
                                 Secondo Petaloso	10.0 petali	MAIN_COURSE
                                 Caffè	1.0 €	DRINK
                                 Acqua	1.0 €	DRINK</pre>
+
+                                <hr class="my-4">
+
+                                <form action="/home" method="post">
+
+                                    <input name="code" type="hidden" value="3">
+                                    <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
+
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -125,20 +152,25 @@
                                 GEsu	4.0 €	STARTER
                                 Democrazia cristiana	10.0 €	FIRST_COURSE
                                 Caffè	1.0 €	DRINK
+                                Acqua	1.0 €	DRINK
+                                GEsu	4.0 €	STARTER
+                                Democrazia cristiana	10.0 €	FIRST_COURSE
+                                Caffè	1.0 €	DRINK
                                 Acqua	1.0 €	DRINK</pre>
+
+                                <hr class="my-4">
+
+                                <form action="/home" method="post">
+
+                                    <input name="code" type="hidden" value="4">
+                                    <input type="submit" class="btn btn-success btn-lg" style="margin-left: 39%; "value="Select menu &checkmark;">
+
+                                </form>
+
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- -------------------------------------- BTN SELECT MENU --------------------------------------------------- -->
-
-                <form action="/home" method="post">
-
-                    <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
-
-                </form>
-
             </div>
         </div>
 
