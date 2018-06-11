@@ -102,6 +102,8 @@
                                 <span class="input-group-text" id="inputGroup-mail" >E-mail</span>
                             </div>
 
+                            <!-- TODO set type as email instead of text -->
+
                             <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
 
                         </div>
