@@ -14,14 +14,20 @@
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script type="text/javascript">
+    <script>
     <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");   %>
 
-
-        function updateList() {
-            document.getElementById("checkout").innerHTML += "Checkbox premuta <br/>";
-        }
+    $(document).ready(function(){
+        $("input[name='selected-id']").on("change", function() {
+            var selectedList = [];
+            $('input[name=\'selected-id\']:checked').each(function() {
+                selectedList.push($("label[for='" + $(this).attr('id') + "']").text());
+            });
+            $('#checkout').html(selectedList.join('<br/>'));
+        });
+    });
     </script>
 
 </head>
@@ -82,7 +88,7 @@
                         <%  for (MenuElement item : catalogue.getDishes()) {
                                     if (item.getType().equals(DishType.STARTER)) {  %>
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                        <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                         <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                                      </div>
                                 <%  }
@@ -98,7 +104,7 @@
                             <%  for (MenuElement item : catalogue.getDishes()) {
                                     if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
@@ -115,7 +121,7 @@
                             <%  for (MenuElement item : catalogue.getDishes()) {
                                 if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
@@ -132,7 +138,7 @@
                             <%  for (MenuElement item : catalogue.getDishes()) {
                                 if (item.getType().equals(DishType.DESSERT)) {  %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
@@ -148,7 +154,7 @@
 
                             <%  for (MenuElement item : catalogue.getDrinks()) {    %>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" onchange="updateList()" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }  %>
@@ -168,6 +174,7 @@
 
             <br/>
             <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
+            <form action="/status" method="post"><input type="submit" class="btn btn-dark" value="Back" style="float: right; margin-right: 1%"></form>
         </div>
     </div>
 </div>
