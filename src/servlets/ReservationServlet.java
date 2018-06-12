@@ -10,11 +10,12 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
 public class ReservationServlet extends HttpServlet {
-    Restaurant restaurant;
+    private Restaurant restaurant;
     {
         try {
             restaurant = Restaurant.getRestaurantInstance();
@@ -22,8 +23,6 @@ public class ReservationServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
-    //Non chiedete perchè questo try/catch faccia così schifo pls
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String backToStatus=request.getParameter("backToStatus");
@@ -33,49 +32,21 @@ public class ReservationServlet extends HttpServlet {
             String formSurname = request.getParameter("surname");
             String formEmail = request.getParameter("email");
             String formStringDate = request.getParameter("date");
+
             Date eventDate=null;
-            int reservationListSize = restaurant.getReservationList().size(),reservationsCount;
-            String lastReservationCode="R000",newReservationCode;
-
-            // GENERATING THE CODE FOR THE NEW RESERVATION
-            if(!(restaurant.getReservationList().isEmpty())){
-                lastReservationCode=restaurant.getReservationList().get(reservationListSize-1).getReservationCode();
-            }
-            reservationsCount= Integer.parseInt(lastReservationCode.substring(1));
-
-            if(reservationsCount<10)
-                newReservationCode="R00"+(reservationsCount+1);
-            else
-            {
-                if(reservationsCount<100){
-                    newReservationCode="R0"+(lastReservationCode+1);
-                }
-                else
-                    newReservationCode="R"+(lastReservationCode+1);
-            }
-
-            // MANAGING EVENT DATE
             try {
                 eventDate=new SimpleDateFormat("yyyy-MM-dd").parse(formStringDate);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            restaurant.getReservationList().add(new Reservation(newReservationCode,eventDate,formName+" "+formSurname,formEmail));
-
+            restaurant.getReservationList().add(new Reservation(generateReservationCode(),eventDate,formName+" "+formSurname,formEmail));
             forwardTo(request, response, "/views/reservationState.jsp");
+
+
         }else{
-
             backToStatus=null;
-            //CLEAR ALL THE OPTIMIZED MENU CREATED
-            int reservationListSize = restaurant.getReservationList().size();
-            Reservation lastReservation=null;
-
-            if(!(restaurant.getReservationList().isEmpty())){
-                lastReservation=restaurant.getReservationList().get(reservationListSize-1);
-            }
-
-            lastReservation.getOptimizedMenu().clear();
+            clearOptimizedMenus();
             forwardTo(request, response, "/views/reservationState.jsp");
         }
 
@@ -95,6 +66,38 @@ public class ReservationServlet extends HttpServlet {
         RequestDispatcher rd = context.getRequestDispatcher(route);
         rd.forward(request, response);
     }
+
+
+    private String generateReservationCode(){
+        int reservationsCount=0;
+        String lastReservationCode="R000",newReservationCode;
+        Reservation lastReservation = restaurant.getLastReservation();
+
+        if(lastReservation!=null){
+            lastReservationCode=lastReservation.getReservationCode();
+            reservationsCount= Integer.parseInt(lastReservationCode.substring(1));
+        }
+
+
+        if(reservationsCount<10)
+            newReservationCode="R00"+(reservationsCount+1);
+        else
+        {
+            if(reservationsCount<100){
+                newReservationCode="R0"+(lastReservationCode+1);
+            }
+            else
+                newReservationCode="R"+(lastReservationCode+1);
+        }
+        return newReservationCode;
+    }
+
+    private void clearOptimizedMenus(){
+        Reservation lastReservation=restaurant.getLastReservation();
+        lastReservation.getOptimizedMenu().clear();
+
+    }
+
 }
 
 

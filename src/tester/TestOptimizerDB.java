@@ -9,7 +9,7 @@ import services.Query;
 
 public class TestOptimizerDB {
     public static void main(String[] args) throws InterruptedException {
-        DbReader dbr = new DbReader("root","root");
+        DbReader dbr = DbReader.getDbReaderInstance();
         Thread dishesReaderThread=new Thread(dbr);
         MenuGenerator mg;
 

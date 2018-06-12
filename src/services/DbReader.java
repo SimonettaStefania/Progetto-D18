@@ -4,6 +4,7 @@ import menu.Allergen;
 import menu.DishType;
 import menu.MenuElement;
 import restaurant.Reservation;
+import restaurant.Restaurant;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Date;
 
 public class DbReader implements Runnable {
 
+    private static DbReader dbReaderInstance;
     private static String connectionString;
     private String query;
     private ArrayList<MenuElement> dishesList = new ArrayList<>();
@@ -18,8 +20,8 @@ public class DbReader implements Runnable {
     private ArrayList<Reservation> reservationsList = new ArrayList<>();
 
 
-    public DbReader(String username, String password){
-        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?useSSL=false&user="+username +"&password="+password;
+    private DbReader(){
+        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?useSSL=false&user=progettoD18&password=progettoD18";
     }
 
     @Override
@@ -110,5 +112,10 @@ public class DbReader implements Runnable {
     }
     public ArrayList<Reservation> getReservationsList() {
         return reservationsList;
+    }
+    public static synchronized DbReader getDbReaderInstance(){
+        if(dbReaderInstance==null)
+            dbReaderInstance =  new DbReader();
+        return dbReaderInstance;
     }
 }

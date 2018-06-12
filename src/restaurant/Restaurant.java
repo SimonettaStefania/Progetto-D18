@@ -24,7 +24,7 @@ public class Restaurant {
         this.reservationList = new ArrayList<>();
 
         if(database){
-            DbReader dbr = new DbReader("root", "root");
+            DbReader dbr = DbReader.getDbReaderInstance();
             Thread reservationReaderThread = new Thread(dbr);
             Thread dishesReaderThread = new Thread(dbr);
 
@@ -104,5 +104,19 @@ public class Restaurant {
         if(restaurantInstance==null)
             restaurantInstance =  new Restaurant("Da Ciccio", 150,true);
         return restaurantInstance;
+    }
+
+    public Reservation getLastReservation(){
+        int reservationListSize;
+
+        if(!(reservationList.isEmpty())){
+            reservationListSize = reservationList.size();
+            return reservationList.get(reservationListSize-1);
+        }
+        return null;
+    }
+
+    public void removeLastReservation(){
+        reservationList.remove(getLastReservation());
     }
 }

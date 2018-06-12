@@ -19,7 +19,7 @@ public class TestReservationDB {
         String stringDate="12/06/2016";
         Date eventDate= new SimpleDateFormat("dd/MM/yyyy").parse(stringDate);
 
-        DbReader dbr = new DbReader("esame","123456");
+        DbReader dbr = DbReader.getDbReaderInstance();
 
         Thread insertThread=new Thread(dbr);
         Thread reader1Thread=new Thread(dbr);

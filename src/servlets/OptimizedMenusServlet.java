@@ -13,10 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(name = "OptimizedMenusServlet", urlPatterns = "/optimize")
 public class OptimizedMenusServlet extends HttpServlet {
-    Restaurant restaurant;
+    private Restaurant restaurant;
     {
         try {
             restaurant = Restaurant.getRestaurantInstance();
@@ -27,18 +28,8 @@ public class OptimizedMenusServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String formStringBudget = request.getParameter("budget");
         double budget= Double.parseDouble(formStringBudget);
-        int reservationListSize = restaurant.getReservationList().size();
-        MenuGenerator menuGenerator;
-        Reservation lastReservation=null;
 
-        if(!(restaurant.getReservationList().isEmpty())){
-            lastReservation=restaurant.getReservationList().get(reservationListSize-1);
-        }
-
-        menuGenerator=new MenuGenerator(budget,restaurant.getDishesCatalogue());
-        menuGenerator.generate();
-
-        lastReservation.getOptimizedMenu().addAll(menuGenerator.getGeneratedMenu());
+        generateOptimizedMenus(budget);
 
         forwardTo(request, response, "/views/optimizedMenus.jsp");
     }
@@ -51,5 +42,14 @@ public class OptimizedMenusServlet extends HttpServlet {
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher(route);
         rd.forward(request, response);
+    }
+
+    private void generateOptimizedMenus(double budget){
+        Reservation lastReservation= restaurant.getLastReservation();
+        MenuGenerator menuGenerator= new MenuGenerator(budget,restaurant.getDishesCatalogue());
+
+        menuGenerator.generate();
+        lastReservation.getOptimizedMenu().addAll(menuGenerator.getGeneratedMenu());
+
     }
 }

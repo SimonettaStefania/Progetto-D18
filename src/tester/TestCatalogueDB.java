@@ -9,7 +9,7 @@ import java.util.Collections;
 
 public class TestCatalogueDB {
     public static void main(String[] args) throws InterruptedException {
-        DbReader dbr = new DbReader("esame","123456");
+        DbReader dbr = DbReader.getDbReaderInstance();
         Thread dishesReaderThread=new Thread(dbr);
 
 

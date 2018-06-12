@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @WebServlet(name = "SelectOptimizedServlet", urlPatterns = "/selectOptimized")
 public class SelectOptimizedServlet extends HttpServlet {
-    Restaurant restaurant;
+    private Restaurant restaurant;
     {
         try {
             restaurant = Restaurant.getRestaurantInstance();
@@ -25,13 +25,24 @@ public class SelectOptimizedServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int optimizedMenuCode=Integer.parseInt(request.getParameter("code"));
-        String menuName;
-        int reservationListSize = restaurant.getReservationList().size() ;
-        Reservation lastReservation=null;
 
-        if(!(restaurant.getReservationList().isEmpty())){
-            lastReservation=restaurant.getReservationList().get(reservationListSize-1);
-        }
+        selectOptimizedMenu(optimizedMenuCode);
+        forwardTo(request, response, "/views/optimizedMenus.jsp");
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        forwardTo(request, response, "/index.jsp");
+    }
+
+    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
+        ServletContext context = getServletContext();
+        RequestDispatcher rd = context.getRequestDispatcher(route);
+        rd.forward(request, response);
+    }
+
+    private void selectOptimizedMenu(int optimizedMenuCode){
+        Reservation lastReservation= restaurant.getLastReservation();
+        String menuName;
 
         switch (optimizedMenuCode){
             case 1:
@@ -52,22 +63,10 @@ public class SelectOptimizedServlet extends HttpServlet {
         }
 
         for (Menu elem: lastReservation.getOptimizedMenu()){
-
             if (elem.getName().equals(menuName)){
                 lastReservation.getCreatedMenu().add(elem);
             }
         }
 
-        forwardTo(request, response, "/views/optimizedMenus.jsp");
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/index.jsp");
-    }
-
-    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher(route);
-        rd.forward(request, response);
     }
 }

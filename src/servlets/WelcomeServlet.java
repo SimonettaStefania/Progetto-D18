@@ -10,35 +10,26 @@ import java.io.IOException;
 
 @WebServlet(name = "WelcomeServlet", urlPatterns = "/home")
 public class WelcomeServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Restaurant restaurant=null;
-        {
-            try {
-                restaurant = Restaurant.getRestaurantInstance();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    private Restaurant restaurant=null;
+    {
+        try {
+            restaurant = Restaurant.getRestaurantInstance();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String backToHome=request.getParameter("backToHome");
 
         if (backToHome==null){
             forwardTo(request, response, "/views/welcome.jsp");
         }else{
-
-            //REMOVE THE LAST RESERVATION FROM THE LIST
             backToHome=null;
-            int reservationListSize = restaurant.getReservationList().size();
-            Reservation lastReservation=null;
-
-            if(!(restaurant.getReservationList().isEmpty())){
-                lastReservation=restaurant.getReservationList().get(reservationListSize-1);
-            }
-            restaurant.getReservationList().remove(lastReservation);
+            restaurant.removeLastReservation();
             forwardTo(request, response, "/views/welcome.jsp");
         }
-
-
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
