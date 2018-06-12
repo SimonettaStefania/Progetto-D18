@@ -6,15 +6,16 @@
     padding-top: 5%;
     padding-bottom: 5%;
 }
+
 #list{
     width: 70%;
     margin-left:10%;
-
 }
 
 .btt{
     background-color: transparent;
     border-color: transparent;
+    color:white;
 
 }
 
@@ -28,9 +29,7 @@
     background-color: #6576a5;
 }
 
-.btt{
-    color:white;
-}
+
 
 #placeholder{
     width:80%;
@@ -46,16 +45,10 @@
     width: 95%;
 }
 
-.btt_m {
-    width: 50%;
-    margin-left: 35%;
-    margin-bottom: 2%;
-    border-color: transparent;
-}
 
 .btt_d{
-    width: 50%;
-    margin-left: 15%;
+    width: 60%;
+    margin-left: 76%;
     margin-bottom: 2%;
     border-color: transparent;
 }

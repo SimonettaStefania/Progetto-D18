@@ -61,24 +61,24 @@
         <h1 style="margin-left: 8%">Your Reservations</h1>
         <br>
         <h6 style="margin-left: 8%; margin-right: 5%">Insert here your e-mail and click the button below to view your reservations</h6>
+        <form action="../reservation" method="post">
+            <div class="row">
 
-        <div class="row">
-
-            <div class="input-group mb-3" id="list" >
-                <div class="input-group-prepend" >
-                    <span class="input-group-text" id="addon1" >E-mail</span>
+                <div class="input-group mb-3" id="list" >
+                    <div class="input-group-prepend" >
+                        <span class="input-group-text" id="addon1" >E-mail</span>
+                    </div>
+                    <input type="text" class="form-control" id= "placeholder" placeholder="Insert your email" aria-label="Username" aria-describedby="basic-addon1" >
                 </div>
-                <input type="text" class="form-control" id= "placeholder" placeholder="Insert your email" aria-label="Username" aria-describedby="basic-addon1" >
+
             </div>
 
-        </div>
+            <div class="row">
 
-        <div class="row">
+                <input type="submit" class="btn btn-dark" id="confirm"  value="Confirm">
 
-            <input type="submit" class="btn btn-dark" id="confirm"  value="Confirm">
-
-        </div>
-
+            </div>
+        </form>
     </div>
 
     <div class="col">
@@ -89,6 +89,7 @@
             <div id="accordion" >
 
                 <!-- -------------------------------------------- First element---------------------------------------------------- -->
+
 
                 <div class="card" >
 
@@ -111,12 +112,10 @@
                             </pre>
 
                             <div class="row">
-                                <div class="col">
-                                    <input type="submit" class="btn btn-sm btn-dark btt_m"  value="Modify">
-                                </div>
-                                <div class="col">
+                                <form action="../reservations" method="post">
+                                    <input type="hidden" name="code" value="1">
                                     <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
-                                </div>
+                                </form>
                             </div>
 
                         </div>
@@ -146,12 +145,10 @@
                             </pre>
 
                             <div class="row">
-                                <div class="col">
-                                    <input type="submit" class="btn btn-sm btn-dark btt_m"  value="Modify">
-                                </div>
-                                <div class="col">
+                                <form action="../reservations" method="post">
+                                    <input type="hidden" name="code" value="2">
                                     <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
-                                </div>
+                                </form>
                             </div>
 
                         </div>
@@ -177,12 +174,10 @@
                             <pre></pre>
 
                             <div class="row">
-                                <div class="col">
-                                    <input type="submit" class="btn btn-sm btn-dark btt_m"  value="Modify">
-                                </div>
-                                <div class="col">
+                                <form action="../reservations" method="post">
+                                    <input type="hidden" name="code" value="3">
                                     <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
-                                </div>
+                                </form>
                             </div>
                         </div>
 
