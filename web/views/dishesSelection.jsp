@@ -58,7 +58,7 @@
             var selectedList = [];
             var pricesList = [];
             $('input[name=\'selected-id\']:checked').each(function() {
-                var label = $("label[for='" + $(this).attr('id') + "']");
+                var label = $(this).siblings('label');
                 selectedList.push(label.text());
                 pricesList.push(label.attr('data-price'));
             });

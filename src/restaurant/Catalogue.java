@@ -84,6 +84,17 @@ public class Catalogue {
                         
         }
 
+    }
 
+    public MenuElement getElementByCode(String id) {
+        for (MenuElement element : dishesList)
+            if (element.getElementCode().equals(id))
+                return element;
+
+        for (MenuElement element : drinksList)
+            if (element.getElementCode().equals(id))
+                return element;
+
+        return null;
     }
 }
