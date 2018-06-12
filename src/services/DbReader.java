@@ -78,13 +78,13 @@ public class DbReader implements Runnable {
                 if(this.query.contains("INSERT ")){
                     if(this.query.contains(" RESERVATIONS ")){
                         stm.executeUpdate(this.query);
-                        System.out.println("Insert OK");
+                        //System.out.println("Insert OK");
                     }
                 }
                 if(this.query.contains("DELETE ")){
                     if(this.query.contains(" RESERVATIONS ")){
                         stm.executeUpdate(this.query);
-                        System.out.println("Delete OK");
+                        //System.out.println("Delete OK");
                     }
                 }
             }

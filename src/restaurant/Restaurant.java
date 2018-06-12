@@ -24,7 +24,7 @@ public class Restaurant {
         this.reservationList = new ArrayList<>();
 
         if(database){
-            DbReader dbr = new DbReader("esame", "123456");
+            DbReader dbr = new DbReader("root", "root");
             Thread reservationReaderThread = new Thread(dbr);
             Thread dishesReaderThread = new Thread(dbr);
 

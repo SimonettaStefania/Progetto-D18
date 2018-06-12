@@ -108,6 +108,10 @@ public class Reservation {
         this.budget = budget;
     }
 
+    public void setReservationCost(double reservationCost) {
+        this.reservationCost = reservationCost;
+    }
+
     public double getReservationCost() {
         return reservationCost;
     }

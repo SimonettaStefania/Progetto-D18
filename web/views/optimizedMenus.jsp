@@ -196,7 +196,7 @@
             <div class="row" style="margin-right: 20%">
 
                 <form action="/status" method="post">
-
+                    <input type="hidden", name="backToStatus", value="true">
                     <input type="submit" class="btn btn-lg" style="margin-left: 20%" id="btnBack" value="&laquo; Back">
 
                 </form>
