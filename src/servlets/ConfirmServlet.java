@@ -59,7 +59,7 @@ public class ConfirmServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/views/index.jsp");
+        forwardTo(request, response, "/index.jsp");
     }
 
     private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
