@@ -70,7 +70,6 @@
     <div class="row" style="margin-left: 43%" >
 
         <form action="/home" method="post">
-            <input type="hidden" name="backToHome" value="true">
             <input type="submit" class="btn btn-danger btn-lg" value="&laquo; Back Home">
         </form>
 
