@@ -1,0 +1,15 @@
+body{
+
+    background-repeat: no-repeat;
+    background-size:cover;
+
+}
+
+#confirmJumbotron{
+    background-color: #ffffffe3;
+    margin-left: 12%;
+    margin-right: 12%;
+    margin-top: 3%;
+    padding-top: 3%;
+    padding-bottom: 2%;
+}

@@ -54,7 +54,7 @@ public class ConfirmServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        forwardTo(request, response, "/views/welcome.jsp");
+        forwardTo(request, response, "/views/confirmPage.jsp");
 
     }
 
