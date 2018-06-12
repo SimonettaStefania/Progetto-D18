@@ -37,7 +37,7 @@
             MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001", DishType.DESSERT, 4.00, false, false, false);
             MenuElement dessert_2 = new MenuElement("Tiramisù", "D002", DishType.DESSERT, 2.00, false, false, false);
             MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
-            MenuElement drink_2 = new MenuElement("Kaffèèèèèè", "DR002", DishType.DRINK, 1.0, false, false, false);
+            MenuElement drink_2 = new MenuElement("Ciaone biricone", "DR002", DishType.DRINK, 3.0, false, false, false);
 
             r.addToCatalogue(dessert_1);    r.addToCatalogue(dessert_2);
             r.addToCatalogue(drink_1);      r.addToCatalogue(drink_2);
@@ -56,10 +56,17 @@
     $(document).ready(function(){
         $("input[name='selected-id']").on("change", function() {
             var selectedList = [];
+            var pricesList = [];
             $('input[name=\'selected-id\']:checked').each(function() {
-                selectedList.push($("label[for='" + $(this).attr('id') + "']").text());
+                var label = $("label[for='" + $(this).attr('id') + "']");
+                selectedList.push(label.text());
+                pricesList.push(label.attr('data-price'));
             });
-            $('#checkout').html(selectedList.join('<br/>'));
+
+            var content = '';
+            for(var i = 0; i < selectedList.length; i++)
+                content += '<tr><th>' + selectedList[i] + '</th><td>' + pricesList[i] + '</td></tr>';
+            $('#checkout').html(content);
         });
     });
     </script>
@@ -123,7 +130,7 @@
                                     if (item.getType().equals(DishType.STARTER)) {  %>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
-                                        <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
+                                        <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
                                      </div>
                                 <%  }
                                 }   %>
@@ -139,7 +146,7 @@
                                     if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
-                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
                             }   %>
@@ -156,7 +163,7 @@
                                 if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
-                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
                             }   %>
@@ -173,7 +180,7 @@
                                 if (item.getType().equals(DishType.DESSERT)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
-                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }
                             }   %>
@@ -189,7 +196,7 @@
                             <%  for (MenuElement item : catalogue.getDrinks()) {    %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
-                                <label class="custom-control-label" for="<%=item.getElementCode()%>"> <%=item.getName()%> </label>
+                                <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
                             </div>
                             <%  }  %>
 
@@ -202,13 +209,26 @@
             <div class="card">
                 <div class="card-header bg-dark text-white"><b>Menu checkout</b></div>
                 <div class="card-body">
-                    <p id="checkout"></p>
+                    <table class="table table-sm">
+                        <thead>
+                        <tr>
+                            <th><span style="color: dodgerblue">Dish</span></th>
+                            <th><span style="color: dodgerblue">Price</span></th>
+                        </tr>
+                        </thead>
+                        <tbody id="checkout">
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <br/>
+            <input type="hidden" name="backToStatus" form="selected-dishes" value="true">
             <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
-            <form action="/status" method="post"><input type="submit" class="btn btn-dark" value="Back" style="float: right; margin-right: 1%"></form>
+            <form action="/status" method="post">
+                <input type="hidden" name="backToStatus" value="true">
+                <input type="submit" class="btn btn-dark" value="Back" style="float: right; margin-right: 1%">
+            </form>
         </div>
     </div>
 </div>
