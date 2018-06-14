@@ -106,7 +106,7 @@ public class Restaurant {
 
     public static synchronized  Restaurant getRestaurantInstance() throws InterruptedException {
         if(restaurantInstance==null)
-            restaurantInstance =  new Restaurant("Da Ciccio", 150,false);
+            restaurantInstance =  new Restaurant("Da Ciccio", 150,true);
         return restaurantInstance;
     }
 
