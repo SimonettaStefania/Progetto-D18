@@ -1,7 +1,5 @@
 package servlets;
 
-import menu.DishType;
-import menu.MenuElement;
 import restaurant.Catalogue;
 import restaurant.Restaurant;
 
@@ -12,16 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "SelectionServlet", urlPatterns = "/selection")
 public class SelectionServlet extends HttpServlet {
-
-    Restaurant restaurant;
-
-    {
-        try {
-            restaurant = Restaurant.getRestaurantInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    private Restaurant restaurant = getRestaurant();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Catalogue catalogue = restaurant.getDishesCatalogue();
@@ -44,4 +33,13 @@ public class SelectionServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
+    private Restaurant getRestaurant() {
+        Restaurant r = null;
+        try {
+            r = Restaurant.getRestaurantInstance();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return r;
+    }
 }

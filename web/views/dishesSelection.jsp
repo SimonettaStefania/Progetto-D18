@@ -18,9 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
-    <%  //  Da implementare nella versione effettiva
-        Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");    %>
-
+    <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");    %>
 
     $(document).ready(function(){
         $("input[name='selected-id']").on("change", function() {
@@ -192,6 +190,8 @@
             </div>
 
             <br/>
+
+
             <input type="hidden" name="backToStatus" form="selected-dishes" value="new-menu">
             <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
             <form action="/status" method="post">

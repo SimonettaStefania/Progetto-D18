@@ -1,10 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Chiara
-  Date: 08/06/2018
-  Time: 15:08
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="restaurant.Catalogue" %>
+<%@ page import="menu.MenuElement" %>
+<%@ page import="menu.DishType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -20,6 +16,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../stylesheets/CatalogueStyle.css">
 
+    <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");    %>
 </head>
 
 <body background ="../img/background.jpg" >
@@ -92,44 +89,21 @@
 
                     <div id="accorditionStarter">
 
+                        <%  for (MenuElement item : catalogue.getDishes()) {
+                                if (item.getType().equals(DishType.STARTER)) {  %>
                         <div class="card">
-
-                            <div class="card-header" id="starter1">
-
-                                <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionStarter1" aria-controls="descriptionStarter1">
-                                    Starter
-                                </button>
-
-                            </div>
-
-                            <div id="descriptionStarter1" class="collapse" aria-labelledby="starter1" data-parent="#accorditionStarter">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card" >
-
-                            <div class="card-header" id="starter2">
+                            <div class="card-header" id="<%=item.getElementCode()%>">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionStarter2" aria-controls="descriptionStarter2">
-                                        Starter
-                                    </button>
+                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
+                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
                                 </h5>
                             </div>
-
-                            <div id="descriptionStarter2" class="collapse " aria-labelledby="starter2" data-parent="#accorditionStarter">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
+                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionStarter">
+                                <div class="card-body"><%=item.showDetails()%></div>
                             </div>
                         </div>
-
+                            <%  }
+                            } %>
 
                     </div>
 
@@ -141,45 +115,21 @@
 
                     <div class="accordion" id="accorditionFirst">
 
-
-                        <div class="card" >
-
-                            <div class="card-header" id="first1">
+                        <%  for (MenuElement item : catalogue.getDishes()) {
+                            if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
+                        <div class="card">
+                            <div class="card-header" id="<%=item.getElementCode()%>">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionFirst1" aria-controls="descriptionFirst1">
-                                        First
-                                    </button>
+                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
+                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
                                 </h5>
                             </div>
-
-                            <div id="descriptionFirst1" class="collapse " aria-labelledby="first1" data-parent="#accorditionFirst">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
+                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionFirst">
+                                <div class="card-body"><%=item.showDetails()%></div>
                             </div>
                         </div>
-
-                        <div class="card" >
-
-                            <div class="card-header" id="first2">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionFirst2" aria-controls="descriptionFirst2">
-                                        first
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="descriptionFirst2" class="collapse " aria-labelledby="first2" data-parent="#accorditionFirst">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
-                            </div>
-                        </div>
-
+                        <%  }
+                        } %>
 
                     </div>
 
@@ -191,46 +141,21 @@
 
                     <div class="accordion" id="accorditionMain">
 
-
-                        <div class="card" >
-
-                            <div class="card-header" id="main1">
+                        <%  for (MenuElement item : catalogue.getDishes()) {
+                            if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
+                        <div class="card">
+                            <div class="card-header" id="<%=item.getElementCode()%>">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionMain1" aria-controls="descriptionMain1">
-                                        Main
-                                    </button>
+                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
+                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
                                 </h5>
                             </div>
-
-                            <div id="descriptionMain1" class="collapse " aria-labelledby="main1" data-parent="#accorditionMain">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
+                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionMain">
+                                <div class="card-body"><%=item.showDetails()%></div>
                             </div>
                         </div>
-
-                        <div class="card" >
-
-                            <div class="card-header" id="main2">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionMain2" aria-controls="descriptionMain2">
-                                        Main
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="descriptionMain2" class="collapse " aria-labelledby="main2" data-parent="#accorditionMain">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
-                            </div>
-                        </div>
-
-
+                        <%  }
+                        } %>
                     </div>
 
                 </div>
@@ -241,46 +166,21 @@
 
                     <div class="accordion" id="accorditionDessert">
 
-
-                        <div class="card" >
-
-                            <div class="card-header" id="dessert1">
+                        <%  for (MenuElement item : catalogue.getDishes()) {
+                            if (item.getType().equals(DishType.DESSERT)) {  %>
+                        <div class="card">
+                            <div class="card-header" id="<%=item.getElementCode()%>">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionDessert1" aria-controls="descriptionDessert1">
-                                        Dessert
-                                    </button>
+                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
+                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
                                 </h5>
                             </div>
-
-                            <div id="descriptionDessert1" class="collapse " aria-labelledby="dessert1" data-parent="#accorditionDessert">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
+                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDessert">
+                                <div class="card-body"><%=item.showDetails()%></div>
                             </div>
                         </div>
-
-                        <div class="card" >
-
-                            <div class="card-header" id="dessert2">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionDessert2" aria-controls="descriptionDessert2">
-                                        Dessert
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="descriptionDessert2" class="collapse " aria-labelledby="dessert2" data-parent="#accorditionDessert">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
-                            </div>
-                        </div>
-
-
+                        <%  }
+                        } %>
                     </div>
 
                 </div>
@@ -291,45 +191,19 @@
 
                     <div class="accordion" id="accorditionDrink">
 
-
-                        <div class="card" >
-
-                            <div class="card-header" id="drink1">
+                        <%  for (MenuElement item : catalogue.getDrinks()) {    %>
+                        <div class="card">
+                            <div class="card-header" id="<%=item.getElementCode()%>">
                                 <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionDrink1" aria-controls="descriptionDrink1">
-                                        Drink
-                                    </button>
+                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
+                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
                                 </h5>
                             </div>
-
-                            <div id="descriptionDrink1" class="collapse " aria-labelledby="drink1" data-parent="#accorditionDrink">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
+                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionStarter">
+                                <div class="card-body"><%=item.showDetails()%></div>
                             </div>
                         </div>
-
-                        <div class="card" >
-
-                            <div class="card-header" id="drink2">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#descriptionDrink2" aria-controls="descriptionDrink2">
-                                        Drink
-                                    </button>
-                                </h5>
-                            </div>
-
-                            <div id="descriptionDrink2" class="collapse " aria-labelledby="drink2" data-parent="#accorditionDrink">
-
-                                <div class="card-body">
-                                    Description
-
-                                </div>
-                            </div>
-                        </div>
-
+                        <%  }   %>
 
                     </div>
                 </div>
