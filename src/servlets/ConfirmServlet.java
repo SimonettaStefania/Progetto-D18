@@ -1,6 +1,5 @@
 package servlets;
 
-import menu.Menu;
 import restaurant.Reservation;
 import restaurant.Restaurant;
 import services.DbReader;
@@ -18,15 +17,8 @@ import java.sql.Date;
 
 @WebServlet(name = "ConfirmServlet", urlPatterns = "/confirm")
 public class ConfirmServlet extends HttpServlet {
-    private Restaurant restaurant;
-    {
-        try {
-            restaurant = Restaurant.getRestaurantInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    private DbReader dbr=DbReader.getDbReaderInstance();
+    private Restaurant restaurant = Restaurant.getRestaurantInstance();
+    private DbReader dbr = DbReader.getDbReaderInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

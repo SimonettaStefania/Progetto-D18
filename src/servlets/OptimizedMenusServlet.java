@@ -1,6 +1,5 @@
 package servlets;
 
-import menu.Menu;
 import restaurant.Reservation;
 import restaurant.Restaurant;
 import services.MenuGenerator;
@@ -13,18 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "OptimizedMenusServlet", urlPatterns = "/optimize")
 public class OptimizedMenusServlet extends HttpServlet {
-    private Restaurant restaurant;
-    {
-        try {
-            restaurant = Restaurant.getRestaurantInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    private Restaurant restaurant = Restaurant.getRestaurantInstance();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String formStringBudget = request.getParameter("budget");
         double budget= Double.parseDouble(formStringBudget);

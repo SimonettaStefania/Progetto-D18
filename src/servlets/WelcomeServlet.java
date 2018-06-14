@@ -1,6 +1,5 @@
 package servlets;
 
-import restaurant.Reservation;
 import restaurant.Restaurant;
 
 import javax.servlet.*;
@@ -10,23 +9,15 @@ import java.io.IOException;
 
 @WebServlet(name = "WelcomeServlet", urlPatterns = "/home")
 public class WelcomeServlet extends HttpServlet {
-    private Restaurant restaurant=null;
-    {
-        try {
-            restaurant = Restaurant.getRestaurantInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+    private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String backToHome=request.getParameter("backToHome");
 
-        if (backToHome==null){
+        if (backToHome == null){
             forwardTo(request, response, "/views/welcome.jsp");
-        }else{
-            backToHome=null;
+        } else {
+            backToHome = null;
             restaurant.removeLastReservation();
             forwardTo(request, response, "/views/welcome.jsp");
         }

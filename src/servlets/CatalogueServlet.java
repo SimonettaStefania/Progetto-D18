@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CatalogueServlet", urlPatterns = "/catalogue")
 public class CatalogueServlet extends HttpServlet {
-    private Restaurant restaurant = getRestaurant();
+    private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Catalogue catalogue = restaurant.getDishesCatalogue();
@@ -31,15 +31,5 @@ public class CatalogueServlet extends HttpServlet {
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher(route);
         rd.forward(request, response);
-    }
-
-    private Restaurant getRestaurant() {
-        Restaurant r = null;
-        try {
-            r = Restaurant.getRestaurantInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return r;
     }
 }

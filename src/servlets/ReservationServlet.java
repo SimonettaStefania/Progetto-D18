@@ -16,7 +16,7 @@ import java.util.Date;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
 public class ReservationServlet extends HttpServlet {
-    private Restaurant restaurant = getRestaurant();
+    private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String backToStatus = request.getParameter("backToStatus");
@@ -63,16 +63,6 @@ public class ReservationServlet extends HttpServlet {
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher(route);
         rd.forward(request, response);
-    }
-
-    private Restaurant getRestaurant() {
-        Restaurant r = null;
-        try {
-            r = Restaurant.getRestaurantInstance();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return r;
     }
 
     private Reservation makeReservation(HttpServletRequest request) {
