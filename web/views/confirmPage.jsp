@@ -55,9 +55,9 @@
 
     <div class="row">
 
-        <div style="margin-left: 15%"><h1>Your reservation has been made successfully!</h1>
+        <div style="margin-left: 15%"><h1>Your reservation has been successfully made!</h1>
             <br/>
-            <center>Thank you, we will see soon!</center>
+            <center>Thank you, we will see you soon!</center>
         </div>
 
     </div>

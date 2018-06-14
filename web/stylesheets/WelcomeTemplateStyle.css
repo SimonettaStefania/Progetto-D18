@@ -29,8 +29,11 @@ body {
 
 .jumbotron  {
 
-    background-color:rgba(255, 255, 255, 0.61);
-    margin:2%;
+    background-color:#ffffffd4;
+    margin-top:3%;
+	margin-bottom:2%;
+	margin-left:10%;
+	margin-right:10%;
     padding:0;
 }
 
@@ -58,7 +61,7 @@ body {
 }
 
 
-#inputGroup-names, #inputGroup-mail, #inputGroup-date{
+#inputGroup-names, #inputGroup-mail, #inputGroup-date, #inputGroup-guest{
 	
 	font-size:0.9em;
 	text-align:justify;
@@ -74,11 +77,24 @@ p {
 	
 }
 
+#descReservation, #descCatalogue {
+
+	margin-top:12.5%;
+	margin-bottom:	12.5%;
+}
+
 
 .btn, .btn-info{
 
 	font-size:1em;
     border-radius:0.3em;
-	margin-bottom:0.1em;
+	margin-top:1%;
+
+}
+
+#ReservationsBtn, #CatalogueBtn {
+
+	margin-top:25%;
+
 
 }
