@@ -1,72 +1,44 @@
-html {
-
-    height:100%;
-
-}
-
-
 body {
 
 	background-size:cover;
 	background-repeat: no-repeat;
-	border-radius:0.5em ;
-	font-size:21px;
-}
-
-p {
-
-	font-size:1em;
 
 }
 
-.navbar {
+#nav-tabContent{
+	width:80%;
+	margin-left: 20%;
+	margin-top:0%;
+}
 
-	border-radius:0em;
-	font-size:0.9em;
-
-
+.card-header{
+	padding-top: 1%;
+	padding-bottom: 1%;
 }
 
 .row {
-
-	margin: 1%;
-	padding : 1%;
-
+	margin-left: 2%;
+	margin-right: 2%;
 }
 
 
 #dishesList {
-	
-	padding-top:0;
 	background-color:#ffffff00;
-	
 }
 
-#typeList {
-	
+#Jumbotron {
+
 	background-color: #ffffffe3;
-	margin:5%;
+	margin-left:5%;
+	margin-right:5%;
+	margin-top:3%;
+	padding-top:3%;
 }
 
-#sidebar {
 
-    margin-bottom:5%;
-
-}
-
-.card{
-	
-	margin-top:0%;
-	
-}
 .card-header, .btn-info, .list-group-item.active {
 
 	background-color: #6576a5;
 	border-color: #6576a5;
-	font-size:1em;
-
 
 }
-
-
-
