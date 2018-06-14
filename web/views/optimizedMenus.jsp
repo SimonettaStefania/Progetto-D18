@@ -81,8 +81,9 @@
 
                                 <hr class="my-4">
 
-                                <form action="/selectOptimized" method="post">
+                                <form action="/status" method="post">
 
+                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
                                     <input name="code" type="hidden" value="1">
                                     <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
 
@@ -106,8 +107,8 @@
 
                                 <hr class="my-4">
 
-                                <form action="/selectOptimized" method="post">
-
+                                <form action="/status" method="post">
+                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
                                     <input name="code" type="hidden" value="2">
                                     <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
 
@@ -131,8 +132,8 @@
 
                                 <hr class="my-4">
 
-                                <form action="/selectOptimized" method="post">
-
+                                <form action="/status" method="post">
+                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
                                     <input name="code" type="hidden" value="3">
                                     <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
 
@@ -160,8 +161,9 @@
 
                                 <hr class="my-4">
 
-                                <form action="/selecOptimized" method="post">
+                                <form action="/status" method="post">
 
+                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
                                     <input name="code" type="hidden" value="4">
                                     <input type="submit" class="btn btn-success btn-lg" style="margin-left: 39%; "value="Select menu &checkmark;">
 
@@ -196,7 +198,7 @@
             <div class="row" style="margin-right: 20%">
 
                 <form action="/status" method="post">
-                    <input type="hidden", name="backToStatus", value="true">
+                    <input type="hidden", name="backToStatus", value="back">
                     <input type="submit" class="btn btn-lg" style="margin-left: 20%" id="btnBack" value="&laquo; Back">
 
                 </form>

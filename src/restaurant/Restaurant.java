@@ -66,6 +66,10 @@ public class Restaurant {
 
     }
 
+    public void setCatalogue(Catalogue cat) {
+        dishesCatalogue = cat;
+    }
+
     public void addToCatalogue ( MenuElement element){
 
         dishesCatalogue.addElement(element);
@@ -102,7 +106,7 @@ public class Restaurant {
 
     public static synchronized  Restaurant getRestaurantInstance() throws InterruptedException {
         if(restaurantInstance==null)
-            restaurantInstance =  new Restaurant("Da Ciccio", 150,true);
+            restaurantInstance =  new Restaurant("Da Ciccio", 150,false);
         return restaurantInstance;
     }
 
