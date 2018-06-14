@@ -17,7 +17,13 @@ public class MenuGenerator {
         generatedMenu = new ArrayList<>();
     }
 
-
+    /**
+     * Method to generate the optimized menus starting from the budget.
+     * It generates four menus, three optimized for the three main categories, the other
+     * one balanced on all the dishes type (i.e. one menu is focused on starters, another one in
+     * firt courses, the third on main and the last balanced on all)
+     *
+     */
     public void generate () {
         Collections.sort(catalogue.getDishes(), MenuElement.priceComparator);
         Collections.sort(catalogue.getDishes(), MenuElement.typeComparator);
@@ -29,7 +35,16 @@ public class MenuGenerator {
 
     }
 
-
+    /**
+     * Method to be called when is necessary to set the budget to create
+     * the optimized menus
+     *
+     * @param starterQuote set the total quote for the starter section
+     * @param firstQuote set the total quote for the first section
+     * @param mainQuote set the total quote for the main section
+     *
+     * @return the optimized menu every time is called
+     */
     private Menu optimizeBudget(double starterQuote, double firstQuote, double mainQuote){
         double starterBudget = (budget*starterQuote);
         double firstBudget = (budget*firstQuote);
@@ -63,7 +78,14 @@ public class MenuGenerator {
 
     }
 
-
+    /**
+     * Method to get best dish starting from a budget
+     *
+     * @param type set the type of dish to be picked
+     * @param budget set the budget for the dish to be picked
+     *
+     * @return the selected dish, optimized for the budget
+     */
     private ArrayList<MenuElement> findDishes(DishType type, double budget){
         MenuElement tmpElem=null;
         boolean first=true;
