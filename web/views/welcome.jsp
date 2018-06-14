@@ -83,6 +83,7 @@
 
                         <p>Want to make a new reservation? Compile the form below and organize your event!</p>
 
+        <!-- --------------------------- NAME AND SURNAME ------------------------------------------------------------------>
 
                     <form action="../status" method="post">
                         <div class="input-group input-group-sm mb-3">
@@ -95,6 +96,9 @@
 
                         </div>
 
+        <!-- ------------------------------------ EMAIL  ------------------------------------------------------------------>
+
+            <!-- TODO : input type = email instead of text -->
 
                         <div class="input-group input-group-sm mb-3 ">
 
@@ -102,11 +106,12 @@
                                 <span class="input-group-text" id="inputGroup-mail" >E-mail</span>
                             </div>
 
-                            <!-- TODO set type as email instead of text -->
-
-                            <input name="email" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
+                            <input name="text" type="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
 
                         </div>
+
+        <!-- ------------------------------------ DATE  ------------------------------------------------------------------>
+
 
                         <div class="input-group input-group-sm mb-3 ">
 
@@ -114,8 +119,25 @@
                                 <span class="input-group-text" id="inputGroup-date">Date</span>
                             </div>
 
-                            <input name="date" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                    style="font-size: 1em" required="">
+
+                            <input name="date" id="reservationDay" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                   style="font-size: 1em" required="" onchange="check()" />
+                            <input type="boolean" id="DateValidity" value="false" hidden = "true" />
+
+                        </div>
+
+        <!-- ------------------------------------ GUESTS AND CONFIRM  ------------------------------------------------------------------>
+
+
+                        <div class="input-group input-group-sm mb-3 ">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-guest">Total Guests</span>
+                            </div>
+
+                            <input type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                   style="font-size: 1em" required="" onchange="checkGuests(300)" />
+                            <input type="boolean" id="GuestValidity" value="false" hidden = "true" />
 
                         </div>
 
@@ -125,19 +147,25 @@
 
                     </div>
 
+
+<!-- ============= CATALOGUE =============================================================================================-->
+
+
                     <div class = "col col-md-2">
 
                         <h1 class = "display-4" style = "padding-bottom:0.5em">Catalogue</h1>
-                        <p>Want to see what we offer in our catalogue? Click on the button below and discover our dishes,from startes to desserts ! </p>
+                        <p id="descCatalogue">Want to see what we offer in our catalogue? Click on the button below and discover our dishes,from startes to desserts ! </p>
                         <form  action="../catalogue" method="post">
                             <input class="btn btn-dark" id="CatalogueBtn"  type="submit" value="Go to Catalogue&raquo;">
                         </form>
                     </div>
 
+<!-- ============= RESERVATIONS ===============================================================================================-->
+
 
                     <div class="col col-md-2">
                         <h1 class = "display-4" style = "padding-bottom:0.5em">Reservations</h1>
-                        <p >You made a reservation and now you want to see it? Nothing easier! Click on the button below to view your hires.</p>
+                        <p id="descReservation">You made a reservation and now you want to see it? Nothing easier! Click on the button below to view your hires.</p>
 
                         <form action="../reservations" method="post">
 
@@ -161,6 +189,99 @@
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+
+        <!-- ============= RESERVATION DAY CHECK SCRIPT =======================================================================-->
+
+        <script type="text/javascript">
+
+
+            function isLater( date1, date2 ){
+
+                if ( date1 > date2 )
+                    return true ;
+                else
+                    return false;
+
+            }
+
+            function isEqual (date1, date2){
+
+                if ( date1.getDate() == date2.getDate() && date1.getMonth() ==date2.getMonth() && date1.getFullYear() == date2.getFullYear() )
+                    return true;
+                else
+                    return false ;
+
+            }
+
+            function tryDate(reservationDay, date){
+
+                var today = new Date();
+
+                if (isLater(reservationDay,today)){
+                    if (! isEqual(reservationDay,date))
+                        return true;
+                }else
+                    return false;
+
+
+            }
+
+            function checkValidity(reservationArray) {
+
+                var tmp = document.getElementById("reservationDay").value;
+                var reservationDay = new Date(tmp) ;
+                var dates = reservationArray;
+                var validity = undefined ;
+
+                for (var i=0 ; i<2 ; i++) {
+
+                    if (!tryDate(reservationDay, dates[i]))
+                        validity=false ;
+
+                }
+
+                if (validity== undefined)
+                    validity = true ;
+                document.getElementById("DateValidity").value=validity;
+
+                return validity;
+
+
+            }
+
+            function check(){
+
+                var dates = new Array (new Date("2018-06-25"),new Date("2018-06-30"));
+                if (checkValidity(dates) == false )
+                    alert("ATTENTION!\nThe selected day is not free or is not valid. Please select another date." );
+
+            }
+
+        </script>
+
+        <!-- ======================== GUEST CHECK SCRIPT ==================================================================-->
+
+        <script type="text/javascript">
+
+            function checkGuests(nCovers){
+
+                var nGuests = document.getElementById("guestsNumber").value;
+                var validity = undefined ;
+
+
+                if (nGuests <= 0 || nGuests > nCovers ){
+                    alert("ATTENTION!\nInsert a valid number of guests, from 1 up to " + nCovers );
+                    validity = false;
+                }
+                else
+                    validity = true;
+
+                document.getElementById("GuestValidity").value = validity;
+            }
+
+
+        </script>
 
 
 
