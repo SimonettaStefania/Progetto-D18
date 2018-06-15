@@ -1,10 +1,6 @@
 package menu;
 
-import java.lang.annotation.ElementType;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
 
 public class Menu {
     private String name;
@@ -52,8 +48,10 @@ public class Menu {
         return name;
     }
 
-    public void sortMenuElements(){ Collections.sort(this.menuElementsList,MenuElement.typeComparator); }  // Method that sorts elementListMenu TODO add this method in the UML
-
+    // Method that sorts elementListMenu TODO add this method in the UML
+    public void sortMenuElements(){
+        menuElementsList.sort(MenuElement.typeComparator);
+    }
 
     // method that calculates all menus's cost  TODO add this method in the UML
     public void calculateMenuCost(){
@@ -76,5 +74,7 @@ public class Menu {
         return menuElementsList;
     }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -6,7 +6,6 @@ import services.DbReader;
 import services.Query;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Restaurant {
     private static Restaurant restaurantInstance;
@@ -100,8 +99,8 @@ public class Restaurant {
         for (MenuElement elem : dbr.getDishesList())
             this.addToCatalogue(elem);
 
-        Collections.sort(dishesCatalogue.getDishes(),MenuElement.priceComparator);
-        Collections.sort(dishesCatalogue.getDishes(),MenuElement.typeComparator);
+        dishesCatalogue.getDishes().sort(MenuElement.priceComparator);
+        dishesCatalogue.getDishes().sort(MenuElement.typeComparator);
     }
 
     private void executeQuery(DbReader dbr, String query) {

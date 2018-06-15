@@ -14,76 +14,62 @@ public class Catalogue {
     }
 
     public ArrayList<MenuElement> getDishes() {
-
         return dishesList;
-
     }
+
     public ArrayList<MenuElement> getDrinks() {
-
         return drinksList;
-
     }
 
     private void addDish(MenuElement elem) {
-
-        if ( !dishesList.contains(elem) )
+        if (!dishesList.contains(elem))
             dishesList.add(elem);
-
     }
 
     private void addDrink(MenuElement elem) {
-
-        if ( !drinksList.contains(elem) )
+        if (!drinksList.contains(elem))
             drinksList.add(elem);
-
     }
 
-    public void addElement (MenuElement elem){
-
+    // TODO: update UML (made package-private to improve security)
+    void addElement(MenuElement elem) {
         if (elem.getType() != DishType.DRINK)
             addDish(elem);
-
-        else if (elem.getType() == DishType.DRINK)
-            addDrink(elem);
-
+        else addDrink(elem);
     }
 
-    public void removeElement (MenuElement elem){
-
-        if ( dishesList.contains(elem))
+    // TODO: update UML (made package-private to improve security)
+    void removeElement (MenuElement elem) {
+        if (dishesList.contains(elem))
             dishesList.remove(elem);
-        else if ( drinksList.contains(elem))
-            drinksList.remove(elem);
-
-
+        else drinksList.remove(elem);
     }
 
     @Override
     public String toString() {
-        String tmp = "CATALOGO DI PORTATE : \nPIATTI : \n";
+        StringBuilder tmp = new StringBuilder("CATALOGO DI PORTATE : \nPIATTI : \n");
+        for (MenuElement element : dishesList)
+            tmp.append(element.toString()).append("\n");
 
-            for ( MenuElement element : dishesList)
-                tmp += element.toString() + "\n";
+         tmp.append("\nBEVANDE :\n");
+        for (MenuElement element : drinksList)
+            tmp.append(element.toString()).append("\n");
 
-            tmp += "\nBEVANDE :\n";
-
-        for ( MenuElement element : drinksList)
-            tmp += element.toString() + "\n";
-
-        return tmp ;
-
+        return tmp.toString();
     }
 
     public void generateFilter(boolean vegan, boolean vegetarian, boolean celiac) {
-
         filterSelection.clear();
 
         for (MenuElement element : dishesList){
             if (element.respectsFilters(vegan, vegetarian, celiac))
                 filterSelection.add(element);
-                        
         }
+    }
 
+    // TODO: add method to UML
+    public ArrayList<MenuElement> getFilteredDishes() {
+        return filterSelection;
     }
 
     public MenuElement getElementByCode(String id) {
