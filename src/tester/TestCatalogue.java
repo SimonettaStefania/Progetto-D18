@@ -4,40 +4,24 @@ import menu.DishType;
 import menu.MenuElement;
 import restaurant.Restaurant;
 
-import java.util.Collections;
-
 public class TestCatalogue {
-
-    public static void main(String[] args) throws InterruptedException {
-
+    public static void main(String[] args) {
         checkCatalogue();
-
     }
 
-    public static void checkCatalogue() throws InterruptedException {
-
+    private static void checkCatalogue() {
         Restaurant r = new Restaurant("Ristorante Italiano", 100,false);
 
-        MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER,
-                                                4.00, false, false, false);
-        MenuElement starter_2 = new MenuElement("Aragosta","S002", DishType.STARTER,
-                6.00, false, false, false);
-        MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001",
-                                                    DishType.FIRST_COURSE,10.0, false, false, false);
-        MenuElement first_2 = new MenuElement("Spaghetti allo scoglio", "P002",
-                DishType.FIRST_COURSE,11.0, false, false, false);
-        MenuElement main_1 = new MenuElement("Pepata di cozze", "M001",
-                                                    DishType.MAIN_COURSE,10.00, false, false, false);
-        MenuElement main_2 = new MenuElement("cozze", "M002",
-                DishType.MAIN_COURSE,8.00, false, false, false);
-        MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001",
-                                                    DishType.DESSERT, 4.00, false, false, false);
-        MenuElement dessert_2 = new MenuElement("Tiramisù", "D002",
-                DishType.DESSERT, 2.00, false, false, false);
-        MenuElement drink_1 = new MenuElement("Acqua", "DR001",
-                                                    DishType.DRINK, 1.0, false, false, false);
-        MenuElement drink_2 = new MenuElement("Caffè", "DR002",
-                                                    DishType.DRINK, 1.0, false, false, false);
+        MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER, 4.00, false, false, false);
+        MenuElement starter_2 = new MenuElement("Aragosta","S002", DishType.STARTER, 6.00, false, false, false);
+        MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE,10.0, false, false, false);
+        MenuElement first_2 = new MenuElement("Spaghetti allo scoglio", "P002", DishType.FIRST_COURSE,11.0, false, false, false);
+        MenuElement main_1 = new MenuElement("Pepata di cozze", "M001", DishType.MAIN_COURSE,10.00, false, false, false);
+        MenuElement main_2 = new MenuElement("Cozze", "M002", DishType.MAIN_COURSE,8.00, false, false, false);
+        MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001", DishType.DESSERT, 4.00, false, false, false);
+        MenuElement dessert_2 = new MenuElement("Tiramisù", "D002", DishType.DESSERT, 2.00, false, false, false);
+        MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
+        MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
 
         r.addToCatalogue(dessert_1);
         r.addToCatalogue(dessert_2);
@@ -60,11 +44,9 @@ public class TestCatalogue {
 
         System.out.println(r.showCatalogue());
 
-        Collections.sort(r.getDishesCatalogue().getDishes(), MenuElement.priceComparator);
-        Collections.sort(r.getDishesCatalogue().getDishes(), MenuElement.typeComparator);
+        r.getDishesCatalogue().getDishes().sort(MenuElement.priceComparator);
+        r.getDishesCatalogue().getDishes().sort(MenuElement.typeComparator);
 
         System.out.println(r.showCatalogue());
-
     }
-
 }
