@@ -17,8 +17,7 @@ public class TestMenu {
     MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
     MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
 
-    // Add elementS in the menuProva
-
+    // Add elements to menuProva
     m.addElement(drink_2);
     m.addElement(first_1);
     m.addElement(main_1);
@@ -27,28 +26,23 @@ public class TestMenu {
     m.addElement(drink_1);
 
     // Print all elements in the menu
-
     m.sortMenuElements();  // method to be called in the UI
-
 
     System.out.println(m.toString());
 
-    // Remove some elements in the menu (TODO exception if menuElementList is empty)
-
+    // Remove some elements in the menu
     m.removeElement(main_1);
     m.removeElement(dessert_1);
 
     System.out.println(m.toString());
 
     // set budget and guests's number
-
     m.setNMenuGuests(20);
     m.updateMenuCost(300);
 
     System.out.println(m.toString());
 
     // menu creation simulation
-
     m.setNMenuGuests(50);
     m.updateMenuCost(500);
 
@@ -76,6 +70,5 @@ public class TestMenu {
     m.addElement(starter_1);
     m.sortMenuElements();
     System.out.println(m.toString());
-
     }
 }

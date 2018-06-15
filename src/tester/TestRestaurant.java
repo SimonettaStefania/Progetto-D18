@@ -4,7 +4,6 @@ package tester;
 import menu.DishType;
 import menu.Menu;
 import menu.MenuElement;
-import restaurant.Catalogue;
 import restaurant.Reservation;
 import restaurant.Restaurant;
 
@@ -12,8 +11,7 @@ import java.util.Date;
 
 public class TestRestaurant {
 
-    public static void main(String[] args) throws InterruptedException {
-
+    public static void main(String[] args) {
         // create dishes and drink
         MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER, 4.00, false, false, false);
         MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE,10.0, false, false, false);
