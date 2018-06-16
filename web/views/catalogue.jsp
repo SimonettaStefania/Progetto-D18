@@ -1,6 +1,7 @@
 <%@ page import="restaurant.Catalogue" %>
 <%@ page import="menu.MenuElement" %>
 <%@ page import="menu.DishType" %>
+<%@ page import="restaurant.Restaurant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../stylesheets/CatalogueStyle.css">
 
-    <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");    %>
+    <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();    %>
 </head>
 
 <body background ="../img/background.jpg" >

@@ -51,6 +51,7 @@ public class Restaurant {
         dishesCatalogue.removeElement(elem);
     }
 
+    // TODO: ha poco senso passare da qui per aggiungere/togliere elementi al menu, da rivedere i diagrammi di sequenza?
     public void addDish(Reservation res, Menu menu, MenuElement menuElement){
         res.addDish(menu, menuElement);
     }
@@ -65,6 +66,8 @@ public class Restaurant {
         return tmp ;
     }
 
+    // TODO: metodo syncronized che inserisce una nuova reservation
+    // Risparmierebbe la "fatica" di passare forzatamente per questo metodo (più efficiente)
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
     }

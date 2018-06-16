@@ -1,8 +1,5 @@
 package servlets;
 
-import restaurant.Catalogue;
-import restaurant.Restaurant;
-
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
@@ -10,12 +7,8 @@ import java.io.IOException;
 
 @WebServlet(name = "SelectionServlet", urlPatterns = "/selection")
 public class SelectionServlet extends HttpServlet {
-    private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Catalogue catalogue = restaurant.getDishesCatalogue();
-
-        request.setAttribute("catalogue", catalogue);
         forwardTo(request, response, "/views/dishesSelection.jsp");
     }
 

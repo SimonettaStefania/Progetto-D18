@@ -18,7 +18,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
-    <%  Catalogue catalogue = (Catalogue) request.getAttribute("catalogue");    %>
+    <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();    %>
 
     $(document).ready(function(){
         $("input[name='selected-id']").on("change", function() {
@@ -190,7 +190,7 @@
             </div>
 
             <br/>
-
+            <% // TODO: aggiungere numero di persone per menu %>
 
             <input type="hidden" name="backToStatus" form="selected-dishes" value="new-menu">
             <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
