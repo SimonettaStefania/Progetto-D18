@@ -69,6 +69,7 @@ public class ReservationServlet extends HttpServlet {
         String formSurname = request.getParameter("surname");
         String formEmail = request.getParameter("email");
         String formStringDate = request.getParameter("date");
+        String formGuests = request.getParameter("guestsNumber");
 
         Date eventDate = null;
         try {
@@ -79,6 +80,7 @@ public class ReservationServlet extends HttpServlet {
 
         Reservation reservation = new Reservation(generateReservationCode(),eventDate,
                 formName+ " " + formSurname, formEmail);
+        reservation.setnGuests(Integer.parseInt(formGuests));
         restaurant.getReservationList().add(reservation);
         return reservation;
     }
