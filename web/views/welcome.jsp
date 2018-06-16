@@ -135,7 +135,7 @@
                                 <span class="input-group-text" id="inputGroup-guest">Total Guests</span>
                             </div>
 
-                            <input type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                            <input name ="guestsNumber" type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                                    style="font-size: 1em" required="" onchange="checkGuests(300)" />
                             <input type="boolean" id="GuestValidity" value="false" hidden = "true" />
 
