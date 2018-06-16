@@ -21,7 +21,7 @@ public class DbReader implements Runnable {
 
 
     private DbReader(){
-        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?useSSL=false&user=root&password=root";
+        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?useSSL=false&user=progettoD18&password=progettoD18";
     }
 
     @Override
@@ -86,11 +86,11 @@ public class DbReader implements Runnable {
                     rsDishes.getDouble("DISH_PRICE"),rsDishes.getBoolean("VEGAN"),rsDishes.getBoolean("VEGETARIAN"),rsDishes.getBoolean("CELIAC"));
             dishesList.add(tmpElem);
         }
-        allergenesInDishes();
+        allergensInDishes();
         ingredientsInDishes();
     }
 
-    private void allergenesInDishes() throws SQLException {
+    private void allergensInDishes() throws SQLException {
         this.query=Query.SELECT_ALLERGENS_IN_DISHES;
         ResultSet rsAllergens = stm.executeQuery(this.query);
         while(rsAllergens.next()){
