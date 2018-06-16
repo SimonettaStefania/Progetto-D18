@@ -17,27 +17,26 @@ import java.util.Date;
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
 public class ReservationServlet extends HttpServlet {
     private Restaurant restaurant = Restaurant.getRestaurantInstance();
+    private Reservation reservation;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String backToStatus = request.getParameter("backToStatus");
 
         if (backToStatus == null) {
             // TODO: salvarsi questa reservation invece di prendere l'ultima
-            Reservation reservation = makeReservation(request);
+            reservation = makeReservation(request);
             request.setAttribute("reservation", reservation);
         } else if (backToStatus.equalsIgnoreCase("new-menu")) {
-            // Vale solo per i menu personalizzati
             Catalogue catalogue = restaurant.getDishesCatalogue();
             String selected[] = request.getParameterValues("selected-id");
 
             if (selected != null) {
-                Menu menu = new Menu("CIAONE BIRICONE", 10);
+                Menu menu = new Menu("Menu personalizzato", 10);
                 for (String id : selected) {
                     MenuElement item = catalogue.getElementByCode(id);
                     menu.addElement(item);
                 }
 
-                Reservation reservation = restaurant.getLastReservation();
                 reservation.addMenu(menu);
             }
         } else if (backToStatus.equalsIgnoreCase("sel-opt-menu")) {
@@ -47,7 +46,7 @@ public class ReservationServlet extends HttpServlet {
             clearOptimizedMenus();
         }
 
-
+        request.setAttribute("reservation", this.reservation);
         forwardTo(request, response, "/views/reservationState.jsp");
     }
 
@@ -84,6 +83,7 @@ public class ReservationServlet extends HttpServlet {
         return reservation;
     }
 
+    // TODO: genererarlo solo alla fine, una volta confermata la reservation?
     private String generateReservationCode(){
         int reservationsCount = 0;
         String lastReservationCode = "R000", newReservationCode;

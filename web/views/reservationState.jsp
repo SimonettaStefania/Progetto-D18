@@ -1,10 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: SimonettaStefania
-  Date: 05/06/2018
-  Time: 16:32
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="menu.Menu" %>
+<%@ page import="menu.MenuElement" %>
+<%@ page import="restaurant.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -15,6 +11,16 @@
 
     <title>Reservation State </title>
 
+    <%  Reservation reservation = (Reservation) request.getAttribute("reservation");  %>
+    <%!
+        private String shortString(Menu menu) {
+            menu.calculateMenuCost();
+            StringBuilder s = new StringBuilder("Price: " + menu.getMenuCost() + "&emsp;&emsp; People: " + menu.getnMenuGuests());
+            for (MenuElement el : menu.getMenuElementsList())
+                s.append("<br/> - ").append(el.getName());
+            return s.toString();
+        }
+    %>
 </head>
 <body background="../img/background.jpg">
 
@@ -30,52 +36,34 @@
 </nav>
 
 
-
 <div class="jumbotron" style="background-color:#f1f1f1d1; padding:2%; margin-top:3%; margin-left:5%;margin-right:5%">
     <h1 style="margin-left: 7%; color: black">Reservation State</h1>
     <div class="row"  id="row1_pg2">
 
         <div class="col-md-5">
-            <ul class="list-group mb-3" style="margin-left: 10%; padding: 2%; margin-top:7%; width:103% ">
-                <a class="list-view bg-dark" style="height: 10%; color: antiquewhite; text-align: center">Added Menù</a>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Menu 1 </h6>
-                        <small class="text-muted">Fatto bene, è bello</small>
-                    </div>
-                    <form action="/selection" method="post">
-                        <input type="hidden" value="1">
-                        <button class="btn" style="background-color: #6576a5; color: white;" id="modify0" >Modify</button>
-                    </form>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Menu 2</h6>
-                        <small class="text-muted">Caruccio, dai</small>
-                    </div>
-                    <form action="/selection" method="post">
-                        <input type="hidden" value="2">
-                        <button class="btn" style="background-color: #6576a5; color: white;" id="modify1" >Modify</button>
-                    </form>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Menu 3</h6>
-                        <small class="text-muted">Vegano stai lontano</small>
-                    </div>
-                    <form action="/selection" method="post">
-                        <input type="hidden" value="3">
-                        <button class="btn" style="background-color: #6576a5; color: white;" id="modify2" >Modify</button>
-                    </form>
-                </li>
+            <ul class="list-group mb-3" style="margin-left: 10%; padding: 2%; margin-top: 2%; width: 100%">
+                <div class="card-header bg-dark text-white" style="width: 100%; text-align: center;"><b>Added Menu</b></div>
+
+            <%  int n = 0;      // TODO: rendere la lista dei menu delle tendine a (s)comparsa
+                for (Menu menu : reservation.getCreatedMenu()) {  %>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0"><%=menu.getName()%></h6>
+                            <small class="text-muted"><%=shortString(menu)%></small>
+                        </div>
+                        <form action="/selection" method="post">
+                            <input type="hidden" value="<%=n%>">
+                            <button class="btn" style="background-color: #6576a5; color: white;">Modify</button>
+                        </form>
+                    </li>
+            <%      n++;
+                }  %>
+
             </ul>
         </div>
 
-        <div class="col-md-5" style=" margin-left:12%">
-
+        <div class="col-md-5" style=" margin-left:12%; margin-top: 2%">
             <span style="font-size: larger; font-style: inherit">You can create your own menu or we can do it for you: you've just to insert the budget!</span>
-
-
 
             <form action="/selection" method="post">
                 <br>
@@ -83,7 +71,7 @@
                 <br>
             </form>
 
-            <center><span style="font-size: larger; margin-bottom: 0%">OR</span></center>
+            <div style="font-size: larger; text-align: center;">OR</div>
             <br>
             <form action="/optimize" method="post">
                 <div class="input-group mb-3">
@@ -95,14 +83,12 @@
                 <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create a budget optimized Menu &raquo;">
             </form>
 
-
         </div>
     </div>
 
         <br/>
 
         <div class="row">
-
             <div class="col">
                 <form action="/home" method="post" style="  margin-left: 19.3%">
                     <input type="hidden" name="backToHome" value="true">
@@ -114,7 +100,6 @@
                 <input type="submit" class="btn btn-lg btn-success" style="width:50%" value="Next &raquo;">
             </form></div>
         </div>
-
 
 </div>
 
