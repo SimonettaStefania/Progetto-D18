@@ -7,7 +7,8 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../stylesheets/RecapTemplateStyle.css">
+    <link rel="stylesheet" href="../stylesheets/ReservStateStyle.css">
+   <!-- <link rel="stylesheet" href="../stylesheets/RecapTemplateStyle.css"> -->
 
     <title>Reservation State </title>
 
@@ -29,7 +30,7 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarProject">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link active" href="#">Reservations</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Reservations</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Catalogue</a></li>
         </ul>
     </div>
@@ -43,26 +44,47 @@
         <div class="col-md-5">
             <ul class="list-group mb-3" style="margin-left: 10%; padding: 2%; margin-top: 2%; width: 100%">
                 <div class="card-header bg-dark text-white" style="width: 100%; text-align: center;"><b>Added Menu</b></div>
-
+                <div id="accordion" >
             <%  int n = 0;      // TODO: rendere la lista dei menu delle tendine a (s)comparsa
                 for (Menu menu : reservation.getCreatedMenu()) {  %>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0"><%=menu.getName()%></h6>
-                            <small class="text-muted"><%=shortString(menu)%></small>
+
+
+                        <div class="card" >
+
+                            <div class="card-header" id="card<%=n%>">
+                                <h5 class="mb-0">
+                                    <button class="btn collapsed btt head" style="background-color: transparent;color: white;" data-toggle="collapse" data-target="#description<%=n%>" aria-controls="description<%=n%>">
+                                        <%=menu.getName() + " " + (n+1)%>
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="description<%=n%>" class="collapse" aria-labelledby="card<%=n%>" data-parent="#accordion">
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <small class="text-muted"><%=shortString(menu)%></small>
+                                        </div>
+                                        <div class="col">
+
+                                            <form action="/selection" method="post">
+                                                <input type="hidden" style="width:0%;" value="<%=n%>">
+                                                <button class="btn modif" >Modify</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <form action="/selection" method="post">
-                            <input type="hidden" value="<%=n%>">
-                            <button class="btn" style="background-color: #6576a5; color: white;">Modify</button>
-                        </form>
-                    </li>
             <%      n++;
                 }  %>
-
+                </div>
             </ul>
         </div>
 
-        <div class="col-md-5" style=" margin-left:12%; margin-top: 2%">
+        <div class="col-md-5" style=" margin-left:12%; margin-top: 1%">
             <span style="font-size: larger; font-style: inherit">You can create your own menu or we can do it for you: you've just to insert the budget!</span>
 
             <form action="/selection" method="post">
@@ -105,3 +127,7 @@
 
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>

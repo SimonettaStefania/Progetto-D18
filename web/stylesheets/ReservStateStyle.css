@@ -1,0 +1,30 @@
+body {
+
+	background-size:cover;
+	background-repeat: no-repeat;
+
+}
+
+
+
+.card-header{
+	padding-top: 1%;
+	padding-bottom: 1%;
+	background-color: #6576a5;
+	border-color: #6576a5;
+}
+
+
+.head{
+	background-color: transparent;
+	color: white;
+}
+
+.modif{
+	background-color: #6576a5;
+	color: white;
+	position: absolute;
+	bottom:0%;
+	right:6%;
+}
+
