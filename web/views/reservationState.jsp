@@ -45,23 +45,23 @@
             <ul class="list-group mb-3" style="margin-left: 10%; padding: 2%; margin-top: 2%; width: 100%">
                 <div class="card-header bg-dark text-white" style="width: 100%; text-align: center;"><b>Added Menu</b></div>
                 <div id="accordion" >
+
             <%  int n = 0;      // TODO: cercare di far funzionare il bottone modify
                 for (Menu menu : reservation.getCreatedMenu()) {  %>
 
-
                         <div class="card" >
-
                             <div class="card-header" id="card<%=n%>">
                                 <h5 class="mb-0">
                                     <div class="row">
                                         <div class="col-9">
                                             <button class="btn collapsed btt head" style="background-color: transparent;color: white;" data-toggle="collapse" data-target="#description<%=n%>" aria-controls="description<%=n%>">
-                                                <%=menu.getName() + " " + (n+1)%>
+                                                <%=menu.getName()%>
                                             </button>
                                         </div>
                                         <div class="col-3">
                                             <form action="/status" method="post">
-                                                <input type="hidden" name="backToStatus" style="width:0%;" value="<%=n%>">
+                                                <input type="hidden" name="backToStatus" value="rem-menu">
+                                                <input type="hidden" name="removedMenu" value="<%=n%>">
                                                 <button class="btn fa fa-trash" style="float: right; color: white; background-color: transparent"></button>
                                             </form>
                                         </div>
@@ -70,7 +70,6 @@
                             </div>
 
                             <div id="description<%=n%>" class="collapse" aria-labelledby="card<%=n%>" data-parent="#accordion">
-
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-8">
@@ -79,7 +78,7 @@
                                         <div class="col-4">
 
                                             <form action="/selection" method="post">
-                                                <input type="hidden" style="width:0%;" value="<%=n%>">
+                                                <input type="hidden" value="<%=n%>">
                                                 <button class="btn modif" >Modify</button>
                                             </form>
 
@@ -88,8 +87,10 @@
                                 </div>
                             </div>
                         </div>
+
             <%      n++;
                 }  %>
+
                 </div>
             </ul>
         </div>

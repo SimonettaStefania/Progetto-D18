@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
@@ -30,8 +31,13 @@ public class ReservationServlet extends HttpServlet {
             Catalogue catalogue = restaurant.getDishesCatalogue();
             String selected[] = request.getParameterValues("selected-id");
 
+            String menuName = request.getParameter("menuName");
+            int nGuests = Integer.parseInt(request.getParameter("people"));
+            if (menuName.isEmpty())
+                menuName = "Menu personalizzato";
+
             if (selected != null) {
-                Menu menu = new Menu("Menu personalizzato", 10);
+                Menu menu = new Menu(menuName, nGuests);
                 for (String id : selected) {
                     MenuElement item = catalogue.getElementByCode(id);
                     menu.addElement(item);
@@ -40,8 +46,13 @@ public class ReservationServlet extends HttpServlet {
                 reservation.addMenu(menu);
             }
         } else if (backToStatus.equalsIgnoreCase("sel-opt-menu")) {
-            int optimizedMenuCode=Integer.parseInt(request.getParameter("code"));
+            int optimizedMenuCode = Integer.parseInt(request.getParameter("code"));
             selectOptimizedMenu(optimizedMenuCode);
+        } else if (backToStatus.equalsIgnoreCase("rem-menu")) {
+            int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
+            ArrayList<Menu> menu = reservation.getCreatedMenu();
+
+            menu.remove(removedMenu);
         } else if (backToStatus.equalsIgnoreCase("back")){
             clearOptimizedMenus();
         }
