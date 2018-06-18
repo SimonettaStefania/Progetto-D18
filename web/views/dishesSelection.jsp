@@ -190,13 +190,20 @@
             </div>
 
             <br/>
-            <% // TODO: aggiungere numero di persone per menu %>
+            <div class="form-group row">
+                <label for="menuName" class="col-sm-4 col-form-label">Menu name</label>
+                <input type="text" class="form-control col-sm-7" id="menuName"name="menuName" form="selected-dishes">
+            </div>
+            <div class="form-group row" style="margin-top: -3%">
+                <label for="people" class="col-sm-4 col-form-label">People n.</label>
+                <input type="number" class="form-control col-sm-4" id="people" name="people" form="selected-dishes" required min="1">
+            </div>
 
             <input type="hidden" name="backToStatus" form="selected-dishes" value="new-menu">
             <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
             <form action="/status" method="post">
                 <input type="hidden" name="backToStatus" value="back">
-                <input type="submit" class="btn btn-dark" value="Back" style="float: right; margin-right: 1%">
+                <input type="submit" class="btn btn-dark" value="Back" style="float: right; margin-right: 2%">
             </form>
         </div>
     </div>
