@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <link rel="stylesheet" href="../stylesheets/ReservStateStyle.css">
-   <!-- <link rel="stylesheet" href="../stylesheets/RecapTemplateStyle.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Reservation State </title>
 
@@ -45,7 +45,7 @@
             <ul class="list-group mb-3" style="margin-left: 10%; padding: 2%; margin-top: 2%; width: 100%">
                 <div class="card-header bg-dark text-white" style="width: 100%; text-align: center;"><b>Added Menu</b></div>
                 <div id="accordion" >
-            <%  int n = 0;      // TODO: rendere la lista dei menu delle tendine a (s)comparsa
+            <%  int n = 0;      // TODO: cercare di far funzionare il bottone modify
                 for (Menu menu : reservation.getCreatedMenu()) {  %>
 
 
@@ -53,9 +53,19 @@
 
                             <div class="card-header" id="card<%=n%>">
                                 <h5 class="mb-0">
-                                    <button class="btn collapsed btt head" style="background-color: transparent;color: white;" data-toggle="collapse" data-target="#description<%=n%>" aria-controls="description<%=n%>">
-                                        <%=menu.getName() + " " + (n+1)%>
-                                    </button>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <button class="btn collapsed btt head" style="background-color: transparent;color: white;" data-toggle="collapse" data-target="#description<%=n%>" aria-controls="description<%=n%>">
+                                                <%=menu.getName() + " " + (n+1)%>
+                                            </button>
+                                        </div>
+                                        <div class="col-3">
+                                            <form action="/status" method="post">
+                                                <input type="hidden" name="backToStatus" style="width:0%;" value="<%=n%>">
+                                                <button class="btn fa fa-trash" style="float: right; color: white; background-color: transparent"></button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </h5>
                             </div>
 
@@ -63,10 +73,10 @@
 
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col-8">
                                             <small class="text-muted"><%=shortString(menu)%></small>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-4">
 
                                             <form action="/selection" method="post">
                                                 <input type="hidden" style="width:0%;" value="<%=n%>">
