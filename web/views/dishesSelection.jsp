@@ -192,7 +192,7 @@
             <br/>
             <div class="form-group row">
                 <label for="menuName" class="col-sm-4 col-form-label">Menu name</label>
-                <input type="text" class="form-control col-sm-7" id="menuName"name="menuName" form="selected-dishes">
+                <input type="text" class="form-control col-sm-7" id="menuName" name="menuName" form="selected-dishes" placeholder="(Optional)">
             </div>
             <div class="form-group row" style="margin-top: -3%">
                 <label for="people" class="col-sm-4 col-form-label">People n.</label>
