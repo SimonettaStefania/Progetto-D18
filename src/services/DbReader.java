@@ -21,7 +21,7 @@ public class DbReader implements Runnable {
 
 
     private DbReader(){
-        this.connectionString="jdbc:mysql://127.0.0.1:3306/restaurant?useSSL=false&user=progettoD18&password=progettoD18";
+        this.connectionString="jdbc:mysql://127.0.0.1:3306/RESTAURANT?useSSL=false&user=progettoD18&password=progettoD18";
     }
 
     @Override
