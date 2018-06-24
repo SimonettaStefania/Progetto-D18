@@ -24,7 +24,6 @@ public class ReservationServlet extends HttpServlet {
         String backToStatus = request.getParameter("backToStatus");
 
         if (backToStatus == null) {
-            // TODO: salvarsi questa reservation invece di prendere l'ultima
             reservation = makeReservation(request);
             request.getSession().setAttribute("reservation", reservation);
         } else if (backToStatus.equalsIgnoreCase("new-menu")) {
@@ -79,7 +78,7 @@ public class ReservationServlet extends HttpServlet {
         String formSurname = request.getParameter("surname");
         String formEmail = request.getParameter("email");
         String formStringDate = request.getParameter("date");
-        String formGuests = request.getParameter("guestsNumber");
+        int formGuests = Integer.parseInt(request.getParameter("guestsNumber"));
 
         Date eventDate = null;
         try {
@@ -88,9 +87,8 @@ public class ReservationServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        Reservation reservation = new Reservation(generateReservationCode(),eventDate,
-                formName+ " " + formSurname, formEmail);
-        reservation.setnGuests(Integer.parseInt(formGuests));
+        Reservation reservation = new Reservation(generateReservationCode(), formGuests,
+                eventDate,formName+ " " + formSurname, formEmail);
         restaurant.getReservationList().add(reservation);
         return reservation;
     }

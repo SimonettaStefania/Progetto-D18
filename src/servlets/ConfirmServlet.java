@@ -1,7 +1,6 @@
 package servlets;
 
 import restaurant.Reservation;
-import restaurant.Restaurant;
 import services.DbReader;
 import services.Query;
 
@@ -17,14 +16,12 @@ import java.sql.Date;
 
 @WebServlet(name = "ConfirmServlet", urlPatterns = "/confirm")
 public class ConfirmServlet extends HttpServlet {
-    private Restaurant restaurant = Restaurant.getRestaurantInstance();
     private DbReader dbr = DbReader.getDbReaderInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        insertReservationInDB();
+        Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
+        insertReservationInDB(reservation);
         forwardTo(request, response, "/views/confirmPage.jsp");
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,12 +34,13 @@ public class ConfirmServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void insertReservationInDB(){
-        String addToQuery;
-        Thread insertThread=new Thread(dbr);
-        Reservation lastReservation=restaurant.getLastReservation();
+    private void insertReservationInDB(Reservation reservation){
+        Thread insertThread = new Thread(dbr);
 
-        addToQuery="('"+lastReservation.getReservationCode()+"',"+lastReservation.getnGuests()+","+lastReservation.getReservationCost() +",'"+new Date(lastReservation.getEventDate().getTime())+"','"+lastReservation.getCustomerNameSurname()+"','"+lastReservation.getCustomerMail()+"',NULL)";
+        String addToQuery = String.format("('%s',%d,%s,'%s','%s','%s',NULL)", reservation.getReservationCode(),
+                reservation.getnGuests(), reservation.getReservationCost(), new Date(reservation.getEventDate().getTime()),
+                reservation.getCustomerNameSurname(), reservation.getCustomerMail());
+
         dbr.setQuery(Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
         insertThread.start();
         try {
