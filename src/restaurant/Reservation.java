@@ -45,33 +45,23 @@ public class Reservation {
     }
 
     public boolean checkPeople() {
+        return nGuests == calculateGuests();
+    }
+
+    public int calculateGuests() {
         int realGuests = 0;
-        for(Menu m : createdMenu){
+        for(Menu m : createdMenu)
             realGuests += m.getnMenuGuests();
-        }
-        return realGuests == nGuests;
 
+        return realGuests;
     }
 
-    public boolean checkBudget(int realCost) {
-        return realCost == reservationCost;
-
-    }
-
-
-    public void addMenu(Menu newMenu) {     // newMenu is the menu that you want to add in the arraylist createdMenu
+    public void addMenu(Menu newMenu) {
         createdMenu.add(newMenu);
     }
 
     public void removeMenu(Menu menuWantRemove) {
-        Iterator<Menu> iter = createdMenu.iterator();
-
-        while(iter.hasNext()){
-            Menu m = iter.next();
-            if(m.equals(menuWantRemove)) {
-                iter.remove();
-            }
-        }
+        createdMenu.removeIf(m -> m.equals(menuWantRemove));
     }
 
     public void addDish(Menu menuWhereAddDish, MenuElement dishToAdd) {
@@ -82,16 +72,18 @@ public class Reservation {
         menuWhereRemoveDish.removeElement(dishToRemove);
     }
 
-
-    public void calculateReservationCost(){   // method to calculate all menus's cost  TODO add this method in the UML
+    // TODO change this method in the UML
+    public double getReservationCost() {
         reservationCost = 0;
         for (Menu m : createdMenu) {
             m.calculateMenuCost();
             reservationCost += m.getMenuCost();
         }
+        return reservationCost;
     }
 
-    public String toString() {                    // TODO add this method in the UML
+    // TODO add this method in the UML
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         sb.append("Reservation: ").append(this.reservationCode).append("\tCliente: ").append(this.customerNameSurname).append("\tBudget: ").append(this.budget).append("\t nGuest: ").append(this.nGuests)
@@ -108,14 +100,6 @@ public class Reservation {
 
     public void setBudget(double budget) {
         this.budget = budget;
-    }
-
-    public void setReservationCost(double reservationCost) {
-        this.reservationCost = reservationCost;
-    }
-
-    public double getReservationCost() {
-        return reservationCost;
     }
 
     public String getReservationCode() {

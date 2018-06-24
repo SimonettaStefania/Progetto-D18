@@ -57,10 +57,6 @@ public class TestReservation {
         r1.setnGuests(18);
         r1.setBudget(200);
 
-        // calculate reservationCost
-
-        r1.calculateReservationCost();
-
         // check
         System.out.println(r1.toString());
 

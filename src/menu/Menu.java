@@ -36,8 +36,6 @@ public class Menu {
         this.menuCost = cost;
     }
 
-    // TODO: is variable menuCost really needed?
-    // Could be replaced by making the sum of all the elements in the menu
     public double getMenuCost() {
         return menuCost;
     }
