@@ -18,15 +18,14 @@ import java.util.Date;
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
 public class ReservationServlet extends HttpServlet {
     private Restaurant restaurant = Restaurant.getRestaurantInstance();
-    private Reservation reservation;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
         String backToStatus = request.getParameter("backToStatus");
 
         if (backToStatus == null) {
-            // TODO: salvarsi questa reservation invece di prendere l'ultima
             reservation = makeReservation(request);
-            request.setAttribute("reservation", reservation);
+            request.getSession().setAttribute("reservation", reservation);
         } else if (backToStatus.equalsIgnoreCase("new-menu")) {
             Catalogue catalogue = restaurant.getDishesCatalogue();
             String selected[] = request.getParameterValues("selected-id");
@@ -47,17 +46,16 @@ public class ReservationServlet extends HttpServlet {
             }
         } else if (backToStatus.equalsIgnoreCase("sel-opt-menu")) {
             int optimizedMenuCode = Integer.parseInt(request.getParameter("code"));
-            selectOptimizedMenu(optimizedMenuCode);
+            selectOptimizedMenu(reservation, optimizedMenuCode);
         } else if (backToStatus.equalsIgnoreCase("rem-menu")) {
             int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
             ArrayList<Menu> menu = reservation.getCreatedMenu();
 
             menu.remove(removedMenu);
         } else if (backToStatus.equalsIgnoreCase("back")){
-            clearOptimizedMenus();
+            clearOptimizedMenus(reservation);
         }
 
-        request.setAttribute("reservation", this.reservation);
         forwardTo(request, response, "/views/reservationState.jsp");
     }
 
@@ -80,7 +78,7 @@ public class ReservationServlet extends HttpServlet {
         String formSurname = request.getParameter("surname");
         String formEmail = request.getParameter("email");
         String formStringDate = request.getParameter("date");
-        String formGuests = request.getParameter("guestsNumber");
+        int formGuests = Integer.parseInt(request.getParameter("guestsNumber"));
 
         Date eventDate = null;
         try {
@@ -89,9 +87,8 @@ public class ReservationServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        Reservation reservation = new Reservation(generateReservationCode(),eventDate,
-                formName+ " " + formSurname, formEmail);
-        reservation.setnGuests(Integer.parseInt(formGuests));
+        Reservation reservation = new Reservation(generateReservationCode(), formGuests,
+                eventDate,formName+ " " + formSurname, formEmail);
         restaurant.getReservationList().add(reservation);
         return reservation;
     }
@@ -119,13 +116,11 @@ public class ReservationServlet extends HttpServlet {
         return newReservationCode;
     }
 
-    private void clearOptimizedMenus(){
-        Reservation lastReservation = restaurant.getLastReservation();
-        lastReservation.getOptimizedMenu().clear();
+    private void clearOptimizedMenus(Reservation reservation){
+        reservation.getOptimizedMenu().clear();
     }
 
-    private void selectOptimizedMenu(int optimizedMenuCode){
-        Reservation lastReservation= restaurant.getLastReservation();
+    private void selectOptimizedMenu(Reservation reservation, int optimizedMenuCode){
         String menuName;
 
         switch (optimizedMenuCode){
@@ -146,12 +141,9 @@ public class ReservationServlet extends HttpServlet {
                 break;
         }
 
-        for (Menu elem: lastReservation.getOptimizedMenu()){
-            if (elem.getName().equals(menuName)){
-                lastReservation.addMenu(elem);
-            }
-        }
-
+        for (Menu elem : reservation.getOptimizedMenu())
+            if (elem.getName().equals(menuName))
+                reservation.addMenu(elem);
     }
 }
 

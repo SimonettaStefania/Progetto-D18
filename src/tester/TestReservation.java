@@ -10,8 +10,6 @@ import java.util.Date;
 public class TestReservation {
 
     public static void main(String[] args) {
-
-
         Reservation r1 = new Reservation("R1",50,new Date("2018/5/13"),"Piero Angela","ciao@ciao.com");
 
         Menu m1 = new Menu("first menu", 10);
@@ -54,12 +52,6 @@ public class TestReservation {
 
         // remove second menu and edit nGuests and budget
         r1.removeMenu(m2);
-        r1.setnGuests(18);
-        r1.setBudget(200);
-
-        // calculate reservationCost
-
-        r1.calculateReservationCost();
 
         // check
         System.out.println(r1.toString());

@@ -18,11 +18,10 @@ public class OptimizedMenusServlet extends HttpServlet {
     private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String formStringBudget = request.getParameter("budget");
-        double budget= Double.parseDouble(formStringBudget);
+        Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
+        double budget = Double.parseDouble(request.getParameter("budget"));
 
-        generateOptimizedMenus(budget);
-
+        generateOptimizedMenus(reservation, budget);
         forwardTo(request, response, "/views/optimizedMenus.jsp");
     }
 
@@ -36,12 +35,10 @@ public class OptimizedMenusServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void generateOptimizedMenus(double budget){
-        Reservation lastReservation= restaurant.getLastReservation();
-        MenuGenerator menuGenerator= new MenuGenerator(budget,restaurant.getDishesCatalogue());
+    private void generateOptimizedMenus(Reservation reservation, double budget){
+        MenuGenerator menuGenerator = new MenuGenerator(budget, restaurant.getDishesCatalogue());
 
         menuGenerator.generate();
-        lastReservation.getOptimizedMenu().addAll(menuGenerator.getGeneratedMenu());
-
+        reservation.getOptimizedMenu().addAll(menuGenerator.getGeneratedMenu());
     }
 }

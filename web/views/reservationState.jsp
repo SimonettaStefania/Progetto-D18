@@ -12,7 +12,7 @@
 
     <title>Reservation State </title>
 
-    <%  Reservation reservation = (Reservation) request.getAttribute("reservation");  %>
+    <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
     <%!
         private String shortString(Menu menu) {
             menu.calculateMenuCost();

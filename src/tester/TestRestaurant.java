@@ -68,8 +68,6 @@ public class TestRestaurant {
         ilTitolareDelCorso.addDish(r1, m3, dessert_1);
         ilTitolareDelCorso.addDish(r1, m3, drink_1);
 
-        r1.calculateReservationCost();
-
         System.out.println("I CATALOGHI SONO MORTIIIIIIIIIII TOMMASOOO LI ABBIAMO UCCISI NOI: test metodi sui piatti");
 
         System.out.println(r1.toString());
@@ -81,8 +79,6 @@ public class TestRestaurant {
 
         ilTitolareDelCorso.removeDish(r1, m3, first_1);
         ilTitolareDelCorso.removeDish(r1, m3, drink_1);
-
-        r1.calculateReservationCost();
 
         System.out.println(r1.toString());
 

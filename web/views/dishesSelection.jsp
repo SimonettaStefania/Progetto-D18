@@ -18,7 +18,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
-    <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();    %>
+    <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
+
+        String filters[] = request.getParameterValues("filter");
+        boolean veg = false, vgt = false, cel = false;
+        if (filters != null) {
+            for (String f : filters) {
+                if (f.equalsIgnoreCase("veg"))
+                    veg = true;
+                else if (f.equalsIgnoreCase("vgt"))
+                    vgt = true;
+                else if (f.equalsIgnoreCase("cel"))
+                    cel = true;
+            }
+        }
+    %>
 
     $(document).ready(function(){
         $("input[name='selected-id']").on("change", function() {
@@ -46,29 +60,28 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item active"><a class="nav-link" href="#">Menu Creation</a>
-            </li>
+            <li class="nav-item active"><a class="nav-link" href="#">Menu Creation</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
-    <div class="jumbotron" style="background: #ffffff">
+    <form action="/selection" method="post" class="jumbotron" style="background: #ffffff">
         <h2>Filters</h2>
         <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" id="vegetarian" name="vegetarian" class="custom-control-input">
+            <input type="checkbox" id="vegetarian" name="filter" class="custom-control-input" value="vgt" <% if (vgt) out.print("checked"); %>>
             <label class="custom-control-label" for="vegetarian">Vegetarian</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" id="vegan" name="vegan" class="custom-control-input">
+            <input type="checkbox" id="vegan" name="filter" class="custom-control-input" value="veg" <% if (veg) out.print("checked"); %>>
             <label class="custom-control-label" for="vegan">Vegan</label>
         </div>
         <div class="custom-control custom-checkbox custom-control-inline">
-            <input type="checkbox" id="celiac" name="celiac" class="custom-control-input">
+            <input type="checkbox" id="celiac" name="filter" class="custom-control-input" value="cel" <% if (cel) out.print("checked"); %>>
             <label class="custom-control-label" for="celiac">Celiac</label>
         </div>
-            <a style="float: right" href="#" class="btn btn-primary">Apply</a>
-    </div>
+            <input type="submit" style="float: right" class="btn btn-primary" value="Apply">
+    </form>
 </div>
 
 <div class="jumbotron" style="margin-left: 5%; margin-right: 5%; background: #ffffffc0">
@@ -94,7 +107,7 @@
                         <div class="card-body">
 
                         <%  for (MenuElement item : catalogue.getDishes()) {
-                                    if (item.getType().equals(DishType.STARTER)) {  %>
+                                    if (item.getType().equals(DishType.STARTER) && item.respectsFilters(veg, vgt, cel)) {  %>
                                     <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                         <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
@@ -110,7 +123,7 @@
                         <div class="card-body">
 
                             <%  for (MenuElement item : catalogue.getDishes()) {
-                                    if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
+                                    if (item.getType().equals(DishType.FIRST_COURSE) && item.respectsFilters(veg, vgt, cel)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
@@ -127,7 +140,7 @@
                         <div class="card-body">
 
                             <%  for (MenuElement item : catalogue.getDishes()) {
-                                if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
+                                if (item.getType().equals(DishType.MAIN_COURSE) && item.respectsFilters(veg, vgt, cel)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
@@ -144,7 +157,7 @@
                         <div class="card-body">
 
                             <%  for (MenuElement item : catalogue.getDishes()) {
-                                if (item.getType().equals(DishType.DESSERT)) {  %>
+                                if (item.getType().equals(DishType.DESSERT) && item.respectsFilters(veg, vgt, cel)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
@@ -160,12 +173,14 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <%  for (MenuElement item : catalogue.getDrinks()) {    %>
+                            <%  for (MenuElement item : catalogue.getDrinks()) {
+                                if (item.respectsFilters(veg, vgt, cel)) {  %>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
                                 <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"> <%=item.getName()%> </label>
                             </div>
-                            <%  }  %>
+                            <%  }
+                            }   %>
 
                         </div>
                     </div>

@@ -106,7 +106,7 @@
                                 <span class="input-group-text" id="inputGroup-mail" >E-mail</span>
                             </div>
 
-                            <input name="text" type="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
+                            <input name="email" type="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="">
 
                         </div>
 

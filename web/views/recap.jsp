@@ -1,10 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Woizbora & beard33
-  Date: 05/06/2018
-  Time: 16:45
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="menu.Menu" %>
+<%@ page import="menu.MenuElement" %>
+<%@ page import="restaurant.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -21,6 +17,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="../stylesheets/RecapTemplateStyle.css">
 
+    <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
+    <%!
+        private String recapString(Menu menu) {
+            StringBuilder s = new StringBuilder();
+            for (MenuElement el : menu.getMenuElementsList())
+                s.append(" - ").append(el.getName()).append("<br/>");
+            s.append("<br/>People:<br/>Total price:");
+            return s.toString();
+        }
+        private String pricesString(Menu menu) {
+            menu.calculateMenuCost();
+            StringBuilder s = new StringBuilder();
+            for (MenuElement el : menu.getMenuElementsList())
+                s.append(el.getPrice()).append("<br/>");
+            s.append("<br/>").append(menu.getnMenuGuests());
+            s.append("<br/>").append(menu.getMenuCost());
+            return s.toString();
+        }
+    %>
 </head>
 
 <body background ="../img/background.jpg" style="background-repeat: no-repeat">
@@ -53,7 +68,7 @@
 
 <div class="jumbotron" id="mainJumbotronRecap">
 
-    <h1 style="margin-right: 27%"><center>Reservation recap</center></h1>
+    <h1 style="text-align: center; margin-right: 27%">Reservation recap</h1>
     <br/>
 
     <div class="row">
@@ -64,86 +79,42 @@
 
             <div class="jumbotron" id="menuJumbotronRecap">
 
-                <h4>ID: 867483638</h4>
+                <h4>ID: 867483638</h4>  <% // TODO: come generare questo id? %>
                 <hr class="my-4">
 
                 <div class="tab-content" id="nav-tabContent">
 
-                    <div class="tab-pane fade show active" id="list-menu1" role="tabpanel">
-
+                <%  int i = 0;  %>
+                <%  for (Menu menu : reservation.getCreatedMenu()) {  %>
+                    <div class="tab-pane fade show <%if (i == 0) out.print("active");%>" id="list-menu<%=i%>" role="tabpanel">
                         <div class="card bg-light mb-3">
-                        <div class="card-header text-white">MenuProva</div>
+                        <div class="card-header text-white"><%=menu.getName()%></div>
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-9">
+                                    <%=recapString(menu)%>
+                                </div>
+                                <div class="col-3">
+                                    <%=pricesString(menu)%>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <%  i++;  %>
+                <%  }  %>
 
-                            <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
-                            <pre>
-                                Bruschetta	4.0 €	STARTER
-                                Spaghetti alla carbonara	10.0 €	FIRST_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-                        </div>
-                        </div>
-                        </div>
-
-                    <div class="tab-pane fade" id="list-menu2" role="tabpanel">
-
-                        <div class="card bg-light mb-3">
-                        <div class="card-header text-white">Menu2</div>
-                        <div class="card-body">
-
-                            <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
-                            <pre>
-                                Bruschetta	4.0 €	STARTER
-                                Spaghetti alla carbonara	10.0 €	FIRST_COURSE
-                                ciaone biricone	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-                        </div>
-                        </div>
-                        </div>
-
-                    <div class="tab-pane fade" id="list-menu3" role="tabpanel">
-
-                        <div class="card bg-light mb-3">
-                        <div class="card-header text-white">Menu3</div>
-                        <div class="card-body">
-
-                            <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
-                            <pre>
-                                Bruschetta	4.0 €	STARTER
-                                aljjfjaklfj alla carbonara	10.0 €	FIRST_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-                        </div>
-                        </div>
-                        </div>
-
-                    <div class="tab-pane fade" id="list-menu4" role="tabpanel">
-
-                        <div class="card bg-light mb-3">
-                        <div class="card-header text-white">Menu4</div>
-                        <div class="card-body">
-
-                            <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
-                            <pre>
-                                GEsu	4.0 €	STARTER
-                                Spaghetti alla carbonara	10.0 €	FIRST_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-                        </div>
-                        </div>
-                        </div>
                 </div>
 
                 <!-- -------------------------------------- TABLE INFO RESERVATION (total cost & guest) --------------------------------------------------- -->
 
-                <table class="table table-borderless" style="margin-bottom: 0%">
+                <table class="table table-borderless" style="margin-bottom: 0">
 
                     <tr>
                         <th scope="row"></th>
 
-                        <td><button type="button" class="btn" id="totalPerson" style="margin-left: 40%"> Total person <span class="badge">30</span></button></td>
-
-                        <td><button type="button" class="btn" id="totalCost" style="margin-right: 40%">Total cost <span class="badge">300</span></button></td>
+                        <td><button type="button" class="btn" id="totalPerson" style="margin-left: 40%"> Total person <span class="badge"><%=reservation.calculateGuests()%></span></button></td>
+                        <td><button type="button" class="btn" id="totalCost" style="margin-right: 40%">Total cost <span class="badge"><%=reservation.getReservationCost()%></span></button></td>
                     </tr>
 
                 </table>
@@ -154,14 +125,13 @@
 
         <div class="col-6 col-md-3 sidebar" id="sidebar">
 
-
-
                 <div class="list-group" id="list-tab" role="tablist">
 
-                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-menu1" role="tab">Menu 1</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu2" role="tab" >Menu 2</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu3" role="tab">Is simonetta legit?</a>
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu4" role="tab">No, she isn't</a>
+                <%  i = 0;  %>
+                <%  for (Menu menu : reservation.getCreatedMenu()) {  %>
+                    <a class="list-group-item list-group-item-action <%if (i == 0) out.print("active");%>" data-toggle="list" href="#list-menu<%=i%>" role="tab"><%=menu.getName()%></a>
+                    <%  i++;  %>
+                <%  }  %>
 
                 </div>
 
