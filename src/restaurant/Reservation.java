@@ -59,8 +59,17 @@ public class Reservation {
         }
     }
 
+    public void addOptimizedMenu (int index) {
+        Menu selected = optimizedMenu.get(index);
+        this.addMenu(selected);
+    }
+
     public void removeMenu(Menu menuWantRemove) {
         createdMenu.removeIf(m -> m.equals(menuWantRemove));
+    }
+
+    public void removeMenu(int index) {
+        createdMenu.remove(index);
     }
 
     public void addDish(Menu menuWhereAddDish, MenuElement dishToAdd) {
@@ -125,7 +134,6 @@ public class Reservation {
 
     public void generateOptimizedMenus(double budget) {
         MenuGenerator menuGenerator = new MenuGenerator(budget);
-        menuGenerator.generate();
-        optimizedMenu.addAll(menuGenerator.getGeneratedMenu());
+        optimizedMenu = menuGenerator.getGeneratedMenu();
     }
 }

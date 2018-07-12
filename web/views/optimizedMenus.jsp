@@ -1,10 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Woizbora
-  Date: 08/06/18
-  Time: 23.07
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="menu.Menu" %>
+<%@ page import="restaurant.Reservation" %>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -15,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Optimized menu</title>
+    <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
 
     <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
 
@@ -53,7 +50,7 @@
 
 <div class="jumbotron" id="mainJumbotronRecap">
 
-    <h1 style="margin-right: 27%"><center>Optimized Menus</center></h1>
+    <h1 style="margin-right: 27%; text-align: center">Optimized Menus</h1>
     <br/>
 
     <div class="row">
@@ -63,115 +60,34 @@
             <!-- -------------------------------------- OPTIMIZED MENUS --------------------------------------------------- -->
 
             <div class="jumbotron" id="menuJumbotronRecap">
-
                 <div class="tab-content" id="nav-tabContent">
 
-                    <div class="tab-pane fade show active" id="list-menu1" role="tabpanel">
+            <%   int n = 0;
+                 for (Menu menu : reservation.getOptimizedMenu()) {  %>
+                    <div class="tab-pane fade show <%if (n == 0) out.print("active");%>" id="list-menu<%=n%>" role="tabpanel">
 
                         <div class="card bg-light mb-3">
-                            <div class="card-header text-white">MenuStarter</div>
+                            <div class="card-header text-white"><%=menu.getName()%></div>
                             <div class="card-body">
 
-                                <h5 class="card-title">menuCost: millemila	 nGuest: 10</h5>
-                                <pre>
-                                Caviale di Magikarp	400.0 €	STARTER
-                                Spaghetti alla carbonara	10.0 €	FIRST_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
+                                <h5 class="card-title">menuCost: millemila nGuest: 10</h5>
+                                <pre><%=menu.toString()%></pre>
 
-                                <hr class="my-4">
+                                <!-- <hr class="my-4"> -->
 
                                 <form action="/status" method="post">
 
                                     <input type="hidden" name="backToStatus" value="sel-opt-menu">
-                                    <input name="code" type="hidden" value="1">
-                                    <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
+                                    <input name="code" type="hidden" value="<%=n%>">
+                                    <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% " value="Select menu &checkmark;">
 
                                 </form>
                             </div>
                         </div>
                     </div>
+            <%      n++;
+                 }   %>
 
-                    <div class="tab-pane fade" id="list-menu2" role="tabpanel">
-
-                        <div class="card bg-light mb-3">
-                            <div class="card-header text-white">MenuPrimone</div>
-                            <div class="card-body">
-
-                                <h5 class="card-title">menuCost: tanti euro	 nGuest: 10</h5>
-                                <pre>
-                                Bruschetta	4.0 €	STARTER
-                                Spaghetti alla Simonetta	1000.0 €	FIRST_COURSE
-                                ciaone biricone	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-
-                                <hr class="my-4">
-
-                                <form action="/status" method="post">
-                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
-                                    <input name="code" type="hidden" value="2">
-                                    <input type="submit"class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="list-menu3" role="tabpanel">
-
-                        <div class="card bg-light mb-3">
-                            <div class="card-header text-white">MenuSecondo</div>
-                            <div class="card-body">
-
-                                <h5 class="card-title">menuCost: 100 rublinGuest: 10</h5>
-                                <pre>
-                                Bruschetta	4.0 €	STARTER
-                                Secondo Petaloso	10.0 petali	MAIN_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-
-                                <hr class="my-4">
-
-                                <form action="/status" method="post">
-                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
-                                    <input name="code" type="hidden" value="3">
-                                    <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% "value="Select menu &checkmark;">
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="list-menu4" role="tabpanel">
-
-                        <div class="card bg-light mb-3">
-                            <div class="card-header text-white">MenuModerato</div>
-                            <div class="card-body">
-
-                                <h5 class="card-title">menuCost: 0	 nGuest: 10</h5>
-                                <pre>
-                                GEsu	4.0 €	STARTER
-                                Democrazia cristiana	10.0 €	FIRST_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK
-                                GEsu	4.0 €	STARTER
-                                Democrazia cristiana	10.0 €	FIRST_COURSE
-                                Caffè	1.0 €	DRINK
-                                Acqua	1.0 €	DRINK</pre>
-
-                                <hr class="my-4">
-
-                                <form action="/status" method="post">
-
-                                    <input type="hidden" name="backToStatus" value="sel-opt-menu">
-                                    <input name="code" type="hidden" value="4">
-                                    <input type="submit" class="btn btn-success btn-lg" style="margin-left: 39%; "value="Select menu &checkmark;">
-
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -179,16 +95,13 @@
         <!-- -------------------------------------- LIST MENU INTERACTIVE--------------------------------------------------- -->
 
         <div class="col-6 col-md-3 sidebar" id="sidebar">
-
-
-
             <div class="list-group" id="list-tab" role="tablist">
 
-                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#list-menu1" role="tab">Menu 1</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu2" role="tab" >Menu 2</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu3" role="tab">Menu 3</a>
-                <a class="list-group-item list-group-item-action" data-toggle="list" href="#list-menu4" role="tab">Menu 4</a>
-
+            <%  int i = 0;  %>
+            <%  for (Menu menu : reservation.getOptimizedMenu()) {  %>
+                    <a class="list-group-item list-group-item-action <%if (i == 0) out.print("active");%>" data-toggle="list" href="#list-menu<%=i%>" role="tab"><%=menu.getName()%></a>
+                <%  i++;
+                }   %>
             </div>
 
             <br/><br/><br/>
@@ -198,7 +111,7 @@
             <div class="row" style="margin-right: 20%">
 
                 <form action="/status" method="post">
-                    <input type="hidden", name="backToStatus", value="back">
+                    <input type="hidden" name="backToStatus" value="back">
                     <input type="submit" class="btn btn-lg" style="margin-left: 20%" id="btnBack" value="&laquo; Back">
 
                 </form>

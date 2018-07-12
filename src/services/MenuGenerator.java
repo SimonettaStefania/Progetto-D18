@@ -3,7 +3,6 @@ import restaurant.*;
 import menu.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class MenuGenerator {
 
@@ -14,7 +13,9 @@ public class MenuGenerator {
     public MenuGenerator (double budget) {
         this.budget = budget;
         this.catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
-        generatedMenu = new ArrayList<>();
+        this.generatedMenu = new ArrayList<>();
+
+        generate();
     }
 
     /**
@@ -24,7 +25,7 @@ public class MenuGenerator {
      * firt courses, the third on main and the last balanced on all)
      *
      */
-    public void generate () {
+    public void generate() {
         catalogue.getDishes().sort(MenuElement.priceComparator);
         catalogue.getDishes().sort(MenuElement.typeComparator);
 
@@ -32,7 +33,6 @@ public class MenuGenerator {
         generatedMenu.add(optimizeBudget(0.25,0.4,0.25));
         generatedMenu.add(optimizeBudget(0.25,0.25,0.4));
         generatedMenu.add(optimizeBudget(0.3,0.3,0.3));
-
     }
 
     /**
@@ -52,29 +52,21 @@ public class MenuGenerator {
         double dessertBudget = (budget*0.1);
 
         Menu optimizedMenu = new Menu();
-        optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.STARTER,starterBudget));
-        optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.FIRST_COURSE,firstBudget));
-        optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.MAIN_COURSE,mainBudget));
-        optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.DESSERT,dessertBudget));
+        ArrayList<MenuElement> dishesList = optimizedMenu.getMenuElementsList();
+        dishesList.addAll(findDishes(DishType.STARTER, starterBudget));
+        dishesList.addAll(findDishes(DishType.FIRST_COURSE, firstBudget));
+        dishesList.addAll(findDishes(DishType.MAIN_COURSE, mainBudget));
+        dishesList.addAll(findDishes(DishType.DESSERT, dessertBudget));
 
-        if(starterBudget==firstBudget && firstBudget==mainBudget){
+        if (starterBudget == firstBudget && firstBudget == mainBudget)
             optimizedMenu.setName("JUST OPTIMIZED BUDGET");
-        }else{
-            if(Math.max(starterBudget,Math.max(firstBudget,mainBudget))==starterBudget) {
-                optimizedMenu.setName("OPTIMIZED BUDGET ON STARTERS");
-            }else {
-                if(Math.max(firstBudget,mainBudget)==firstBudget){
-                    optimizedMenu.setName("OPTIMIZED BUDGET ON FIRST COURSES");
-                }else{
-                    optimizedMenu.setName("OPTIMIZED BUDGET ON MAIN COURSES");
-                }
-            }
-        }
-
-
+        else if (Math.max(starterBudget, Math.max(firstBudget,mainBudget)) == starterBudget)
+            optimizedMenu.setName("OPTIMIZED BUDGET ON STARTERS");
+        else if (Math.max(firstBudget,mainBudget) == firstBudget)
+            optimizedMenu.setName("OPTIMIZED BUDGET ON FIRST COURSES");
+        else optimizedMenu.setName("OPTIMIZED BUDGET ON MAIN COURSES");
 
         return optimizedMenu;
-
     }
 
     /**

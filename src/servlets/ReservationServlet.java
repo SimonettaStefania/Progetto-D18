@@ -1,10 +1,6 @@
 package servlets;
 
-import menu.Menu;
-import menu.MenuElement;
-import restaurant.Catalogue;
 import restaurant.Reservation;
-import restaurant.Restaurant;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -12,12 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
 public class ReservationServlet extends HttpServlet {
-    private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         checkStatus(request);
@@ -53,14 +47,10 @@ public class ReservationServlet extends HttpServlet {
             reservation.createMenu(menuName, nGuests, selected);
         } else if (backToStatus.equalsIgnoreCase("sel-opt-menu")) {
             int optimizedMenuCode = Integer.parseInt(request.getParameter("code"));
-            selectOptimizedMenu(reservation, optimizedMenuCode);
+            reservation.addOptimizedMenu(optimizedMenuCode);
         } else if (backToStatus.equalsIgnoreCase("rem-menu")) {
             int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
-            ArrayList<Menu> menu = reservation.getCreatedMenu();
-
-            menu.remove(removedMenu);
-        } else if (backToStatus.equalsIgnoreCase("back")){
-            clearOptimizedMenus(reservation);
+            reservation.removeMenu(removedMenu);
         }
     }
 
@@ -80,59 +70,6 @@ public class ReservationServlet extends HttpServlet {
 
         return new Reservation(null, formGuests,
                 eventDate,formName+ " " + formSurname, formEmail);
-    }
-
-    // TODO: genererarlo solo alla fine, una volta confermata la reservation?
-    private String generateReservationCode(){
-        int reservationsCount = 0;
-        String lastReservationCode = "R000", newReservationCode;
-        Reservation lastReservation = restaurant.getLastReservation();
-
-        if (lastReservation != null) {
-            lastReservationCode = lastReservation.getReservationCode();
-            reservationsCount = Integer.parseInt(lastReservationCode.substring(1));
-        }
-
-        if (reservationsCount<10)
-            newReservationCode = "R00" + (reservationsCount+1);
-        else {
-            if(reservationsCount < 100) {
-                newReservationCode = "R0" + (lastReservationCode+1);
-            }
-            else
-                newReservationCode ="R" + (lastReservationCode+1);
-        }
-        return newReservationCode;
-    }
-
-    private void clearOptimizedMenus(Reservation reservation){
-        reservation.getOptimizedMenu().clear();
-    }
-
-    private void selectOptimizedMenu(Reservation reservation, int optimizedMenuCode){
-        String menuName;
-
-        switch (optimizedMenuCode){
-            case 1:
-                menuName="OPTIMIZED BUDGET ON STARTERS";
-                break;
-            case 2:
-                menuName="OPTIMIZED BUDGET ON FIRST COURSES";
-                break;
-            case 3:
-                menuName="OPTIMIZED BUDGET ON MAIN COURSES";
-                break;
-            case 4:
-                menuName="JUST OPTIMIZED BUDGET";
-                break;
-            default:
-                menuName="NOT OPTIMIZED";
-                break;
-        }
-
-        for (Menu elem : reservation.getOptimizedMenu())
-            if (elem.getName().equals(menuName))
-                reservation.addMenu(elem);
     }
 }
 

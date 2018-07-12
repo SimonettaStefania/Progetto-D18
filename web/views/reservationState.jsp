@@ -110,7 +110,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Budget</span>
                     </div>
-                    <input name ="budget" type="number" class="form-control" min="20" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1" style="width:50%">
+                    <input name="budget" type="number" class="form-control" required min="20" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1" style="width:50%">
                 </div>
                 <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create a budget optimized Menu &raquo;">
             </form>
