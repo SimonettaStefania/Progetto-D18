@@ -121,8 +121,8 @@
 
 
                             <input name="date" id="reservationDay" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                   style="font-size: 1em" required="" onchange="check()" />
-                            <input type="boolean" id="DateValidity" value="false" hidden = "true" />
+                                   style="font-size: 1em" required=""  />
+
 
                         </div>
 
@@ -136,12 +136,13 @@
                             </div>
 
                             <input name ="guestsNumber" type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                   style="font-size: 1em" required="" onchange="checkGuests(300)" />
-                            <input type="boolean" id="GuestValidity" value="false" hidden = "true" />
+                                   style="font-size: 1em" min = "1" />
+
 
                         </div>
 
-                        <input class="btn btn-dark" id="bookButton"  type="submit" value="Book &raquo;">
+                        <input class="btn btn-dark" id="bookButton"  type="submit" value="Book &raquo;" onclick="checkDataInserted()">
+                            <input type="hidden" id="Validity" value="0"  />
 
                     </form>
 
@@ -237,13 +238,12 @@
                 for (var i=0 ; i<2 ; i++) {
 
                     if (!tryDate(reservationDay, dates[i]))
-                        validity=false ;
+                        validity=0 ;
 
                 }
 
                 if (validity== undefined)
-                    validity = true ;
-                document.getElementById("DateValidity").value=validity;
+                    validity = 1 ;
 
                 return validity;
 
@@ -253,9 +253,10 @@
             function check(){
 
                 var dates = new Array (new Date("2018-06-25"),new Date("2018-06-30"));
-                if (checkValidity(dates) == false )
+                var tmp = checkValidity(dates);
+                if (tmp == 0 )
                     alert("ATTENTION!\nThe selected day is not free or is not valid. Please select another date." );
-
+                return tmp;
             }
 
         </script>
@@ -272,14 +273,28 @@
 
                 if (nGuests <= 0 || nGuests > nCovers ){
                     alert("ATTENTION!\nInsert a valid number of guests, from 1 up to " + nCovers );
-                    validity = false;
+                    validity = 0;
                 }
                 else
-                    validity = true;
+                    validity = 1;
 
-                document.getElementById("GuestValidity").value = validity;
+                return validity ;
             }
 
+
+        </script>
+
+        <script type="text/javascript">
+
+            function checkDataInserted(){
+
+                var guests = checkGuests(300);
+                var date = check();
+
+                document.getElementById("Validity").value = guests && date ;
+                alert("VALORE : " + document.getElementById("Validity").value);
+
+            }
 
         </script>
 

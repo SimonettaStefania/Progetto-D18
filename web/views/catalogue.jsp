@@ -200,7 +200,7 @@
                                             aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
                                 </h5>
                             </div>
-                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionStarter">
+                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDrink">
                                 <div class="card-body"><%=item.showDetails()%></div>
                             </div>
                         </div>
