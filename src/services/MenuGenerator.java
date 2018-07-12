@@ -11,9 +11,9 @@ public class MenuGenerator {
     private Catalogue catalogue;
     private ArrayList<Menu> generatedMenu;
 
-    public MenuGenerator (double budget, Catalogue catalogue) {
+    public MenuGenerator (double budget) {
         this.budget = budget;
-        this.catalogue = catalogue;
+        this.catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
         generatedMenu = new ArrayList<>();
     }
 
@@ -25,8 +25,8 @@ public class MenuGenerator {
      *
      */
     public void generate () {
-        Collections.sort(catalogue.getDishes(), MenuElement.priceComparator);
-        Collections.sort(catalogue.getDishes(), MenuElement.typeComparator);
+        catalogue.getDishes().sort(MenuElement.priceComparator);
+        catalogue.getDishes().sort(MenuElement.typeComparator);
 
         generatedMenu.add(optimizeBudget(0.4,0.25,0.25));
         generatedMenu.add(optimizeBudget(0.25,0.4,0.25));
@@ -56,7 +56,6 @@ public class MenuGenerator {
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.FIRST_COURSE,firstBudget));
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.MAIN_COURSE,mainBudget));
         optimizedMenu.getMenuElementsList().addAll(findDishes(DishType.DESSERT,dessertBudget));
-        optimizedMenu.calculateMenuCost();
 
         if(starterBudget==firstBudget && firstBudget==mainBudget){
             optimizedMenu.setName("JUST OPTIMIZED BUDGET");

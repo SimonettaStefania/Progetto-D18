@@ -5,10 +5,9 @@ import java.util.ArrayList;
 public class Menu {
     private String name;
     private ArrayList<MenuElement> menuElementsList;
-    private double menuCost;  //TODO exception if menuCost > budgetMenu
     private int nMenuGuests;
 
-    public Menu(String name, int nMenuGuests) {          // TODO exception if nMenusGuests > nGuests or nMenusGuests < nGuests
+    public Menu(String name, int nMenuGuests) {
         this.name = name;
         this.menuElementsList = new ArrayList<>();
         this.nMenuGuests = nMenuGuests;
@@ -32,11 +31,10 @@ public class Menu {
         this.nMenuGuests = nGuest;
     }
 
-    public void updateMenuCost(double cost) {
-        this.menuCost = cost;
-    }
-
     public double getMenuCost() {
+        double menuCost = 0;
+        for (MenuElement el : menuElementsList)
+            menuCost += el.getPrice();
         return menuCost;
     }
 
@@ -53,17 +51,9 @@ public class Menu {
         menuElementsList.sort(MenuElement.typeComparator);
     }
 
-    // method that calculates all menus's cost  TODO add this method in the UML
-    public void calculateMenuCost(){
-        menuCost = 0;
-        for (MenuElement el : menuElementsList) {
-            menuCost += el.getPrice();
-        }
-    }
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.name).append("\t menuCost: ").append(this.menuCost).append("\t nGuest: ").append(this.nMenuGuests).append("\n");
+        sb.append(this.name).append("\t menuCost: ").append(this.getMenuCost()).append("\t nGuest: ").append(this.nMenuGuests).append("\n");
         for (MenuElement el : menuElementsList) {
             sb.append(el.toString()).append("\n");
         }

@@ -1,8 +1,6 @@
 package servlets;
 
 import restaurant.Reservation;
-import restaurant.Restaurant;
-import services.MenuGenerator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,13 +13,11 @@ import java.io.IOException;
 
 @WebServlet(name = "OptimizedMenusServlet", urlPatterns = "/optimize")
 public class OptimizedMenusServlet extends HttpServlet {
-    private Restaurant restaurant = Restaurant.getRestaurantInstance();
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
         double budget = Double.parseDouble(request.getParameter("budget"));
 
-        generateOptimizedMenus(reservation, budget);
+        reservation.generateOptimizedMenus(budget);
         forwardTo(request, response, "/views/optimizedMenus.jsp");
     }
 
@@ -33,12 +29,5 @@ public class OptimizedMenusServlet extends HttpServlet {
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher(route);
         rd.forward(request, response);
-    }
-
-    private void generateOptimizedMenus(Reservation reservation, double budget){
-        MenuGenerator menuGenerator = new MenuGenerator(budget, restaurant.getDishesCatalogue());
-
-        menuGenerator.generate();
-        reservation.getOptimizedMenu().addAll(menuGenerator.getGeneratedMenu());
     }
 }

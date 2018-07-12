@@ -2,6 +2,7 @@ package restaurant;
 
 import menu.Menu;
 import menu.MenuElement;
+import services.MenuGenerator;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -73,10 +74,8 @@ public class Reservation {
     // TODO change this method in the UML
     public double getReservationCost() {
         double reservationCost = 0;
-        for (Menu m : createdMenu) {
-            m.calculateMenuCost();
+        for (Menu m : createdMenu)
             reservationCost += m.getMenuCost() * m.getnMenuGuests();
-        }
         return reservationCost;
     }
 
@@ -118,5 +117,11 @@ public class Reservation {
 
     public ArrayList<Menu> getCreatedMenu() {
         return createdMenu;
+    }
+
+    public void generateOptimizedMenus(double budget) {
+        MenuGenerator menuGenerator = new MenuGenerator(budget);
+        menuGenerator.generate();
+        optimizedMenu.addAll(menuGenerator.getGeneratedMenu());
     }
 }

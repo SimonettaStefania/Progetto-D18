@@ -15,7 +15,6 @@
     <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
     <%!
         private String shortString(Menu menu) {
-            menu.calculateMenuCost();
             StringBuilder s = new StringBuilder("Price: " + menu.getMenuCost() + "&emsp;&emsp; People: " + menu.getnMenuGuests());
             for (MenuElement el : menu.getMenuElementsList())
                 s.append("<br/> - ").append(el.getName());

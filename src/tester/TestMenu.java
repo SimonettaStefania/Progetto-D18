@@ -38,13 +38,11 @@ public class TestMenu {
 
     // set budget and guests's number
     m.setNMenuGuests(20);
-    m.updateMenuCost(300);
 
     System.out.println(m.toString());
 
     // menu creation simulation
     m.setNMenuGuests(50);
-    m.updateMenuCost(500);
 
     m.addElement(drink_2);
     m.addElement(first_1);
@@ -64,8 +62,6 @@ public class TestMenu {
     m.removeElement(drink_1);
     m.removeElement(starter_1);
     m.removeElement(first_1);
-
-    m.updateMenuCost(490);
 
     m.addElement(starter_1);
     m.sortMenuElements();

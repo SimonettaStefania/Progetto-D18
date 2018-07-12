@@ -27,7 +27,6 @@
             return s.toString();
         }
         private String pricesString(Menu menu) {
-            menu.calculateMenuCost();
             StringBuilder s = new StringBuilder();
             for (MenuElement el : menu.getMenuElementsList())
                 s.append(el.getPrice()).append("<br/>");
