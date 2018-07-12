@@ -107,40 +107,27 @@ public class Restaurant {
         dishesCatalogue.getDishes().sort(MenuElement.typeComparator);
     }
 
-    private void executeQuery(DbReader dbr, String query) {
-        Thread reader = new Thread(dbr);
-        try {
-            dbr.setQuery(query);
-            reader.start();
-            reader.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public static int getStaticCovers(){
-        return N_COVERS;
-    }
-
-
     public synchronized void insertReservation(Reservation reservation) {
+        DbReader dbr = DbReader.getDbReaderInstance();
         String id = generateReservationId();
         reservation.setReservationCode(id);
 
         reservationList.add(reservation);
-        DbReader dbr = DbReader.getDbReaderInstance();
-        Thread insertThread = new Thread(dbr);
-
         String addToQuery = String.format("('%s',%d,%s,'%s','%s','%s',NULL)", reservation.getReservationCode(),
                 reservation.getnGuests(), reservation.getReservationCost(), new Date(reservation.getEventDate().getTime()),
                 reservation.getCustomerNameSurname(), reservation.getCustomerMail());
+        executeQuery(dbr,Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
 
-        dbr.setQuery(Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
-        insertThread.start();
+    }
+
+    private void executeQuery(DbReader dbr, String query) {
+        Thread dbThread = new Thread(dbr);
+        dbr.setQuery(query);
+        dbThread.start();
         try {
-            insertThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            dbThread.join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -170,5 +157,10 @@ public class Restaurant {
             sb.append(candidateChars.charAt(random.nextInt(36)));
 
         return sb.toString();
+    }
+
+
+    public static int getStaticCovers(){
+        return N_COVERS;
     }
 }
