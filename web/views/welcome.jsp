@@ -1,4 +1,4 @@
-
+<%@ page import="restaurant.Restaurant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 
@@ -136,12 +136,12 @@
                             </div>
 
                             <input name ="guestsNumber" type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                   style="font-size: 1em" min = "1" />
+                                   style="font-size: 1em" min = "1" max = "<%=Restaurant.getStaticCovers()%>"/>
 
 
                         </div>
 
-                        <input class="btn btn-dark" id="bookButton"  type="submit" value="Book &raquo;" onclick="checkDataInserted()">
+                        <input class="btn btn-dark" id="bookButton"  type="submit" value="Book &raquo;" onclick="check()">
                             <input type="hidden" id="Validity" value="0"  />
 
                     </form>
@@ -260,44 +260,6 @@
             }
 
         </script>
-
-        <!-- ======================== GUEST CHECK SCRIPT ==================================================================-->
-
-        <script type="text/javascript">
-
-            function checkGuests(nCovers){
-
-                var nGuests = document.getElementById("guestsNumber").value;
-                var validity = undefined ;
-
-
-                if (nGuests <= 0 || nGuests > nCovers ){
-                    alert("ATTENTION!\nInsert a valid number of guests, from 1 up to " + nCovers );
-                    validity = 0;
-                }
-                else
-                    validity = 1;
-
-                return validity ;
-            }
-
-
-        </script>
-
-        <script type="text/javascript">
-
-            function checkDataInserted(){
-
-                var guests = checkGuests(300);
-                var date = check();
-
-                document.getElementById("Validity").value = guests && date ;
-                alert("VALORE : " + document.getElementById("Validity").value);
-
-            }
-
-        </script>
-
 
 
         </body>

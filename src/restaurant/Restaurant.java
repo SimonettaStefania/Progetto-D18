@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Restaurant {
     private static Restaurant restaurantInstance;
+    private static int N_COVERS =  150 ;
     private String name;
     private int nCover;
     private Catalogue dishesCatalogue;
@@ -115,5 +116,11 @@ public class Restaurant {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static int getStaticCovers(){
+
+        return N_COVERS;
+
     }
 }
