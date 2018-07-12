@@ -44,15 +44,15 @@ public class ReservationTest {
     }
 
    @Test
-    public void reservationCostTest(){
-        double expectedCost = 55.0;
-        Assert.assertEquals(expectedCost, r1.getReservationCost(), 0.0);
+    public void reservationCostTest() {
+       double expectedCost = 19.0*10 + 15.0*12 + 21.0*8;
+       Assert.assertEquals(expectedCost, r1.getReservationCost(), 0.0);
    }
 
     @Test
-    public void removeMenuTest(){
-        r1.removeMenu(m1);
-        double expectedCost = 36.0;
+    public void removeMenuTest() {
+        r1.removeMenu(0);
+        double expectedCost = 15.0*12 + 21.0*8;
         Assert.assertEquals(expectedCost, r1.getReservationCost(), 0.0);
     }
 

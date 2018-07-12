@@ -13,8 +13,8 @@ public class Reservation {
     private Date eventDate;
     private ArrayList<Menu> createdMenu, optimizedMenu;
     private String reservationCode, customerNameSurname, customerMail;
-
-
+    
+    // TODO: update UML
     public Reservation(String reservationCode, int nGuests, Date eventDate, String customerNameSurname, String customerMail) {
         this.reservationCode = reservationCode;
         this.nGuests = nGuests;
@@ -64,10 +64,6 @@ public class Reservation {
         this.addMenu(selected);
     }
 
-    public void removeMenu(Menu menuWantRemove) {
-        createdMenu.removeIf(m -> m.equals(menuWantRemove));
-    }
-
     public void removeMenu(int index) {
         createdMenu.remove(index);
     }
@@ -80,7 +76,6 @@ public class Reservation {
         menuWhereRemoveDish.removeElement(dishToRemove);
     }
 
-    // TODO change this method in the UML
     public double getReservationCost() {
         double reservationCost = 0;
         for (Menu m : createdMenu)
@@ -88,7 +83,6 @@ public class Reservation {
         return reservationCost;
     }
 
-    // TODO add this method in the UML
     public String toString() {
         StringBuilder sb = new StringBuilder();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

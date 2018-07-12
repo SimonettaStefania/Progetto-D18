@@ -51,7 +51,8 @@ public class TestReservation {
         m3.sortMenuElements();
 
         // remove second menu and edit nGuests and budget
-        r1.removeMenu(m2);
+        //r1.removeMenu(m2);
+        r1.removeMenu(1);
 
         // check
         System.out.println(r1.toString());
