@@ -78,10 +78,8 @@ public class ReservationServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        Reservation reservation = new Reservation(generateReservationCode(), formGuests,
+        return new Reservation(null, formGuests,
                 eventDate,formName+ " " + formSurname, formEmail);
-        restaurant.getReservationList().add(reservation);
-        return reservation;
     }
 
     // TODO: genererarlo solo alla fine, una volta confermata la reservation?

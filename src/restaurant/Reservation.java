@@ -119,6 +119,10 @@ public class Reservation {
         return createdMenu;
     }
 
+    public void setReservationCode(String id) {
+        reservationCode = id;
+    }
+
     public void generateOptimizedMenus(double budget) {
         MenuGenerator menuGenerator = new MenuGenerator(budget);
         menuGenerator.generate();

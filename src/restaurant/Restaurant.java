@@ -5,7 +5,9 @@ import menu.MenuElement;
 import services.DbReader;
 import services.Query;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Restaurant {
     private static Restaurant restaurantInstance;
@@ -67,8 +69,6 @@ public class Restaurant {
         return tmp ;
     }
 
-    // TODO: metodo syncronized che inserisce una nuova reservation
-    // Risparmierebbe la "fatica" di passare forzatamente per questo metodo (più efficiente)
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
     }
@@ -119,8 +119,56 @@ public class Restaurant {
     }
 
     public static int getStaticCovers(){
-
         return N_COVERS;
+    }
 
+
+    public synchronized void insertReservation(Reservation reservation) {
+        String id = generateReservationId();
+        reservation.setReservationCode(id);
+
+        reservationList.add(reservation);
+        DbReader dbr = DbReader.getDbReaderInstance();
+        Thread insertThread = new Thread(dbr);
+
+        String addToQuery = String.format("('%s',%d,%s,'%s','%s','%s',NULL)", reservation.getReservationCode(),
+                reservation.getnGuests(), reservation.getReservationCost(), new Date(reservation.getEventDate().getTime()),
+                reservation.getCustomerNameSurname(), reservation.getCustomerMail());
+
+        dbr.setQuery(Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
+        insertThread.start();
+        try {
+            insertThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String generateReservationId() {
+        String tmpId = null;
+        boolean unique = false;
+
+        while (!unique) {
+            tmpId = generateCode();
+
+            unique = true;
+            for (Reservation res : reservationList)
+                if (tmpId.equalsIgnoreCase(res.getReservationCode()))
+                    unique = false;
+        }
+
+        return tmpId;
+    }
+
+    private String generateCode() {
+        String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+        int length = 6;
+
+        for (int i = 0; i < length; i++)
+            sb.append(candidateChars.charAt(random.nextInt(36)));
+
+        return sb.toString();
     }
 }
