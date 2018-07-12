@@ -15,7 +15,7 @@
     <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
     <%!
         private String shortString(Menu menu) {
-            StringBuilder s = new StringBuilder("Price: " + menu.getMenuCost() + "&emsp;&emsp; People: " + menu.getnMenuGuests());
+            StringBuilder s = new StringBuilder("Price: &euro; " + String.format("%.2f", menu.getMenuCost()) + "&emsp;&emsp; People: " + menu.getnMenuGuests());
             for (MenuElement el : menu.getMenuElementsList())
                 s.append("<br/> - ").append(el.getName());
             return s.toString();

@@ -1,4 +1,5 @@
 <%@ page import="menu.Menu" %>
+<%@ page import="menu.MenuElement" %>
 <%@ page import="restaurant.Reservation" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +12,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Optimized menu</title>
+
     <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
+    <%!
+        private String optString(Menu menu) {
+            StringBuilder s = new StringBuilder();
+            for (MenuElement el : menu.getMenuElementsList())
+                s.append(" - ").append(el.getName()).append("<br/>");
+            s.append("<br/>Total price:");
+            return s.toString();
+        }
+        private String costString(Menu menu) {
+            StringBuilder s = new StringBuilder();
+            for (MenuElement el : menu.getMenuElementsList())
+                s.append("&euro; ").append(String.format("%.2f", el.getPrice())).append("<br/>");
+            s.append("<br/>&euro; ").append(String.format("%.2f", menu.getMenuCost()));
+            return s.toString();
+        }
+    %>
 
     <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
 
@@ -70,15 +88,19 @@
                             <div class="card-header text-white"><%=menu.getName()%></div>
                             <div class="card-body">
 
-                                <h5 class="card-title">menuCost: millemila nGuest: 10</h5>
-                                <pre><%=menu.toString()%></pre>
-
-                                <!-- <hr class="my-4"> -->
+                                <div class="row">
+                                    <div class="col-9">
+                                        <%=optString(menu)%>
+                                    </div>
+                                    <div class="col-3">
+                                        <%=costString(menu)%>
+                                    </div>
+                                </div>
 
                                 <form action="/status" method="post">
 
                                     <input type="hidden" name="backToStatus" value="sel-opt-menu">
-                                    <input name="code" type="hidden" value="<%=n%>">
+                                    <input type="hidden" name="code" value="<%=n%>">
                                     <input type="submit" class="btn btn-success btn-lg" style="margin-left: 40% " value="Select menu &checkmark;">
 
                                 </form>

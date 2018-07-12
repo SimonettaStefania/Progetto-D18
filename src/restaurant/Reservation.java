@@ -13,7 +13,7 @@ public class Reservation {
     private Date eventDate;
     private ArrayList<Menu> createdMenu, optimizedMenu;
     private String reservationCode, customerNameSurname, customerMail;
-    
+
     // TODO: update UML
     public Reservation(String reservationCode, int nGuests, Date eventDate, String customerNameSurname, String customerMail) {
         this.reservationCode = reservationCode;
@@ -46,7 +46,7 @@ public class Reservation {
         Catalogue catalogue = restaurant.getDishesCatalogue();
 
         if (name.isEmpty())
-            name = "Menu personalizzato";
+            name = "Personalized menu";
 
         if (selectedDishes != null) {
             Menu menu = new Menu(name, people);

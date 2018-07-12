@@ -78,28 +78,24 @@ public class MenuGenerator {
      * @return the selected dish, optimized for the budget
      */
     private ArrayList<MenuElement> findDishes(DishType type, double budget){
-        MenuElement tmpElem=null;
-        boolean first=true;
+        MenuElement tmpElem = null;
+        boolean first = true;
 
         ArrayList<MenuElement> tmp = new ArrayList<>();
-        for ( MenuElement element : catalogue.getDishes() ) {
-            if(first)
-            {
-                tmpElem=element;
-                first=false;
-            }else{
-                if(tmpElem.getType()==type && element.getType()==type && (tmpElem.getPrice()+element.getPrice()<=budget)){
-                    tmp.add(tmpElem);
-                    tmp.add(element);
-                    break;
-                }else{
-                    tmpElem=element;
-                }
-            }
+        for (MenuElement element : catalogue.getDishes()) {
+            if (first) {
+                tmpElem = element;
+                first = false;
+            } else if (tmpElem.getType()==type && element.getType()==type && (tmpElem.getPrice()+element.getPrice()<=budget)) {
+                tmp.add(tmpElem);
+                tmp.add(element);
+                break;
+            } else tmpElem = element;
         }
-        if(tmp.isEmpty()){
-            for ( MenuElement element : catalogue.getDishes() ) {
-                if(element.getType()==type && element.getPrice()<=budget){
+
+        if (tmp.isEmpty()) {
+            for (MenuElement element : catalogue.getDishes()) {
+                if (element.getType()==type && element.getPrice()<=budget) {
                     tmp.add(element);
                     break;
                 }

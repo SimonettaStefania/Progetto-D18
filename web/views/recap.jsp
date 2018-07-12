@@ -29,9 +29,9 @@
         private String pricesString(Menu menu) {
             StringBuilder s = new StringBuilder();
             for (MenuElement el : menu.getMenuElementsList())
-                s.append(el.getPrice()).append("<br/>");
+                s.append("&euro; ").append(String.format("%.2f", el.getPrice())).append("<br/>");
             s.append("<br/>").append(menu.getnMenuGuests());
-            s.append("<br/>").append(menu.getMenuCost());
+            s.append("<br/>&euro; ").append(String.format("%.2f", menu.getMenuCost()));
             return s.toString();
         }
     %>
