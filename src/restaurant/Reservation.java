@@ -40,6 +40,24 @@ public class Reservation {
         createdMenu.add(newMenu);
     }
 
+    public void createMenu(String name, int people, String[] selectedDishes) {
+        Restaurant restaurant = Restaurant.getRestaurantInstance();
+        Catalogue catalogue = restaurant.getDishesCatalogue();
+
+        if (name.isEmpty())
+            name = "Menu personalizzato";
+
+        if (selectedDishes != null) {
+            Menu menu = new Menu(name, people);
+            for (String id : selectedDishes) {
+                MenuElement item = catalogue.getElementByCode(id);
+                menu.addElement(item);
+            }
+
+            this.addMenu(menu);
+        }
+    }
+
     public void removeMenu(Menu menuWantRemove) {
         createdMenu.removeIf(m -> m.equals(menuWantRemove));
     }

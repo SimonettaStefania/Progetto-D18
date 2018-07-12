@@ -20,42 +20,7 @@ public class ReservationServlet extends HttpServlet {
     private Restaurant restaurant = Restaurant.getRestaurantInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
-        String backToStatus = request.getParameter("backToStatus");
-
-        if (backToStatus == null) {
-            reservation = makeReservation(request);
-            request.getSession().setAttribute("reservation", reservation);
-        } else if (backToStatus.equalsIgnoreCase("new-menu")) {
-            Catalogue catalogue = restaurant.getDishesCatalogue();
-            String selected[] = request.getParameterValues("selected-id");
-
-            String menuName = request.getParameter("menuName");
-            int nGuests = Integer.parseInt(request.getParameter("people"));
-            if (menuName.isEmpty())
-                menuName = "Menu personalizzato";
-
-            if (selected != null) {
-                Menu menu = new Menu(menuName, nGuests);
-                for (String id : selected) {
-                    MenuElement item = catalogue.getElementByCode(id);
-                    menu.addElement(item);
-                }
-
-                reservation.addMenu(menu);
-            }
-        } else if (backToStatus.equalsIgnoreCase("sel-opt-menu")) {
-            int optimizedMenuCode = Integer.parseInt(request.getParameter("code"));
-            selectOptimizedMenu(reservation, optimizedMenuCode);
-        } else if (backToStatus.equalsIgnoreCase("rem-menu")) {
-            int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
-            ArrayList<Menu> menu = reservation.getCreatedMenu();
-
-            menu.remove(removedMenu);
-        } else if (backToStatus.equalsIgnoreCase("back")){
-            clearOptimizedMenus(reservation);
-        }
-
+        checkStatus(request);
         forwardTo(request, response, "/views/reservationState.jsp");
     }
 
@@ -71,6 +36,32 @@ public class ReservationServlet extends HttpServlet {
         ServletContext context = getServletContext();
         RequestDispatcher rd = context.getRequestDispatcher(route);
         rd.forward(request, response);
+    }
+
+    private void checkStatus(HttpServletRequest request) {
+        Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
+        String backToStatus = request.getParameter("backToStatus");
+
+        if (backToStatus == null) {
+            reservation = makeReservation(request);
+            request.getSession().setAttribute("reservation", reservation);
+        } else if (backToStatus.equalsIgnoreCase("new-menu")) {
+            String selected[] = request.getParameterValues("selected-id");
+            String menuName = request.getParameter("menuName");
+            int nGuests = Integer.parseInt(request.getParameter("people"));
+
+            reservation.createMenu(menuName, nGuests, selected);
+        } else if (backToStatus.equalsIgnoreCase("sel-opt-menu")) {
+            int optimizedMenuCode = Integer.parseInt(request.getParameter("code"));
+            selectOptimizedMenu(reservation, optimizedMenuCode);
+        } else if (backToStatus.equalsIgnoreCase("rem-menu")) {
+            int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
+            ArrayList<Menu> menu = reservation.getCreatedMenu();
+
+            menu.remove(removedMenu);
+        } else if (backToStatus.equalsIgnoreCase("back")){
+            clearOptimizedMenus(reservation);
+        }
     }
 
     private Reservation makeReservation(HttpServletRequest request) {
