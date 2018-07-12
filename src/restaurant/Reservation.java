@@ -57,7 +57,7 @@ public class Reservation {
         double reservationCost = 0;
         for (Menu m : createdMenu) {
             m.calculateMenuCost();
-            reservationCost += m.getMenuCost();
+            reservationCost += m.getMenuCost() * m.getnMenuGuests();
         }
         return reservationCost;
     }
