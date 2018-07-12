@@ -9,6 +9,7 @@
     <title>Menu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../stylesheets/SelectionTemplateStyle.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"
@@ -80,7 +81,7 @@
             <input type="checkbox" id="celiac" name="filter" class="custom-control-input" value="cel" <% if (cel) out.print("checked"); %>>
             <label class="custom-control-label" for="celiac">Celiac</label>
         </div>
-            <input type="submit" style="float: right" class="btn btn-primary" value="Apply">
+            <input type="submit" style="float: right; background-color: #6576a5; border-color: #6576a5" class="btn btn-primary" value="Apply">
     </form>
 </div>
 
@@ -218,7 +219,7 @@
             <input type="submit" class="btn btn-success" value="Submit" form="selected-dishes" style="float: right">
             <form action="/status" method="post">
                 <input type="hidden" name="backToStatus" value="back">
-                <input type="submit" class="btn btn-dark" value="Back" style="float: right; margin-right: 2%">
+                <input type="submit" class="btn btn-dark" value="&laquo;Back" style="float: right; margin-right: 2%; background-color: #e34d4d; border-color: #e34d4d">
             </form>
         </div>
     </div>
