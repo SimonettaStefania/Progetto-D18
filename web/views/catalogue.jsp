@@ -18,6 +18,13 @@
     <link rel="stylesheet" href="../stylesheets/CatalogueStyle.css">
 
     <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();    %>
+    <%!
+        private String itemDetails(MenuElement element) {
+            StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
+                s.append("<br><b>Ingredients:</b> <br>"+ element.showDetails() + "<br><b>Allergens:</b> <br>"+element.showAllergenes());
+            return s.toString();
+        }
+    %>
 </head>
 
 <body background ="../img/background.jpg" >
@@ -100,7 +107,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionStarter">
-                                <div class="card-body"><%=item.showDetails()%></div>
+                                <div class="card-body"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                             <%  }
@@ -126,7 +133,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionFirst">
-                                <div class="card-body"><%=item.showDetails()%></div>
+                                <div class="card-body"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }
@@ -152,7 +159,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionMain">
-                                <div class="card-body"><%=item.showDetails()%></div>
+                                <div class="card-body"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }
@@ -177,7 +184,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDessert">
-                                <div class="card-body"><%=item.showDetails()%></div>
+                                <div class="card-body"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }
@@ -201,7 +208,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDrink">
-                                <div class="card-body"><%=item.showDetails()%></div>
+                                <div class="card-body"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }   %>
