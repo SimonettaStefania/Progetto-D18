@@ -95,7 +95,7 @@
         </div>
 
         <div class="col-md-5" style=" margin-left:12%; margin-top: 1%">
-            <span style="font-size: larger; font-style: inherit">You can create your own menu or we can do it for you: you've just to insert the budget!</span>
+            <span style="font-size: larger; font-style: inherit">You can create your own menu or let us do: it will be budget-optimized!</span>
 
             <form action="/selection" method="post">
                 <br>
@@ -106,12 +106,22 @@
             <div style="font-size: larger; text-align: center;">OR</div>
             <br>
             <form action="/optimize" method="post">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="addon1" style="background-color:#6576a5;color: white; width: 100%">Budget</span>
+
+                <div class="row">
+                    <div class="form-group mb-3 col-sm-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lab1" style="background-color:#6576a5;color: white">Budget</span>
+                            <input name="budget" type="number" class="form-control" required min="20" placeholder="Insert budget" aria-describedby="lab1">
+                        </div>
                     </div>
-                    <input name="budget" type="number" class="form-control" required min="20" placeholder="Insert Budget" aria-label="" aria-describedby="basic-addon1" style="width:50%">
+                    <div class="form-group mb-3 col-sm-6">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="lab2" style="background-color:#6576a5;color: white">People n.</span>
+                            <input name="people" type="number" class="form-control" required min="1" placeholder="Insert number" aria-describedby="lab2">
+                        </div>
+                    </div>
                 </div>
+
                 <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create a budget optimized Menu &raquo;">
             </form>
 

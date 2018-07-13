@@ -26,7 +26,7 @@ public class TestOptimizerDB {
             rest.addToCatalogue(elem);
         }
 
-        mg=new MenuGenerator(40);
+        mg=new MenuGenerator(40, 1);
         mg.generate();
 
         for(Menu m:mg.getGeneratedMenu()){

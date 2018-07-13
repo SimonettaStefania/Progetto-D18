@@ -16,8 +16,9 @@ public class OptimizedMenusServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
         double budget = Double.parseDouble(request.getParameter("budget"));
+        int people = Integer.parseInt(request.getParameter("people"));
 
-        reservation.generateOptimizedMenus(budget);
+        reservation.generateOptimizedMenus(budget, people);
         forwardTo(request, response, "/views/optimizedMenus.jsp");
     }
 

@@ -126,8 +126,8 @@ public class Reservation {
         reservationCode = id;
     }
 
-    public void generateOptimizedMenus(double budget) {
-        MenuGenerator menuGenerator = new MenuGenerator(budget);
+    public void generateOptimizedMenus(double budget, int people) {
+        MenuGenerator menuGenerator = new MenuGenerator(budget, people);
         optimizedMenu = menuGenerator.getGeneratedMenu();
     }
 }

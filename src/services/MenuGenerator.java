@@ -5,13 +5,14 @@ import menu.*;
 import java.util.ArrayList;
 
 public class MenuGenerator {
-
+    private int people;
     private double budget;
     private Catalogue catalogue;
     private ArrayList<Menu> generatedMenu;
 
-    public MenuGenerator (double budget) {
+    public MenuGenerator (double budget, int people) {
         this.budget = budget;
+        this.people = people;
         this.catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
         this.generatedMenu = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class MenuGenerator {
         double mainBudget = (budget*mainQuote);
         double dessertBudget = (budget*0.1);
 
-        Menu optimizedMenu = new Menu();
+        Menu optimizedMenu = new Menu("", people);
         ArrayList<MenuElement> dishesList = optimizedMenu.getMenuElementsList();
         dishesList.addAll(findDishes(DishType.STARTER, starterBudget));
         dishesList.addAll(findDishes(DishType.FIRST_COURSE, firstBudget));
