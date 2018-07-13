@@ -47,7 +47,7 @@
 
             var content = '';
             for(var i = 0; i < selectedList.length; i++)
-                content += '<tr><th>' + selectedList[i] + '</th><td>' + pricesList[i] + '</td></tr>';
+                content += '<tr><th>' + selectedList[i] + '</th><td>' + pricesList[i] + '0 &euro;</td></tr>';
             $('#checkout').html(content);
         });
     });

@@ -95,7 +95,7 @@
         </div>
 
         <div class="col-md-5" style=" margin-left:12%; margin-top: 1%">
-            <span style="font-size: larger; font-style: inherit">You can create your own menu or let us do: it will be budget-optimized!</span>
+            <span style="font-size: larger; font-style: inherit"><b>You can create your own menu or let us do: it will be budget-optimized!</b></span>
 
             <form action="/selection" method="post">
                 <br>

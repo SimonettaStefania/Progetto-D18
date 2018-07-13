@@ -19,14 +19,14 @@
 
     <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
     <%!
-        private String recapString(Menu menu) {
+        private String leftString(Menu menu) {
             StringBuilder s = new StringBuilder();
             for (MenuElement el : menu.getMenuElementsList())
                 s.append(" - ").append(el.getName()).append("<br/>");
             s.append("<br/>People:<br/>Total price:");
             return s.toString();
         }
-        private String pricesString(Menu menu) {
+        private String rightString(Menu menu) {
             StringBuilder s = new StringBuilder();
             for (MenuElement el : menu.getMenuElementsList())
                 s.append("&euro; ").append(String.format("%.2f", el.getPrice())).append("<br/>");
@@ -72,14 +72,11 @@
 
     <div class="row">
 
-        <div class="col-12 col-md-9">
+        <div class="col-md-9">
 
             <!-- -------------------------------------- MENU INFO --------------------------------------------------- -->
 
             <div class="jumbotron" id="menuJumbotronRecap">
-
-                <h4>ID: 867483638</h4>  <% // TODO: come generare questo id? %>
-                <hr class="my-4">
 
                 <div class="tab-content" id="nav-tabContent">
 
@@ -91,10 +88,10 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-9">
-                                    <%=recapString(menu)%>
+                                    <%=leftString(menu)%>
                                 </div>
                                 <div class="col-3">
-                                    <%=pricesString(menu)%>
+                                    <%=rightString(menu)%>
                                 </div>
                             </div>
                         </div>
@@ -112,8 +109,8 @@
                     <tr>
                         <th scope="row"></th>
 
-                        <td><button type="button" class="btn" id="totalPerson" style="margin-left: 40%"> Total person <span class="badge"><%=reservation.calculateGuests()%></span></button></td>
-                        <td><button type="button" class="btn" id="totalCost" style="margin-right: 40%">Total cost <span class="badge"><%=reservation.getReservationCost()%></span></button></td>
+                        <td><button type="button" class="btn btn-lg" id="totalPerson" style="margin-left: 40%"> Total person: <span class="badge"><%=reservation.calculateGuests()%></span></button></td>
+                        <td><button type="button" class="btn btn-lg" id="totalCost" style="margin-right: 40%">Total cost: <span class="badge"><%=String.format("%.2f &euro;", reservation.getReservationCost())%></span></button></td>
                     </tr>
 
                 </table>
@@ -122,9 +119,8 @@
 
         <!-- -------------------------------------- LIST MENU INTERACTIVE--------------------------------------------------- -->
 
-        <div class="col-6 col-md-3 sidebar" id="sidebar">
-
-                <div class="list-group" id="list-tab" role="tablist">
+        <div class="col-md-3 sidebar" id="sidebar">
+            <div class="list-group" id="list-tab" role="tablist">
 
                 <%  i = 0;  %>
                 <%  for (Menu menu : reservation.getCreatedMenu()) {  %>
@@ -132,35 +128,26 @@
                     <%  i++;  %>
                 <%  }  %>
 
-                </div>
-
-            <br/><br/>
+            </div>
+            <br/>
 
             <!-- -------------------------------------- FINAL BTN --------------------------------------------------- -->
 
-            <div class="row" style="margin-right: 20%">
+            <%if (!reservation.checkPeople()) {%>
+                <div class="alert alert-danger" role="alert" style="margin-right: 12%">
+                    Number of people does not match: please check if a menu is present for each guest.
+                </div>
+            <%}%>
 
-            <table class="table table-borderless">
+            <div class="row">
+                <form action="/status" method="post" class="col-3">
+                    <input type="hidden" name="backToStatus" value="true">
+                    <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
+                </form>
 
-                <tr>
-                    <th scope="row"></th>
-
-                    <td>
-                        <form action="/status" method="post">
-                            <input type="hidden" name="backToStatus" value="true">
-                            <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
-                        </form>
-                    </td>
-
-                    <td>
-                        <form action="/confirm" method="post">
-                        <input type="submit" class="btn btn-success btn-lg" value="Confirm &checkmark;">
-                        </form>
-                    </td>
-                </tr>
-
-            </table>
-
+                <form action="/confirm" method="post" class="col-3">
+                    <input type="submit" class="btn btn-success btn-lg" value="Confirm &checkmark;" <%if (!reservation.checkPeople()) out.print("disabled");%>>
+                </form>
             </div>
 
         </div>
@@ -179,8 +166,3 @@
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
 </body>
-
-<footer>
-    <p>&copy; Lisanti non è il titolare del corso</p>
-</footer>
-

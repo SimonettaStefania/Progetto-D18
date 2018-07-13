@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: fenicottero
-  Date: 12/06/18
-  Time: 12.11
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="restaurant.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -14,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Confermation</title>
+    <title>Confirm page</title>
 
     <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
 
@@ -52,34 +46,24 @@
 <!-- -------------------------------------- TEXT --------------------------------------------------- -->
 
 <div class="jumbotron" id="confirmJumbotron">
+    <div style="text-align: center;">
+        <h1>Your reservation has been successfully made!</h1>
+        <br/>
 
-    <div class="row">
+        <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
+            out.print("<h3>Reservation ID: &emsp;" + reservation.getReservationCode() + "</h3>");   %>
 
-        <div style="margin-left: 15%"><h1>Your reservation has been successfully made!</h1>
-            <br/>
-            <center>Thank you, we will see you soon!</center>
-        </div>
-
+        <br/>
+        Thank you, and see you soon!
     </div>
 
-    <hr class="my-4">
     <br/>
 
     <!-- -------------------------------------- BTN BACK HOME--------------------------------------------------- -->
 
-    <div class="row" style="margin-left: 43%" >
-
-        <form action="/home" method="post">
-            <input type="submit" class="btn btn-danger btn-lg" value="&laquo; Back Home">
-        </form>
-
-    </div>
+    <form action="/home" method="post" style="text-align: center">
+        <input type="submit" class="btn btn-danger btn-lg" value="Home">
+    </form>
 
 </div>
 </body>
-
-<footer>
-    <p>&copy; Lisanti non è il titolare del corso</p>
-</footer>
-
-
