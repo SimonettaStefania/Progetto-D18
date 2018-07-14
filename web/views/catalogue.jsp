@@ -21,8 +21,15 @@
     <%!
         private String itemDetails(MenuElement element) {
             StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
-                s.append("<br><b>Ingredients:</b> <br>"+ element.showDetails() + "<br><b>Allergens:</b> <br>"+element.showAllergenes());
+
+            if ( element.getType()!= DishType.DRINK )
+                s.append("<br><b>Ingredients:</b> <br>" + element.showDetails() + "<br><b>Allergens:</b> <br>" + element.showAllergenes());
+
+            else
+                s.append("<br><b>Allergens:</b> <br>" + element.showAllergenes());
+
             return s.toString();
+
         }
     %>
 </head>

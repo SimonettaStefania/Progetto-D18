@@ -65,7 +65,7 @@ public class MenuElement  {
     public String showDetails() {
         String tmp = "";
         for (String element : ingredientsList)
-            tmp += element + ";  ";
+            tmp += element + "  ;  ";
         return tmp;
 
     }
@@ -77,7 +77,7 @@ public class MenuElement  {
     public String showAllergenes() {
         String tmp = "";
         for (Allergen element : allergenList)
-            tmp += element + ";  ";
+            tmp += element + "  ;  ";
         return tmp;
     }
 
