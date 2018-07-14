@@ -77,6 +77,7 @@
     </div>
 </nav>
 
+<br/>
 <div class="container">
     <form action="/selection" method="post" class="jumbotron" style="background: #ffffff">
         <h2>Filters</h2>

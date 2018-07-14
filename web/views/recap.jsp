@@ -138,16 +138,14 @@
                 </div>
             <%}%>
 
-            <div class="row">
-                <form action="/status" method="post" class="col-3">
-                    <input type="hidden" name="backToStatus" value="true">
-                    <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
-                </form>
+            <form action="/status" method="post" style="display: inline">
+                <input type="hidden" name="backToStatus" value="true">
+                <input type="submit" class="btn btn-lg" id="btnBack" value="&laquo; Back">
+            </form>
 
-                <form action="/confirm" method="post" class="col-3">
-                    <input type="submit" class="btn btn-success btn-lg" value="Confirm &checkmark;" <%if (!reservation.checkPeople()) out.print("disabled");%>>
-                </form>
-            </div>
+            <form action="/confirm" method="post" style="display: inline">
+                <input type="submit" class="btn btn-success btn-lg" value="Confirm &checkmark;" <%if (!reservation.checkPeople()) out.print("disabled");%>>
+            </form>
 
         </div>
 
