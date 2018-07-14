@@ -7,11 +7,6 @@
     padding-bottom: 5%;
 }
 
-#list{
-    width: 70%;
-    margin-left:10%;
-}
-
 .btt{
     background-color: transparent;
     border-color: transparent;
@@ -19,26 +14,13 @@
 
 }
 
-#addon1{
-    background-color:#6576a5;
-    color: white;
-    width: 100%;
-}
-
 .card-header{
     background-color: #6576a5;
-}
-
-
-
-#placeholder{
-    width:80%;
 }
 
 #confirm {
     margin-left: 10%;
     border-color: transparent;
-    width:30%;
 }
 
 #container{

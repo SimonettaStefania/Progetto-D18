@@ -1,11 +1,5 @@
-
-<%--
-  Created by IntelliJ IDEA.
-  User: SimonettaStefania
-  Date: 08/06/2018
-  Time: 11:55
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="restaurant.Reservation" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +8,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Progetto D18</title>
+    <title>Reservations review</title>
 
+    <%!
+        private String summary(Reservation r) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            StringBuilder sb = new StringBuilder(r.getCustomerNameSurname());
+            sb.append("<br/>").append(sdf.format(r.getEventDate())).append(" - ").append(r.getnGuests())
+              .append(" guests<br/>Total price: &euro; ").append(String.format("%.2f", r.getReservationCost()));
+
+            /*
+            for (Menu m : r.getCreatedMenu()) {
+                sb.append("<br/><br/>Price: &euro; ").append(String.format("%.2f", m.getMenuCost()))
+                  .append("&emsp;&emsp; People: ").append(m.getnMenuGuests());
+                for (MenuElement el : m.getMenuElementsList())
+                    sb.append("<br/> - ").append(el.getName());
+            }
+            */
+
+            return sb.toString();
+        }
+    %>
 
 <!-- ---------------------------------------------------- CSS LINK ------------------------------------------------------------------------- -->
 
@@ -38,13 +51,13 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#" >Reservation</a>
+                <a class="nav-link active" href="/reservations">Reservations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Catalogue</a>
+                <a class="nav-link" href="/catalogue">Catalogue</a>
             </li>
         </ul>
     </div>
@@ -55,136 +68,57 @@
 
 
 <div class="row"  id="r1" >
-
     <div class="col">
 
-        <h1 style="margin-left: 8%">Your Reservations</h1>
+        <h1 style="margin-left: 10%">Your Reservations</h1>
         <br>
-        <h6 style="margin-left: 8%; margin-right: 5%">Insert here your e-mail and click the button below to view your reservations</h6>
-        <form action="../reservation" method="post">
-            <div class="row">
+        <h6 style="margin-left: 10%; margin-right: 5%">Please insert your e-mail and the reservation ID to see the details.</h6>
+        <form action="../reservations" method="post">
 
-                <div class="input-group mb-3" id="list" >
-                    <div class="input-group-prepend" >
-                        <span class="input-group-text" id="addon1" >E-mail</span>
-                    </div>
-                    <input type="text" class="form-control" id= "placeholder" placeholder="Insert your email" aria-label="Username" aria-describedby="basic-addon1" >
+            <div class="input-group mb-3" style="width: 60%; margin-left: 10%;">
+                <div class="input-group-prepend" >
+                    <span class="input-group-text" style="background-color:#6576a5; color: white;">E-mail</span>
                 </div>
-
+                <input type="text" name="email" class="form-control">
             </div>
 
-            <div class="row">
+            <div class="input-group mb-3" style="width: 60%; margin-left: 10%;">
+                 <div class="input-group-prepend">
+                     <span class="input-group-text" style="background-color:#6576a5; color: white;">Code</span>
+                 </div>
 
-                <input type="submit" class="btn btn-dark" id="confirm"  value="Confirm">
+                 <input type="text" name="res-id" class="form-control">
+             </div>
 
-            </div>
+            <input type="submit" class="btn btn-dark" id="confirm" value="Confirm" style="width: 15%;">
         </form>
     </div>
 
-    <div class="col">
-
 <!------------------------------------------------------------ COLLAPSING LIST ------------------------------------------------------------------- -->
 
+    <div class="col">
         <div class="container" id="container" >
-            <div id="accordion" >
+            <div id="accordion">
 
-                <!-- -------------------------------------------- First element---------------------------------------------------- -->
-
-
+            <%Reservation pickedReservation = (Reservation) request.getAttribute("pickedReservation");
+              if (pickedReservation != null) {%>
                 <div class="card" >
-
                     <div class="card-header">
-                        <h5 class="mb-0">
-                            <button class="btn collapsed btt" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
-                                Reservation 1
-                            </button>
-                        </h5>
+                        <span style="color: white"><b><%=pickedReservation.getReservationCode()%></b></span>
                     </div>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 
                         <div class="card-body">
-                            Description of reservation 1 -------------
-                            <pre>
-                                Menu 1 ----------
-                                Menu 2 ----------
-                                Menu 3 ----------
-                            </pre>
+                            <%=summary(pickedReservation)%>
 
-                            <div class="row">
-                                <form action="../reservations" method="post">
-                                    <input type="hidden" name="code" value="1">
-                                    <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
-                                </form>
-                            </div>
+                            <form action="../reservations" method="get">
+                                <input type="submit" class="btn btn-sm btn-dark"  value="Delete" style="float: right;">
+                            </form>
 
                         </div>
-                    </div>
                 </div>
+              <%}%>
 
-                <!--  ----------------------------------------------- Second element------------------------------------------ -->
-
-                <div class="card">
-
-                    <div class="card-header">
-                        <h5 class="mb-0">
-                            <button class="btn collapsed btt" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Reservation 2
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-
-                        <div class="card-body">
-                            Description of reservation 2 -------------
-                            <pre>
-                                Menu veg ----------
-                                Menu celiac ----------
-                                Menu 3 ----------
-                            </pre>
-
-                            <div class="row">
-                                <form action="../reservations" method="post">
-                                    <input type="hidden" name="code" value="2">
-                                    <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ------------------------------------------------ Third element ----------------------------------------------- -->
-
-                <div class="card">
-
-                    <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn collapsed btt" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Reservation 3
-                            </button>
-                        </h5>
-                    </div>
-
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-
-                        <div class="card-body">
-                            Description of reservation 3 -------------
-                            <pre></pre>
-
-                            <div class="row">
-                                <form action="../reservations" method="post">
-                                    <input type="hidden" name="code" value="3">
-                                    <input type="submit" class="btn btn-sm btn-dark btt_d"  value="Delete">
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
-
         </div>
     </div>
 </div>
