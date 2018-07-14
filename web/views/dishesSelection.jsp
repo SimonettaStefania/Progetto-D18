@@ -56,12 +56,23 @@
 </head>
 <body background="../img/background.jpg">
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" href="#">Progetto D-18 </a>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="#">Project D-18</a>
+    <button class="navbar-toggler p-0 border-0" type="button"></button>
+
+    <div class="navbar-collapse offcanvas-collapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item active"><a class="nav-link" href="#">Menu Creation</a></li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/reservations">Reservations</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/catalogue">Catalogue</a>
+            </li>
         </ul>
     </div>
 </nav>

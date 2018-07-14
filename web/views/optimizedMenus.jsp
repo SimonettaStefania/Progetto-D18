@@ -52,15 +52,14 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Reservations<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/reservations">Reservations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Catalogue</a>
+                <a class="nav-link" href="/catalogue">Catalogue</a>
             </li>
-
         </ul>
     </div>
 </nav>
