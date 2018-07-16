@@ -79,7 +79,7 @@ public class ReservationServlet extends HttpServlet {
         private boolean checkDate(HttpServletRequest request){
 
             String validity = request.getParameter("validity");
-            if (validity.equals("1"))
+            if (validity == null || validity.equals("1"))
                 return true;
             else
                 return false;
