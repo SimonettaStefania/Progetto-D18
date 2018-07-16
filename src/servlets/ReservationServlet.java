@@ -15,7 +15,11 @@ public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         checkStatus(request);
-        forwardTo(request, response, "/views/reservationState.jsp");
+        if (checkDate(request))
+            forwardTo(request, response, "/views/reservationState.jsp");
+        else
+            forwardTo(request, response, "/index.jsp");
+
     }
 
     /**
@@ -71,6 +75,15 @@ public class ReservationServlet extends HttpServlet {
         return new Reservation(null, formGuests,
                 eventDate,formName+ " " + formSurname, formEmail);
     }
-}
 
+        private boolean checkDate(HttpServletRequest request){
+
+            String validity = request.getParameter("validity");
+            if (validity.equals("1"))
+                return true;
+            else
+                return false;
+
+        }
+}
 
