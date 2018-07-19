@@ -2,6 +2,7 @@
 <%@ page import="menu.MenuElement" %>
 <%@ page import="restaurant.Catalogue" %>
 <%@ page import="restaurant.Restaurant" %>
+<%@ page import="restaurant.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -17,23 +18,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" crossorigin="anonymous"
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
 
     <script>
-    <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
 
-        String filters[] = request.getParameterValues("filter");
-        boolean veg = false, vgt = false, cel = false;
-        if (filters != null) {
-            for (String f : filters) {
-                if (f.equalsIgnoreCase("veg"))
-                    veg = true;
-                else if (f.equalsIgnoreCase("vgt"))
-                    vgt = true;
-                else if (f.equalsIgnoreCase("cel"))
-                    cel = true;
+        <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
+
+            String filters[] = request.getParameterValues("filter");
+            boolean veg = false, vgt = false, cel = false;
+            if (filters != null) {
+                for (String f : filters) {
+                    if (f.equalsIgnoreCase("veg"))
+                        veg = true;
+                    else if (f.equalsIgnoreCase("vgt"))
+                        vgt = true;
+                    else if (f.equalsIgnoreCase("cel"))
+                        cel = true;
+                }
             }
-        }
-    %>
+        %>
 
     $(document).ready(function(){
         $("input[name='selected-id']").on("change", function() {
@@ -220,11 +223,12 @@
             <br/>
             <div class="form-group row">
                 <label for="menuName" class="col-sm-4 col-form-label">Menu name</label>
-                <input type="text" class="form-control col-sm-7" id="menuName" name="menuName" form="selected-dishes" placeholder="(Optional)">
+                <input type="text" class="form-control col-sm-7" id="menuName" name="menuName" form="selected-dishes" >
             </div>
+
             <div class="form-group row" style="margin-top: -3%">
                 <label for="people" class="col-sm-4 col-form-label">People n.</label>
-                <input type="number" class="form-control col-sm-4" id="people" name="people" form="selected-dishes" required min="1">
+                <input type="number" class="form-control col-sm-4" id="people" name="people" form="selected-dishes" required min="1" max="<%=reservation.getnGuests()%>">
             </div>
 
             <input type="hidden" name="backToStatus" form="selected-dishes" value="new-menu">

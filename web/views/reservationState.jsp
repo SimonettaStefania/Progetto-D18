@@ -128,7 +128,7 @@
                     <div class="form-group mb-3 col-sm-6">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="lab2" style="background-color:#6576a5;color: white">People n.</span>
-                            <input name="people" type="number" class="form-control" required min="1" placeholder="Insert number" aria-describedby="lab2">
+                            <input name="people" type="number" class="form-control" required min="1" max = "<%=reservation.getnGuests()%>" placeholder="Insert number" aria-describedby="lab2">
                         </div>
                     </div>
                 </div>
