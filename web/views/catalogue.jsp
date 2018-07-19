@@ -22,10 +22,10 @@
         private String itemDetails(MenuElement element) {
             StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
 
-            if ( element.getType()!= DishType.DRINK )
+            if ( element.getType()!= DishType.DRINK ) {
                 s.append("<br><b>Ingredients:</b> <br>" + element.showDetails() + "<br><b>Allergens:</b> <br>" + element.showAllergenes());
-
-            else
+                s.append("<br><b>Filters:</b> <br> " + element.showFilters());
+            }else
                 s.append("<br><b>Allergens:</b> <br>" + element.showAllergenes());
 
             return s.toString();
@@ -70,9 +70,9 @@
 <div class="jumbotron" id= "Jumbotron">
     <h1 style="margin-left: 8%">Catalogue</h1>
     <div class="row">
-        <div class="col-md-4" id="sidebar">
+        <div class="col-md-3" id="sidebar">
 
-            <p style="margin-left:2%">Click on the dish name to view its details :</p>
+            <p style="margin-left:2%">Click on the dish name<br> to view its details :</p>
 
 
 
@@ -93,7 +93,7 @@
 
         <!-- =====================================================DISHES ELEMENTS ===========================================================-->
 
-        <div class="col-md-8">
+        <div class="col-md-9">
 
             <div class="tab-content" id="nav-tabContent" >
 
@@ -113,7 +113,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionStarter">
-                                <div class="card-body"><%=itemDetails(item)%></div>
+                                <div class="card-body" style="font-size:13px;"><p><%=itemDetails(item)%></p></div>
                             </div>
                         </div>
                             <%  }
@@ -139,7 +139,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionFirst">
-                                <div class="card-body"><%=itemDetails(item)%></div>
+                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }
@@ -165,7 +165,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionMain">
-                                <div class="card-body"><%=itemDetails(item)%></div>
+                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }
@@ -190,7 +190,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDessert">
-                                <div class="card-body"><%=itemDetails(item)%></div>
+                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }
@@ -214,7 +214,7 @@
                                 </h5>
                             </div>
                             <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDrink">
-                                <div class="card-body"><%=itemDetails(item)%></div>
+                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
                             </div>
                         </div>
                         <%  }   %>

@@ -2,6 +2,8 @@ package menu;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 public class MenuElement  {
     private String name, elementCode;
@@ -62,6 +64,19 @@ public class MenuElement  {
         return allergenList.contains(a);
 
     }
+
+    public String showFilters(){
+        String tmp="";
+        HashMap<String,Boolean> filters = flags.getFilters();
+
+        for ( String element : filters.keySet()){
+
+            if ( filters.get(element) )
+                tmp += element + " ; ";
+        }
+        return tmp;
+    }
+
     public String showDetails() {
         String tmp = "";
         for (String element : ingredientsList)

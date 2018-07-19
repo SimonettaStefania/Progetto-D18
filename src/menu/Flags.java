@@ -1,5 +1,7 @@
 package menu;
 
+import java.util.HashMap;
+
 public class Flags {
     private boolean vegan, veggie, celiac;
 
@@ -20,5 +22,17 @@ public class Flags {
             return false;
         }
         return true;
+    }
+
+    public HashMap<String,Boolean> getFilters(){
+
+        HashMap<String , Boolean> filters = new HashMap<>();
+        filters.put("VEGAN", vegan);
+        filters.put("VEGETARIAN", veggie);
+        filters.put("CELIAC", celiac);
+
+        return filters ;
+
+
     }
 }
