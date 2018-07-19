@@ -130,4 +130,10 @@ public class Reservation {
         MenuGenerator menuGenerator = new MenuGenerator(budget, people);
         optimizedMenu = menuGenerator.getGeneratedMenu();
     }
+
+    public String dateToString(){
+
+        return eventDate.getDate() + "/" + eventDate.getMonth() + "/" + (eventDate.getYear() + 1900 );
+
+    }
 }
