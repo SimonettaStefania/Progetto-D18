@@ -116,9 +116,16 @@ public class MenuElement  {
      * @param a the allergen to be checked
      * @return true if the allergen is present, false otherwise
      */
+    // TODO Problema: per come viene popolato il catalogo, questo metodo non funziona. L'idea è di rimpiazzarlo con respectsAllergens()
     public boolean containsAllergen(Allergen a) {
         return allergenList.contains(a);
+    }
 
+    public boolean respectsAllergens(String filter) {
+        for (Allergen allergen : allergenList)
+            if (filter.contains(allergen.getAllergenCode()))
+                return false;
+        return true;
     }
 
     public String showFilters(){

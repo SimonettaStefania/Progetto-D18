@@ -5,12 +5,12 @@ import menu.*;
 public class Catalogue {
     private ArrayList<MenuElement> dishesList;
     private ArrayList<MenuElement> drinksList;
-    private ArrayList<MenuElement> filterSelection ;
+    private ArrayList<Allergen> allergensList;
 
     public Catalogue() {
         dishesList = new ArrayList<>();
         drinksList = new ArrayList<>();
-        filterSelection = new ArrayList<>();
+        allergensList = new ArrayList<>();
     }
 
     public ArrayList<MenuElement> getDishes() {
@@ -58,17 +58,21 @@ public class Catalogue {
         return tmp.toString();
     }
 
-    public void generateFilter(boolean vegan, boolean vegetarian, boolean celiac) {
-        filterSelection.clear();
+    // NOTA: ho dovuto modificarlo perchè probabilmente non era thread-safe avere un attributo del catalogue
+    //      utilizzato da tutti, essendo un oggetto locale non dovrebbero esserci problemi ora (credo)
+    public ArrayList<MenuElement> getFilteredList(boolean vegan, boolean vegetarian, boolean celiac, String allergens) {
+        ArrayList<MenuElement> filterSelection = new ArrayList<>();
 
-        for (MenuElement element : dishesList){
+        for (MenuElement element : dishesList)
             if (element.respectsFilters(vegan, vegetarian, celiac))
-                filterSelection.add(element);
-        }
-    }
+                if (element.respectsAllergens(allergens))
+                    filterSelection.add(element);
 
-    // TODO: add method to UML
-    public ArrayList<MenuElement> getFilteredDishes() {
+        for (MenuElement element : drinksList)
+            if (element.respectsFilters(vegan, vegetarian, celiac))
+                if (element.respectsAllergens(allergens))
+                    filterSelection.add(element);
+
         return filterSelection;
     }
 
@@ -82,5 +86,15 @@ public class Catalogue {
                 return element;
 
         return null;
+    }
+
+    // TODO: add to UML
+    public ArrayList<Allergen> getAllergens() {
+        return allergensList;
+    }
+
+    public void addAllergen(Allergen item) {
+        if (!allergensList.contains(item))
+            allergensList.add(item);
     }
 }

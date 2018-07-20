@@ -72,7 +72,7 @@
     <div class="row">
         <div class="col-md-3" id="sidebar">
 
-            <p style="margin-left:2%">Click on the dish name<br> to view its details :</p>
+            <p style="margin-left:2%">Click on the dish name to view its details :</p>
 
 
 

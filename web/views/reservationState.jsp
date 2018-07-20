@@ -81,19 +81,7 @@
 
                             <div id="description<%=n%>" class="collapse" aria-labelledby="card<%=n%>" data-parent="#accordion">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-8">
-                                            <small class="text-muted"><%=shortString(menu)%></small>
-                                        </div>
-                                        <div class="col-4">
-
-                                            <form action="/selection" method="post">
-                                                <input type="hidden" value="<%=n%>">
-                                                <button class="btn modif" >Modify</button>
-                                            </form>
-
-                                        </div>
-                                    </div>
+                                    <small class="text-muted"><%=shortString(menu)%></small>
                                 </div>
                             </div>
                         </div>

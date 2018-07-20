@@ -16,6 +16,7 @@ public class DbReader implements Runnable {
     private String query;
     private ArrayList<MenuElement> dishesList = new ArrayList<>();
     private ArrayList<Reservation> reservationsList = new ArrayList<>();
+    private ArrayList<Allergen> allergensList = new ArrayList<>();
     private Connection connection=null;
     private Statement stm;
 
@@ -68,14 +69,11 @@ public class DbReader implements Runnable {
     }
 
     private void executeSelectQuery() throws SQLException {
-        if(this.query.contains(" DISHES")){
+        if(this.query.contains(" DISHES"))
             populateCatalogue();
-        }
-
-        if(this.query.contains(" RESERVATIONS")){
+        else if(this.query.contains(" RESERVATIONS"))
             getReservationsFromDB();
-        }
-
+        else getAllAllergens();
     }
 
     private void populateCatalogue() throws SQLException {
@@ -123,6 +121,12 @@ public class DbReader implements Runnable {
         }
     }
 
+    private void getAllAllergens() throws SQLException {
+        ResultSet rsAllergens = stm.executeQuery(this.query);
+        while(rsAllergens.next())
+            allergensList.add(new Allergen(rsAllergens.getString("ALLERGEN_CODE"),rsAllergens.getString("ALLERGEN_DESCR")));
+    }
+
     private void executeInsertQuery() throws SQLException {
         if(this.query.contains(" RESERVATIONS ")){
             stm.executeUpdate(this.query);
@@ -153,5 +157,9 @@ public class DbReader implements Runnable {
         if(dbReaderInstance==null)
             dbReaderInstance =  new DbReader();
         return dbReaderInstance;
+    }
+
+    public ArrayList<Allergen> getAllergensList() {
+        return allergensList;
     }
 }

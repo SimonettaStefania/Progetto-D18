@@ -2,6 +2,7 @@ package services;
 
 public class Query {
     public static final String SELECT_ALL_DISHES = "SELECT * FROM DISHES";
+    public static final String SELECT_ALL_ALLERGENS = "SELECT * FROM ALLERGENS";
     public static final String SELECT_STARTERS = "SELECT * FROM STARTERS";
     public static final String SELECT_FIRST_COURSES = "SELECT * FROM FIRST_COURSES";
     public static final String SELECT_MAIN_COURSES = "SELECT * FROM MAIN_COURSES";

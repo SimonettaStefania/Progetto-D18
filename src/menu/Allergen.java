@@ -11,7 +11,7 @@ public class Allergen {
      * @param name String
      * @param allergenCode String
      */
-    public Allergen(String name, String allergenCode) {
+    public Allergen(String allergenCode, String name) {
         this.name = name;
         this.allergenCode = allergenCode;
     }
@@ -41,6 +41,6 @@ public class Allergen {
 
     @Override
     public String toString() {
-        return name + " ( " + allergenCode + " )";
+        return allergenCode + " (" + name + ")";
     }
 }

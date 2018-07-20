@@ -1,5 +1,6 @@
 package restaurant;
 
+import menu.Allergen;
 import menu.Menu;
 import menu.MenuElement;
 import services.DbReader;
@@ -102,6 +103,10 @@ public class Restaurant {
         executeQuery(dbr, Query.SELECT_ALL_DISHES);
         for (MenuElement elem : dbr.getDishesList())
             this.addToCatalogue(elem);
+
+        executeQuery(dbr, Query.SELECT_ALL_ALLERGENS);
+        for (Allergen item : dbr.getAllergensList())
+            dishesCatalogue.addAllergen(item);
 
         dishesCatalogue.getDishes().sort(MenuElement.priceComparator);
         dishesCatalogue.getDishes().sort(MenuElement.typeComparator);

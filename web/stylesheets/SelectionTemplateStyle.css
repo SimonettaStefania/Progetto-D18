@@ -5,11 +5,12 @@ body{
 
 }
 
-
-
 .list-group-item.active{
     background-color:#6576a5;
     border-color: #6576a5;
 }
 
-
+.btn-styled {
+    background-color:#6576a5;
+    border-color: #6576a5;
+}
