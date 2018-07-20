@@ -130,4 +130,11 @@ public class Reservation {
         MenuGenerator menuGenerator = new MenuGenerator(budget, people);
         optimizedMenu = menuGenerator.getGeneratedMenu();
     }
+
+    public String getDateString(){
+
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        return sf.format(eventDate);
+
+    }
 }

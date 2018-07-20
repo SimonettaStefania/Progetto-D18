@@ -1,4 +1,5 @@
 package menu;
+import java.util.HashMap;
 
 /**
  * Class made to memorize the type of filters that can be selected during the creation of a customized menu.
@@ -25,7 +26,6 @@ public class Flags {
      * @param cel celiac
      * @return true if the dish passed the control, false otherwise
      */
-
     public boolean check(boolean veg, boolean vgt, boolean cel) {
         if (veg && !this.vegan) {
             return false;
@@ -37,5 +37,17 @@ public class Flags {
             return false;
         }
         return true;
+    }
+
+    public HashMap<String,Boolean> getFilters(){
+
+        HashMap<String , Boolean> filters = new HashMap<>();
+        filters.put("VEGAN", vegan);
+        filters.put("VEGETARIAN", veggie);
+        filters.put("CELIAC", celiac);
+
+        return filters ;
+
+
     }
 }

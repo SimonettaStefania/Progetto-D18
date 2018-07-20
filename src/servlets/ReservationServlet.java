@@ -14,8 +14,7 @@ import java.util.Date;
 public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        checkStatus(request);
-        forwardTo(request, response, "/views/reservationState.jsp");
+        checkStatus(request, response);
     }
 
     /**
@@ -32,11 +31,16 @@ public class ReservationServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void checkStatus(HttpServletRequest request) {
+    private void checkStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
         String backToStatus = request.getParameter("backToStatus");
 
         if (backToStatus == null) {
+            if (!checkDate(request)) {
+                forwardTo(request, response, "/index.jsp");
+                return;
+            }
+
             reservation = makeReservation(request);
             request.getSession().setAttribute("reservation", reservation);
         } else if (backToStatus.equalsIgnoreCase("new-menu")) {
@@ -52,7 +56,10 @@ public class ReservationServlet extends HttpServlet {
             int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
             reservation.removeMenu(removedMenu);
         }
+
+        forwardTo(request, response, "/views/reservationState.jsp");
     }
+
 
     private Reservation makeReservation(HttpServletRequest request) {
         String formName = request.getParameter("name");
@@ -71,6 +78,15 @@ public class ReservationServlet extends HttpServlet {
         return new Reservation(null, formGuests,
                 eventDate,formName+ " " + formSurname, formEmail);
     }
-}
 
+        private boolean checkDate(HttpServletRequest request){
+
+            String validity = request.getParameter("validity");
+            if (validity == null || validity.equals("1"))
+                return true;
+            else
+                return false;
+
+        }
+}
 

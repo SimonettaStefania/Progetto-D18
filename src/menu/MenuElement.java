@@ -2,6 +2,8 @@ package menu;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class that represents a single dish in the menu . Each dish is described by :
@@ -117,6 +119,18 @@ public class MenuElement  {
     public boolean containsAllergen(Allergen a) {
         return allergenList.contains(a);
 
+    }
+
+    public String showFilters(){
+        String tmp="";
+        HashMap<String,Boolean> filters = flags.getFilters();
+
+        for ( String element : filters.keySet()){
+
+            if ( filters.get(element) )
+                tmp += element + " ; ";
+        }
+        return tmp;
     }
 
     /**

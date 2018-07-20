@@ -66,7 +66,8 @@
 
 <div class="jumbotron" id="mainJumbotronRecap">
 
-    <h1 style="text-align: center; margin-right: 27%">Reservation recap</h1>
+    <h1 style="margin-left: 7%">Reservation recap</h1>
+    <h6 style="margin-left: 7%">Date : <%=reservation.getDateString()%>  Total Guests : <%=reservation.getnGuests()%></h6>
     <br/>
 
     <div class="row">
@@ -108,7 +109,7 @@
                     <tr>
                         <th scope="row"></th>
 
-                        <td><button type="button" class="btn btn-lg" id="totalPerson" style="margin-left: 40%"> Total person: <span class="badge"><%=reservation.calculateGuests()%></span></button></td>
+                        <td><button type="button" class="btn btn-lg" id="totalPerson" style="margin-left: 40%"> Total menus: <span class="badge"><%=reservation.calculateGuests()%></span></button></td>
                         <td><button type="button" class="btn btn-lg" id="totalCost" style="margin-right: 40%">Total cost: <span class="badge"><%=String.format("%.2f &euro;", reservation.getReservationCost())%></span></button></td>
                     </tr>
 
@@ -134,7 +135,7 @@
 
             <%if (!reservation.checkPeople()) {%>
                 <div class="alert alert-danger" role="alert" style="margin-right: 12%">
-                    Number of people does not match: please check if a menu is present for each guest.
+                    Number of menus does not match with the guests number : please ensure that a menu is present for each guest.
                 </div>
             <%}%>
 
