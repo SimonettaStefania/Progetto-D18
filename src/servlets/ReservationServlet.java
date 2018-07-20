@@ -14,12 +14,8 @@ import java.util.Date;
 public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        checkStatus(request);
-        if (checkDate(request))
-            forwardTo(request, response, "/views/reservationState.jsp");
-        else
-            forwardTo(request, response, "/index.jsp");
-
+        checkStatus(request, response );
+        forwardTo(request, response, "/views/reservationState.jsp");
     }
 
     /**
@@ -36,11 +32,14 @@ public class ReservationServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void checkStatus(HttpServletRequest request) {
+    private void checkStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
         String backToStatus = request.getParameter("backToStatus");
 
         if (backToStatus == null) {
+            if ( !checkDate(request))
+                forwardTo(request, response, "/index.jsp");
+
             reservation = makeReservation(request);
             request.getSession().setAttribute("reservation", reservation);
         } else if (backToStatus.equalsIgnoreCase("new-menu")) {
@@ -56,7 +55,9 @@ public class ReservationServlet extends HttpServlet {
             int removedMenu = Integer.parseInt(request.getParameter("removedMenu"));
             reservation.removeMenu(removedMenu);
         }
+
     }
+
 
     private Reservation makeReservation(HttpServletRequest request) {
         String formName = request.getParameter("name");

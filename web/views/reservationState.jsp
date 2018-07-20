@@ -48,7 +48,7 @@
 
 <div class="jumbotron" style="background-color:#f1f1f1d1; padding:2%; margin-top:3%; margin-left:5%;margin-right:5%">
     <h1 style="margin-left: 7%; color: black">Reservation State </h1>
-    <h6 style="margin-left: 7%; color: black">Date : <%=reservation.dateToString()%>  Total Guests : <%=reservation.getnGuests()%></h6>
+    <h6 style="margin-left: 7%; color: black">Date : <%=reservation.getDateString()%>  Total Guests : <%=reservation.getnGuests()%></h6>
     <div class="row"  id="row1_pg2">
 
         <div class="col-md-5">

@@ -131,9 +131,10 @@ public class Reservation {
         optimizedMenu = menuGenerator.getGeneratedMenu();
     }
 
-    public String dateToString(){
+    public String getDateString(){
 
-        return eventDate.getDate() + "/" + eventDate.getMonth() + "/" + (eventDate.getYear() + 1900 );
+        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+        return sf.format(eventDate);
 
     }
 }
