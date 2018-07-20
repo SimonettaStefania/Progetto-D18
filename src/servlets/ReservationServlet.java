@@ -14,8 +14,7 @@ import java.util.Date;
 public class ReservationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        checkStatus(request, response );
-        forwardTo(request, response, "/views/reservationState.jsp");
+        checkStatus(request, response);
     }
 
     /**
@@ -37,8 +36,10 @@ public class ReservationServlet extends HttpServlet {
         String backToStatus = request.getParameter("backToStatus");
 
         if (backToStatus == null) {
-            if ( !checkDate(request))
+            if (!checkDate(request)) {
                 forwardTo(request, response, "/index.jsp");
+                return;
+            }
 
             reservation = makeReservation(request);
             request.getSession().setAttribute("reservation", reservation);
@@ -56,6 +57,7 @@ public class ReservationServlet extends HttpServlet {
             reservation.removeMenu(removedMenu);
         }
 
+        forwardTo(request, response, "/views/reservationState.jsp");
     }
 
 

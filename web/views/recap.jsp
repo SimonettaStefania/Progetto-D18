@@ -66,8 +66,8 @@
 
 <div class="jumbotron" id="mainJumbotronRecap">
 
-    <h1 style="text-align: center; margin-right:59%">Reservation recap</h1>
-    <h6 style="margin-left: 7%; color: black">Date : <%=reservation.getDateString()%>  Total Guests : <%=reservation.getnGuests()%></h6>
+    <h1 style="margin-left: 7%">Reservation recap</h1>
+    <h6 style="margin-left: 7%">Date : <%=reservation.getDateString()%>  Total Guests : <%=reservation.getnGuests()%></h6>
     <br/>
 
     <div class="row">
