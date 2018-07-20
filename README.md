@@ -20,5 +20,5 @@ When the reservation is confirmed it will be saved into the database and the cus
 In order to run the program is necessary to have:
 * Apache Tomcat Server 8.5.3 or higher
 * JDK 8 or higher
-* MySql Server (progettoD18 user must be created with *delete, insert, select permiossions*)
+* MySql Server (progettoD18 user must be created with *delete, insert, select* permissions)
 
