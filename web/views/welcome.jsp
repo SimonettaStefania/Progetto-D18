@@ -28,28 +28,9 @@
 <body background="../img/background.jpg"  >
 
 
-<!-- ============= NAVBAR =======================================================================-->
+<!-- ============= NAVBAR =======================================================================
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-    <a class="navbar-brand" href="#">Project D-18</a>
-    <button class="navbar-toggler p-0 border-0" type="button"></button>
-
-    <div class="navbar-collapse offcanvas-collapse">
-        <ul class="navbar-nav mr-auto">
-
-            <li class="nav-item">
-                <a class="nav-link active" href="/home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/reservations">Reservations</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/catalogue">Catalogue</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<jsp:include page="navbar.jsp"/>
 
 <!-- ============= TITLE AND DESCRIPTION =======================================================================-->
 
@@ -90,8 +71,6 @@
                 </div>
 
                 <!-- ------------------------------------ EMAIL  ------------------------------------------------------------------>
-
-                <!-- TODO : input type = email instead of text -->
 
                 <div class="input-group input-group-sm mb-3 ">
 
