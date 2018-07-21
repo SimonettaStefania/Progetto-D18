@@ -2,6 +2,7 @@ package services;
 
 import menu.Allergen;
 import menu.DishType;
+import menu.Menu;
 import menu.MenuElement;
 import restaurant.Reservation;
 
@@ -16,6 +17,8 @@ public class DbReader implements Runnable {
     private String query;
     private ArrayList<MenuElement> dishesList = new ArrayList<>();
     private ArrayList<Reservation> reservationsList = new ArrayList<>();
+    private ArrayList<Menu> menuList = new ArrayList<>();
+    private ArrayList<String> menuDishesCodeList = new ArrayList<>();
     private ArrayList<Allergen> allergensList = new ArrayList<>();
     private Connection connection=null;
     private Statement stm;
@@ -60,10 +63,10 @@ public class DbReader implements Runnable {
             executeSelectQuery();
         }else {
             if(this.query.contains("INSERT ")){
-                executeInsertQuery();
+                stm.executeUpdate(this.query);
             }
             if(this.query.contains("DELETE ")){
-                executeDeleteQuery();
+                stm.executeUpdate(this.query);
             }
         }
     }
@@ -71,8 +74,12 @@ public class DbReader implements Runnable {
     private void executeSelectQuery() throws SQLException {
         if(this.query.contains(" DISHES"))
             populateCatalogue();
-        else if(this.query.contains(" RESERVATIONS"))
+        else if(this.query.contains(" RESERVATIONS "))
             getReservationsFromDB();
+        else if(this.query.contains(" MENUS "))
+            getMenusFromDB();
+        else if(this.query.contains(" DISH_IN_MENU "))
+            getMenuDishesFromDB();
         else getAllAllergens();
     }
 
@@ -121,25 +128,27 @@ public class DbReader implements Runnable {
         }
     }
 
+    private void getMenusFromDB() throws SQLException {
+        ResultSet rsMenus = stm.executeQuery(this.query);
+        while(rsMenus.next()){
+            menuList.add(new Menu(rsMenus.getString("MENU_NAME"),rsMenus.getInt("MENU_N_GUESTS")));
+        }
+    }
+
+    private void getMenuDishesFromDB() throws SQLException {
+        ResultSet rsMenuDishes= stm.executeQuery(this.query);
+        while(rsMenuDishes.next()){
+            menuDishesCodeList.add(rsMenuDishes.getString("DISH_CODE"));
+        }
+    }
+
     private void getAllAllergens() throws SQLException {
         ResultSet rsAllergens = stm.executeQuery(this.query);
         while(rsAllergens.next())
             allergensList.add(new Allergen(rsAllergens.getString("ALLERGEN_CODE"),rsAllergens.getString("ALLERGEN_DESCR")));
     }
 
-    private void executeInsertQuery() throws SQLException {
-        if(this.query.contains(" RESERVATIONS ")){
-            stm.executeUpdate(this.query);
-            //System.out.println("Insert OK");
-        }
-    }
 
-    private void executeDeleteQuery() throws SQLException {
-        if(this.query.contains(" RESERVATIONS ")){
-            stm.executeUpdate(this.query);
-            //System.out.println("Delete OK");
-        }
-    }
 
     public void setQuery(String query) {
         this.query = query;
@@ -153,13 +162,21 @@ public class DbReader implements Runnable {
         return reservationsList;
     }
 
-    public static synchronized DbReader getDbReaderInstance(){
-        if(dbReaderInstance==null)
-            dbReaderInstance =  new DbReader();
-        return dbReaderInstance;
+    public ArrayList<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public ArrayList<String> getMenuDishesCodeList() {
+        return menuDishesCodeList;
     }
 
     public ArrayList<Allergen> getAllergensList() {
         return allergensList;
+    }
+
+    public static synchronized DbReader getDbReaderInstance(){
+        if(dbReaderInstance==null)
+            dbReaderInstance =  new DbReader();
+        return dbReaderInstance;
     }
 }
