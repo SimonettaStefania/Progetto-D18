@@ -1,5 +1,7 @@
 <%@ page import="restaurant.Reservation" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="menu.MenuElement" %>
+<%@ page import="menu.Menu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +19,14 @@
                     sb.append("<br/>").append(sdf.format(r.getEventDate())).append(" - ").append(r.getnGuests())
                       .append(" guests<br/>Total price: &euro; ").append(String.format("%.2f", r.getReservationCost()));
 
-                    /*
+
                     for (Menu m : r.getCreatedMenu()) {
                         sb.append("<br/><br/>Price: &euro; ").append(String.format("%.2f", m.getMenuCost()))
                           .append("&emsp;&emsp; People: ").append(m.getnMenuGuests());
                         for (MenuElement el : m.getMenuElementsList())
                             sb.append("<br/> - ").append(el.getName());
                     }
-                    */
+
 
                     return sb.toString();
                 }

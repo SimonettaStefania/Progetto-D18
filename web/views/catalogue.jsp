@@ -1,226 +1,156 @@
+<!-- CATALOGUE PAGE : this page shows dishes and drinks offered by the restaurant ; for each category
+     (starters, first courses, main courses, desserts, drinks) creates a list of dishes where the user
+      can read name, price, ingredients, allergens ; it's also shown if each dish is vegetarian , vegan
+      or gluten free ( filters )-->
+
+
 <%@ page import="restaurant.Catalogue" %>
 <%@ page import="menu.MenuElement" %>
 <%@ page import="menu.DishType" %>
 <%@ page import="restaurant.Restaurant" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+        <head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <!-- Page informations ( name, CSS styles )-->
 
-    <title>Catalogue Page</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../stylesheets/CatalogueStyle.css">
+                <title>Catalogue Page</title>
 
-    <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();    %>
-    <%!
-        private String itemDetails(MenuElement element) {
-            StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+                <link rel="stylesheet" href="../stylesheets/CatalogueStyle.css">
 
-            if ( element.getType()!= DishType.DRINK ) {
-                s.append("<br><b>Ingredients:</b> <br>" + element.showDetails() + "<br><b>Allergens:</b> <br>" + element.showAllergenes());
-                s.append("<br><b>Filters:</b> <br> " + element.showFilters());
-            }else
-                s.append("<br><b>Allergens:</b> <br>" + element.showAllergenes());
+                <!-- List of dishes and drinks ( catalogueElement ) taken from the restaurant -->
 
-            return s.toString();
+                <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
+                    ArrayList<MenuElement> catalogueElement = catalogue.getDishes();
+                    catalogueElement.addAll(catalogue.getDrinks());
+                    DishType[] types = DishType.values();
+                    %>
 
-        }
-    %>
-</head>
+                <!-- Method that creates a description for each dish with its price , ingredients, allergens, and filters ;
+                     For the drinks, only allergens are not shown-->
 
-<body background ="../img/background.jpg" >
+                <%!
+                    private String itemDetails(MenuElement element) {
+                        StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
+                        s.append("<br><b>Allergens:</b> <br>").append(element.showAllergenes());
 
+                        if ( element.getType()!= DishType.DRINK ) {
+                            s.append("<br><b>Ingredients:</b> <br>").append(element.showDetails());
+                            s.append("<br><b>Filters:</b> <br> ").append(element.showFilters());
+                        }
 
+                        return s.toString();
 
-<!-- ========== NAVBAR ======================================================================================================-->
+                    }
+                %>
 
-<jsp:include page="navbar.jsp"/>
+        </head>
 
+        <body background ="../img/background.jpg" >
 
+            <!-- Navigation Bar on the top of the page is included in the page -->
 
+                <jsp:include page="navbar.jsp"/>
 
-
-<!-- ========== CATEGORY LIST ======================================================================================================-->
-
-
-<div class="jumbotron" id= "Jumbotron">
-    <h1 style="margin-left: 8%">Catalogue</h1>
-    <div class="row">
-        <div class="col-md-3" id="sidebar">
-
-            <p style="margin-left:2%">Click on the dish name to view its details :</p>
-
+            <!-- Content of the page : categories and dishes -->
 
 
-            <div class="list-group" id="list-tab" role="tablist">
+            <div class="jumbotron" id= "Jumbotron">
 
-                <a class="list-group-item list-group-item-action active" id="label-starters" data-toggle="list" href="#list-starters" role="tab" >Starters</a>
-                <a class="list-group-item list-group-item-action" id="label-first" data-toggle="list" href="#list-first" role="tab" >First Courses</a>
-                <a class="list-group-item list-group-item-action" id="label-main" data-toggle="list" href="#list-main" role="tab" >Main Courses</a>
-                <a class="list-group-item list-group-item-action" id="label-desserts" data-toggle="list" href="#list-desserts" role="tab" >Desserts</a>
-                <a class="list-group-item list-group-item-action" id="label-drinks" data-toggle="list" href="#list-drinks" role="tab" >Drinks</a>
+                <h1 style="margin-left: 8%">Catalogue</h1>
+                <div class="row">
+                    <div class="col-md-3" id="sidebar">
+
+                        <p style="margin-left:2%">Click on the dish name to view its details :</p>
+
+   <!-- ------------------------------------------------- CATEGORIES and HOME BUTTON --------------------------------------------------------------------->
+
+                        <div class="list-group" id="list-tab" role="tablist">
+
+                            <% for (int i=0 ; i < types.length ; i++) {
+                                String category = types[i].toString();
+                            %>
+
+                                <a class="list-group-item list-group-item-action <%if (i==0) out.print("active");%>" id="label-<%=category%>" data-toggle="list" href="#list-<%=category%>" role="tab" >
+                                    <%=category%>
+                                </a>
+
+
+                            <%}%>
+
+                        </div>
+
+                        <form action="/home" method="post">
+                            <input type="submit" class="btn btn-success btn-lg" value="&laquo; Home" style="margin-top:6%"/>
+                        </form>
+
+                    </div>
+
+  <!-- -------------------------------------------------- DISHES DETAILS ------------------------------------------------------------------------>
+  <!-- For each category , takes all the elements in the catalogue that belongs to it and create a card element with the name of the dish
+       and a description ( itemDetails method ) -->
+                    <div class="col-md-9">
+
+                        <div class="tab-content" id="nav-tabContent" >
+
+                            <% for (int i=0 ; i < types.length ;  i++){
+                                DishType nameType = types[i]; %>
+
+                                <div class="tab-pane fade show <%if (i==0) out.print("active");%> " id="list-<%=nameType.toString()%>" role="tabpanel" aria-labelledby="label-<%=nameType.toString()%>">
+
+                                    <div id="accordition<%=nameType.toString()%>">
+
+                                        <%for ( MenuElement item : catalogueElement){
+                                            if (item.getType().equals(nameType)) {%>
+
+                                            <div class = "card" >
+                                                <div class="card-header" id="<%=item.getElementCode()%>">
+                                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
+                                                            aria-controls="description<%=item.getElementCode()%>">
+                                                        <%=item.getName()%>
+                                                    </button>
+                                                </div>
+
+                                                <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accordition<%=nameType.toString()%>">
+                                                    <div class="card-body" style="font-size:13px;"><p><%=itemDetails(item)%></p></div>
+                                                </div>
+
+                                            </div>
+                                    <%     }
+                                        } %>
+                                    </div>
+
+                                </div>
+
+                            <%}%>
+
+
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
 
-            <form action="/home" method="post">
-                <input type="submit" class="btn btn-success btn-lg" value="&laquo; Home" style="margin-top:6%">
-            </form>
-        </div>
+        <!-- ----------------------------------------------- BOOTSTRAP SCRIPTS ----------------------------------------------------------------------------------- -->
 
-        <!-- =====================================================DISHES ELEMENTS ===========================================================-->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-        <div class="col-md-9">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+                        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
-            <div class="tab-content" id="nav-tabContent" >
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+                        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
-                <!-- -------------------------------------------------------- STARTERS -------------------------------------------------------->
-
-                <div class="tab-pane fade show active" id="list-starters" role="tabpanel" aria-labelledby="label-starters">
-
-                    <div id="accorditionStarter">
-
-                        <%  for (MenuElement item : catalogue.getDishes()) {
-                                if (item.getType().equals(DishType.STARTER)) {  %>
-                        <div class="card">
-                            <div class="card-header" id="<%=item.getElementCode()%>">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
-                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
-                                </h5>
-                            </div>
-                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionStarter">
-                                <div class="card-body" style="font-size:13px;"><p><%=itemDetails(item)%></p></div>
-                            </div>
-                        </div>
-                            <%  }
-                            } %>
-
-                    </div>
-
-                </div>
-
-                <!-- -------------------------------------------------------- FIRST COURSE -------------------------------------------------------->
-
-                <div class="tab-pane fade " id="list-first" role="tabpanel" aria-labelledby="label-first">
-
-                    <div class="accordion" id="accorditionFirst">
-
-                        <%  for (MenuElement item : catalogue.getDishes()) {
-                            if (item.getType().equals(DishType.FIRST_COURSE)) {  %>
-                        <div class="card">
-                            <div class="card-header" id="<%=item.getElementCode()%>">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
-                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
-                                </h5>
-                            </div>
-                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionFirst">
-                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
-                            </div>
-                        </div>
-                        <%  }
-                        } %>
-
-                    </div>
-
-                </div>
-
-                <!-- -------------------------------------------------------- MAIN COURSE -------------------------------------------------------->
-
-                <div class="tab-pane fade " id="list-main" role="tabpanel" aria-labelledby="label-main">
-
-                    <div class="accordion" id="accorditionMain">
-
-                        <%  for (MenuElement item : catalogue.getDishes()) {
-                            if (item.getType().equals(DishType.MAIN_COURSE)) {  %>
-                        <div class="card">
-                            <div class="card-header" id="<%=item.getElementCode()%>">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
-                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
-                                </h5>
-                            </div>
-                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionMain">
-                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
-                            </div>
-                        </div>
-                        <%  }
-                        } %>
-                    </div>
-
-                </div>
-
-                <!-- -------------------------------------------------------- DESSERTS -------------------------------------------------------->
-
-                <div class="tab-pane fade " id="list-desserts" role="tabpanel" aria-labelledby="label-desserts">
-
-                    <div class="accordion" id="accorditionDessert">
-
-                        <%  for (MenuElement item : catalogue.getDishes()) {
-                            if (item.getType().equals(DishType.DESSERT)) {  %>
-                        <div class="card">
-                            <div class="card-header" id="<%=item.getElementCode()%>">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
-                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
-                                </h5>
-                            </div>
-                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDessert">
-                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
-                            </div>
-                        </div>
-                        <%  }
-                        } %>
-                    </div>
-
-                </div>
-
-                <!-- -------------------------------------------------------- DRINKS -------------------------------------------------------->
-
-                <div class="tab-pane fade " id="list-drinks" role="tabpanel" aria-labelledby="label-drinks">
-
-                    <div class="accordion" id="accorditionDrink">
-
-                        <%  for (MenuElement item : catalogue.getDrinks()) {    %>
-                        <div class="card">
-                            <div class="card-header" id="<%=item.getElementCode()%>">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-info collapsed btt" data-toggle="collapse" data-target="#description<%=item.getElementCode()%>"
-                                            aria-controls="description<%=item.getElementCode()%>"><%=item.getName()%></button>
-                                </h5>
-                            </div>
-                            <div id="description<%=item.getElementCode()%>" class="collapse " aria-labelledby="<%=item.getElementCode()%>" data-parent="#accorditionDrink">
-                                <div class="card-body" style="font-size:13px;"><%=itemDetails(item)%></div>
-                            </div>
-                        </div>
-                        <%  }   %>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-
-<!-- =================== BOOTSTRAP SCRIPTS ======================================================================== -->
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
-</body>
+        </body>
 
 </html>
