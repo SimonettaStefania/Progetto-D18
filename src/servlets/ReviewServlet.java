@@ -3,18 +3,17 @@ package servlets;
 import restaurant.Reservation;
 import restaurant.Restaurant;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "ReviewServlet", urlPatterns = "/reservations")
-public class ReviewServlet extends HttpServlet {
+public class ReviewServlet extends AbstractServlet {
+    private String DEFAULT_ROUTE = "/views/reservations.jsp";
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
@@ -25,16 +24,10 @@ public class ReviewServlet extends HttpServlet {
             if (code.equalsIgnoreCase(r.getReservationCode()) && email.equalsIgnoreCase(r.getCustomerMail()))
                 request.setAttribute("pickedReservation", r);
 
-        forwardTo(request, response, "/views/reservations.jsp");
+        forwardTo(request, response, DEFAULT_ROUTE);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/views/reservations.jsp");
-    }
-
-    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher(route);
-        rd.forward(request, response);
+        forwardTo(request, response, DEFAULT_ROUTE);
     }
 }
