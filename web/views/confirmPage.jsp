@@ -3,47 +3,49 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
 
-    <title>Confirm page</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
+        <title>Confirm page</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../stylesheets/ConfirmTemplateStyle.css">
+        <!-- -------------------------------------- CSS LINK --------------------------------------------------- -->
 
-</head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../stylesheets/ConfirmTemplateStyle.css">
 
-<body background ="../img/background.jpg" style="background-repeat: no-repeat">
+    </head>
 
-<!-- -------------------------------------- NAVBAR --------------------------------------------------- -->
+    <body background ="../img/background.jpg" style="background-repeat: no-repeat">
 
-<jsp:include page="navbar.jsp"/>
+    <!-- -------------------------------------- NAVBAR --------------------------------------------------- -->
 
-<!-- -------------------------------------- TEXT --------------------------------------------------- -->
+            <jsp:include page="navbar.jsp"/>
 
-<div class="jumbotron" id="confirmJumbotron">
-    <div style="text-align: center;">
-        <h1>Your reservation has been successfully made!</h1>
-        <br/>
+    <!-- -------------------------------------- TEXT --------------------------------------------------- -->
 
-        <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
-            out.print("<h3>Reservation ID: &emsp;" + reservation.getReservationCode() + "</h3>");   %>
+            <div class="jumbotron" id="confirmJumbotron" style = "text-align: center">
+                <div >
+                    <h1>Your reservation has been successfully made!</h1>
+                    <br/>
 
-        <br/>
-        Thank you, and see you soon!
-    </div>
+                    <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
+                        out.print("<h3>Reservation ID: &emsp;" + reservation.getReservationCode() + "</h3>");   %>
 
-    <br/>
+                    <br/>
+                    Thank you, and see you soon!
+                </div>
+
+                <br/>
 
     <!-- -------------------------------------- BTN BACK HOME--------------------------------------------------- -->
 
-    <form action="/home" method="post" style="text-align: center">
-        <input type="submit" class="btn btn-danger btn-lg" value="Home">
-    </form>
+                <form action="/home" method="post" >
+                    <input type="submit" class="btn btn-danger btn-lg" value="Home">
+                </form>
 
-</div>
-</body>
+            </div>
+    </body>
+</html>

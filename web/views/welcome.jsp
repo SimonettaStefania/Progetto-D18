@@ -1,3 +1,6 @@
+<!-- Welcome page : this page is the home of the application, where the customer can book a reservation , see the ones
+he has already created and view the restaurant catalogue -->
+
 <%@ page import="restaurant.Restaurant" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
@@ -21,8 +24,6 @@
 
         </head>
 
-<!-- ==========  BODY OF THE PAGE ======================================================================================-->
-
 
         <body background="../img/background.jpg"  >
 
@@ -36,15 +37,18 @@
                     <div class = "col-8 ">
 
                         <h1 class="display-4">Welcome to Project D-18 book page!</h1>
-                        <p id="description">This website will guide you through the creation of a reservation: you can book your event and
-                            add one or more menu for your guests. <br/>What are you waiting for? See the options below to discover what our website
-                            can offer!</p>
+                        <p id="description">
+                        This website will guide you through the creation of a reservation: complete the form below and start organizing your event !
+                        You can create different types of menus according to the guests' tastes and needs. For each menu, you have to specify
+                        how many people will order it : in the end, the total number of ordered menus will correspond to the total number of guests .
+
+                        </p>
 
                     </div>
                 </div>
             </div>
 
-        <!-- ============= FORM CATALOGUE AND RESERVATIONS =======================================================================-->
+        <!-- ============= FORM CATALOGUE AND RESERVATIONS =============================================================-->
 
             <div class="jumbotron jumbotron-theme2">
 
@@ -54,7 +58,7 @@
 
                         <p>Want to make a new reservation? Compile the form below and organize your event!</p>
 
-                        <!-- --------------------------- NAME AND SURNAME ------------------------------------------------------------------>
+                        <!-- --------------------------- NAME AND SURNAME --------------------------------------------->
 
                         <form action="../status" method="post">
                             <div class="input-group input-group-sm mb-3">
@@ -67,7 +71,7 @@
 
                             </div>
 
-                            <!-- ------------------------------------ EMAIL  ------------------------------------------------------------------>
+                        <!-- ------------------------------------ EMAIL  ---------------------------------------------->
 
                             <div class="input-group input-group-sm mb-3 ">
 
@@ -79,7 +83,7 @@
 
                             </div>
 
-                            <!-- ------------------------------------ DATE  ------------------------------------------------------------------->
+                        <!-- ------------------------------------ DATE  ----------------------------------------------->
 
 
                             <div class="input-group input-group-sm mb-3 ">
@@ -94,7 +98,7 @@
 
                             </div>
 
-                            <!-- ------------------------------------ GUESTS NUMBER  ------------------------------------------------------------------>
+                        <!-- ------------------------------------ GUESTS NUMBER  -------------------------------------->
 
 
                             <div class="input-group input-group-sm mb-3 ">
@@ -108,7 +112,7 @@
 
 
                             </div>
-                            <!-- ------------------------------------ CONFIRM BUTTON  ------------------------------------------------------------------>
+                        <!-- ------------------------------------ CONFIRM BUTTON  ------------------------------------->
 
                             <input class="btn btn-dark" id="bookButton"  type="submit" value="Book &raquo;" onclick="dateControl()" />
                             <input name = "validity" type="hidden" id="Validity" value="0"  />
@@ -118,7 +122,7 @@
                     </div>
 
 
-                    <!-- ============= CATALOGUE =============================================================================================-->
+        <!-- ============= CATALOGUE ===================================================================================-->
 
 
                     <div class = "col col-md-3">
@@ -130,7 +134,7 @@
                         </form>
                     </div>
 
-                    <!-- ============= RESERVATIONS ===============================================================================================-->
+        <!-- ============= RESERVATIONS ================================================================================-->
 
 
                     <div class="col col-md-3">
@@ -148,7 +152,7 @@
             </div>
 
 
-        <!-- ============= BOOTSTRAP SCRIPTS =======================================================================-->
+        <!-- ============= BOOTSTRAP SCRIPTS ===========================================================================-->
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
@@ -156,7 +160,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
 
-        <!-- ============= RESERVATION DAY CHECK SCRIPT =======================================================================-->
+        <!-- ============= RESERVATION DAY CHECK SCRIPT ================================================================-->
 
         <script type="text/javascript">
 
