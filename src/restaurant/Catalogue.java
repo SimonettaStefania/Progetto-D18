@@ -21,6 +21,13 @@ public class Catalogue {
         return drinksList;
     }
 
+    // TODO: provvisorio
+    public ArrayList<MenuElement> getCompleteList() {
+        ArrayList<MenuElement> completeList = new ArrayList<>(dishesList);
+        completeList.addAll(drinksList);
+        return completeList;
+    }
+
     // TODO: add to UML
     public ArrayList<Allergen> getAllergens() {
         return allergensList;

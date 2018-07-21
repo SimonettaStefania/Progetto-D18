@@ -2,7 +2,6 @@ package restaurant;
 
 import menu.Menu;
 import menu.Allergen;
-import menu.Menu;
 import menu.MenuElement;
 import services.DbReader;
 import services.Query;
