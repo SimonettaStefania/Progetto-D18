@@ -1,7 +1,6 @@
 package restaurant;
 
 import menu.Allergen;
-import menu.Menu;
 import menu.MenuElement;
 import services.DbReader;
 import services.Query;
@@ -11,8 +10,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Restaurant {
+    private static final String NAME = "Progetto D-18";
+    private static final int N_COVERS =  150;
     private static Restaurant restaurantInstance;
-    private static int N_COVERS =  150 ;
+
     private String name;
     private int nCover;
     private Catalogue dishesCatalogue;
@@ -25,9 +26,7 @@ public class Restaurant {
         this.dishesCatalogue = new Catalogue();
         this.reservationList = new ArrayList<>();
 
-        if (database)
-            readDatabase();
-        // else readLocal();    TODO: creare una copia locale in caso di errori?
+        if (database) readDatabase();
     }
 
     public String getName() {
@@ -38,9 +37,12 @@ public class Restaurant {
         return nCover;
     }
 
-
     public Catalogue getDishesCatalogue() {
         return dishesCatalogue;
+    }
+
+    public ArrayList<Reservation> getReservationList() {
+        return reservationList;
     }
 
     public void setCatalogue(Catalogue cat) {
@@ -55,43 +57,16 @@ public class Restaurant {
         dishesCatalogue.removeElement(elem);
     }
 
-    // TODO: ha poco senso passare da qui per aggiungere/togliere elementi al menu, da rivedere i diagrammi di sequenza?
-    public void addDish(Reservation res, Menu menu, MenuElement menuElement){
-        res.addDish(menu, menuElement);
-    }
-
-    public void removeDish(Reservation res, Menu menu, MenuElement menuElement){
-        res.removeDish(menu, menuElement);
-    }
-
     public String showCatalogue (){
         String tmp = "Catalogo del ristorante \" " + name + " \" :\n" ;
             tmp += dishesCatalogue.toString();
         return tmp ;
     }
 
-    public ArrayList<Reservation> getReservationList() {
-        return reservationList;
-    }
-
     public static synchronized  Restaurant getRestaurantInstance() {
         if (restaurantInstance == null)
-            restaurantInstance =  new Restaurant("Da Ciccio", 150,true);
+            restaurantInstance =  new Restaurant(NAME, N_COVERS, true);
         return restaurantInstance;
-    }
-
-    public Reservation getLastReservation(){
-        int reservationListSize;
-
-        if(!(reservationList.isEmpty())){
-            reservationListSize = reservationList.size();
-            return reservationList.get(reservationListSize-1);
-        }
-        return null;
-    }
-
-    public void removeLastReservation(){
-        reservationList.remove(getLastReservation());
     }
 
     private void readDatabase() {
@@ -125,6 +100,7 @@ public class Restaurant {
 
     }
 
+    // TODO: move to DatabaseReader
     private void executeQuery(DbReader dbr, String query) {
         Thread dbThread = new Thread(dbr);
         dbr.setQuery(query);
@@ -164,8 +140,9 @@ public class Restaurant {
         return sb.toString();
     }
 
-
+    // TODO: remove!!
     public static int getStaticCovers(){
-        return N_COVERS;
+        Restaurant r = Restaurant.getRestaurantInstance();
+        return r.getnCover();
     }
 }
