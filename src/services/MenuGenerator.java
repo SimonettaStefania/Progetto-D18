@@ -32,8 +32,8 @@ public class MenuGenerator {
 
     // TODO: add to javadoc and UML
     private void initOptimizationMap() {
-        double budget[] = {0.35, 0.25, 0.25};
-        double starters[] = {0.25, 0.3, 0.3};
+        double starters[] = {0.35, 0.25, 0.25};
+        double budget[] = {0.25, 0.3, 0.3};
         double first[] = {0.2, 0.4, 0.25};
         double main[] = {0.2, 0.25, 0.4};
 
@@ -121,6 +121,7 @@ public class MenuGenerator {
 
         ArrayList<MenuElement> tmp = new ArrayList<>();
         for (MenuElement element : catalogueList) {
+            if (type.equals(DishType.DRINK)) break;
             if (element.getType() == type) {
                 if (tmpElem == null)
                     tmpElem = element;
