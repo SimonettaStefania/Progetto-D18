@@ -7,6 +7,7 @@ import services.Query;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 public class Restaurant {
@@ -69,11 +70,8 @@ public class Restaurant {
         return restaurantInstance;
     }
 
-    private void readDatabase() {
+    private synchronized void readDatabase() {
         DbReader dbr = DbReader.getDbReaderInstance();
-
-        executeQuery(dbr, Query.SELECT_RESERVATION);
-        reservationList.addAll(dbr.getReservationsList());
 
         executeQuery(dbr, Query.SELECT_ALL_DISHES);
         for (MenuElement elem : dbr.getDishesList())
@@ -85,6 +83,37 @@ public class Restaurant {
 
         dishesCatalogue.getDishes().sort(MenuElement.priceComparator);
         dishesCatalogue.getDishes().sort(MenuElement.typeComparator);
+
+        populateReservations(dbr);
+
+    }
+
+    private synchronized void populateReservations(DbReader dbr){
+        executeQuery(dbr, Query.SELECT_RESERVATION);
+        reservationList.addAll(dbr.getReservationsList());
+
+        for(Reservation res: reservationList){
+            String addToQuery="WHERE RES_CODE ='"+res.getReservationCode()+"' ORDER BY MENU_CODE";
+            executeQuery(dbr,Query.editQuery(Query.SELECT_MENU,addToQuery));
+
+            res.getCreatedMenu().addAll(dbr.getMenuList());
+
+            readMenuDishes(res,dbr);
+
+        }
+    }
+    private synchronized void readMenuDishes(Reservation reservation, DbReader dbr){
+        int arraySize = reservation.getCreatedMenu().size();
+        String addToQuery;
+        for (int menuIndex=0; menuIndex<arraySize; menuIndex++){
+            Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
+
+            addToQuery="WHERE (MENU_CODE='"+menuIndex+"' AND RES_CODE='"+reservation.getReservationCode()+"')";
+            executeQuery(dbr,Query.editQuery(Query.SELECT_DISH_IN_MENU,addToQuery));
+            for(String code: dbr.getMenuDishesCodeList()){
+                currentMenu.getMenuElementsList().add(dishesCatalogue.getElementByCode(code));
+            }
+        }
     }
 
     public synchronized void insertReservation(Reservation reservation) {
@@ -97,6 +126,34 @@ public class Restaurant {
                 reservation.getnGuests(), reservation.getReservationCost(), new Date(reservation.getEventDate().getTime()),
                 reservation.getCustomerNameSurname(), reservation.getCustomerMail());
         executeQuery(dbr,Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
+
+        insertMenus(reservation,dbr);
+
+    }
+
+    private synchronized void insertMenus(Reservation reservation,DbReader dbr){
+        Locale.setDefault(Locale.US);
+        int arraySize = reservation.getCreatedMenu().size();
+        String addToQuery;
+
+        for (int menuIndex=0; menuIndex<arraySize; menuIndex++){
+            Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
+
+            addToQuery = String.format("('%s','%s','%s',%d)", reservation.getReservationCode(),
+                menuIndex, currentMenu.getName(),currentMenu.getnMenuGuests());
+            executeQuery(dbr,Query.editQuery(Query.INSERT_MENU,addToQuery));
+
+            insertDishesInMenu(reservation,menuIndex,currentMenu,dbr);
+        }
+    }
+
+    private synchronized  void insertDishesInMenu(Reservation reservation,int menuIndex,Menu menu,DbReader dbr){
+        String addToQuery;
+        for(MenuElement elem: menu.getMenuElementsList()){
+            addToQuery = String.format("('%s',%s,'%s')", reservation.getReservationCode(),
+                    menuIndex, elem.getElementCode());
+            executeQuery(dbr,Query.editQuery(Query.INSERT_DISH_IN_MENU,addToQuery));
+        }
 
     }
 
