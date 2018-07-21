@@ -16,6 +16,18 @@ public class ReviewServlet extends AbstractServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action=request.getParameter("action");
+
+        if(action.equals("confirm")){
+            searchReservations(request);
+        }else if(action.equals("delete")){
+            deleteReservation(request);
+        }
+
+        forwardTo(request, response, DEFAULT_ROUTE);
+    }
+
+    private void searchReservations(HttpServletRequest request){
         String email = request.getParameter("email");
         String code = request.getParameter("res-id");
 
@@ -24,7 +36,12 @@ public class ReviewServlet extends AbstractServlet {
             if (code.equalsIgnoreCase(r.getReservationCode()) && email.equalsIgnoreCase(r.getCustomerMail()))
                 request.setAttribute("pickedReservation", r);
 
-        forwardTo(request, response, DEFAULT_ROUTE);
+    }
+
+    private void deleteReservation(HttpServletRequest request){
+        String resToDelete=request.getParameter("reservationId");
+
+        Restaurant.getRestaurantInstance().deleteReservation(resToDelete);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
