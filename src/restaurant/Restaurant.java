@@ -2,6 +2,7 @@ package restaurant;
 
 import menu.Menu;
 import menu.Allergen;
+import menu.Menu;
 import menu.MenuElement;
 import services.DbReader;
 import services.Query;
@@ -157,6 +158,23 @@ public class Restaurant {
         }
 
     }
+
+    public synchronized void deleteReservation(String resToDeleteCode){
+        DbReader dbr= DbReader.getDbReaderInstance();
+        Reservation resToDelete=null;
+
+        for(Reservation elem:reservationList){
+            if(elem.getReservationCode().equals(resToDeleteCode)){
+                resToDelete=elem;
+            }
+        }
+        reservationList.remove(resToDelete);
+
+        String addToQuery="WHERE RES_CODE='"+resToDeleteCode+"'";
+        executeQuery(dbr,Query.editQuery(Query.DELETE_RESERVATION,addToQuery));
+
+    }
+
 
     // TODO: move to DatabaseReader
     private void executeQuery(DbReader dbr, String query) {
