@@ -14,3 +14,11 @@ body{
     background-color:#6576a5;
     border-color: #6576a5;
 }
+td , th{
+
+    font-size:80%;
+}
+
+td {
+    width:25%;
+}
