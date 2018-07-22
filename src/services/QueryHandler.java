@@ -23,11 +23,11 @@ class QueryHandler {
     private static final String INSERT_DISH_IN_MENU = "INSERT INTO DISH_IN_MENU VALUES ";
     private static final String SELECT_DISH_IN_MENU = "SELECT * FROM DISH_IN_MENU ";
 
-    private final String connectionString = "jdbc:mysql://127.0.0.1:3306/RESTAURANT?useSSL=false&user=progettoD18&password=progettoD18";
     private Connection connection = null;
     private Statement stm;
 
     void setupConnection() {
+        String connectionString = "jdbc:mysql://127.0.0.1:3306/RESTAURANT?useSSL=false&user=progettoD18&password=progettoD18";
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(connectionString);
@@ -152,6 +152,8 @@ class QueryHandler {
                 MenuElement item = catalogue.getElementByCode(rsMenuDishes.getString("DISH_CODE"));
                 currentMenu.addElement(item);
             }
+
+            currentMenu.sortMenuElements();
         }
     }
 

@@ -62,10 +62,4 @@ public class Restaurant {
     public synchronized void deleteReservation(String code) {
         databaseManager.deleteReservation(code);
     }
-
-    // TODO: remove!!
-    public static int getStaticCovers(){
-        Restaurant r = Restaurant.getRestaurantInstance();
-        return r.getnCover();
-    }
 }
