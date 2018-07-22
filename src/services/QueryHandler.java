@@ -219,12 +219,15 @@ class QueryHandler {
      */
 
     void insertReservationInDB(Reservation reservation) {
-        String addToQuery = String.format("('%s',%d,%s,'%s','%s','%s')", reservation.getReservationCode(),
-                reservation.getnGuests(), reservation.getReservationCost(), new java.sql.Date(reservation.getEventDate().getTime()),
-                reservation.getCustomerNameSurname(), reservation.getCustomerMail());
+        String addToQuery = String.format("('%s',%d,%s,'%s',(?),(?))", reservation.getReservationCode(),
+                reservation.getnGuests(), reservation.getReservationCost(), new java.sql.Date(reservation.getEventDate().getTime()));
 
         try {
-            stm.executeUpdate(INSERT_RESERVATION + addToQuery);
+            PreparedStatement statement = connection.prepareStatement(INSERT_RESERVATION + addToQuery);
+            statement.setString(1, reservation.getCustomerNameSurname());
+            statement.setString(2, reservation.getCustomerMail());
+            statement.executeUpdate();
+
             insertMenus(reservation);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -244,9 +247,12 @@ class QueryHandler {
         for (int menuIndex = 0; menuIndex < arraySize; menuIndex++){
             Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
 
-            String addToQuery = String.format("('%s','%s','%s',%d)", reservation.getReservationCode(),
-                    menuIndex, currentMenu.getName(), currentMenu.getnMenuGuests());
-            stm.executeUpdate(INSERT_MENU + addToQuery);
+            String addToQuery = String.format("('%s','%s',(?),%d)", reservation.getReservationCode(),
+                    menuIndex, currentMenu.getnMenuGuests());
+
+            PreparedStatement statement = connection.prepareStatement(INSERT_MENU + addToQuery);
+            statement.setString(1, currentMenu.getName());
+            statement.executeUpdate();
 
             insertMenuDishes(reservation, currentMenu, menuIndex);
         }
