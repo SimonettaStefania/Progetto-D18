@@ -20,7 +20,7 @@ he has already created and view the restaurant catalogue -->
             <link  rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
             <link  rel="stylesheet" type="text/css" href="../stylesheets/WelcomeTemplateStyle.css"/>
 
-
+            <%  Restaurant restaurant = Restaurant.getRestaurantInstance();   %>
 
         </head>
 
@@ -107,8 +107,8 @@ he has already created and view the restaurant catalogue -->
                                     <span class="input-group-text" id="inputGroup-guest">Total Guests</span>
                                 </div>
 
-                                <input name ="guestsNumber" autocomplete="off" type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                                       min = "1" max = "<%=Restaurant.getStaticCovers()%>"/>
+                                <input name ="guestsNumber" autocomplete="off" type="number" id="guestsNumber" class="form-control" aria-label="Small"
+                                       aria-describedby="inputGroup-sizing-sm" min="1" max="<%=restaurant.getnCover()%>"/>
 
 
                             </div>

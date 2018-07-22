@@ -24,12 +24,10 @@ public class Allergen {
         return name;
     }
 
-    // TODO method not used
     /**
      * Returns the allergen's code
      * @return String
      */
-
     public String getAllergenCode() {
         return allergenCode;
     }
@@ -38,7 +36,6 @@ public class Allergen {
      * Generates a description for the allergen
      * @return String
      */
-
     @Override
     public String toString() {
         return allergenCode + " (" + name + ")";

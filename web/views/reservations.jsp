@@ -22,14 +22,12 @@
                     sb.append("<br/>").append(sdf.format(r.getEventDate())).append(" - ").append(r.getnGuests())
                       .append(" guests<br/>Total price: &euro; ").append(String.format("%.2f", r.getReservationCost()));
 
-
                     for (Menu m : r.getCreatedMenu()) {
-                        sb.append("<br/><br/>Price: &euro; ").append(String.format("%.2f", m.getMenuCost()))
-                          .append("&emsp;&emsp; People: ").append(m.getnMenuGuests());
+                        sb.append("<br/><br/>").append(m.getName()).append("<br/>Price: &euro; ").append(String.format("%.2f",
+                                m.getMenuCost())).append("&emsp;&emsp; People: ").append(m.getnMenuGuests());
                         for (MenuElement el : m.getMenuElementsList())
                             sb.append("<br/> - ").append(el.getName());
                     }
-
 
                     return sb.toString();
                 }

@@ -34,8 +34,6 @@
                     integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
             <!-- --------------------- Page scripts --------------------------------------------------------------------->
 
             <script>
@@ -65,11 +63,8 @@
 
                     ArrayList<MenuElement> filteredList = catalogue.getFilteredList(veg, vgt, cel, allergens);
 
-                %>
-
-
-                <% DishType[] types = DishType.values();
-                   String[] category = {"Starters", "First-Courses", "Main-Courses", "Desserts", "Drinks"};%>
+                    DishType[] types = DishType.values();
+                    String[] category = {"Starters", "First-Courses", "Main-Courses", "Desserts", "Drinks"};    %>
 
                 // Function to update the checkout box with the selected dishes and to show the allergens in the dropdown menu
 
@@ -107,8 +102,8 @@
                         StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
                         s.append("<br><b>Allergens:</b> <br>").append(element.showAllergenes());
 
-                        if ( element.getType()!= DishType.DRINK ) {
-                            s.append("<br><b>Ingredients:</b> <br>").append(element.showDetails());
+                        if (element.getType()!= DishType.DRINK) {
+                            s.append("<br><b>Ingredients:</b> <br>").append(element.showIngredients());
                             s.append("<br><b>Filters:</b> <br> ").append(element.showFilters());
                         }
 
@@ -179,7 +174,7 @@
                         <div class="col-sm-2">
                             <div class="list-group" id="list-tab" role="tablist">
 
-                                <% for ( int i=0 ; i < types.length ; i++){
+                                <% for (int i=0 ; i < types.length ; i++){
                                     String categoryLabel = category[i].toLowerCase();
                                 %>
                                 <a class="list-group-item list-group-item-action <%if (i==0) out.print("active");%>"
@@ -197,7 +192,7 @@
 
                             <div class="tab-content" id="nav-tabContent">
 
-                                <% for ( int i=0 ; i < types.length ; i++) {
+                                <% for (int i = 0; i < types.length; i++) {
                                     String categoryLabel = category[i].toLowerCase();%>
 
                                 <div class="tab-pane fade show <%if (i==0) out.print("active");%>" id="<%=categoryLabel%>" role="tabpanel" aria-labelledby="<%=categoryLabel%>-tab">

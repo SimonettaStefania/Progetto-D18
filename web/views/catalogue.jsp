@@ -26,30 +26,26 @@
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
                 <link rel="stylesheet" href="../stylesheets/CatalogueStyle.css">
 
-                <!-- List of dishes and drinks ( catalogueElement ) taken from the restaurant -->
+                <!-- Catalogue object taken from the restaurant -->
 
                 <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
-                    ArrayList<MenuElement> catalogueElement = catalogue.getDishes();
-                    catalogueElement.addAll(catalogue.getDrinks());
-                    DishType[] types = DishType.values();
                     String[] title = {"Starters", "First courses", "Main courses", "Dessert", "Drinks"};
-                    %>
+                    DishType[] types = DishType.values();   %>
 
                 <!-- Method that creates a description for each dish with its price , ingredients, allergens, and filters ;
-                     For the drinks, only allergens are not shown-->
+                     For the drinks, only allergens are shown-->
 
                 <%!
                     private String itemDetails(MenuElement element) {
                         StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
                         s.append("<br><b>Allergens:</b> <br>").append(element.showAllergenes());
 
-                        if ( element.getType()!= DishType.DRINK ) {
-                            s.append("<br><b>Ingredients:</b> <br>").append(element.showDetails());
+                        if (element.getType()!= DishType.DRINK ) {
+                            s.append("<br><b>Ingredients:</b> <br>").append(element.showIngredients());
                             s.append("<br><b>Filters:</b> <br> ").append(element.showFilters());
                         }
 
                         return s.toString();
-
                     }
                 %>
 
@@ -109,7 +105,7 @@
 
                                     <div id="accordition<%=nameType.toString()%>">
 
-                                        <%for ( MenuElement item : catalogueElement){
+                                        <%for (MenuElement item : catalogue.getDishes()){
                                             if (item.getType().equals(nameType)) {%>
 
                                             <div class = "card" >

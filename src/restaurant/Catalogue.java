@@ -1,103 +1,104 @@
 package restaurant;
+
 import menu.*;
 import java.util.ArrayList;
 
+/**
+ * Class containing all the available dishes and appropriate methods to handle them.
+ * It is described by:
+ * - a list of dishes (MenuElement objects)
+ * - a list of all the possible allergens (useful for item filtering)
+ */
 public class Catalogue {
     private ArrayList<MenuElement> dishesList;
-    private ArrayList<MenuElement> drinksList;
     private ArrayList<Allergen> allergensList;
 
+    /**
+     * Class constructor, initializes the ArrayList objects
+      */
     public Catalogue() {
         dishesList = new ArrayList<>();
-        drinksList = new ArrayList<>();
         allergensList = new ArrayList<>();
     }
 
+    /**
+     * Getter that allows access to the stored dishes
+     * @return list of elements in the catalogue
+     */
     public ArrayList<MenuElement> getDishes() {
         return dishesList;
     }
 
-    public ArrayList<MenuElement> getDrinks() {
-        return drinksList;
-    }
-
-    // TODO: provvisorio
-    public ArrayList<MenuElement> getCompleteList() {
-        ArrayList<MenuElement> completeList = new ArrayList<>(dishesList);
-        completeList.addAll(drinksList);
-        return completeList;
-    }
-
-    // TODO: add to UML
+    /**
+     * Getter that allows access to the known allergens
+     * @return list of allergens in the catalogue
+     */
     public ArrayList<Allergen> getAllergens() {
         return allergensList;
     }
 
-    private void addDish(MenuElement elem) {
-        if (!dishesList.contains(elem))
-            dishesList.add(elem);
-    }
-
-    private void addDrink(MenuElement elem) {
-        if (!drinksList.contains(elem))
-            drinksList.add(elem);
-    }
-
-    // TODO: add to UML
+    /**
+     * Method to insert elements in the allergen list
+     * @param item Allergen to be stored
+     */
     public void addAllergen(Allergen item) {
         if (!allergensList.contains(item))
             allergensList.add(item);
     }
 
+    /**
+     * Method to insert elements in the dishes list
+     * @param elem MenuElement to be stored
+     */
     public void addElement(MenuElement elem) {
-        if (elem.getType() != DishType.DRINK)
-            addDish(elem);
-        else addDrink(elem);
+        if (!dishesList.contains(elem))
+            dishesList.add(elem);
     }
 
-    public void removeElement (MenuElement elem) {
-        if (dishesList.contains(elem))
-            dishesList.remove(elem);
-        else drinksList.remove(elem);
-    }
-
+    /**
+     * Allows to filter the dishes in the catalogue
+     * @param vegan boolean specifying if only vegan dishes are needed
+     * @param vegetarian boolean specifying if only vegetarian dishes are needed
+     * @param celiac boolean specifying if only gluten-free dishes are needed
+     * @param allergens string containing all the allergens to avoid
+     * @return a list of dishes respecting the specified properties
+     */
     public ArrayList<MenuElement> getFilteredList(boolean vegan, boolean vegetarian, boolean celiac, String allergens) {
         ArrayList<MenuElement> filterSelection = new ArrayList<>();
 
-        for (MenuElement element : dishesList)
-            if (element.respectsFilters(vegan, vegetarian, celiac))
-                if (element.respectsAllergens(allergens))
-                    filterSelection.add(element);
-
-        for (MenuElement element : drinksList)
-            if (element.respectsFilters(vegan, vegetarian, celiac))
-                if (element.respectsAllergens(allergens))
-                    filterSelection.add(element);
+        for (MenuElement item : dishesList)
+            if (item.respectsFilters(vegan, vegetarian, celiac) && item.respectsAllergens(allergens))
+                filterSelection.add(item);
 
         return filterSelection;
     }
 
+    /**
+     * Selects the dish in the list with the specified identifier
+     * @param id code representing uniquely a dish
+     * @return the MenuElement item with the corresponding code, null otherwise
+     */
     public MenuElement getElementByCode(String id) {
         for (MenuElement element : dishesList)
-            if (element.getElementCode().equals(id))
-                return element;
-
-        for (MenuElement element : drinksList)
             if (element.getElementCode().equals(id))
                 return element;
 
         return null;
     }
 
+    /**
+     * Simple textual representation of the catalogue
+     * @return a string containing basic information about the catalogue
+     */
     @Override
     public String toString() {
-        StringBuilder tmp = new StringBuilder("CATALOGO DI PORTATE : \nPIATTI : \n");
+        StringBuilder tmp = new StringBuilder("Catalogue\n");
         for (MenuElement element : dishesList)
             tmp.append(element.toString()).append("\n");
 
-        tmp.append("\nBEVANDE :\n");
-        for (MenuElement element : drinksList)
-            tmp.append(element.toString()).append("\n");
+        tmp.append("Allergens:");
+        for (Allergen allergen : allergensList)
+            tmp.append(allergen.toString()).append("\n");
 
         return tmp.toString();
     }
