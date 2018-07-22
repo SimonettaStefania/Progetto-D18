@@ -11,14 +11,12 @@ public class WelcomeServlet extends AbstractServlet {
 
     // TODO: improve
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String backToHome=request.getParameter("backToHome");
+        String backToHome = request.getParameter("backToHome");
 
-        if (backToHome == null){
-            forwardTo(request, response, DEFAULT_ROUTE);
-        } else {
-            backToHome = null;
-            forwardTo(request, response, DEFAULT_ROUTE);
-        }
+        if (backToHome != null)
+            request.getSession().removeAttribute("reservation");
+
+        forwardTo(request, response, DEFAULT_ROUTE);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
