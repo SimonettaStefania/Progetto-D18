@@ -2,18 +2,17 @@ package menu;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
 
 /**
- * Class that represents a single dish in the menu . Each dish is described by :
+ * Class that represents a single dish in the menu. Each dish is described by:
  *  - a name and a code
- *  - a type ( starter, first course, main course , dessert or drink )
+ *  - a type (starter, first course, main course , dessert or drink)
  *  - a price
- *  - flags setted to true if the dish is vegan or vegetarian or gluten free
- *  - a list of allergen and a list of ingredients
+ *  - flags set to true if the dish is vegan, vegetarian or gluten free
+ *  - a list of allergens and a list of ingredients
  */
 public class MenuElement  {
-    private String name, elementCode;
+    private String name, code;
     private DishType type;
     private double price;
     private Flags flags;
@@ -23,18 +22,17 @@ public class MenuElement  {
     /**
      * Constructor with parameters
      * @param name tbe name of the dish
-     * @param elementCode the code of the dish
+     * @param code the code of the dish
      * @param type the type of dish
      * @param price the price of the dish
      * @param veg true if the dish is vegan
      * @param vgt true if the dish is vegetarian
      * @param cel true if the dish is gluten free
      */
-
-    public MenuElement(String name, String elementCode, DishType type,
+    public MenuElement(String name, String code, DishType type,
                        double price, boolean veg, boolean vgt, boolean cel) {
         this.name = name;
-        this.elementCode = elementCode;
+        this.code = code;
         this.type = type;
         this.price = price;
         this.flags = new Flags(veg, vgt, cel);
@@ -54,7 +52,7 @@ public class MenuElement  {
      * @return the code of the dish
      */
     public String getElementCode() {
-        return elementCode;
+        return code;
     }
 
     /**
@@ -105,7 +103,6 @@ public class MenuElement  {
      * Removes an allergen to the allergen's list
      * @param a the allergen to be removed
      */
-
     public void removeAllergen(Allergen a) {
         allergenList.remove(a);
     }
@@ -122,37 +119,23 @@ public class MenuElement  {
         return true;
     }
 
-    // TODO: add doc and improve
+    /**
+     * Creates a description of the dish flags
+     * @return string describing the dish filters
+     */
     public String showFilters(){
-        String tmp="";
-        HashMap<String,Boolean> filters = flags.getFilters();
-
-        for ( String element : filters.keySet()){
-
-            if ( filters.get(element) )
-                tmp += element + " ; ";
-        }
-        return tmp;
+        return flags.showFilters();
     }
 
     /**
      * Creates a description of the dish's ingredients
      * @return string description
      */
-    public String showDetails() {
-        String tmp = "";
+    public String showIngredients() {
+        StringBuilder tmp = new StringBuilder();
         for (String element : ingredientsList)
-            tmp += element + "  ;  ";
-        return tmp;
-
-    }
-
-    /**
-     * Creates a description of the dish ( name, price , type of dish )
-     * @return string description
-     */
-    public String toString() {
-        return name + "\t" + price + " €" + "\t" + type+"\n";
+            tmp.append(element).append("  ;  ");
+        return tmp.toString();
     }
 
     /**
@@ -160,28 +143,32 @@ public class MenuElement  {
      * @return string description
      */
     public String showAllergenes() {
-        String tmp = "";
+        StringBuilder tmp = new StringBuilder();
         for (Allergen element : allergenList)
-            tmp += element + "  ;  ";
-        return tmp;
+            tmp.append(element).append("  ;  ");
+        return tmp.toString();
     }
 
     /**
-     * Comparator for the type of dishes. Its method compare( ) takes two MenuElements e1, e2 as parameters and returns
-     * 0 if e1 and e2 are dishes of the same type
+     * Creates a description of the dish (name, price , type of dish)
+     * @return string description
      */
-    public static Comparator <MenuElement> typeComparator = new Comparator<MenuElement>() {
-        @Override
-        public int compare(MenuElement o1, MenuElement o2) {
-            return o1.getType().compareTo(o2.getType());
-        }
-    };
+    public String toString() {
+        return String.format("%s\t%s €\t%s\n", name, price, type);
+    }
+
 
     /**
-     * Comparator for the type of dishes. Its method compare( ) takes two MenuElements e1, e2 as parameters and returns
-     * 0 if e1 and e2  have the same price
-     * positive integer if the price of e1 is lower than the one of e2
-     * negative integer if the price of e1 is higher than the one of e2
+     * Comparator for the type of dishes. Its method compare() takes two MenuElements e1, e2 as parameters and returns
+     *  0 if e1 and e2 are dishes of the same type
+     */
+    public static Comparator <MenuElement> typeComparator = Comparator.comparing(MenuElement::getType);
+
+    /**
+     * Comparator for the type of dishes. Its method compare() takes two MenuElements e1, e2 as parameters and returns:
+     * - 0 if e1 and e2 have the same price
+     * - a positive integer if the price of e1 is lower than the one of e2
+     * - a negative integer if the price of e1 is higher than the one of e2
      *
      */
     public static Comparator <MenuElement> priceComparator = (o1, o2) -> {

@@ -14,34 +14,64 @@ public class Menu {
     private int nMenuGuests;
 
     /**
-     * Constructor for an empty menu , initialized only with its name and a number of guests
+     * Constructor for an empty menu, initialized only with its name and a number of guests
      * @param name the name of the menu
      * @param nMenuGuests the number of guests to whom the menu is addressed
      */
     public Menu(String name, int nMenuGuests) {
         this.name = name;
-        this.menuElementsList = new ArrayList<>();
         this.nMenuGuests = nMenuGuests;
+        this.menuElementsList = new ArrayList<>();
     }
 
     /**
-     * Method that adds a dish in the menu
-     * @param newElement the element to be added
+     * Returns the name of the menu
+     * @return menu's name
      */
-
-    public void addElement(MenuElement newElement) {
-
-        if(!menuElementsList.contains(newElement))  //check if newElement is already in the menuElementList
-        menuElementsList.add(newElement);
+    public String getName() {
+        return name;
     }
 
     /**
-     * Methods that removes a dish from the menu
-     * @param element the element to be removed
+     * Returns the number of guests to whom the menu is addressed
+     * @return guests number
      */
+    public int getnMenuGuests() {
+        return nMenuGuests;
+    }
 
-    public void removeElement(MenuElement element) {
-       menuElementsList.remove(element);
+    /**
+     * Calculates and returns the menu's cost by adding the prices of each dish in the menu
+     * @return the menu's final cost
+     */
+    public double getMenuCost() {
+        double menuCost = 0;
+        for (MenuElement el : menuElementsList)
+            menuCost += el.getPrice();
+        return menuCost;
+    }
+
+    /**
+     * Returns the menu's dishes list
+     * @return the dishes list
+     */
+    public ArrayList<MenuElement> getMenuElementsList() {
+        return menuElementsList;
+    }
+
+    /**
+     * Method that sorts the dishes of the menu by name ( ascending order )
+     */
+    public void sortMenuElements(){
+        menuElementsList.sort(MenuElement.typeComparator);
+    }
+
+    /**
+     * Sets the menu's name
+     * @param name the name of the menu
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -53,50 +83,26 @@ public class Menu {
     }
 
     /**
-     * Calculates and returns the menu's cost by adding the prices of each dish in the menu
-     * @return the menu's final cost
+     * Method that adds a dish in the menu
+     * @param newElement the element to be added
      */
-
-    public double getMenuCost() {
-        double menuCost = 0;
-        for (MenuElement el : menuElementsList)
-            menuCost += el.getPrice();
-        return menuCost;
+    public void addElement(MenuElement newElement) {
+        if(!menuElementsList.contains(newElement))
+            menuElementsList.add(newElement);
     }
 
     /**
-     * Returns the number of guests to whom the menu is addressed
-     * @return guests number
+     * Methods that removes a dish from the menu
+     * @param element the element to be removed
      */
-
-    public int getnMenuGuests() {
-        return nMenuGuests;
-    }
-
-    /**
-     * Returns the name of the menu
-     * @return menu's name
-     */
-
-    public String getName() {
-        return name;
-    }
-
-    // Method that sorts elementListMenu TODO add this method in the UML
-
-    /**
-     * Method that sorts the dishes of the menu by name ( ascending order )
-     */
-
-    public void sortMenuElements(){
-        menuElementsList.sort(MenuElement.typeComparator);
+    public void removeElement(MenuElement element) {
+        menuElementsList.remove(element);
     }
 
     /**
      * Method that returns a description of the Menu, in particular its name , price
      * @return the string description
      */
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.name).append("\t menuCost: ").append(this.getMenuCost()).append("\t nGuest: ").append(this.nMenuGuests).append("\n");
@@ -104,23 +110,5 @@ public class Menu {
             sb.append(el.toString()).append("\n");
         }
         return sb.toString();
-    }
-
-    /**
-     * Returns the menu's dishes list
-     * @return the dishes list
-     */
-
-    public ArrayList<MenuElement> getMenuElementsList() {
-        return menuElementsList;
-    }
-
-    /**
-     * Sets the menu's name
-     * @param name the name of the menu
-     */
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

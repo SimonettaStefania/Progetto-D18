@@ -43,7 +43,7 @@
                         s.append("<br><b>Allergens:</b> <br>").append(element.showAllergenes());
 
                         if ( element.getType()!= DishType.DRINK ) {
-                            s.append("<br><b>Ingredients:</b> <br>").append(element.showDetails());
+                            s.append("<br><b>Ingredients:</b> <br>").append(element.showIngredients());
                             s.append("<br><b>Filters:</b> <br> ").append(element.showFilters());
                         }
 
