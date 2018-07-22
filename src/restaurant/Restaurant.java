@@ -1,15 +1,7 @@
 package restaurant;
 
-import menu.Menu;
-import menu.Allergen;
-import menu.MenuElement;
-import services.DbReader;
-import services.Query;
-
-import java.sql.Date;
+import services.DatabaseManager;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Random;
 
 public class Restaurant {
     private static final String NAME = "Progetto D-18";
@@ -20,15 +12,15 @@ public class Restaurant {
     private int nCover;
     private Catalogue dishesCatalogue;
     private ArrayList<Reservation> reservationList;
+    private DatabaseManager databaseManager;
 
 
-    public Restaurant(String name, int nCover, boolean database) {
+    public Restaurant(String name, int nCover) {
         this.name = name;
         this.nCover = nCover;
         this.dishesCatalogue = new Catalogue();
         this.reservationList = new ArrayList<>();
-
-        if (database) readDatabase();
+        this.databaseManager = new DatabaseManager(this);
     }
 
     public String getName() {
@@ -51,168 +43,24 @@ public class Restaurant {
         dishesCatalogue = cat;
     }
 
-    public void addToCatalogue (MenuElement element){
-        dishesCatalogue.addElement(element);
-    }
-
-    public void removeFromCatalogue (MenuElement elem){
-        dishesCatalogue.removeElement(elem);
-    }
-
-    public String showCatalogue (){
-        String tmp = "Catalogo del ristorante \" " + name + " \" :\n" ;
-            tmp += dishesCatalogue.toString();
-        return tmp ;
-    }
-
-    public static synchronized  Restaurant getRestaurantInstance() {
-        if (restaurantInstance == null)
-            restaurantInstance =  new Restaurant(NAME, N_COVERS, true);
+    public static synchronized Restaurant getRestaurantInstance() {
+        if (restaurantInstance == null) {
+            restaurantInstance = new Restaurant(NAME, N_COVERS);
+            restaurantInstance.readDatabase();
+        }
         return restaurantInstance;
     }
 
     private synchronized void readDatabase() {
-        DbReader dbr = DbReader.getDbReaderInstance();
-
-        executeQuery(dbr, Query.SELECT_ALL_DISHES);
-        for (MenuElement elem : dbr.getDishesList())
-            this.addToCatalogue(elem);
-
-        executeQuery(dbr, Query.SELECT_ALL_ALLERGENS);
-        for (Allergen item : dbr.getAllergensList())
-            dishesCatalogue.addAllergen(item);
-
-        dishesCatalogue.getDishes().sort(MenuElement.priceComparator);
-        dishesCatalogue.getDishes().sort(MenuElement.typeComparator);
-
-        populateReservations(dbr);
-
-    }
-
-    private synchronized void populateReservations(DbReader dbr){
-        executeQuery(dbr, Query.SELECT_RESERVATION);
-        reservationList.addAll(dbr.getReservationsList());
-
-        for(Reservation res: reservationList){
-            String addToQuery="WHERE RES_CODE ='"+res.getReservationCode()+"' ORDER BY MENU_CODE";
-            executeQuery(dbr,Query.editQuery(Query.SELECT_MENU,addToQuery));
-
-            res.getCreatedMenu().addAll(dbr.getMenuList());
-
-            readMenuDishes(res,dbr);
-
-        }
-    }
-    private synchronized void readMenuDishes(Reservation reservation, DbReader dbr){
-        int arraySize = reservation.getCreatedMenu().size();
-        String addToQuery;
-        for (int menuIndex=0; menuIndex<arraySize; menuIndex++){
-            Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
-
-            addToQuery="WHERE (MENU_CODE='"+menuIndex+"' AND RES_CODE='"+reservation.getReservationCode()+"')";
-            executeQuery(dbr,Query.editQuery(Query.SELECT_DISH_IN_MENU,addToQuery));
-            for(String code: dbr.getMenuDishesCodeList()){
-                currentMenu.getMenuElementsList().add(dishesCatalogue.getElementByCode(code));
-            }
-        }
+        databaseManager.readDatabase();
     }
 
     public synchronized void insertReservation(Reservation reservation) {
-        DbReader dbr = DbReader.getDbReaderInstance();
-        String id = generateReservationId();
-        reservation.setReservationCode(id);
-
-        reservationList.add(reservation);
-        String addToQuery = String.format("('%s',%d,%s,'%s','%s','%s',NULL)", reservation.getReservationCode(),
-                reservation.getnGuests(), reservation.getReservationCost(), new Date(reservation.getEventDate().getTime()),
-                reservation.getCustomerNameSurname(), reservation.getCustomerMail());
-        executeQuery(dbr,Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
-
-        insertMenus(reservation,dbr);
-
+        databaseManager.insertReservation(reservation);
     }
 
-    private synchronized void insertMenus(Reservation reservation,DbReader dbr){
-        Locale.setDefault(Locale.US);
-        int arraySize = reservation.getCreatedMenu().size();
-        String addToQuery;
-
-        for (int menuIndex=0; menuIndex<arraySize; menuIndex++){
-            Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
-
-            addToQuery = String.format("('%s','%s','%s',%d)", reservation.getReservationCode(),
-                menuIndex, currentMenu.getName(),currentMenu.getnMenuGuests());
-            executeQuery(dbr,Query.editQuery(Query.INSERT_MENU,addToQuery));
-
-            insertDishesInMenu(reservation,menuIndex,currentMenu,dbr);
-        }
-    }
-
-    private synchronized  void insertDishesInMenu(Reservation reservation,int menuIndex,Menu menu,DbReader dbr){
-        String addToQuery;
-        for(MenuElement elem: menu.getMenuElementsList()){
-            addToQuery = String.format("('%s',%s,'%s')", reservation.getReservationCode(),
-                    menuIndex, elem.getElementCode());
-            executeQuery(dbr,Query.editQuery(Query.INSERT_DISH_IN_MENU,addToQuery));
-        }
-
-    }
-
-    public synchronized void deleteReservation(String resToDeleteCode){
-        DbReader dbr= DbReader.getDbReaderInstance();
-        Reservation resToDelete=null;
-
-        for(Reservation elem:reservationList){
-            if(elem.getReservationCode().equals(resToDeleteCode)){
-                resToDelete=elem;
-            }
-        }
-        reservationList.remove(resToDelete);
-
-        String addToQuery="WHERE RES_CODE='"+resToDeleteCode+"'";
-        executeQuery(dbr,Query.editQuery(Query.DELETE_RESERVATION,addToQuery));
-
-    }
-
-
-    // TODO: move to DatabaseReader
-    private void executeQuery(DbReader dbr, String query) {
-        Thread dbThread = new Thread(dbr);
-        dbr.setQuery(query);
-        dbThread.start();
-        try {
-            dbThread.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    private String generateReservationId() {
-        String tmpId = null;
-        boolean unique = false;
-
-        while (!unique) {
-            tmpId = generateCode();
-
-            unique = true;
-            for (Reservation res : reservationList)
-                if (tmpId.equalsIgnoreCase(res.getReservationCode()))
-                    unique = false;
-        }
-
-        return tmpId;
-    }
-
-    private String generateCode() {
-        String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        StringBuilder sb = new StringBuilder();
-        Random random = new Random();
-        int length = 6;
-
-        for (int i = 0; i < length; i++)
-            sb.append(candidateChars.charAt(random.nextInt(36)));
-
-        return sb.toString();
+    public synchronized void deleteReservation(String code) {
+        databaseManager.deleteReservation(code);
     }
 
     // TODO: remove!!

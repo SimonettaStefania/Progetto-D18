@@ -44,20 +44,18 @@ public class Catalogue {
     }
 
     // TODO: add to UML
-    void addAllergen(Allergen item) {
+    public void addAllergen(Allergen item) {
         if (!allergensList.contains(item))
             allergensList.add(item);
     }
 
-    // TODO: update UML (made package-private to improve security)
-    void addElement(MenuElement elem) {
+    public void addElement(MenuElement elem) {
         if (elem.getType() != DishType.DRINK)
             addDish(elem);
         else addDrink(elem);
     }
 
-    // TODO: update UML (made package-private to improve security)
-    void removeElement (MenuElement elem) {
+    public void removeElement (MenuElement elem) {
         if (dishesList.contains(elem))
             dishesList.remove(elem);
         else drinksList.remove(elem);
@@ -79,7 +77,7 @@ public class Catalogue {
         return filterSelection;
     }
 
-    MenuElement getElementByCode(String id) {
+    public MenuElement getElementByCode(String id) {
         for (MenuElement element : dishesList)
             if (element.getElementCode().equals(id))
                 return element;
