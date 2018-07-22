@@ -6,6 +6,9 @@ import restaurant.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * A class which stands between Restaurant and QueryHandler
+ */
 public class DatabaseManager {
     private Catalogue catalogue;
     private ArrayList<Reservation> reservations;
@@ -35,6 +38,7 @@ public class DatabaseManager {
         queryHandler.closeConnection();
     }
 
+
     public synchronized void insertReservation (Reservation reservation) {
         String id = generateReservationId();
         reservation.setReservationCode(id);
@@ -62,6 +66,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Method that returns a generatd ID if it is not used by any reservation
+     * @return tmpId is the generated ID
+     */
     private String generateReservationId() {
         String tmpId = null;
         boolean unique = false;
@@ -78,6 +86,10 @@ public class DatabaseManager {
         return tmpId;
     }
 
+    /**
+     * Method that generates a 6 character random code
+     * @return the random code
+     */
     private String generateCode() {
         String candidateChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder sb = new StringBuilder();
