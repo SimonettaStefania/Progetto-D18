@@ -32,6 +32,7 @@
                     ArrayList<MenuElement> catalogueElement = catalogue.getDishes();
                     catalogueElement.addAll(catalogue.getDrinks());
                     DishType[] types = DishType.values();
+                    String[] title = {"Starters", "First courses", "Main courses", "Dessert", "Drinks"};
                     %>
 
                 <!-- Method that creates a description for each dish with its price , ingredients, allergens, and filters ;
@@ -80,7 +81,7 @@
                             %>
 
                                 <a class="list-group-item list-group-item-action <%if (i==0) out.print("active");%>" id="label-<%=category%>" data-toggle="list" href="#list-<%=category%>" role="tab" >
-                                    <%=category%>
+                                    <b><%=title[i]%></b>
                                 </a>
 
 
