@@ -73,13 +73,12 @@
                              <div class="input-group-prepend">
                                  <span class="input-group-text" style="background-color:#6576a5; color: white;">Code</span>
                              </div>
-
-                             <input type="text" name="res-id" autocomplete="off" class="form-control">
-                         </div>
-
-                        <input type="submit" class="btn btn-dark" id="confirm" value="Confirm" style="width: 15%;">
-                    </form>
-                </div>
+                 <input type="text" name="res-id" autocomplete="off" class="form-control">
+             </div>
+            <input type="hidden" name="action" value="confirm">
+            <input type="submit" class="btn btn-dark" id="confirm" value="Confirm" style="width: 15%;">
+        </form>
+    </div>
 
         <!------------------------------------------------------------ COLLAPSING LIST ------------------------------------------------------------------- -->
 
@@ -97,14 +96,15 @@
                                     <div class="card-body">
                                         <%=summary(pickedReservation)%>
 
-                                        <form action="../reservations" method="get">
-                                            <input type="submit" class="btn btn-sm btn-dark"  value="Delete" style="float: right;">
+                                        <form action="../reservations" method="post">
+                                          <input type="hidden" name="action" value="delete">
+                                          <input type="hidden" name="reservationId" value="<%=pickedReservation.getReservationCode()%>">
+                                          <input type="submit" class="btn btn-sm btn-dark"  value="Delete" style="float: right;">
                                         </form>
-
+                                      
                                     </div>
                             </div>
                           <%}%>
-
                         </div>
                     </div>
                 </div>

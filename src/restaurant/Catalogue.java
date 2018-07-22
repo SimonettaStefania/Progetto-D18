@@ -1,6 +1,6 @@
 package restaurant;
-import java.util.ArrayList;
 import menu.*;
+import java.util.ArrayList;
 
 public class Catalogue {
     private ArrayList<MenuElement> dishesList;
@@ -21,6 +21,18 @@ public class Catalogue {
         return drinksList;
     }
 
+    // TODO: provvisorio
+    public ArrayList<MenuElement> getCompleteList() {
+        ArrayList<MenuElement> completeList = new ArrayList<>(dishesList);
+        completeList.addAll(drinksList);
+        return completeList;
+    }
+
+    // TODO: add to UML
+    public ArrayList<Allergen> getAllergens() {
+        return allergensList;
+    }
+
     private void addDish(MenuElement elem) {
         if (!dishesList.contains(elem))
             dishesList.add(elem);
@@ -31,35 +43,24 @@ public class Catalogue {
             drinksList.add(elem);
     }
 
-    // TODO: update UML (made package-private to improve security)
-    void addElement(MenuElement elem) {
+    // TODO: add to UML
+    public void addAllergen(Allergen item) {
+        if (!allergensList.contains(item))
+            allergensList.add(item);
+    }
+
+    public void addElement(MenuElement elem) {
         if (elem.getType() != DishType.DRINK)
             addDish(elem);
         else addDrink(elem);
     }
 
-    // TODO: update UML (made package-private to improve security)
-    void removeElement (MenuElement elem) {
+    public void removeElement (MenuElement elem) {
         if (dishesList.contains(elem))
             dishesList.remove(elem);
         else drinksList.remove(elem);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder tmp = new StringBuilder("CATALOGO DI PORTATE : \nPIATTI : \n");
-        for (MenuElement element : dishesList)
-            tmp.append(element.toString()).append("\n");
-
-         tmp.append("\nBEVANDE :\n");
-        for (MenuElement element : drinksList)
-            tmp.append(element.toString()).append("\n");
-
-        return tmp.toString();
-    }
-
-    // NOTA: ho dovuto modificarlo perchè probabilmente non era thread-safe avere un attributo del catalogue
-    //      utilizzato da tutti, essendo un oggetto locale non dovrebbero esserci problemi ora (credo)
     public ArrayList<MenuElement> getFilteredList(boolean vegan, boolean vegetarian, boolean celiac, String allergens) {
         ArrayList<MenuElement> filterSelection = new ArrayList<>();
 
@@ -88,13 +89,16 @@ public class Catalogue {
         return null;
     }
 
-    // TODO: add to UML
-    public ArrayList<Allergen> getAllergens() {
-        return allergensList;
-    }
+    @Override
+    public String toString() {
+        StringBuilder tmp = new StringBuilder("CATALOGO DI PORTATE : \nPIATTI : \n");
+        for (MenuElement element : dishesList)
+            tmp.append(element.toString()).append("\n");
 
-    public void addAllergen(Allergen item) {
-        if (!allergensList.contains(item))
-            allergensList.add(item);
+        tmp.append("\nBEVANDE :\n");
+        for (MenuElement element : drinksList)
+            tmp.append(element.toString()).append("\n");
+
+        return tmp.toString();
     }
 }
