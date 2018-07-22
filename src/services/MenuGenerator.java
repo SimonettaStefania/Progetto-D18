@@ -24,7 +24,7 @@ public class MenuGenerator {
         this.people = people;
         this.generatedMenu = new ArrayList<>();
         this.optimizationMap = new TreeMap<>();
-        this.catalogueList = catalogue.getCompleteList();
+        this.catalogueList = catalogue.getDishes();
 
         initOptimizationMap();
         generate();
