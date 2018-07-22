@@ -1,15 +1,17 @@
-<!-- Reservation Status page : this page allows the customer to view the menu he created for the reservation
+<!-- RESERVATION STATUS PAGE : this page allows the customer to view the menu he created for the reservation
      and to add a new one ( customized or optimized according to the budget ) -->
 
 <%@ page import="menu.Menu" %>
 <%@ page import="menu.MenuElement" %>
 <%@ page import="restaurant.Reservation" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 
 
         <head>
+
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
@@ -18,15 +20,18 @@
 
             <title>Reservation State </title>
 
-            <!-- This method creates the list of dishes included in a menu , specified with its name, price ;
-                 The number of people to whom the menu is addressed is shown too (quantity) -->
+            <!-- This method creates the list of dishes included in a menu , which is specified with its name, price ;
+                 The number of people to whom the menu is addressed is shown too -->
 
-            <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");  %>
+            <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
+                String dateString = new SimpleDateFormat("dd/MM/yyyy").format(reservation.getEventDate()); %>
             <%!
                 private String shortString(Menu menu) {
 
                     String cost = String.format("%.2f", menu.getMenuCost());
-                    StringBuilder s = new StringBuilder("<b>Price : </b> &euro; " + cost + "&emsp;&emsp; <b>Quantity : </b> " + menu.getnMenuGuests());
+                    StringBuilder s = new StringBuilder("<b>Price : </b> &euro; ").append(cost);
+                    s.append( "&emsp;&emsp; <b>People  : </b> ").append(menu.getnMenuGuests());
+
                     for (MenuElement el : menu.getMenuElementsList())
                         s.append("<br/> - ").append(el.getName());
                     return s.toString();
@@ -44,17 +49,18 @@
 
                 <div class="jumbotron" style="background-color:#f1f1f1d1; padding:2%; margin-top:3%; margin-left:5%;margin-right:5%">
 
-            <!-- ========= Title, date , and total guests ===========================================================-->
+            <!-- ------------- TITLE , DATE AND TOTAL GUESTS  ------------------------------------------------------------------------->
+
 
 
                     <h1 style="margin-left: 7%; color: black">Reservation State </h1>
-                    <h6 style="margin-left: 7%; color: black">Date : <%=reservation.getDateString()%>  Total Guests : <%=reservation.getnGuests()%></h6>
+                    <h6 style="margin-left: 7%; color: black">Date : <%=dateString%>  Total Guests : <%=reservation.getnGuests()%></h6>
 
 
 
                     <div class="row"  id="row1_pg2">
 
-                        <!-- ========= Added Menus ==============================================================================-->
+            <!-- ------------- MENUS ADDED FOR THE RESERVATION ------------------------------------------------------------------------->
 
 
                         <div class="col-md-5">
@@ -68,7 +74,7 @@
 
 
 
-                                    <!-- For each menu, create an element with the menu details-->
+                    <!------------------ For each menu, create an element with the menu details ------------------------>
 
                                     <%  int n = 0;
                                         for (Menu menu : reservation.getCreatedMenu()) {  %>
@@ -108,14 +114,18 @@
                                     }  %>
 
                                 </div>
+
                             </ul>
                         </div>
 
 
-                        <!-- ==============================MENU CREATION =======================================================-->
+         <!-- ------------- CHOICES TO CREATE A NEW MENU ------------------------------------------------------------------------->
+
 
                         <div class="col-md-5" style=" margin-left:12%; margin-top: 1%">
                             <span style="font-size: larger; font-style: inherit"><b>You can create your own menu or let us do: it will be budget-optimized!</b></span>
+
+                            <!-- Customized menu-->
 
                             <form action="/selection" method="post">
                                 <br>
@@ -125,24 +135,32 @@
 
                             <div style="font-size: larger; text-align: center;">OR</div>
                             <br>
+
+                            <!-- Optimized menu -->
+
                             <form action="/optimize" method="post">
 
                                 <div class="row">
+
                                     <div class="form-group mb-3 col-sm-6">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="lab1" style="background-color:#6576a5;color: white">Budget</span>
                                             <input name="budget" type="number" class="form-control" required min="20" placeholder="Insert budget" aria-describedby="lab1">
                                         </div>
                                     </div>
+
                                     <div class="form-group mb-3 col-sm-6">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="lab2" style="background-color:#6576a5;color: white">Quantity</span>
-                                            <input name="people" type="number" class="form-control" required min="1" max = "<%=reservation.getnGuests()%>" placeholder="Insert number" aria-describedby="lab2">
+                                            <span class="input-group-text" id="lab2" style="background-color:#6576a5;color: white">People n.</span>
+                                            <input name="people" type="number" class="form-control" required min="1" max = "<%=reservation.getnGuests()%>"
+                                                   title="How many menus of this type do you want to order?" placeholder="Insert number" aria-describedby="lab2">
                                         </div>
                                     </div>
+
                                 </div>
 
                                 <input type="submit" class="btn" style="background:#6576a5; color: white; width: 100%" value="Create a budget optimized Menu &raquo;">
+
                             </form>
 
                         </div>
@@ -152,25 +170,31 @@
                         <br/>
 
 
-                    <!-- ====== NEXT AND CANCEL BUTTONS ================================================================-->
+           <!-------------------------- NEXT AND CANCEL BUTTONS ---------------------------------------------------------->
 
                         <div class="row">
                             <div class="col">
+
                                 <form action="/home" method="post" style=" margin-left: 19.3%">
                                     <input type="hidden" name="backToHome" value="true">
                                     <input type="submit" class="btn btn-danger btn-lg" id="btnBack" value=" &laquo; Cancel">
-                                </form></div>
+                                </form>
+
+                            </div>
 
                             <div class="col">
-                            <form action="/recap" method="post" style=" margin-left: 62%; margin-top:0.9%;">
-                                <input type="submit" class="btn btn-lg btn-success" style="width:50%" value="Next &raquo;">
-                            </form></div>
+
+                                <form action="/recap" method="post" style=" margin-left: 62%; margin-top:0.9%;">
+                                    <input type="submit" class="btn btn-lg btn-success" style="width:50%" value="Next &raquo;">
+                                </form>
+
+                            </div>
                         </div>
 
                 </div>
 
 
-        <!-- ======= BOOTSTRAP SCRIPTS ============================================================================---->
+        <!-- ------- BOOTSTRAP SCRIPTS ----------------------------------------------------------------------------------->
 
 
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

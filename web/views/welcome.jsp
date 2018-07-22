@@ -1,4 +1,4 @@
-<!-- Welcome page : this page is the home of the application, where the customer can book a reservation , see the ones
+<!-- WELCOME PAGE : this page is the home of the application, where the customer can book a reservation , see the ones
 he has already created and view the restaurant catalogue -->
 
 <%@ page import="restaurant.Restaurant" %>
@@ -29,7 +29,7 @@ he has already created and view the restaurant catalogue -->
 
             <jsp:include page="navbar.jsp"/>
 
-        <!-- ============= TITLE AND DESCRIPTION =======================================================================-->
+        <!-- ------------- TITLE AND DESCRIPTION ------------------------------------------------------------------------->
 
 
             <div class = "jumbotron jumbotron-theme1">
@@ -48,7 +48,7 @@ he has already created and view the restaurant catalogue -->
                 </div>
             </div>
 
-        <!-- ============= FORM CATALOGUE AND RESERVATIONS =============================================================-->
+        <!-- ------------- BOOK FORM ------------------------------------------------------------------------------------->
 
             <div class="jumbotron jumbotron-theme2">
 
@@ -66,8 +66,8 @@ he has already created and view the restaurant catalogue -->
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-names"> First Name | Last Name</span>
                                 </div>
-                                <input name="name" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" />
-                                <input name="surname" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" />
+                                <input name="name" type="text" autocomplete="off" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" />
+                                <input name="surname" type="text" autocomplete="off" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required="" />
 
                             </div>
 
@@ -79,7 +79,7 @@ he has already created and view the restaurant catalogue -->
                                     <span class="input-group-text" id="inputGroup-mail" >E-mail</span>
                                 </div>
 
-                                <input name="email" type="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required=""/>
+                                <input name="email" type="email" autocomplete="off" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required=""/>
 
                             </div>
 
@@ -93,7 +93,7 @@ he has already created and view the restaurant catalogue -->
                                 </div>
 
 
-                                <input name="date" id="reservationDay" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required=""/>
+                                <input name="date" autocomplete="off" id="reservationDay" type="date" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required=""/>
 
 
                             </div>
@@ -107,7 +107,7 @@ he has already created and view the restaurant catalogue -->
                                     <span class="input-group-text" id="inputGroup-guest">Total Guests</span>
                                 </div>
 
-                                <input name ="guestsNumber" type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                                <input name ="guestsNumber" autocomplete="off" type="number" id="guestsNumber" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
                                        min = "1" max = "<%=Restaurant.getStaticCovers()%>"/>
 
 
@@ -122,7 +122,7 @@ he has already created and view the restaurant catalogue -->
                     </div>
 
 
-        <!-- ============= CATALOGUE ===================================================================================-->
+        <!-- ------------- CATALOGUE ------------------------------------------------------------------------->
 
 
                     <div class = "col col-md-3">
@@ -134,7 +134,8 @@ he has already created and view the restaurant catalogue -->
                         </form>
                     </div>
 
-        <!-- ============= RESERVATIONS ================================================================================-->
+        <!-- ------------- RESERVATIONS ---------------------------------------------------------------------------------->
+
 
 
                     <div class="col col-md-3">
@@ -152,7 +153,7 @@ he has already created and view the restaurant catalogue -->
             </div>
 
 
-        <!-- ============= BOOTSTRAP SCRIPTS ===========================================================================-->
+        <!-- ------------- BOOTSTRAP SCRIPTS ----------------------------------------------------------------------------->
 
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
@@ -160,7 +161,9 @@ he has already created and view the restaurant catalogue -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 
 
-        <!-- ============= RESERVATION DAY CHECK SCRIPT ================================================================-->
+        <!-- ------------- RESERVATION DAY CHECK SCRIPT ------------------------------------------------------------------>
+        <!-- The method dateControl() checks if the selected reservation day is valid : if the date is equal or before
+             today, the date is not valid -->
 
         <script type="text/javascript">
 

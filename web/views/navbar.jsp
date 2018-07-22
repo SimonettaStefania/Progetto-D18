@@ -1,10 +1,11 @@
-
-<!-- JSP PAGE THAT CONTAINS THE TOP NAVIGATION BAR ; IT WILL BE INCLUDED IN EACH PAGE-->
+<!-- NAVIGATION BAR : this page contains the top navigation bar with links to Home, Reservations and Catalogue ;
+     it is included in each page of the application -->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 
 <html>
+
     <body>
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -30,5 +31,4 @@
         </nav>
 
     </body>
-
 </html>

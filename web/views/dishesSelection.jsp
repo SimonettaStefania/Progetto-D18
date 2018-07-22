@@ -1,3 +1,8 @@
+<!-- DISHES SELECTION PAGE : this page allows the user to create a customized menu ; he can apply filters to select
+     vegan, vegetarian and celiac dishes or to select elements of the menu without some specified allergens. In this page
+     the dishes the user selects are automatically added to the menu recap on the right side of the page ; he can also
+     add a menu name and has to insert the number of people to whom the menu is addressed -->
+
 <%@ page import="menu.DishType" %>
 <%@ page import="menu.MenuElement" %>
 <%@ page import="restaurant.Catalogue" %>
@@ -11,13 +16,14 @@
 <!DOCTYPE html>
 <html>
         <head>
+
             <title>Menu</title>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
                   integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
             <link rel="stylesheet" href="../stylesheets/SelectionTemplateStyle.css">
 
 
-            <!-- ----------------- BOOTSTRAP and AJAX SCRIPTS ------------------------------------------------------------------------------- -->
+            <!-- ----------------- BOOTSTRAP, JAVASCRIPT and AJAX SCRIPTS -------------------------------------------- -->
 
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"
                     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"></script>
@@ -28,9 +34,12 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-            <!-- --------------------- Page scripts ---------------->
+            <!-- --------------------- Page scripts --------------------------------------------------------------------->
 
             <script>
+
+                // Method to create the filters based on the checkboxes selected by the user
+
                 <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
                     Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
 
@@ -56,8 +65,11 @@
 
                 %>
 
+
                 <% DishType[] types = DishType.values();
                    String[] category = {"Starters", "First-Courses", "Main-Courses", "Desserts", "Drinks"};%>
+
+                // Function to update the checkout box with the selected dishes and to show the allergens in the dropdown menu
 
                 $(document).ready(function(){
                     $("input[name='selected-id']").on("change", function() {
@@ -84,6 +96,7 @@
 
 
         </head>
+
         <body background="../img/background.jpg">
 
                 <jsp:include page="navbar.jsp"/>
@@ -211,12 +224,13 @@
 
                             <div class="form-group row">
                                 <label for="menuName" class="col-sm-4 col-form-label">Menu name</label>
-                                <input type="text" class="form-control col-sm-7" id="menuName" name="menuName" form="selected-dishes" placeholder="(Optional)">
+                                <input type="text" autocomplete="off" class="form-control col-sm-7" id="menuName" name="menuName" form="selected-dishes" placeholder="(Optional)">
                             </div>
 
                             <div class="form-group row" style="margin-top: -3%">
-                                <label for="people" class="col-sm-4 col-form-label">Quantity</label>
-                                <input type="number" class="form-control col-sm-4" id="people" name="people" form="selected-dishes" required min="1" max="<%=reservation.getnGuests()%>">
+                                <label for="people" class="col-sm-4 col-form-label">People n.</label>
+                                <input type="number" autocomplete="off" class="form-control col-sm-4" id="people" name="people" form="selected-dishes"
+                                       title=" How many menus of this type do you want to order ? " required min="1" max="<%=reservation.getnGuests()%>">
                             </div>
 
                             <!------------------------------------- BACK and NEXT BUTTONS ----------------------------------------------->

@@ -1,3 +1,6 @@
+<!-- CONFIRM PAGE : this page confirms to the user that the reservation has been made successfully and shows him
+     the reservation ID. He can use the ID to view his resrevations in the reservation page -->
+
 <%@ page import="restaurant.Reservation" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -18,7 +21,7 @@
 
     </head>
 
-    <body background ="../img/background.jpg" style="background-repeat: no-repeat">
+    <body background ="../img/background.jpg" >
 
     <!-- -------------------------------------- NAVBAR --------------------------------------------------- -->
 
@@ -30,12 +33,11 @@
                 <div >
                     <h1>Your reservation has been successfully made!</h1>
                     <br/>
-
                     <%  Reservation reservation = (Reservation) request.getSession().getAttribute("reservation");
                         out.print("<h3>Reservation ID: &emsp;" + reservation.getReservationCode() + "</h3>");   %>
 
                     <br/>
-                    Thank you, and see you soon!
+                    You can use your e-mail and this reservation ID to see your reservation. Thank you, and see you soon!
                 </div>
 
                 <br/>

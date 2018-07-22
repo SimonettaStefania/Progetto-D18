@@ -1,3 +1,6 @@
+<!-- RESERVATIONS PAGE : in this page the user can insert his email and the code of a resrvation to view it
+     and eventually delete is-->
+
 <%@ page import="restaurant.Reservation" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="menu.MenuElement" %>
@@ -63,7 +66,7 @@
                             <div class="input-group-prepend" >
                                 <span class="input-group-text" style="background-color:#6576a5; color: white;">E-mail</span>
                             </div>
-                            <input type="text" name="email" class="form-control">
+                            <input type="text" name="email" autocomplete="off" class="form-control">
                         </div>
 
                         <div class="input-group mb-3" style="width: 60%; margin-left: 10%;">
@@ -71,7 +74,7 @@
                                  <span class="input-group-text" style="background-color:#6576a5; color: white;">Code</span>
                              </div>
 
-                             <input type="text" name="res-id" class="form-control">
+                             <input type="text" name="res-id" autocomplete="off" class="form-control">
                          </div>
 
                         <input type="submit" class="btn btn-dark" id="confirm" value="Confirm" style="width: 15%;">
