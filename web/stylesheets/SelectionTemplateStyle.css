@@ -5,6 +5,18 @@ body{
 
 }
 
+.btnDetails {
+
+    margin: 5%;
+    margin-top:0%;
+    padding:5%;
+    font-size: 90%;
+    padding-top: 1%;
+    font-weight: 500;
+
+}
+
+
 .list-group-item.active{
     background-color:#6576a5;
     border-color: #6576a5;
@@ -14,6 +26,28 @@ body{
     background-color:#6576a5;
     border-color: #6576a5;
 }
+
+.modal-content {
+
+    border:0;
+}
+
+.modal-header {
+
+    background-color:#6576a5;
+    border-color:#6576a5;
+    color:white;
+
+}
+
+.modal-body {
+
+    background-color:#e6f4f42b;
+    border-color:#e6f4f42b;
+
+}
+
+modal-
 td , th{
 
     font-size:80%;

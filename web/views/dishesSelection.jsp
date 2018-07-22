@@ -18,6 +18,7 @@
         <head>
 
             <title>Menu</title>
+
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
                   integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
             <link rel="stylesheet" href="../stylesheets/SelectionTemplateStyle.css">
@@ -33,6 +34,7 @@
                     integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
             <!-- --------------------- Page scripts --------------------------------------------------------------------->
 
@@ -93,7 +95,29 @@
                 });
             </script>
 
+            <!-- Method that creates a description for each dish with its price , ingredients, allergens, and filters ;
+                For the drinks, only allergens are not shown-->
 
+
+            <script>
+
+
+                <%!
+                    private String itemDetails(MenuElement element) {
+                        StringBuilder s = new StringBuilder("<b>Price:</b> &euro; " + String.format("%.2f", element.getPrice()));
+                        s.append("<br><b>Allergens:</b> <br>").append(element.showAllergenes());
+
+                        if ( element.getType()!= DishType.DRINK ) {
+                            s.append("<br><b>Ingredients:</b> <br>").append(element.showDetails());
+                            s.append("<br><b>Filters:</b> <br> ").append(element.showFilters());
+                        }
+
+                        return s.toString();
+
+                    }
+                %>
+
+            </script>
 
         </head>
 
@@ -183,10 +207,47 @@
                                             <%  for (MenuElement item : filteredList) {
                                                 if (item.getType().equals(types[i])) {  %>
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
-                                                <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>"
-                                                        title = "<%= item.showFilters().toLowerCase()%>">
-                                                    <%=item.getName()%>  </label>
+                                                <div class="row">
+
+                                                    <!-- Chechbox with dish name-->
+                                                    <div class="col-sm-10">
+                                                        <input type="checkbox" class="custom-control-input" id="<%=item.getElementCode()%>" name="selected-id" value="<%=item.getElementCode()%>">
+                                                        <label class="custom-control-label" for="<%=item.getElementCode()%>" data-price="<%=item.getPrice()%>">
+                                                            <%=item.getName()%>
+                                                        </label>
+
+                                                    </div>
+
+                                                    <!-- Button to open a modal pop-up with dish details -->
+
+                                                    <div class="col-sm-2">
+
+                                                        <button type="button" class="btn btn-info btnDetails" data-toggle="modal" data-target="#details<%=item.getElementCode()%>">Details</button>
+
+                                                        <div class="modal fade" id="details<%=item.getElementCode()%>" role="dialog">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+
+                                                                    <div class="modal-header">
+                                                                        <h4 class="modal-title"><%=item.getName()%></h4>
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                    </div>
+
+                                                                    <div class="modal-body">
+                                                                        <p><%=itemDetails(item)%></p>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+
                                             </div>
                                             <%  }
                                             }   %>
