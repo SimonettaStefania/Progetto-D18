@@ -23,6 +23,14 @@ public class Restaurant {
         this.databaseManager = new DatabaseManager(dishesCatalogue, reservationList);
     }
 
+    public static synchronized Restaurant getRestaurantInstance() {
+        if (restaurantInstance == null) {
+            restaurantInstance = new Restaurant(NAME, N_COVERS);
+            restaurantInstance.initRestaurant();
+        }
+        return restaurantInstance;
+    }
+
     public String getName() {
         return name;
     }
@@ -31,27 +39,19 @@ public class Restaurant {
         return nCover;
     }
 
-    public Catalogue getDishesCatalogue() {
-        return dishesCatalogue;
-    }
-
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
+    }
+
+    public Catalogue getDishesCatalogue() {
+        return dishesCatalogue;
     }
 
     public void setCatalogue(Catalogue cat) {
         dishesCatalogue = cat;
     }
 
-    public static synchronized Restaurant getRestaurantInstance() {
-        if (restaurantInstance == null) {
-            restaurantInstance = new Restaurant(NAME, N_COVERS);
-            restaurantInstance.readDatabase();
-        }
-        return restaurantInstance;
-    }
-
-    private synchronized void readDatabase() {
+    private synchronized void initRestaurant() {
         databaseManager.readDatabase();
     }
 

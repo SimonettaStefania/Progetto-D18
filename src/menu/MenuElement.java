@@ -154,7 +154,7 @@ public class MenuElement  {
      * @return string description
      */
     public String toString() {
-        return String.format("%s - %s €\t\t(%s)\n", name, price, type);
+        return String.format("%s  (%s) - %s €\n", name, type, price);
     }
 
 

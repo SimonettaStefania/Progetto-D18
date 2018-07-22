@@ -108,7 +108,7 @@ public class Menu {
         sb.append(this.name).append("\nPrice: ").append(this.getMenuCost());
         sb.append("\t\tGuests: ").append(this.nMenuGuests).append("\n");
         for (MenuElement el : menuElementsList)
-            sb.append(el.toString()).append("\n");
+            sb.append(el.toString());
 
         return sb.toString();
     }

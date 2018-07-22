@@ -11,18 +11,46 @@ import java.util.Date;
 public class Reservation {
     private int nGuests;
     private Date eventDate;
-    private ArrayList<Menu> createdMenu, optimizedMenu;
+    private ArrayList<Menu> createdMenu;
     private String reservationCode, customerNameSurname, customerMail;
+    private MenuGenerator menuGenerator;
 
     // TODO: update UML
     public Reservation(String reservationCode, int nGuests, Date eventDate, String customerNameSurname, String customerMail) {
         this.reservationCode = reservationCode;
-        this.nGuests = nGuests;
-        this.createdMenu = new ArrayList<>();
-        this.optimizedMenu = new ArrayList<>();
-        this.eventDate = eventDate;
         this.customerNameSurname = customerNameSurname;
         this.customerMail = customerMail;
+        this.eventDate = eventDate;
+        this.nGuests = nGuests;
+        this.createdMenu = new ArrayList<>();
+    }
+
+    public String getReservationCode() {
+        return reservationCode;
+    }
+
+    public String getCustomerNameSurname() {
+        return customerNameSurname;
+    }
+
+    public String getCustomerMail() {
+        return customerMail;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public int getnGuests() {
+        return nGuests;
+    }
+
+    public ArrayList<Menu> getCreatedMenu() {
+        return createdMenu;
+    }
+
+    public void setReservationCode(String id) {
+        reservationCode = id;
     }
 
     public boolean checkPeople() {
@@ -37,8 +65,19 @@ public class Reservation {
         return realGuests;
     }
 
+    public double getReservationCost() {
+        double reservationCost = 0;
+        for (Menu m : createdMenu)
+            reservationCost += m.getMenuCost() * m.getnMenuGuests();
+        return reservationCost;
+    }
+
     public void addMenu(Menu newMenu) {
         createdMenu.add(newMenu);
+    }
+
+    public void removeMenu(int index) {
+        createdMenu.remove(index);
     }
 
     public void createMenu(String name, int people, String[] selectedDishes) {
@@ -59,82 +98,30 @@ public class Reservation {
         }
     }
 
+    public void generateOptimizedMenus(double budget, int people) {
+        menuGenerator = new MenuGenerator(budget, people);
+    }
+
+    public ArrayList<Menu> getOptimizedMenu() {
+        if (menuGenerator == null)  return null;
+        return menuGenerator.getGeneratedMenu();
+    }
+
     public void addOptimizedMenu (int index) {
+        ArrayList<Menu> optimizedMenu = menuGenerator.getGeneratedMenu();
         Menu selected = optimizedMenu.get(index);
         this.addMenu(selected);
     }
 
-    public void removeMenu(int index) {
-        createdMenu.remove(index);
-    }
-
-    public void addDish(Menu menuWhereAddDish, MenuElement dishToAdd) {
-        menuWhereAddDish.addElement(dishToAdd);
-    }
-
-    public void removeDish(Menu menuWhereRemoveDish, MenuElement dishToRemove) {
-        menuWhereRemoveDish.removeElement(dishToRemove);
-    }
-
-    public double getReservationCost() {
-        double reservationCost = 0;
-        for (Menu m : createdMenu)
-            reservationCost += m.getMenuCost() * m.getnMenuGuests();
-        return reservationCost;
-    }
-
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sb.append("Reservation: ").append(this.reservationCode).append("\tCliente: ").append(this.customerNameSurname).append("\t nGuest: ").append(this.nGuests)
-                .append("\t ReservationCost: ").append(this.getReservationCost()).append(("\t eventDate: ")).append(sdf.format(this.eventDate)).append("\n");
-        for (Menu m : createdMenu) {
-            sb.append(m.toString()).append("\n");
-        }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        sb.append("Reservation: ").append(reservationCode).append((" - ")).append(sdf.format(eventDate)).append("\nCliente: ").append(customerNameSurname);
+        sb.append(" - ").append(customerMail).append("\nGuests: ").append(nGuests).append("\nReservation cost: ").append(getReservationCost()).append("\n\n");
+
+        for (Menu m : createdMenu)
+            sb.append(m.toString());
+
         return sb.toString();
-    }
-
-    public String getReservationCode() {
-        return reservationCode;
-    }
-
-    public int getnGuests() {
-        return nGuests;
-    }
-
-    public Date getEventDate() {
-        return eventDate;
-    }
-
-    public String getCustomerNameSurname() {
-        return customerNameSurname;
-    }
-
-    public String getCustomerMail() {
-        return customerMail;
-    }
-
-    public ArrayList<Menu> getOptimizedMenu() {
-        return optimizedMenu;
-    }
-
-    public ArrayList<Menu> getCreatedMenu() {
-        return createdMenu;
-    }
-
-    public void setReservationCode(String id) {
-        reservationCode = id;
-    }
-
-    public void generateOptimizedMenus(double budget, int people) {
-        MenuGenerator menuGenerator = new MenuGenerator(budget, people);
-        optimizedMenu = menuGenerator.getGeneratedMenu();
-    }
-
-    public String getDateString(){
-
-        SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
-        return sf.format(eventDate);
-
     }
 }
