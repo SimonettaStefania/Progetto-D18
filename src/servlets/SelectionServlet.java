@@ -6,7 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
 @WebServlet(name = "SelectionServlet", urlPatterns = "/selection")
-public class SelectionServlet extends HttpServlet {
+public class SelectionServlet extends AbstractServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         forwardTo(request, response, "/views/dishesSelection.jsp");
@@ -18,11 +18,5 @@ public class SelectionServlet extends HttpServlet {
      * */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         forwardTo(request, response, "/index.jsp");
-    }
-
-    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher(route);
-        rd.forward(request, response);
     }
 }

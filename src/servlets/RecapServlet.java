@@ -6,9 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
 @WebServlet(name = "RecapServlet", urlPatterns = "/recap")
-public class RecapServlet extends HttpServlet {
+public class RecapServlet extends AbstractServlet {
+    private String DEFAULT_ROUTE = "/views/recap.jsp";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/views/recap.jsp");
+        forwardTo(request, response, DEFAULT_ROUTE);
     }
 
     /**
@@ -16,12 +18,6 @@ public class RecapServlet extends HttpServlet {
      *  Only access through post method is allowed.
      * */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/index.jsp");
-    }
-
-    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher(route);
-        rd.forward(request, response);
+        forwardTo(request, response, INDEX_ROUTE);
     }
 }

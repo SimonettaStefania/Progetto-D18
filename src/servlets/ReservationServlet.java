@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet(name = "ReservationServlet", urlPatterns = "/status")
-public class ReservationServlet extends HttpServlet {
+public class ReservationServlet extends AbstractServlet {
+    private String DEFAULT_ROUTE = "/views/reservationState.jsp";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         checkStatus(request, response);
@@ -22,13 +23,7 @@ public class ReservationServlet extends HttpServlet {
      *  Only access through post method is allowed.
      * */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/index.jsp");
-    }
-
-    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher(route);
-        rd.forward(request, response);
+        forwardTo(request, response, INDEX_ROUTE);
     }
 
     private void checkStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -37,7 +32,7 @@ public class ReservationServlet extends HttpServlet {
 
         if (backToStatus == null) {
             if (!checkDate(request)) {
-                forwardTo(request, response, "/index.jsp");
+                forwardTo(request, response, INDEX_ROUTE);
                 return;
             }
 
@@ -57,10 +52,10 @@ public class ReservationServlet extends HttpServlet {
             reservation.removeMenu(removedMenu);
         }
 
-        forwardTo(request, response, "/views/reservationState.jsp");
+        forwardTo(request, response, DEFAULT_ROUTE);
     }
 
-
+    // TODO: move to Restaurant
     private Reservation makeReservation(HttpServletRequest request) {
         String formName = request.getParameter("name");
         String formSurname = request.getParameter("surname");
@@ -79,14 +74,9 @@ public class ReservationServlet extends HttpServlet {
                 eventDate,formName+ " " + formSurname, formEmail);
     }
 
-        private boolean checkDate(HttpServletRequest request){
-
-            String validity = request.getParameter("validity");
-            if (validity == null || validity.equals("1"))
-                return true;
-            else
-                return false;
-
-        }
+    private boolean checkDate(HttpServletRequest request){
+        String validity = request.getParameter("validity");
+        return validity == null || validity.equals("1");
+    }
 }
 

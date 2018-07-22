@@ -3,7 +3,6 @@ package menu;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * Class that represents a single dish in the menu . Each dish is described by :
@@ -54,16 +53,17 @@ public class MenuElement  {
     /**
      * @return the code of the dish
      */
-
     public String getElementCode() {
         return elementCode;
     }
+
     /**
      * @return the price of the dish
      */
     public double getPrice() {
         return price;
     }
+
     /**
      * @return the type of the dish
      */
@@ -107,20 +107,14 @@ public class MenuElement  {
      */
 
     public void removeAllergen(Allergen a) {
-        if (allergenList.contains(a))
-            allergenList.remove(a);
+        allergenList.remove(a);
     }
 
     /**
-     * Checks whether an allergen is contained in the allergen's list
-     * @param a the allergen to be checked
-     * @return true if the allergen is present, false otherwise
+     * Checks whether the element contains the specified allergens or not
+     * @param filter string of allergen's codes to be checked
+     * @return true if none of the specified allergens is present, false otherwise
      */
-    // TODO Problema: per come viene popolato il catalogo, questo metodo non funziona. L'idea è di rimpiazzarlo con respectsAllergens()
-    public boolean containsAllergen(Allergen a) {
-        return allergenList.contains(a);
-    }
-
     public boolean respectsAllergens(String filter) {
         for (Allergen allergen : allergenList)
             if (filter.contains(allergen.getAllergenCode()))
@@ -128,6 +122,7 @@ public class MenuElement  {
         return true;
     }
 
+    // TODO: add doc and improve
     public String showFilters(){
         String tmp="";
         HashMap<String,Boolean> filters = flags.getFilters();
@@ -164,7 +159,6 @@ public class MenuElement  {
      * Creates a description of the dish's allergens
      * @return string description
      */
-
     public String showAllergenes() {
         String tmp = "";
         for (Allergen element : allergenList)
@@ -176,7 +170,6 @@ public class MenuElement  {
      * Comparator for the type of dishes. Its method compare( ) takes two MenuElements e1, e2 as parameters and returns
      * 0 if e1 and e2 are dishes of the same type
      */
-
     public static Comparator <MenuElement> typeComparator = new Comparator<MenuElement>() {
         @Override
         public int compare(MenuElement o1, MenuElement o2) {
@@ -191,15 +184,11 @@ public class MenuElement  {
      * negative integer if the price of e1 is higher than the one of e2
      *
      */
-    public static Comparator <MenuElement> priceComparator = new Comparator<MenuElement>() {
-        @Override
-        public int compare(MenuElement o1, MenuElement o2) {
-            Double p1 = o1.getPrice();
-            Double p2 = o2.getPrice();
+    public static Comparator <MenuElement> priceComparator = (o1, o2) -> {
+        Double p1 = o1.getPrice();
+        Double p2 = o2.getPrice();
 
-            return -p1.compareTo(p2);
-
-        }
+        return -p1.compareTo(p2);
     };
 
 }

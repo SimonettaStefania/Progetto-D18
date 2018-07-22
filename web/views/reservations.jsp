@@ -89,7 +89,7 @@
 
                  <input type="text" name="res-id" class="form-control">
              </div>
-
+            <input type="hidden" name="action" value="confirm">
             <input type="submit" class="btn btn-dark" id="confirm" value="Confirm" style="width: 15%;">
         </form>
     </div>
@@ -110,7 +110,9 @@
                         <div class="card-body">
                             <%=summary(pickedReservation)%>
 
-                            <form action="../reservations" method="get">
+                            <form action="../reservations" method="post">
+                                <input type="hidden" name="action" value="delete">
+                                <input type="hidden" name="reservationId" value="<%=pickedReservation.getReservationCode()%>">
                                 <input type="submit" class="btn btn-sm btn-dark"  value="Delete" style="float: right;">
                             </form>
 

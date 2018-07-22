@@ -3,20 +3,31 @@ package servlets;
 import restaurant.Reservation;
 import restaurant.Restaurant;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "ReviewServlet", urlPatterns = "/reservations")
-public class ReviewServlet extends HttpServlet {
+public class ReviewServlet extends AbstractServlet {
+    private String DEFAULT_ROUTE = "/views/reservations.jsp";
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action=request.getParameter("action");
+
+        if(action.equals("confirm")){
+            searchReservations(request);
+        }else if(action.equals("delete")){
+            deleteReservation(request);
+        }
+
+        forwardTo(request, response, DEFAULT_ROUTE);
+    }
+
+    private void searchReservations(HttpServletRequest request){
         String email = request.getParameter("email");
         String code = request.getParameter("res-id");
 
@@ -25,16 +36,15 @@ public class ReviewServlet extends HttpServlet {
             if (code.equalsIgnoreCase(r.getReservationCode()) && email.equalsIgnoreCase(r.getCustomerMail()))
                 request.setAttribute("pickedReservation", r);
 
-        forwardTo(request, response, "/views/reservations.jsp");
+    }
+
+    private void deleteReservation(HttpServletRequest request){
+        String resToDelete=request.getParameter("reservationId");
+
+        Restaurant.getRestaurantInstance().deleteReservation(resToDelete);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        forwardTo(request, response, "/views/reservations.jsp");
-    }
-
-    private void forwardTo(HttpServletRequest request, HttpServletResponse response, String route) throws ServletException, IOException {
-        ServletContext context = getServletContext();
-        RequestDispatcher rd = context.getRequestDispatcher(route);
-        rd.forward(request, response);
+        forwardTo(request, response, DEFAULT_ROUTE);
     }
 }
