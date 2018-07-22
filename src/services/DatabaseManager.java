@@ -3,65 +3,36 @@ package services;
 import menu.*;
 import restaurant.*;
 
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Random;
 
 public class DatabaseManager {
     private Catalogue catalogue;
     private ArrayList<Reservation> reservations;
+    private QueryHandler queryHandler;
 
-    public DatabaseManager (Restaurant restaurant) {
-        this.catalogue = restaurant.getDishesCatalogue();
-        this.reservations = restaurant.getReservationList();
+    public DatabaseManager (Catalogue cat, ArrayList<Reservation> res) {
+        this.catalogue = cat;
+        this.reservations = res;
+        this.queryHandler = new QueryHandler();
     }
 
-    public synchronized void readDatabase() {
-        DbReader dbr = DbReader.getDbReaderInstance();
 
-        executeQuery(Query.SELECT_ALL_DISHES);
-        for (MenuElement elem : dbr.getDishesList())
+    public synchronized void readDatabase() {
+        queryHandler.setupConnection();
+
+        for (MenuElement elem : queryHandler.readCatalogue())
             catalogue.addElement(elem);
 
-        executeQuery(Query.SELECT_ALL_ALLERGENS);
-        for (Allergen item : dbr.getAllergensList())
-            catalogue.addAllergen(item);
+        for (Allergen elem : queryHandler.readAllergens())
+            catalogue.addAllergen(elem);
 
         catalogue.getDishes().sort(MenuElement.priceComparator);
         catalogue.getDishes().sort(MenuElement.typeComparator);
 
-        populateReservations();
-    }
+        reservations.addAll(queryHandler.readReservations());
 
-    private synchronized void populateReservations(){
-        DbReader dbr = DbReader.getDbReaderInstance();
-        executeQuery(Query.SELECT_RESERVATION);
-        reservations.addAll(dbr.getReservationsList());
-
-        for (Reservation reservation : reservations) {
-            String addToQuery = "WHERE RES_CODE ='" + reservation.getReservationCode() + "' ORDER BY MENU_CODE";
-            executeQuery(Query.editQuery(Query.SELECT_MENU, addToQuery));
-
-            reservation.getCreatedMenu().addAll(dbr.getMenuList());
-            readMenuDishes(reservation);
-        }
-    }
-
-    private synchronized void readMenuDishes (Reservation reservation) {
-        DbReader dbr = DbReader.getDbReaderInstance();
-        int arraySize = reservation.getCreatedMenu().size();
-        String addToQuery;
-
-        for (int menuIndex = 0; menuIndex < arraySize; menuIndex++) {
-            Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
-
-            addToQuery = "WHERE (MENU_CODE='" + menuIndex + "' AND RES_CODE='" + reservation.getReservationCode() + "')";
-            executeQuery(Query.editQuery(Query.SELECT_DISH_IN_MENU,addToQuery));
-            for(String code: dbr.getMenuDishesCodeList()){
-                currentMenu.getMenuElementsList().add(catalogue.getElementByCode(code));
-            }
-        }
+        queryHandler.closeConnection();
     }
 
     public synchronized void insertReservation (Reservation reservation) {
@@ -69,64 +40,25 @@ public class DatabaseManager {
         reservation.setReservationCode(id);
 
         reservations.add(reservation);
-        String addToQuery = String.format("('%s',%d,%s,'%s','%s','%s',NULL)", reservation.getReservationCode(),
-                reservation.getnGuests(), reservation.getReservationCost(), new Date(reservation.getEventDate().getTime()),
-                reservation.getCustomerNameSurname(), reservation.getCustomerMail());
-        executeQuery(Query.editQuery(Query.INSERT_RESERVATION,addToQuery));
 
-        insertMenus(reservation);
+        queryHandler.setupConnection();
+        queryHandler.insertReservationInDB(reservation);
+        queryHandler.closeConnection();
     }
 
-    private synchronized void insertMenus (Reservation reservation) {
-        int arraySize = reservation.getCreatedMenu().size();
-        Locale.setDefault(Locale.US);
-        String addToQuery;
+    public synchronized void deleteReservation (String reservationCode) {
+        Reservation toDelete = null;
 
-        for (int menuIndex=0; menuIndex<arraySize; menuIndex++){
-            Menu currentMenu = reservation.getCreatedMenu().get(menuIndex);
+        for(Reservation elem : reservations)
+            if (elem.getReservationCode().equals(reservationCode))
+                toDelete = elem;
 
-            addToQuery = String.format("('%s','%s','%s',%d)", reservation.getReservationCode(),
-                    menuIndex, currentMenu.getName(),currentMenu.getnMenuGuests());
-            executeQuery(Query.editQuery(Query.INSERT_MENU,addToQuery));
+        if (toDelete != null) {
+            reservations.remove(toDelete);
 
-            insertDishesInMenu(reservation,menuIndex,currentMenu);
-        }
-    }
-
-    private synchronized void insertDishesInMenu(Reservation reservation, int menuIndex, Menu menu){
-        String addToQuery;
-
-        for (MenuElement elem : menu.getMenuElementsList()) {
-            addToQuery = String.format("('%s',%s,'%s')", reservation.getReservationCode(),
-                    menuIndex, elem.getElementCode());
-            executeQuery(Query.editQuery(Query.INSERT_DISH_IN_MENU,addToQuery));
-        }
-    }
-
-    public synchronized void deleteReservation(String resToDeleteCode) {
-        Reservation resToDelete = null;
-
-        for(Reservation elem : reservations){
-            if (elem.getReservationCode().equals(resToDeleteCode)) {
-                resToDelete = elem;
-            }
-        }
-        reservations.remove(resToDelete);
-
-        String addToQuery="WHERE RES_CODE='" + resToDeleteCode + "'";
-        executeQuery(Query.editQuery(Query.DELETE_RESERVATION,addToQuery));
-
-    }
-
-    private void executeQuery(String query) {
-        DbReader dbr = DbReader.getDbReaderInstance();
-        Thread dbThread = new Thread(dbr);
-        dbr.setQuery(query);
-        dbThread.start();
-        try {
-            dbThread.join();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
+            queryHandler.setupConnection();
+            queryHandler.deleteReservation(reservationCode);
+            queryHandler.closeConnection();
         }
     }
 

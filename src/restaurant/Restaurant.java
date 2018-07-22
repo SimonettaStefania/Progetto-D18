@@ -20,7 +20,7 @@ public class Restaurant {
         this.nCover = nCover;
         this.dishesCatalogue = new Catalogue();
         this.reservationList = new ArrayList<>();
-        this.databaseManager = new DatabaseManager(this);
+        this.databaseManager = new DatabaseManager(dishesCatalogue, reservationList);
     }
 
     public String getName() {
