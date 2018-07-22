@@ -8,7 +8,6 @@
 <%@ page import="menu.MenuElement" %>
 <%@ page import="menu.DishType" %>
 <%@ page import="restaurant.Restaurant" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
