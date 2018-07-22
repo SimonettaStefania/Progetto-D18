@@ -5,6 +5,9 @@ import menu.*;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+/**
+ * Abstraction of the algorithm to generate menus within a specified budget.
+ */
 public class MenuGenerator {
     private int people;
     private double budget;
@@ -12,10 +15,18 @@ public class MenuGenerator {
     private ArrayList<MenuElement> catalogueList;
     private TreeMap<Optimization, double[]> optimizationMap;
 
+    /**
+     * Enumeration of the different optimization approaches
+     */
     enum Optimization {
         BUDGET, STARTERS, FIRST_COURSES, MAIN_COURSES
     }
 
+    /**
+     * Constructor needing informations about the menus to be generated
+     * @param budget Double representing the assigned budget
+     * @param people Number of guests the menu is designated to
+     */
     public MenuGenerator (double budget, int people) {
         Restaurant restaurant = Restaurant.getRestaurantInstance();
         Catalogue catalogue = restaurant.getDishesCatalogue();
@@ -30,7 +41,9 @@ public class MenuGenerator {
         generate();
     }
 
-    // TODO: add to javadoc and UML
+    /**
+     * Inizialization of the map containing the quotes for each optimization option
+      */
     private void initOptimizationMap() {
         double starters[] = {0.35, 0.25, 0.25};
         double budget[] = {0.25, 0.3, 0.3};
@@ -61,22 +74,17 @@ public class MenuGenerator {
         }
     }
 
+    /**
+     * Method selecting the proper name for each optimizaion tecnique
+     * @param opt Referenced Optimization approach
+     * @return name for the upcoming optimized menu
+     */
     private String pickName(Optimization opt) {
         String name = "";
-        switch (opt) {
-            case BUDGET:
-                name = "Budget-optimized menu";
-                break;
-            case STARTERS:
-                name = "Budget-optimized menu on starters";
-                break;
-            case FIRST_COURSES:
-                name = "Budget-optimized menu on first courses";
-                break;
-            case MAIN_COURSES:
-                name = "Budget-optimized menu on main courses";
-                break;
-        }
+        if (opt == Optimization.BUDGET) name = "Budget-optimized menu";
+        else if (opt == Optimization.STARTERS) name = "Budget-optimized menu on starters";
+        else if (opt == Optimization.FIRST_COURSES) name = "Budget-optimized menu on first courses";
+        else if (opt == Optimization.MAIN_COURSES) name = "Budget-optimized menu on main courses";
         return name;
     }
 
@@ -145,6 +153,10 @@ public class MenuGenerator {
         return tmp ;
     }
 
+    /**
+     * Method returning the stored generated menus
+     * @return ArrayList of optimized menus
+     */
     public ArrayList<Menu> getGeneratedMenu() {
         return generatedMenu;
     }

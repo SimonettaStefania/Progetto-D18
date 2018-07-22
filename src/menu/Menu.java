@@ -105,10 +105,11 @@ public class Menu {
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.name).append("\t menuCost: ").append(this.getMenuCost()).append("\t nGuest: ").append(this.nMenuGuests).append("\n");
-        for (MenuElement el : menuElementsList) {
+        sb.append(this.name).append("\nPrice: ").append(this.getMenuCost());
+        sb.append("\t\tGuests: ").append(this.nMenuGuests).append("\n");
+        for (MenuElement el : menuElementsList)
             sb.append(el.toString()).append("\n");
-        }
+
         return sb.toString();
     }
 }

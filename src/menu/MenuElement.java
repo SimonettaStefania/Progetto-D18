@@ -150,11 +150,11 @@ public class MenuElement  {
     }
 
     /**
-     * Creates a description of the dish (name, price , type of dish)
+     * Creates a description of the dish (name, price, type of dish)
      * @return string description
      */
     public String toString() {
-        return String.format("%s\t%s €\t%s\n", name, price, type);
+        return String.format("%s - %s €\t\t(%s)\n", name, price, type);
     }
 
 
