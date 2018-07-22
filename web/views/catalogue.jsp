@@ -29,6 +29,7 @@
                 <!-- Catalogue object taken from the restaurant -->
 
                 <%  Catalogue catalogue = Restaurant.getRestaurantInstance().getDishesCatalogue();
+                    String[] title = {"Starters", "First courses", "Main courses", "Dessert", "Drinks"};
                     DishType[] types = DishType.values();   %>
 
                 <!-- Method that creates a description for each dish with its price , ingredients, allergens, and filters ;
@@ -76,7 +77,7 @@
                             %>
 
                                 <a class="list-group-item list-group-item-action <%if (i==0) out.print("active");%>" id="label-<%=category%>" data-toggle="list" href="#list-<%=category%>" role="tab" >
-                                    <%=category%>
+                                    <b><%=title[i]%></b>
                                 </a>
 
 
