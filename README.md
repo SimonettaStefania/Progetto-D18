@@ -19,6 +19,8 @@ The goal of thee project is to realize a system that let a customer create a res
     <img src="http://i65.tinypic.com/1zmgf40.png"><br>
 </div>
 
+For more information and documentation please read the [wiki](https://github.com/IngSW-unipv/Progetto-D18/wiki)
+
 ## Members & responsibilities:
 - Database/Code documentation: [nik1360](https://github.com/nik1360)
 - Code quality: [zorzr](https://github.com/zorzr)
