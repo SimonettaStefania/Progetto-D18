@@ -1,6 +1,7 @@
 package servlets;
 
 import restaurant.Reservation;
+import restaurant.Restaurant;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -58,7 +59,7 @@ public class ReservationServlet extends AbstractServlet {
             e.printStackTrace();
         }
 
-        Reservation reservation = new Reservation(null, formGuests, eventDate, formName, formEmail);
+        Reservation reservation = Restaurant.makeReservation(null, formGuests, eventDate, formName, formEmail);
         request.getSession().setAttribute("reservation", reservation);
     }
 

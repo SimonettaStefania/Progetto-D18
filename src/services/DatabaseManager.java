@@ -8,32 +8,26 @@ import java.util.Random;
 
 /**
  * A class which stands between Restaurant and QueryHandler.
- * It is described by:
- * - a Catalogue
- * - a list of reservations
+ * It is described by the QueryHandler object used to interact with the database.
  */
 public class DatabaseManager {
-    private Catalogue catalogue;
-    private ArrayList<Reservation> reservations;
     private QueryHandler queryHandler;
 
     /**
-     * Constructor with the following parameters
-     * @param cat restaurant's catalogue
-     * @param res restaurant's reservations list
+     * Constructor initializing the QueryHandler
      */
-
-    public DatabaseManager (Catalogue cat, ArrayList<Reservation> res) {
-        this.catalogue = cat;
-        this.reservations = res;
+    public DatabaseManager () {
         this.queryHandler = new QueryHandler();
     }
 
     /**
      * Method that populate reads from database by using QueryHandler instance
      */
-
     public synchronized void readDatabase() {
+        Restaurant restaurant = Restaurant.getRestaurantInstance();
+        Catalogue catalogue = restaurant.getDishesCatalogue();
+        ArrayList<Reservation> reservations = restaurant.getReservationList();
+
         queryHandler.setupConnection();
 
         for (MenuElement elem : queryHandler.readCatalogue())
@@ -52,15 +46,9 @@ public class DatabaseManager {
 
     /**
      * Method which inserts a reservation into database by using a QueryHandler instance
-     * @param reservation the reervation to insert
+     * @param reservation the reservation to insert
      */
-
     public synchronized void insertReservation (Reservation reservation) {
-        String id = generateReservationId();
-        reservation.setReservationCode(id);
-
-        reservations.add(reservation);
-
         queryHandler.setupConnection();
         queryHandler.insertReservationInDB(reservation);
         queryHandler.closeConnection();
@@ -68,32 +56,29 @@ public class DatabaseManager {
 
     /**
      *  Method that deletes a reservation from database by using QueryHandler instance.
-     * @param reservationCode the code of the reservation to delete
+     * @param toDelete the reservation to delete
      */
+    public synchronized void deleteReservation (Reservation toDelete) {
+        queryHandler.setupConnection();
+        queryHandler.deleteReservation(toDelete.getReservationCode());
+        queryHandler.closeConnection();
+    }
 
-    public synchronized void deleteReservation (String reservationCode) {
-        Reservation toDelete = null;
-
-        for(Reservation elem : reservations)
-            if (elem.getReservationCode().equals(reservationCode))
-                toDelete = elem;
-
-        if (toDelete != null) {
-            reservations.remove(toDelete);
-
-            queryHandler.setupConnection();
-            queryHandler.deleteReservation(reservationCode);
-            queryHandler.closeConnection();
-        }
+    public void setReservationId(Reservation reservation) {
+        String id = generateReservationId();
+        reservation.setReservationCode(id);
     }
 
     /**
-     * Method that returns a generatd ID if it is not used by any reservation
+     * Method that returns a unique random ID not used by any other reservation
      * @return tmpId is the generated ID
      */
     private String generateReservationId() {
-        String tmpId = null;
+        Restaurant restaurant = Restaurant.getRestaurantInstance();
+        ArrayList<Reservation> reservations = restaurant.getReservationList();
+
         boolean unique = false;
+        String tmpId = null;
 
         while (!unique) {
             tmpId = generateCode();
