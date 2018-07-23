@@ -44,8 +44,8 @@ public class Restaurant {
     }
 
     /**
-     * Method that read the database and uses the "readDatabase" method to
-     * initialize the catalogue
+     * Method that creates the Restaurant instance and, if database is used,
+     *  automatically fills the Catalogue and the reservationList.
      */
     private static synchronized void initRestaurant() {
         restaurantInstance = new Restaurant(NAME, N_COVERS);
@@ -54,11 +54,24 @@ public class Restaurant {
             restaurantInstance.databaseManager.readDatabase();
     }
 
+    /**
+     * Method that allows to enable/disable the database before obtaining the instance.
+     * @param value a boolean
+     */
     public static void setDatabase(boolean value) {
         if (restaurantInstance == null)
             database = value;
     }
 
+    /**
+     * Method generating a new reservation
+     * @param id the reservation code (may be temorary null)
+     * @param guests number of people participating the event
+     * @param date Date object representing the day of the event
+     * @param name the customer's full name
+     * @param mail the customer's email address
+     * @return a new instance of Reservation
+     */
     public static Reservation makeReservation(String id, int guests, Date date, String name, String mail) {
         return new Reservation(id, guests, date, name, mail);
     }
@@ -81,8 +94,8 @@ public class Restaurant {
 
     /**
      * Getter that returns the arraylist containing all the already created reservations
-     * for the instanced restaurant. It is in the reservations page to find the
-     * reservations that corresponds to email-id set
+     *  for the instanced restaurant. It is used in the reservations page to find the
+     *  reservations corresponding to the inserted email-id set
      * @return list of existing reservations for the restaurant
      */
     public ArrayList<Reservation> getReservationList() {
@@ -98,8 +111,8 @@ public class Restaurant {
     }
 
     /**
-     * Setter that get a catalogue as a paramether and set that as dishes catalogue
-     * in the initialized restaurant
+     * Setter that get a catalogue as a parameter and set that as dishes catalogue
+     *  in the initialized restaurant
      * @param cat catalogue to be passed
      */
     public void setCatalogue(Catalogue cat) {
@@ -107,9 +120,9 @@ public class Restaurant {
     }
 
     /**
-     * Method that get a reservation as a parameter and insert it into the database
-     * thought the databaseManager. Must be synchronized to avoid concurrency problems that may
-     * occur due to contemporary access to the method
+     * Method that get a reservation as a parameter and insert it into the reservationList and,
+     *  if enabled, also in the database thought the databaseManager. Must be synchronized to avoid
+     *  concurrency problems that may occur due to contemporary access to the method
      * @param reservation reservation to be inserted
      */
     public synchronized void insertReservation(Reservation reservation) {
@@ -121,10 +134,10 @@ public class Restaurant {
 
 
     /**
-     * Method that uses the databaseManger to delete a reservation using the unique generated
-     * code as a parameter to identify the selected reservation.
-     * Must be synchronized to avoid concurrency problems that may
-     * occur due to contemporary access to the method
+     * Method that removes a reservation using the unique generated code as a parameter to identify
+     *  the selected reservation: if enabled, it also removes it from the database.
+     * Must be synchronized to avoid concurrency problems that may occur due to contemporary access
+     *  to the method
      * @param code code of reservation to be deleted
      */
     public synchronized void deleteReservation(String code) {

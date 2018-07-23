@@ -8,9 +8,7 @@ import java.util.Random;
 
 /**
  * A class which stands between Restaurant and QueryHandler.
- * It is described by:
- * - a Catalogue
- * - a list of reservations
+ * It is described by the QueryHandler object used to interact with the database.
  */
 public class DatabaseManager {
     private QueryHandler queryHandler;
@@ -48,7 +46,7 @@ public class DatabaseManager {
 
     /**
      * Method which inserts a reservation into database by using a QueryHandler instance
-     * @param reservation the reervation to insert
+     * @param reservation the reservation to insert
      */
     public synchronized void insertReservation (Reservation reservation) {
         queryHandler.setupConnection();
@@ -72,7 +70,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Method that returns a generatd ID if it is not used by any reservation
+     * Method that returns a unique random ID not used by any other reservation
      * @return tmpId is the generated ID
      */
     private String generateReservationId() {
