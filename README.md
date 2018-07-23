@@ -1,12 +1,23 @@
 # D18:
-The goal of the project is to realize a system from which a customer can create a personalized reservation (for an event with a lot of guests) and deeply customize one or more menus. It's possible to create more than one menu for every reservation and to decide how many people to assign to each of them (*e.g. if you make a reservation for 50 people you can decide to create 3 menus: the first for 15 people, the second for 15 people and the third for 20*). 
-In addition customer has two choices for every menu:
-* He can decide to customize the menu and build one from nothing: in this case the customer can choose every dish he wants from the catalogue; moreover with this choice he can apply filters to the catalogue itself (*Vegeratian, Vegan, Celiac*) and at the same time read informations about every dish (including price and allergenes)
-
-* He can decide to insert a budget and let the program create the menu: the system will create 4 menus (one giving more budget to the starters, one to the first, one to the mains and the last one balacing the budget between all of them); customer can then choose from the generated menus or decide to go back and create it's own menu (choice one)
-
-When the reservation is confirmed it will be saved into the database and the customer will be given an alphanumeric random code: with his e-mail and the code he can use the site to view his reservations and delete them.
-
+The goal of thee project is to realize a system that let a customer create a reservation for an event, allowing a deep customization of the menu and everything related. It allows him to:
+<div align="center">
+    <figcaption>Choose every detail about the reservation:</figcaption>
+    <img  src="https://image.ibb.co/npQj1y/home.png"> <br>
+   <figcaption>See the catalogue:</figcaption>
+    <img src="http://i63.tinypic.com/wwku2v.png"><br>
+    <figcaption>See all informations about the reservation the customer is creating:</figcaption>
+    <img src="http://i63.tinypic.com/21aw8qe.png"><br>
+    <figcaption>Choose dishes applying filters to allergenes and vegan/vegetarian/celiac:</figcaption>
+    <img  src="http://i68.tinypic.com/sl5zd5.png"> <br>
+    <figcaption>Create optimized menus starting from a budget and a number of guests:</figcaption>
+    <img src="http://i63.tinypic.com/2qmjg1u.png"><br>
+    <figcaption>See a recap of the reservation:</figcaption>
+    <img src="http://i65.tinypic.com/97t9xs.png"><br>
+    <figcaption>Get a unique ID that represents the reservation after the confirm:</figcaption>
+    <img src="http://i68.tinypic.com/nnmadl.png"><br>
+    <figcaption>Delete a previous reservation using customer e-mail and the unique ID:</figcaption>
+    <img src="http://i65.tinypic.com/1zmgf40.png"><br>
+</div>
 
 ## Members & responsibilities:
 - Database/Code documentation: [nik1360](https://github.com/nik1360)
