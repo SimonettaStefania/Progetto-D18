@@ -7,12 +7,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * A class which stands between Restaurant and QueryHandler
+ * A class which stands between Restaurant and QueryHandler.
+ * It is described by:
+ * - a Catalogue
+ * - a list of reservations
  */
 public class DatabaseManager {
     private Catalogue catalogue;
     private ArrayList<Reservation> reservations;
     private QueryHandler queryHandler;
+
+    /**
+     * Constructor with the following parameters
+     * @param cat restaurant's catalogue
+     * @param res restaurant's reservations list
+     */
 
     public DatabaseManager (Catalogue cat, ArrayList<Reservation> res) {
         this.catalogue = cat;
@@ -20,6 +29,9 @@ public class DatabaseManager {
         this.queryHandler = new QueryHandler();
     }
 
+    /**
+     * Method that populate reads from database by using QueryHandler instance
+     */
 
     public synchronized void readDatabase() {
         queryHandler.setupConnection();
@@ -38,6 +50,10 @@ public class DatabaseManager {
         queryHandler.closeConnection();
     }
 
+    /**
+     * Method which inserts a reservation into database by using a QueryHandler instance
+     * @param reservation the reervation to insert
+     */
 
     public synchronized void insertReservation (Reservation reservation) {
         String id = generateReservationId();
@@ -49,6 +65,11 @@ public class DatabaseManager {
         queryHandler.insertReservationInDB(reservation);
         queryHandler.closeConnection();
     }
+
+    /**
+     *  Method that deletes a reservation from database by using QueryHandler instance.
+     * @param reservationCode the code of the reservation to delete
+     */
 
     public synchronized void deleteReservation (String reservationCode) {
         Reservation toDelete = null;

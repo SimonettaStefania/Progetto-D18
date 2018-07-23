@@ -93,7 +93,7 @@ public class Restaurant {
     }
 
     /**
-     * Method that populates the catalogue and the reservations list from database by using databaseManager instance.
+     * Method that populates the catalogue and the reservations list from database by using DatabaseManager instance.
      */
 
     private synchronized void initRestaurant() {
@@ -101,7 +101,8 @@ public class Restaurant {
     }
 
     /**
-     * Method that inserts a reservation into database by using databaseManager instance.
+     * Method which inserts a reservation into database by using a DatabaseManager instance
+     * @param reservation the reservation to insert
      */
 
     public synchronized void insertReservation(Reservation reservation) {
@@ -109,9 +110,9 @@ public class Restaurant {
     }
 
     /**
-     * Method that deletes a reservation from database by using databaseManager instance.
+     * Method that deletes a reservation from database by using DatabaseManager instance.
+     * @param code the code of the reservation to delete
      */
-
     public synchronized void deleteReservation(String code) {
         databaseManager.deleteReservation(code);
     }
