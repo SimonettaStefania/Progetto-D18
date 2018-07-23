@@ -78,7 +78,7 @@ public class ReservationTest {
         Assert.assertEquals(expectedCost0, r0.getReservationCost(), 0.0);
     }
 
-    // doesn't work
+
     @Test
     public void createdMenuTest() {
         ArrayList<Menu> expected = new ArrayList<>();
