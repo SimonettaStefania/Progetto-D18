@@ -1,9 +1,9 @@
 # D18:
 The goal of thee project is to realize a system that let a customer create a reservation for an event, allowing a deep customization of the menu and everything related. It allows him to:
-<div align="center">
-    <figcaption align"left">Choose every detail about the reservation:</figcaption>
+<div align="left">
+    <figcaption>Choose every detail about the reservation:</figcaption>
     <img  src="https://image.ibb.co/npQj1y/home.png"> <br>
-   <figcaption align"left">See the catalogue:</figcaption>
+   <figcaption>See the catalogue:</figcaption>
     <img src="http://i63.tinypic.com/wwku2v.png"><br>
     <figcaption>See all informations about the reservation the customer is creating:</figcaption>
     <img src="http://i63.tinypic.com/21aw8qe.png"><br>
