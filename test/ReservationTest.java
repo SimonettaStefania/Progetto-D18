@@ -95,7 +95,7 @@ public class ReservationTest {
 
         r1.createMenu("menu creato", 10, new String[]{"A01", "P01", "S01"});
 
-        Assert.assertArrayEquals(expected.toArray(), r1.getCreatedMenu().toArray());
+        Assert.assertEquals(expected.get(4).toString(), r1.getCreatedMenu().get(4).toString());
     }
 
     @Test
