@@ -4,13 +4,11 @@ import services.DatabaseManager;
 import java.util.ArrayList;
 
 /**
- * Class that represents the restaurant.
- * It is a Singleton and it is described by:
- * - a name
- * - the number of the covers
- * - a catalogue
- * - a list of reservations
- * - an object (databaseManager) which interfaces the restaurant with the database
+ * Class containing all the methods to handle the restaurant, which is initialized on the welcome page
+ * It is described by:
+ * - Name
+ * - N_covers
+ * - An instance of the restaurant itself
  */
 
 public class Restaurant {
@@ -25,11 +23,10 @@ public class Restaurant {
     private DatabaseManager databaseManager;
 
     /**
-     * Constructor with parameters:
-     * @param name is the name of the restaurant
-     * @param nCover is the number of the covers
+     * Class constructor, creates the Restaurant
+     * @param name name of the restaurant
+     * @param nCover number of restaurant covers
      */
-
     public Restaurant(String name, int nCover) {
         this.name = name;
         this.nCover = nCover;
@@ -39,11 +36,11 @@ public class Restaurant {
     }
 
     /**
-     * Method which returns the current Restaurant's instance if present, otherwise
-     * it returns a new Restaurant's instance
-     * @return restaurantInstance is the current or the new instance
+     * Method to get the restaurant instance (or create one if it does not exist)
+     * It must be synchronized because of possible concurrency problems that may be caused
+     * by multiple access to the main page at the same time.
+     * @return the current restaurant instance
      */
-
     public static synchronized Restaurant getRestaurantInstance() {
         if (restaurantInstance == null) {
             restaurantInstance = new Restaurant(NAME, N_COVERS);
@@ -53,65 +50,73 @@ public class Restaurant {
     }
 
     /**
-     *@return restaurant's name
+     * Getter that returns restaurant name
+     * @return name of the restaurant
      */
-
     public String getName() {
         return name;
     }
 
     /**
-     *@return restaurants's covers
+     * Getter that returns number of covers of the instanced restaurant
+     * @return number of covers
      */
     public int getnCover() {
         return nCover;
     }
 
     /**
-     *@return the list of the reservations
+     * Getter that returns the arraylist containing all the already created reservations
+     * for the instanced restaurant. It is in the reservations page to find the
+     * reservations that corresponds to email-id set
+     * @return list of existing reservations for the restaurant
      */
-
     public ArrayList<Reservation> getReservationList() {
         return reservationList;
     }
 
     /**
-     *@return restaurant's catalogue
+     * Getter that returns the dishes catalogue
+     * @return the catalogue of dishes
      */
-
     public Catalogue getDishesCatalogue() {
         return dishesCatalogue;
     }
 
     /**
-     * Method that sets restaurant's catalogue from a given one
-     * @param cat given Catalogue object
+     * Setter that get a catalogue as a paramether and set that as dishes catalogue
+     * in the initialized restaurant
+     * @param cat catalogue to be passed
      */
-
     public void setCatalogue(Catalogue cat) {
         dishesCatalogue = cat;
     }
 
     /**
-     * Method that populates the catalogue and the reservations list from database by using DatabaseManager instance.
+     * Method that read the database and uses the "readDatabase" method to
+     * initialize the catalogue
      */
-
     private synchronized void initRestaurant() {
         databaseManager.readDatabase();
     }
 
     /**
-     * Method which inserts a reservation into database by using a DatabaseManager instance
-     * @param reservation the reservation to insert
+     * Method that get a reservation as a parameter and insert it into the database
+     * thought the databaseManager. Must be synchronized to avoid concurrency problems that may
+     * occur due to contemporary access to the method
+     * @param reservation reservation to be inserted
      */
-
     public synchronized void insertReservation(Reservation reservation) {
         databaseManager.insertReservation(reservation);
     }
 
+
     /**
-     * Method that deletes a reservation from database by using DatabaseManager instance.
-     * @param code the code of the reservation to delete
+     * Method that uses the databaseManger to delete a reservation using the unique generated
+     * code as a parameter to identify the selected reservation.
+     * Must be synchronized to avoid concurrency problems that may
+     * occur due to contemporary access to the method
+     * @param code code of reservation to be deleted
      */
     public synchronized void deleteReservation(String code) {
         databaseManager.deleteReservation(code);
