@@ -38,7 +38,7 @@ public class OptimizedMenusServlet extends AbstractServlet {
     }
 
     /**
-     * Method to handle the HTTP get request and redirect to INDEX_ROUTE (home.jsp)
+     * Method to handle the HTTP get request and redirect to INDEX_ROUTE (index.jsp)
      * in case of doGet. This behavior allows to prevent customer to reach the
      * confirmPage.jsp without making a reservation
      * @param request represents the HTTP request

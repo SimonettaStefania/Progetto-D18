@@ -12,7 +12,7 @@ public class RecapServlet extends AbstractServlet {
 
     /**
      * Method to handle the HTTP post request, redirecting it to the defined route
-     * (in this case recap.jsp.jsp)
+     * (in this case recap.jsp)
      * @param request represents the HTTP request
      * @param response represents the HTTP response
      * @throws ServletException Exception coming from the servlet itself
@@ -24,7 +24,7 @@ public class RecapServlet extends AbstractServlet {
 
 
      /**
-     * Method to handle the HTTP get request and redirect to INDEX_ROUTE (home.jsp)
+     * Method to handle the HTTP get request and redirect to INDEX_ROUTE (index.jsp)
      * in case of doGet. This behavior allows to prevent customer to reach the
      * confirmPage.jsp without making a reservation
      * @param request represents the HTTP request

@@ -24,8 +24,13 @@ public class SelectionServlet extends AbstractServlet {
     }
 
     /**
-     *  Redirects to homepage if trying to access the page from its address.
-     *  Only access through post method is allowed.
+     * Method to handle the HTTP get request and redirect to INDEX_ROUTE (index.jsp)
+     * in case of doGet. This behavior allows to prevent customer to reach the
+     * confirmPage.jsp without making a reservation
+     * @param request represents the HTTP request
+     * @param response represents the HTTP response
+     * @throws ServletException Exception coming from the servlet itself
+     * @throws IOException Exception coming from an I/O problem
      * */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         forwardTo(request, response, INDEX_ROUTE);

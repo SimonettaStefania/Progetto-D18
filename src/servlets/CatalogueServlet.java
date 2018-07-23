@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * Servlet that handles the redirection to the catalogue jsp page. In this case
- * it allows a get method, making the page reachable from the URL, from the navbar
+ * it allows a get method, making the page reachable from the URL
  * and from the buttons.
  */
 
@@ -28,6 +28,14 @@ public class CatalogueServlet extends AbstractServlet {
         forwardTo(request, response, DEFAULT_ROUTE);
     }
 
+    /**
+     * Method to handle the HTTP get request; in this case is possible to reach catalogue.jsp either from doGet or doPost
+     * method
+     * @param request is the HTTP request
+     * @param response is the HTTP response
+     * @throws ServletException Exception coming from the servlet itself
+     * @throws IOException Exception coming from an I/O error
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         forwardTo(request, response, DEFAULT_ROUTE);
     }

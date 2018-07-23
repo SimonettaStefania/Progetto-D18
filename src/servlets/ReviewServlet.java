@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Class that handles requests between web pages(navbar.jsp, reservations.jsp, welcome.jsp).
  * This Servlet:
  * - search a certain reservation using email and reservation code
  * - calls a Reservation method to delete a certain reservation
@@ -39,10 +38,13 @@ public class ReviewServlet extends AbstractServlet {
     }
 
     /**
-     *  Redirects to homepage if trying to access the page from its address.
-     *  Only access through post method is allowed.
-     * */
-
+     * Method to handle the HTTP get request; in this case is possible to reach reservations.jsp either from doGet or doPost
+     * method
+     * @param request is the HTTP request
+     * @param response is the HTTP response
+     * @throws ServletException Exception coming from the servlet itself
+     * @throws IOException Exception coming from an I/O error
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         forwardTo(request, response, DEFAULT_ROUTE);
     }
