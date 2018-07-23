@@ -9,16 +9,28 @@ import restaurant.Restaurant;
 
 import java.util.Date;
 
+/**
+ * Class made for testing the algoritm that generate optimized menus
+ */
+
 public class MenuGeneratorTest{
 
-    Reservation r1 = new Reservation("RES PROVA 1", 30, new Date(), "nomeCognome", "nome@gmail.it");
+    private Reservation r1 = new Reservation("RES PROVA 1", 30, new Date(), "nomeCognome", "nome@gmail.it");
 
+    /**
+     * Method to generate the optimizedMenus
+     */
     @Before
     public void inizialize(){
 
         r1.generateOptimizedMenus(110, 20);
     }
 
+    /**
+     * This method controls if the prizes of disches are consistent with optimization:
+     * in the double arrays there are the percentages of the budget ("bdS" is budgetStarter, "bdF" is budgetFirst, ecc).
+     * The first elements of arrays are about first optimized menu, second elements are about second optimized menu (ecc).
+     */
     @Test
     // This method controls if the prizes of dishes are consistent with optimization
     public void optimizedMenuTest() {

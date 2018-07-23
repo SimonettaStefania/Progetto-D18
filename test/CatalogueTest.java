@@ -8,24 +8,29 @@ import restaurant.Catalogue;
 
 import java.util.ArrayList;
 
+/**
+ * Class made for testing the class Catalogue
+ */
 public class CatalogueTest {
 
-    Catalogue c = new Catalogue();
+    private Catalogue c = new Catalogue();
 
-    MenuElement starter_1 = new MenuElement("BRUSCHETTA", "A01", DishType.STARTER, 4.00, false, true, false);
-    MenuElement starter_2 = new MenuElement("TAGLIERE SALUMI MISTI", "A02", DishType.STARTER, 5.00, false, false, true);
-    MenuElement first_1 = new MenuElement("SPAGHETTI ALLA CARBONARA", "P01", DishType.FIRST_COURSE, 10.0, false, false, false);
-    MenuElement first_2 = new MenuElement("PAELLA", "P02", DishType.FIRST_COURSE, 12.5, false, false, false);
-    MenuElement main_1 = new MenuElement("PEPATA DI COZZE", "S01", DishType.MAIN_COURSE, 10.00, false, false, true);
-    MenuElement main_2 = new MenuElement("SETAN ALLA PIZZAIOLA", "S02", DishType.MAIN_COURSE, 18.5, true, true, true);
-    MenuElement dessert_1 = new MenuElement("CHEESECAKE AI LAMPONI", "D01", DishType.DESSERT, 4.00, false, true, false);
-    MenuElement drink_1 = new MenuElement("ACQUA", "B01", DishType.DRINK, 1.0, true, true, true);
-    MenuElement drink_2 = new MenuElement("CAFFÈ", "B02", DishType.DRINK, 1.0, true, true, true);
+    private MenuElement starter_1 = new MenuElement("BRUSCHETTA", "A01", DishType.STARTER, 4.00, false, true, false);
+    private MenuElement starter_2 = new MenuElement("TAGLIERE SALUMI MISTI", "A02", DishType.STARTER, 5.00, false, false, true);
+    private MenuElement first_1 = new MenuElement("SPAGHETTI ALLA CARBONARA", "P01", DishType.FIRST_COURSE, 10.0, false, false, false);
+    private MenuElement first_2 = new MenuElement("PAELLA", "P02", DishType.FIRST_COURSE, 12.5, false, false, false);
+    private MenuElement main_1 = new MenuElement("PEPATA DI COZZE", "S01", DishType.MAIN_COURSE, 10.00, false, false, true);
+    private MenuElement main_2 = new MenuElement("SETAN ALLA PIZZAIOLA", "S02", DishType.MAIN_COURSE, 18.5, true, true, true);
+    private MenuElement dessert_1 = new MenuElement("CHEESECAKE AI LAMPONI", "D01", DishType.DESSERT, 4.00, false, true, false);
+    private MenuElement drink_1 = new MenuElement("ACQUA", "B01", DishType.DRINK, 1.0, true, true, true);
+    private MenuElement drink_2 = new MenuElement("CAFFÈ", "B02", DishType.DRINK, 1.0, true, true, true);
 
-    Allergen a1 = new Allergen("B", "CROSTACEI E DERIVATI");
-    Allergen a2 = new Allergen("G", "LATTE E DERIVATI");
+    private Allergen a1 = new Allergen("B", "CROSTACEI E DERIVATI");
+    private Allergen a2 = new Allergen("G", "LATTE E DERIVATI");
 
-
+    /**
+     * Method for populate an object Catalogue and for add some allergens into dishes
+     */
     @Before
     public void inizialize(){
 
@@ -45,6 +50,11 @@ public class CatalogueTest {
 
     }
 
+    /**
+     * Method for testing the method getFilteredTest:
+     * from the first to third test are about flags,
+     * the others are also on allergens
+     */
     @Test
     public void getFilteredListTest(){
 
@@ -95,6 +105,9 @@ public class CatalogueTest {
         Assert.assertArrayEquals(expectedAllergensVgt.toArray(), c.getFilteredList(false, true, false, "BG").toArray());
     }
 
+    /**
+     * Method for testing method getElementByCode
+     */
     @Test
     public void getElementByCodeTest(){
 
@@ -105,6 +118,9 @@ public class CatalogueTest {
         Assert.assertEquals(drink_2 ,c.getElementByCode("B02"));
     }
 
+    /**
+     * Method for testing method addAllergens
+     */
     @Test
     public void addAllergensTest(){
 

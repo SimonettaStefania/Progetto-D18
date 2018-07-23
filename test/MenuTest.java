@@ -6,23 +6,27 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
+/**
+ * Class made for testing the class Menu
+ */
 
 public class MenuTest {
 
-    MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER, 4.00, false, false, false);
-    MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE,10.0, false, false, false);
-    MenuElement main_1 = new MenuElement("Pepata di cozze", "M001", DishType.MAIN_COURSE,10.00, false, false, false);
-    MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001", DishType.DESSERT, 4.00, false, false, false);
-    MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
-    MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
+    private MenuElement starter_1 = new MenuElement("Bruschetta","S001", DishType.STARTER, 4.00, false, false, false);
+    private MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE,10.0, false, false, false);
+    private MenuElement main_1 = new MenuElement("Pepata di cozze", "M001", DishType.MAIN_COURSE,10.00, false, false, false);
+    private MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001", DishType.DESSERT, 4.00, false, false, false);
+    private MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
+    private MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
 
-    Menu menu;
-    Menu menu1;
-    Menu menu0;
+    private Menu menu;
+    private Menu menu1;
+    private Menu menu0;
+
+    /**
+     * Method to create some menus and to populate them
+     */
     @Before
     public void initialize() {
         menu = new Menu("MenuOrdinaryTest", 20);
@@ -41,7 +45,9 @@ public class MenuTest {
     }
 
 
-    // Method to test menu sorting
+    /**
+     * Method for testing the method sortMenu
+     */
     @Test
     public void testSort() {
         ArrayList<MenuElement> expected = new ArrayList<>();
@@ -68,7 +74,9 @@ public class MenuTest {
     }
 
 
-    // Method to test removeElement
+    /**
+     * Method for testing the method removeElement
+     */
     @Test
     public void testRemove(){
         ArrayList<MenuElement> expected = new ArrayList<>();
@@ -91,9 +99,11 @@ public class MenuTest {
         Assert.assertArrayEquals(expected0.toArray(), menu0.getMenuElementsList().toArray());
     }
 
-    //method to test AddElement
+    /**
+     * Method for testing the method addElement
+     */
     @Test
-    public void testAdd(){
+    public void testAddElement(){
         ArrayList<MenuElement> expected = new ArrayList<>();
         ArrayList<MenuElement> expected1 = new ArrayList<>();
 
@@ -130,7 +140,9 @@ public class MenuTest {
         Assert.assertArrayEquals(expected.toArray(), menu0.getMenuElementsList().toArray());
     }
 
-    //Method to test getMenuCost
+    /**
+     * Method for testing the method getMenuCost
+     */
     @Test
     public void testGetMenuCost(){
 

@@ -9,29 +9,35 @@ import restaurant.Reservation;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Class made for testing the class Reservation
+ */
+
 public class ReservationTest {
 
-    Reservation r1 = new Reservation("R1", 50, new Date("2018/5/13"), "Piero Angela", "ciao@ciao.com");
-    Reservation r0 = new Reservation("R0", 0, new Date("2018/5/13"), "Pikachu", "pika@ciao.com");
+    private Reservation r1 = new Reservation("R1", 50, new Date("2018/5/13"), "Piero Angela", "ciao@ciao.com");
+    private Reservation r0 = new Reservation("R0", 0, new Date("2018/5/13"), "Pikachu", "pika@ciao.com");
 
-    Menu m1 = new Menu("first menu", 10);
-    Menu m2 = new Menu("second menu", 30);
-    Menu m3 = new Menu("MenuNoElements", 8);
-    Menu m0 = new Menu("MenuNoGuests", 0);
+    private Menu m1 = new Menu("first menu", 10);
+    private Menu m2 = new Menu("second menu", 30);
+    private Menu m3 = new Menu("MenuNoElements", 8);
+    private Menu m0 = new Menu("MenuNoGuests", 0);
 
-    Menu mCreated = new Menu("menu creato", 10);
+    private Menu mCreated = new Menu("menu creato", 10);
 
-    MenuElement starter_1 = new MenuElement("Bruschetta", "S001", DishType.STARTER, 4.00, false, false, false);
-    MenuElement starter_2 = new MenuElement("TAGLIERE SALUMI MISTI", "A01", DishType.STARTER, 5.00, false, false, false);
-    MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE, 10.0, false, false, false);
-    MenuElement first_2 = new MenuElement("PAELLA", "P01", DishType.FIRST_COURSE, 12.5, false, false, false);
-    MenuElement main_1 = new MenuElement("Pepata di cozze", "M001", DishType.MAIN_COURSE, 10.00, false, false, false);
-    MenuElement main_2 = new MenuElement("ARAGOSTA ALLA CATALANA", "S01", DishType.MAIN_COURSE, 18.5, false, false, false);
-    MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001", DishType.DESSERT, 4.00, false, false, false);
-    MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
-    MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
+    private MenuElement starter_1 = new MenuElement("Bruschetta", "S001", DishType.STARTER, 4.00, false, false, false);
+    private MenuElement starter_2 = new MenuElement("TAGLIERE SALUMI MISTI", "A01", DishType.STARTER, 5.00, false, false, false);
+    private MenuElement first_1 = new MenuElement("Spaghetti alla carbonara", "P001", DishType.FIRST_COURSE, 10.0, false, false, false);
+    private MenuElement first_2 = new MenuElement("PAELLA", "P01", DishType.FIRST_COURSE, 12.5, false, false, false);
+    private MenuElement main_1 = new MenuElement("Pepata di cozze", "M001", DishType.MAIN_COURSE, 10.00, false, false, false);
+    private MenuElement main_2 = new MenuElement("ARAGOSTA ALLA CATALANA", "S01", DishType.MAIN_COURSE, 18.5, false, false, false);
+    private MenuElement dessert_1 = new MenuElement("Cheesecake ai lamponi", "D001", DishType.DESSERT, 4.00, false, false, false);
+    private MenuElement drink_1 = new MenuElement("Acqua", "DR001", DishType.DRINK, 1.0, false, false, false);
+    private MenuElement drink_2 = new MenuElement("Caffè", "DR002", DishType.DRINK, 1.0, false, false, false);
 
-
+    /**
+     * Method to create some menus in reservations and to populate the menus
+     */
     @Before
     public void initialize() {
         // add menu in the reservation
@@ -53,15 +59,21 @@ public class ReservationTest {
         m2.addElement(first_1);
     }
 
+    /**
+     * Method for testing the method calculateGuest
+     */
     @Test
     public void calculateGuestTest() {
-        int expected1 = 10 + 30 + 8 + 0;
+        int expected1 = 10 + 30 + 8;
         int expected0 = 8;
 
         Assert.assertEquals(expected1, r1.calculateGuests());
         Assert.assertEquals(expected0, r0.calculateGuests());
     }
 
+    /**
+     * Method for testing the method checkPeople
+     */
     @Test
     public void checkPeopleTest() {
 
@@ -69,6 +81,9 @@ public class ReservationTest {
         Assert.assertFalse(r0.checkPeople());
     }
 
+    /**
+     * Method for testing the method reservationCost
+     */
     @Test
     public void reservationCostTest() {
         double expectedCost1 = 29.0 * 10 + 15.0 * 30 + 0.0 * 8 + 0.0 * 0;
@@ -78,7 +93,9 @@ public class ReservationTest {
         Assert.assertEquals(expectedCost0, r0.getReservationCost(), 0.0);
     }
 
-
+    /**
+     * Method for testing the method createdMenu
+     */
     @Test
     public void createdMenuTest() {
         ArrayList<Menu> expected = new ArrayList<>();
@@ -98,6 +115,9 @@ public class ReservationTest {
         Assert.assertEquals(expected.get(4).toString(), r1.getCreatedMenu().get(4).toString());
     }
 
+    /**
+     * Method for testing the method removeMenu
+     */
     @Test
     public void removeMenuTest() {
         double expectedCost = 15.0 * 30 + 0.0 * 8 + 0.0 * 0;

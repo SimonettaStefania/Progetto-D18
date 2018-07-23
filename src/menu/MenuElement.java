@@ -21,7 +21,7 @@ public class MenuElement  {
 
     /**
      * Constructor with parameters
-     * @param name tbe name of the dish
+     * @param name the name of the dish
      * @param code the code of the dish
      * @param type the type of dish
      * @param price the price of the dish

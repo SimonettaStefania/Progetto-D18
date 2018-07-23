@@ -5,14 +5,22 @@ import org.junit.Before;
 import org.junit.Assert;
 import org.junit.runners.Parameterized;
 
+/**
+ * Class made for testing the dishes' filters
+ */
+
 public class FlagsTest {
 
-    MenuElement starter = new MenuElement("Bruschetta","S001", DishType.STARTER,
+    private MenuElement starter = new MenuElement("Bruschetta","S001", DishType.STARTER,
             4.00, true, true, false);
-    MenuElement first = new MenuElement("Spaghetti alla carbonara", "P001",
+    private MenuElement first = new MenuElement("Spaghetti alla carbonara", "P001",
             DishType.FIRST_COURSE,10.0, false, false, false);
-    MenuElement celiac = new MenuElement("Pizza Camut", "S003", DishType.MAIN_COURSE, 5.0, false, true, true);
+    private MenuElement celiac = new MenuElement("Pizza Camut", "S003", DishType.MAIN_COURSE, 5.0, false, true, true);
 
+    /**
+     * These methods test the method respecFilters of class MenuElement
+     * and indirectly also method check of class Flags.
+     */
     @Test
     public void veganTest() {
         Assert.assertTrue(starter.respectsFilters(true, false, false));
