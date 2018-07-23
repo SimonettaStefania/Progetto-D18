@@ -10,18 +10,18 @@ import java.util.Random;
  * A class which stands between Restaurant and QueryHandler
  */
 public class DatabaseManager {
-    private Catalogue catalogue;
-    private ArrayList<Reservation> reservations;
     private QueryHandler queryHandler;
 
-    public DatabaseManager (Catalogue cat, ArrayList<Reservation> res) {
-        this.catalogue = cat;
-        this.reservations = res;
+    public DatabaseManager () {
         this.queryHandler = new QueryHandler();
     }
 
 
     public synchronized void readDatabase() {
+        Restaurant restaurant = Restaurant.getRestaurantInstance();
+        Catalogue catalogue = restaurant.getDishesCatalogue();
+        ArrayList<Reservation> reservations = restaurant.getReservationList();
+
         queryHandler.setupConnection();
 
         for (MenuElement elem : queryHandler.readCatalogue())
@@ -40,30 +40,20 @@ public class DatabaseManager {
 
 
     public synchronized void insertReservation (Reservation reservation) {
-        String id = generateReservationId();
-        reservation.setReservationCode(id);
-
-        reservations.add(reservation);
-
         queryHandler.setupConnection();
         queryHandler.insertReservationInDB(reservation);
         queryHandler.closeConnection();
     }
 
-    public synchronized void deleteReservation (String reservationCode) {
-        Reservation toDelete = null;
+    public synchronized void deleteReservation (Reservation toDelete) {
+        queryHandler.setupConnection();
+        queryHandler.deleteReservation(toDelete.getReservationCode());
+        queryHandler.closeConnection();
+    }
 
-        for(Reservation elem : reservations)
-            if (elem.getReservationCode().equals(reservationCode))
-                toDelete = elem;
-
-        if (toDelete != null) {
-            reservations.remove(toDelete);
-
-            queryHandler.setupConnection();
-            queryHandler.deleteReservation(reservationCode);
-            queryHandler.closeConnection();
-        }
+    public void setReservationId(Reservation reservation) {
+        String id = generateReservationId();
+        reservation.setReservationCode(id);
     }
 
     /**
@@ -71,8 +61,11 @@ public class DatabaseManager {
      * @return tmpId is the generated ID
      */
     private String generateReservationId() {
-        String tmpId = null;
+        Restaurant restaurant = Restaurant.getRestaurantInstance();
+        ArrayList<Reservation> reservations = restaurant.getReservationList();
+
         boolean unique = false;
+        String tmpId = null;
 
         while (!unique) {
             tmpId = generateCode();
