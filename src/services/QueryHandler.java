@@ -12,7 +12,7 @@ import java.util.Locale;
 
 /**
  * Class made to handle and execute queries on local mysql database.
- * It is descripted by:
+ * It is described by:
  * - multiple String attributes, each one contains a complete query or a part of a it
  * - a Statement object which is used to execute sql query and return the result which the query produces
  * - a Connection object that represents the connection with the database
@@ -61,7 +61,7 @@ class QueryHandler {
     }
 
     /**
-     * Method that execute a query which select everything from the "DISHES" table from the database and
+     * Method that execute a query which selects everything from the "DISHES" table from the database and
      * calls allergensInDishes() and ingredientsInDishes() methods.
      * * @return dishesList contains a list of MenuElement created with the values contained in the database
      */
@@ -93,7 +93,7 @@ class QueryHandler {
      * Method that execute a query which select everything from the "ALLERGENS_IN_DISHES" table
      * and associate each allergen to a dish contained in dishesList.
      * @param dishesList list of MenuElement created with readCatalogue() method
-     * @throws SQLException
+     * @throws SQLException Exception coming from an SQL problem
      */
 
     private void allergensInDishes(ArrayList<MenuElement> dishesList) throws SQLException {
@@ -111,7 +111,7 @@ class QueryHandler {
      * Method that execute a query which select everything from the "INGREDIENTS_IN_DISHES" table
      * and associate each ingredient to a dish contained in dishesList.
      * @param dishesList list of MenuElement created with readCatalogue() method
-     * @throws SQLException
+     * @throws SQLException  Exception coming from an SQL problem
      */
 
     private void ingredientsInDishes(ArrayList<MenuElement> dishesList) throws SQLException {
@@ -191,7 +191,7 @@ class QueryHandler {
      * Method that execute a query which select everything from the "DISH_IN_MENU" table
      * and associate each dish to a Menu of a specific reservation..
      * @param reservation which contains the list of the menus that will be populated
-     * @throws SQLException
+     * @throws SQLException  Exception coming from an SQL problem
      */
 
     private void readMenuDishes(Reservation reservation) throws SQLException {
@@ -237,7 +237,7 @@ class QueryHandler {
     /**
      * Method that insert the menus of a reservation into "MENUS" table.
      * @param reservation is the reservation which contains the menus to insert
-     * @throws SQLException
+     * @throws SQLException  Exception coming from an SQL problem
      */
 
     private void insertMenus(Reservation reservation) throws SQLException {
@@ -263,7 +263,7 @@ class QueryHandler {
      * @param reservation is the reservation which contains the menu
      * @param menu is the menu
      * @param menuIndex is the position of the menu in the ArrayList
-     * @throws SQLException
+     * @throws SQLException  Exception coming from an SQL problem
      */
     private void insertMenuDishes(Reservation reservation, Menu menu, int menuIndex) throws SQLException{
         for (MenuElement elem : menu.getMenuElementsList()) {

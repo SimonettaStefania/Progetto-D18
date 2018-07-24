@@ -23,7 +23,7 @@ public class MenuGenerator {
     }
 
     /**
-     * Constructor needing informations about the menus to be generated
+     * Constructor needing information about the menus to be generated
      * @param budget Double representing the assigned budget
      * @param people Number of guests the menu is designated to
      */
@@ -42,7 +42,7 @@ public class MenuGenerator {
     }
 
     /**
-     * Inizialization of the map containing the quotes for each optimization option
+     * Initialization of the map containing the quotes for each optimization option
       */
     private void initOptimizationMap() {
         double starters[] = {0.35, 0.25, 0.25};
@@ -60,7 +60,7 @@ public class MenuGenerator {
      * Method to generate the optimized menus starting from the budget.
      * It generates four menus, three optimized for the three main categories, the other
      * one balanced on all the dishes type (i.e. one menu is focused on starters, another one in
-     * firt courses, the third on main and the last balanced on all)
+     * first courses, the third on main and the last balanced on all)
      *
      */
     private void generate() {
@@ -75,7 +75,7 @@ public class MenuGenerator {
     }
 
     /**
-     * Method selecting the proper name for each optimizaion tecnique
+     * Method selecting the proper name for each optimization technique
      * @param opt Referenced Optimization approach
      * @return name for the upcoming optimized menu
      */

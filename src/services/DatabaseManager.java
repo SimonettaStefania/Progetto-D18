@@ -21,7 +21,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Method that populate reads from database by using QueryHandler instance
+     * Method that populates catalogue and reservations list, reading from database by using QueryHandler instance
      */
     public synchronized void readDatabase() {
         Restaurant restaurant = Restaurant.getRestaurantInstance();
@@ -45,7 +45,7 @@ public class DatabaseManager {
     }
 
     /**
-     * Method which inserts a reservation into database by using a QueryHandler instance
+     * Method that inserts a reservation into database by using a QueryHandler instance
      * @param reservation the reservation to insert
      */
     public synchronized void insertReservation (Reservation reservation) {
@@ -63,6 +63,11 @@ public class DatabaseManager {
         queryHandler.deleteReservation(toDelete.getReservationCode());
         queryHandler.closeConnection();
     }
+
+    /**
+     * Method that sets the id of the current session reservation
+     * @param reservation the reservation that will have its id set
+     */
 
     public void setReservationId(Reservation reservation) {
         String id = generateReservationId();
