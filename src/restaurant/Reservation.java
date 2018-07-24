@@ -35,7 +35,6 @@ public class Reservation {
      * @param customerNameSurname customer's identity
      * @param customerMail customer's email
      */
-    // TODO: update UML
     public Reservation(String reservationCode, int nGuests, Date eventDate, String customerNameSurname, String customerMail) {
         this.reservationCode = reservationCode;
         this.customerNameSurname = customerNameSurname;
