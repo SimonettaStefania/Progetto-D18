@@ -77,7 +77,6 @@ public class MenuTest {
     public void testRemove(){
         ArrayList<MenuElement> expected = new ArrayList<>();
         ArrayList<MenuElement> expected1 = new ArrayList<>();
-        ArrayList<MenuElement> expected0 = new ArrayList<>();
 
         expected.add(dessert_1);
         expected.add(drink_1);
@@ -92,7 +91,6 @@ public class MenuTest {
 
         Assert.assertArrayEquals(expected.toArray(), menu.getMenuElementsList().toArray());
         Assert.assertArrayEquals(expected1.toArray(), menu1.getMenuElementsList().toArray());
-        Assert.assertArrayEquals(expected0.toArray(), menu0.getMenuElementsList().toArray());
     }
 
     /**
