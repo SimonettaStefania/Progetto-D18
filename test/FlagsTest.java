@@ -1,9 +1,5 @@
-import menu.DishType;
-import menu.MenuElement;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.Assert;
-import org.junit.runners.Parameterized;
+import menu.*;
+import org.junit.*;
 
 /**
  * Class made for testing the dishes' filters

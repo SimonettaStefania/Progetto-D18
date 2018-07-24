@@ -1,11 +1,7 @@
-import menu.Allergen;
-import menu.DishType;
-import menu.MenuElement;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import menu.*;
 import restaurant.Catalogue;
 
+import org.junit.*;
 import java.util.ArrayList;
 
 /**

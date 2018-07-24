@@ -1,10 +1,6 @@
-import menu.DishType;
-import menu.Menu;
-import menu.MenuElement;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import menu.*;
 
+import org.junit.*;
 import java.util.ArrayList;
 
 /**

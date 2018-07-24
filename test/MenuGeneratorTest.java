@@ -1,12 +1,7 @@
-import menu.DishType;
-import menu.Menu;
-import menu.MenuElement;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import menu.*;
 import restaurant.Reservation;
-import restaurant.Restaurant;
 
+import org.junit.*;
 import java.util.Date;
 
 /**
